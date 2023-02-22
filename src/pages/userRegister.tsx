@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import userRegisterStyles from '../styles/userRegister.module.css';
-import Header from './components/Header';
 
 export default function userRegister() {
   return (
@@ -133,9 +132,6 @@ export default function userRegister() {
           font-size: 14px;
         }
       `}</style>
-      <header>
-        <Header/>
-      </header>
       <main>
         <div className="body">
           <div className="title">
