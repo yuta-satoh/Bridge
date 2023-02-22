@@ -31,6 +31,22 @@ INSERT INTO api.items (
     , '和モダン'
     , '椅子'
     , 13200
-    , '/images//'
+    , '/images/chair/chair_jmodern_1.jpeg'
     , 55
+), VALUES (
+    '木座椅子'
+    , 'ゆったりとくつろげる作りで、コタツにも合う座椅子。'
+    , '和モダン'
+    , '椅子'
+    , 12000
+    , '/images/public/chair_jmodern_2.jpeg'
+    , 100
+), VALUES (
+    '和座椅子'
+    , 'お手持ちの座布団との組み合わせを楽しむ座椅子。'
+    , '和モダン'
+    , '椅子'
+    , 8900
+    , '/images/chair/chair_jmodern_3.jpeg'
+    , 
 )
