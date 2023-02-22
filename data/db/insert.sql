@@ -1,5 +1,11 @@
 INSERT INTO api.items (
-    name, price
+    name, description, genre, cateory, price, imgUrl, stock
 ) VALUES (
-    'チョコ', 120
+    '竹椅子'
+    , '屋外使用も可能な、モダンなラウンジチェア。'
+    , '和モダン'
+    , '椅子'
+    , 13200
+    , 'aaa'
+    , 55
 )
