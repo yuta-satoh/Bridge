@@ -1,5 +1,5 @@
 -- @block
-DROP TABLE IF EXISTS api.items;
+DROP TABLE IF EXISTS api.items CASCADE;
 CREATE TABLE api.items (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
@@ -15,7 +15,7 @@ GRANT SELECT ON api.items TO web_anon;
 GRANT ALL ON api.items to api_user;
 
 -- @block
-DROP TABLE IF EXISTS api.users;
+DROP TABLE IF EXISTS api.users CASCADE;
 CREATE TABLE api.users (
     id SERIAL PRIMARY KEY,
     lastName TEXT NOT NULL,
@@ -32,21 +32,21 @@ GRANT SELECT ON api.users TO web_anon;
 GRANT ALL ON api.users to api_user;
 
 -- @block
-DROP TABLE IF EXISTS api.carts;
+DROP TABLE IF EXISTS api.carts CASCADE;
 CREATE TABLE api.carts (
     id SERIAL PRIMARY KEY,
-    user_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL REFERENCES api.users (id),
     delete BOOLEAN DEFAULT false NOT NULL
 );
 GRANT SELECT ON api.carts TO web_anon;
 GRANT ALL ON api.carts to api_user;
 
 -- @block
-DROP TABLE IF EXISTS api.cart_items;
+DROP TABLE IF EXISTS api.cart_items CASCADE;
 CREATE TABLE api.cart_items (
     id SERIAL PRIMARY KEY,
-    item_id INTEGER NOT NULL,
-    cart_id INTEGER NOT NULL,
+    item_id INTEGER NOT NULL REFERENCES api.items (id),
+    cart_id INTEGER NOT NULL REFERENCES api.carts (id),
     date DATE NOT NULL,
     quantity INTEGER NOT NULL,
     delete BOOLEAN DEFAULT false NOT NULL
@@ -55,11 +55,11 @@ GRANT SELECT ON api.cart_items TO web_anon;
 GRANT ALL ON api.cart_items to api_user;
 
 -- @block
-DROP TABLE IF EXISTS api.order_histories;
+DROP TABLE IF EXISTS api.order_histories CASCADE;
 CREATE TABLE api.order_histories (
     id SERIAL PRIMARY KEY,
-    item_id INTEGER NOT NULL,
-    user_id INTEGER NOT NULL,
+    item_id INTEGER NOT NULL REFERENCES api.items (id),
+    user_id INTEGER NOT NULL REFERENCES api.users (id),
     name TEXT NOT NULL,
     description TEXT NOT NULL,
     genre TEXT NOT NULL,
