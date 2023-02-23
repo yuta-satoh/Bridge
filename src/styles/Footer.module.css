@@ -1,0 +1,96 @@
+.menu {
+    background-color: #574142;
+    color: #F5F5F5;
+    width: 100%;
+    margin-top: 40px;
+    min-width: 1280px;
+    padding: 40px;
+    display: block;
+}
+
+.menu_title {
+    border-bottom: 2px solid #F5F5F5;
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    line-height: 1;
+    margin: 0% auto 20px;
+    padding-bottom: 20px;
+    width: 1204px;
+}
+
+.menu_contents {
+    display: grid;
+    grid-gap: 40px 30px;
+    grid-template-columns: 1.5fr 1fr;
+    grid-template-rows: auto auto;
+    margin: 0 auto;
+    width: 1204px;
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.menu_contents_title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    margin: 1;
+    padding: 0;
+}
+
+.category {
+    padding: 15px;
+}
+
+.category_lists {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.category_list {
+    flex-basis: 30%;
+    display: list-item;
+    text-indent: 0%;
+}
+
+.category_listItem:hover,
+.message:hover,
+.guide_list:hover {
+    color: #FF7C8A;
+}
+
+.guide_lists {
+    flex-basis: 40%;
+    display: list-item;
+    text-indent: 0%;
+}
+
+.message {
+    border: 2px solid #F5F5F5;
+    padding: 15px;
+    margin: 0% 15px;
+    width: 200px;
+    text-align: center;
+    min-height: 40px;
+    align-items: center;
+    justify-content: center;
+}
+
+.copybox {
+    width: 1204px;
+    padding: 40px 40px 0;
+    align-items: center;
+    justify-content: center;
+    margin: 0% 40px;
+    font-size: 0.5rem;
+}
+
+/* トップへ戻るボタン */
+.top_btn {
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    padding: 0.7em;
+}
