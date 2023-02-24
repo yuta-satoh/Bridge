@@ -6,7 +6,7 @@ export default function userRegister() {
   return (
     <>
       <Head>
-        <title>新規会員登録</title>
+        <title>ログイン</title>
       </Head>
       <style jsx>{`
         main {
