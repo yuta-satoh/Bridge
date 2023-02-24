@@ -9,17 +9,16 @@ export default function Profile() {
       <style jsx>{`
         main {
           background-color: ;
-          background-image: url('/images/background_login/backgroundimage.jpeg');
           background-size: cover;
           width: 100%;
           max-height: 100%;
           display: flex;
         }
-        .body {
+        section {
           background-color: rgba(255, 255, 255, 0.9);
           margin: 50px auto;
-          height: 1500px;
-          width: 45%;
+          height: 800px;
+          width: 70%;
         }
         .title {
           text-align: center;
@@ -30,6 +29,7 @@ export default function Profile() {
         form {
           padding: 5px 100px;
           margin: auto;
+          border: 1px solod black;
         }
         h1 {
           font-size: 30px;
