@@ -1,5 +1,5 @@
 INSERT INTO api.items (
-    name, description, genre, cateory, price, imgUrl, stock
+    name, description, genre, category, price, imgUrl, stock
 ) VALUES (
     'ダイニングチェア（ホワイト）'
     , 'プラスチックと木製フレームでできたシンプルなチェア。'
