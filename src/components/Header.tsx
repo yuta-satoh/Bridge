@@ -20,7 +20,7 @@ export default function Header() {
                         <input className="h-8 border border-neutral-500 rounded-l pl-2.5" type="text" placeholder="何をお探しですか？" />
                         <button className="h-8 text-white bg-neutral-900 border border-neutral-900 rounded-r px-1" type="submit">検索</button>
                     </form>
-                    <Link href={'/'}>
+                    <Link href={'/login'}>
                         <div>
                             <span className="inline-block mt-1">ログイン</span>
                         </div>

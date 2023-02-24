@@ -10,7 +10,7 @@ export default function completeRegister() {
       <style jsx>{`
         main {
           background-color: ;
-          background-image: url('/images/curtain/curtain_jmodern_1.jpeg');
+          background-image: url('/images/background_login/backgroundimage.jpeg');
           background-size: cover;
           width: 100%;
           max-height: 100%;
@@ -23,10 +23,10 @@ export default function completeRegister() {
           width: 45%;
         }
         .welcome {
-            text-align: center;
-            max-width: 425px;
-            margin: 50px auto;
-          }
+          text-align: center;
+          max-width: 425px;
+          margin: 50px auto;
+        }
         .title {
           text-align: center;
           border-bottom: 2px black solid;
@@ -73,18 +73,18 @@ export default function completeRegister() {
       `}</style>
       <main>
         <div className="body">
-        <div className="title">
+          <div className="title">
             <h1 className="subTitle">会員登録完了</h1>
           </div>
           <div className="welcome">
             <h1>Welcome To Bridge!</h1>
           </div>
           <div className="loginLink">
-            <button type="button" className="linkButton">
-              <Link href="">
+            <Link href="/login">
+              <button type="button" className="linkButton">
                 ログイン<span className="buttonSpan">→</span>
-              </Link>
-            </button>
+              </button>
+            </Link>
           </div>
         </div>
       </main>
