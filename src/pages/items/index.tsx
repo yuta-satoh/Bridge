@@ -3,33 +3,41 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import lstyles from '../../styles/itemList.module.css';
 
 export default function List() {
   return (
     <>
       <Head>
         <title>インテリア・家具通販【bridge】</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
       </Head>
+
+      <div className={lstyles.container}>
       <Header />
-      <main>
-        <div role="dialog"></div>
+      <main className={lstyles.main}>
+        <div className={lstyles.Breadcrumbs}>
         <nav>
-          <ol className="breadcrumbs">
-            <li>
+          <ol className={lstyles.breadcrumbs}>
+            <li className={lstyles.breadlist}>
               <Link href="/">TOPページ</Link>
             </li>
-            <li>商品一覧</li>
+            <li className={lstyles.breadlist}>
+                <Link href="">現在のページ</Link>
+            </li>
           </ol>
         </nav>
-
-        <div className="itemList">
-          <ul>
-            <li>
-              <ItemList />
-            </li>
-          </ul>
         </div>
 
+        <div>
+            <ul>
+                <li>
+                    <ItemList />
+                </li>
+            </ul>
+        </div>
+
+        <div role="dialog">
         <fieldset>
           <form>
             <div className="flex gap-10">
@@ -119,7 +127,9 @@ export default function List() {
             </div>
           </form>
         </fieldset>
+        </div>
       </main>
+      </div>
       <Footer />
     </>
   );
