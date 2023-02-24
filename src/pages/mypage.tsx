@@ -22,8 +22,11 @@ export default function Mypage() {
           margin: 50px auto;
           width: 70%;
         }
+        .body {
+          width: 70%;
+          margin: auto;
+        }
         .title {
-          text-align: center;
           border-bottom: 2px black solid;
           max-width: 425px;
           margin: 50px auto;
@@ -36,7 +39,7 @@ export default function Mypage() {
         }
         p {
           font-size: 12px;
-          padding-bottom: 15px;
+          padding-bottom: 2px;
         }
         .subtitle {
           font-size: 25px;
@@ -51,6 +54,14 @@ export default function Mypage() {
           font-size: 12px;
           font-weight: bold;
         }
+        .cartList {
+          margin: 10px auto;
+          display: flex;
+        }
+        .cartItems {
+          margin: 8px;
+          float: left;
+        }
       `}</style>
       <main>
         <section>
@@ -61,7 +72,7 @@ export default function Mypage() {
             <div className="container">
               <div className="cartTitle">
                 <div className="subtitle">
-                  <h2>カートの商品</h2>
+                  <h2>あなたのカート</h2>
                 </div>
                 <div>
                   <span className="cartLink">
@@ -74,9 +85,20 @@ export default function Mypage() {
                   </span>
                 </div>
               </div>
-              <div className="cartImgs">
-                  <div>
-                    <Image src={"/images/chair/chair_feminine_1.jpg"} alt={'kagu'} width={120} height={120}/>
+              <div className="cartList">
+                  <div className='cartItems'>
+                    <Image src={"/images/chair/chair_feminine_1.jpg"} alt={'kagu'} width={100} height={100}/>
+                    <p>商品名</p>
+                    <p>価格</p>
+                  </div>
+                  <div className='cartItems'>
+                    <Image src={"/images/chair/chair_feminine_1.jpg"} alt={'kagu'} width={100} height={100}/>
+                  </div>
+                  <div className='cartItems'>
+                    <Image src={"/images/chair/chair_feminine_1.jpg"} alt={'kagu'} width={100} height={100}/>
+                  </div>
+                  <div className='cartItems'>
+                    <Image src={"/images/chair/chair_feminine_1.jpg"} alt={'kagu'} width={100} height={100}/>
                   </div>
               </div>
             </div>
