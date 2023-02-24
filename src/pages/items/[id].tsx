@@ -10,6 +10,7 @@ export default function ItemPage() {
         <Head>
             <title>商品詳細</title>
         </Head>
+
         <main>
         <nav>
             <ol className="breadcrumbs">
@@ -18,12 +19,22 @@ export default function ItemPage() {
                 <li>全身姿見</li>
             </ol>
         </nav>
+        <div>
             <div>
-                <div>
-            <ItemList />
-                </div>
+                <dl>
+                    <dt>インテリアコーデジャンル</dt>
+                        <dd>北欧風</dd>
+                </dl>
+                <dl>
+                    <dt>商品カテゴリ</dt>
+                        <dd>椅子</dd>
+                </dl>
+                <ItemList />
             </div>
-            <form>
+        </div>
+
+        {/* 仮でmax5で作成しています */}
+        <form>
           <div>
             <select name="selectGenre" id="selectGenre">
               <option value="">0</option>
