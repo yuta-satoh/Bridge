@@ -17,17 +17,17 @@ export default function Header() {
                 </ul>
                 <div className="flex gap-10">
                     <form>
-                        <input type="text" placeholder="何をお探しですか？" />
-                        <button type="submit">検索</button>
+                        <input className="h-8 border border-neutral-500 rounded-l pl-2.5" type="text" placeholder="何をお探しですか？" />
+                        <button className="h-8 text-white bg-neutral-900 border border-neutral-900 rounded-r px-1" type="submit">検索</button>
                     </form>
                     <Link href={'/'}>
                         <div>
-                            <span>ログイン</span>
+                            <span className="inline-block mt-1">ログイン</span>
                         </div>
                     </Link>
                     <Link href={'/'}>
                         <div>
-                            <span>カート</span>
+                            <span className="inline-block mt-1">カート</span>
                         </div>
                     </Link>
                 </div>
