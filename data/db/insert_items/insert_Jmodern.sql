@@ -1,6 +1,6 @@
 -- @block
 INSERT INTO api.items (
-    name, description, genre, cateory, price, imgUrl, stock
+    name, description, genre, category, price, imgUrl, stock
 ) VALUES (
     '竹椅子'
     , '屋外使用も可能な、モダンなラウンジチェア。'
