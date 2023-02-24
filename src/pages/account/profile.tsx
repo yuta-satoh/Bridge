@@ -4,7 +4,7 @@ export default function Profile() {
   return (
     <>
       <Head>
-        <title>お客様情報の編集</title>
+        <title>会員情報の確認/変更</title>
       </Head>
       <style jsx>{`
         main {
@@ -134,7 +134,7 @@ export default function Profile() {
       <main>
         <section>
           <div className="title">
-            <h1>お客様情報の編集</h1>
+            <h1>会員情報の確認/変更</h1>
           </div>
           <div className="body">
             <form>
@@ -145,14 +145,14 @@ export default function Profile() {
                   type="text"
                   name="lastName"
                   id="lastName"
-                  value={"変更前の姓"}
+                  // value={"変更前の姓"}
                   className="border border-neutral-500 rounded pl-2.5"
                 />
                 <input
                   type="text"
                   name="firstName"
                   id="firstName"
-                  value={"変更前の名"}
+                  // value={"変更前の名"}
                   className="border border-neutral-500 rounded pl-2.5"
                 />
               </div>
@@ -166,7 +166,7 @@ export default function Profile() {
                       type="radio"
                       name="gender"
                       id="female"
-                      value="female"
+                      // value="female"
                       className="radioButton"
                     />
                     <label htmlFor="female" className="genderLabel">
@@ -178,7 +178,7 @@ export default function Profile() {
                       type="radio"
                       name="gender"
                       id="male"
-                      value="male"
+                      // value="male"
                       className="radioButton"
                     />
                     <label htmlFor="male" className="genderLabel">
@@ -190,7 +190,7 @@ export default function Profile() {
                       type="radio"
                       name="gender"
                       id="other"
-                      value="other"
+                      // value="other"
                       className="radioButton"
                     />
                     <label htmlFor="other" className="genderLabel">
@@ -207,7 +207,7 @@ export default function Profile() {
                   name="email"
                   id="email"
                   className="inputParts border border-neutral-500 rounded pl-2.5"
-                  value={"変更前のメアド"}
+                  // value={"変更前のメアド"}
                 />
               </div>
               <div className="inputItems">
@@ -218,7 +218,7 @@ export default function Profile() {
                   name="tell"
                   id="tell"
                   className="number border border-neutral-500 rounded pl-2.5"
-                  value={"変更前の電話番号"}
+                  // value={"変更前の電話番号"}
                 />
                 <span>-</span>
                 <input
@@ -226,7 +226,7 @@ export default function Profile() {
                   name="tell"
                   id="tell2"
                   className="number border border-neutral-500 rounded pl-2.5"
-                  value={"変更前の電話番号"}
+                  // value={"変更前の電話番号"}
                 />
                 <span>-</span>
                 <input
@@ -234,7 +234,7 @@ export default function Profile() {
                   name="tell"
                   id="tell3"
                   className="number border border-neutral-500 rounded pl-2.5"
-                  value={"変更前の電話番号"}
+                  // value={"変更前の電話番号"}
                 />
               </div>
               <div className="inputItems">
@@ -246,7 +246,7 @@ export default function Profile() {
                   name="zipcode"
                   id="zipcode"
                   className="number border border-neutral-500 rounded pl-2.5"
-                  value={"変更前の電話番号"}
+                  // value={"変更前の電話番号"}
                 />
                 <span>-</span>
                 <input
@@ -255,7 +255,7 @@ export default function Profile() {
                   name="zipcode"
                   id="zipcode2"
                   className="number border border-neutral-500 rounded pl-2.5"
-                  value={"変更前の郵便番号"}
+                  // value={"変更前の郵便番号"}
                 />
                 <button className="zipButton text-white bg-neutral-900 border border-neutral-900 rounded px-1">
                   住所検索
@@ -269,7 +269,7 @@ export default function Profile() {
                   name="address"
                   id="address"
                   className="inputParts border border-neutral-500 rounded pl-2.5"
-                  value={"変更前の住所"}
+                  // value={"変更前の住所"}
                 />
               </div>
               <div className="buttonArea">

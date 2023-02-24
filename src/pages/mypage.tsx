@@ -49,7 +49,7 @@ export default function Mypage() {
               </div>
               <div>
                 <Link href="ここに退会ページへのリンクを追加">
-                  退会
+                  退会手続き
                 </Link>
               </div>
             </div>
