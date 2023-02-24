@@ -77,7 +77,7 @@ export default function completeRegister() {
             <h1 className="subTitle">会員登録完了</h1>
           </div>
           <div className="welcome">
-            <h1>Welcome To Bridge!</h1>
+            <h1>Welcome&nbsp;To&nbsp;Bridge!</h1>
           </div>
           <div className="loginLink">
             <Link href="/login">

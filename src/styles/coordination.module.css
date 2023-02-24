@@ -1,0 +1,142 @@
+.body {
+  max-width: 85%;
+  margin: auto;
+}
+.links {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.pageLink {
+  font-size: 15px;
+  margin-right: 5px;
+}
+.greaterThan {
+  margin-left: 5px;
+}
+.title {
+  font-size: 30px;
+}
+.selectTheme {
+  display: flex;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+.theme {
+  font-size: 20px;
+}
+.select {
+  font-size: 19px;
+}
+.titleItems {
+  border-bottom: 2px black solid;
+}
+.buttonSpan {
+  padding-left: 15px;
+}
+.linkButton {
+  border: 2.3px black solid;
+  padding: 8px 60px;
+  background-color: white;
+  font-size: 13px;
+  font-weight: bold;
+  margin: 40px 0;
+}
+.linkItems {
+  text-align: center;
+  margin: 40px auto 80px;
+}
+.subTitle {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  font-weight: bold;
+}
+.categoriesList {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+.categories {
+  display: flex;
+  margin-top: 20px;
+  background-color: rgb(245, 245, 245);
+  margin: 10px 20px;
+}
+
+.coordinateArea {
+  background-image: url(/images/background/coordinate.jpeg);
+  background-size: cover;
+  height: 750px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+.empty {
+  width: 25%;
+  height: 240px;
+}
+.images {
+  width: 25%;
+  height: 240px;
+}
+.images_b {
+    width: 25%;
+    height: 240px;
+    text-align: -webkit-center;
+    animation: fade .4s ease-in-out .2s 1 normal forwards;
+  }
+.images_c {
+  width: 25%;
+  height: 240px;
+  text-align: -webkit-right;
+}
+
+.price {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(245, 245, 245);
+  max-width: 20%;
+  margin: 0 auto;
+  padding: 5px 0;
+}
+.total {
+  font-weight: bold;
+  margin-right: 15px;
+}
+.totalPrice {
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 15px;
+}
+.cardList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 80%;
+  margin: 0 auto;
+}
+.card {
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
+.cardDetail {
+  margin-top: 15px;
+}
+.cardContents {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.priceFree {
+  font-size: 13px;
+  color: white;
+  background-color: black;
+  padding: 3px;
+}
