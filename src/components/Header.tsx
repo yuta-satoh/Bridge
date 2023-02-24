@@ -20,7 +20,7 @@ export default function Header() {
                         <input type="text" placeholder="何をお探しですか？" />
                         <button type="submit">検索</button>
                     </form>
-                    <Link href={'/'}>
+                    <Link href={'/login'}>
                         <div>
                             <span>ログイン</span>
                         </div>

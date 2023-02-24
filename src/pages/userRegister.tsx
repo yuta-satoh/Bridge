@@ -11,7 +11,7 @@ export default function userRegister() {
       <style jsx>{`
         main {
           background-color: ;
-          background-image: url('/images/curtain/curtain_jmodern_1.jpeg');
+          background-image: url('/images/background_login/backgroundimage.jpeg');
           background-size: cover;
           width: 100%;
           max-height: 100%;
@@ -21,6 +21,7 @@ export default function userRegister() {
           background-color: rgba(255, 255, 255, 0.9);
           margin: 50px auto;
           height: 1500px;
+          width: 45%;
         }
         .title {
           text-align: center;
@@ -322,11 +323,11 @@ export default function userRegister() {
             <h1 className="subTitle">会員の方はこちら</h1>
           </div>
           <div className="loginLink">
-            <button type="button" className="linkButton">
-              <Link href="">
+            <Link href="/login">
+              <button type="button" className="linkButton">
                 ログイン<span className="buttonSpan">→</span>
-              </Link>
-            </button>
+              </button>
+            </Link>
           </div>
         </div>
       </main>
