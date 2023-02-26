@@ -20,7 +20,7 @@ export default function List() {
       <div className={lstyles.container}>
         <Header />
         <main className={lstyles.main}>
-          <form className={lstyles.serch_boxes}>
+          <div className={lstyles.serch_boxes}>
             <div className={lstyles.serchbox}>
               <input
                 className={lstyles.serch}
@@ -82,7 +82,7 @@ export default function List() {
                   </div>
                 </div>
 
-                <form>
+                <div>
                   <div className={fstyles.category}>
                     <p className={lstyles.menu_contents_title}>
                       商材カテゴリから探す
@@ -212,10 +212,10 @@ export default function List() {
                       </ul>
                     </div>
                   </div>
-                </form>
+                </div>
               </div>
             </div>
-          </form>
+          </div>
 
           <div className={lstyles.Breadcrumb}>
             <nav>

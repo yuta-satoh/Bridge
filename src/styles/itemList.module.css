@@ -198,6 +198,7 @@
     align-items:flex-start;
     flex-direction: column;
     justify-content:space-around;
+    font-size:small;
 
     padding: 20px 30px;
 }
