@@ -20,22 +20,22 @@ export default function Mypage() {
         section {
           background-color: rgba(255, 255, 255, 0.9);
           margin: 50px auto;
-          width: 70%;
+          width: 90%;
         }
         .body {
-          width: 70%;
+          width: 80%;
           margin: auto;
         }
-        .title {
-          border-bottom: 2px black solid;
-          max-width: 425px;
-          margin: 50px auto;
+        .head {
+          width: 80%;
+          margin: 20px auto;
         }
         .container {
           margin: 50px auto;
         }
         h1 {
           font-size: 30px;
+          font-weight: bold;
         }
         p {
           font-size: 12px;
@@ -48,6 +48,8 @@ export default function Mypage() {
           display: flex;
           align-items: center;
           justify-content: space-between;
+          border-bottom: 1px solid black;
+          font-size: 25px;
         }
         .cartLink {
           color: rgb(29, 198, 245);
@@ -62,17 +64,38 @@ export default function Mypage() {
           margin: 8px;
           float: left;
         }
+        .subtitle {
+          border-bottom: 1px solid black;
+        }
+        .updateProfArea {
+          display: grid;
+          grid-auto-columns: 1fr;
+          grid-auto-flow: column;
+          width: fit-content;
+          gap: 1rem;
+          place-items: center;
+        }
+        .updateProfButton {
+          background-color: white;
+          color: black;
+          font-weight: bold;
+          border: 2.3px black solid;
+          padding: 10px 40px;
+          font-size: 14px;
+          text-decoration: underline;
+          margin: 20px auto;
+        }
       `}</style>
       <main>
         <section>
-          <div className="title">
+          <div className="head">
             <h1>マイページ</h1>
           </div>
           <div className="body">
             <div className="container">
               <div className="cartTitle">
-                <div className="subtitle">
-                  <h2>あなたのカート</h2>
+                <div>
+                  <h2>カートの商品</h2>
                 </div>
                 <div>
                   <span className="cartLink">
@@ -86,31 +109,59 @@ export default function Mypage() {
                 </div>
               </div>
               <div className="cartList">
-                  <div className='cartItems'>
-                    <Image src={"/images/chair/chair_feminine_1.jpg"} alt={'kagu'} width={100} height={100}/>
-                    <p>商品名</p>
-                    <p>価格</p>
-                  </div>
-                  <div className='cartItems'>
-                    <Image src={"/images/chair/chair_feminine_1.jpg"} alt={'kagu'} width={100} height={100}/>
-                  </div>
-                  <div className='cartItems'>
-                    <Image src={"/images/chair/chair_feminine_1.jpg"} alt={'kagu'} width={100} height={100}/>
-                  </div>
-                  <div className='cartItems'>
-                    <Image src={"/images/chair/chair_feminine_1.jpg"} alt={'kagu'} width={100} height={100}/>
-                  </div>
+                <div className="cartItems">
+                  <Image
+                    src={'/images/chair/chair_feminine_1.jpg'}
+                    alt={'kagu'}
+                    width={210}
+                    height={210}
+                  />
+                  <p>商品名</p>
+                  <p>価格</p>
+                </div>
+                <div className="cartItems">
+                  <Image
+                    src={'/images/chair/chair_feminine_1.jpg'}
+                    alt={'kagu'}
+                    width={210}
+                    height={210}
+                  />
+                  <p>商品名</p>
+                  <p>価格</p>
+                </div>
+                <div className="cartItems">
+                  <Image
+                    src={'/images/chair/chair_feminine_1.jpg'}
+                    alt={'kagu'}
+                    width={210}
+                    height={210}
+                  />
+                  <p>商品名</p>
+                  <p>価格</p>
+                </div>
+                <div className="cartItems">
+                  <Image
+                    src={'/images/chair/chair_feminine_1.jpg'}
+                    alt={'kagu'}
+                    width={210}
+                    height={210}
+                  />
+                  <p>商品名</p>
+                  <p>価格</p>
+                </div>
               </div>
             </div>
             <div className="container">
               <div className="subtitle">
                 <h2>会員情報</h2>
               </div>
-              <div>
-                <Link href="/account/profile">会員情報の確認/変更</Link>
-              </div>
-              <div>
-                <Link href="/account/password">パスワードの変更</Link>
+              <div className='updateProfArea'>
+                  <button type="button" className='updateProfButton' onClick={() => location.href='/account/profile'}>
+                      会員情報の確認/変更
+                  </button>
+                  <button type="button" className='updateProfButton' onClick={() => location.href='/account/password'}>
+                      パスワードの変更
+                  </button>
               </div>
             </div>
             <div className="container">
