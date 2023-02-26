@@ -9,83 +9,111 @@ export default function ItemList() {
     <>
       <div className={lstyles.list_outer}>
         <div>
+        <Link href={'/'}>
         <div className={lstyles.image}>
           <Image
             src="/images/accessory/accessory_feminine_1.jpg"
             alt="全身姿見"
-            width={200}
-            height={200}
+            width={250}
+            height={250}
           />
         </div>
-        <div>
+        <div className={lstyles.detail}>
           <p>全身姿見</p>
           <p>¥15,000</p>
           <p>韓国インテリアのお洒落な全身鏡。</p>
         </div>
+        </Link>
         </div>
 
         <div>
+        <Link href={'/'}>
         <div className={lstyles.image}>
           <Image
             src="/images/accessory/accessory_feminine_1.jpg"
             alt="全身姿見"
-            width={200}
-            height={200}
+            width={250}
+            height={250}
           />
         </div>
-        <div>
+        <div className={lstyles.detail}>
           <p>全身姿見</p>
           <p>¥15,000</p>
           <p>韓国インテリアのお洒落な全身鏡。</p>
         </div>
+        </Link>
         </div>
 
         <div>
+        <Link href={'/'}>
         <div className={lstyles.image}>
           <Image
             src="/images/accessory/accessory_feminine_1.jpg"
             alt="全身姿見"
-            width={200}
-            height={200}
+            width={250}
+            height={250}
           />
         </div>
-        <div>
+        <div className={lstyles.detail}>
           <p>全身姿見</p>
           <p>¥15,000</p>
           <p>韓国インテリアのお洒落な全身鏡。</p>
         </div>
+        </Link>
         </div>
 
         <div>
+        <Link href={'/'}>
         <div className={lstyles.image}>
           <Image
             src="/images/accessory/accessory_feminine_1.jpg"
             alt="全身姿見"
-            width={200}
-            height={200}
+            width={250}
+            height={250}
           />
         </div>
-        <div>
+        <div className={lstyles.detail}>
           <p>全身姿見</p>
           <p>¥15,000</p>
           <p>韓国インテリアのお洒落な全身鏡。</p>
         </div>
+        </Link>
         </div>
 
         <div>
+        <Link href={'/'}>
         <div className={lstyles.image}>
           <Image
             src="/images/accessory/accessory_feminine_1.jpg"
             alt="全身姿見"
-            width={200}
-            height={200}
+            width={250}
+            height={250}
           />
         </div>
-        <div>
+        <div className={lstyles.detail}>
           <p>全身姿見</p>
           <p>¥15,000</p>
           <p>韓国インテリアのお洒落な全身鏡。</p>
         </div>
+        </Link>
+        </div>
+
+        <div>
+        <Link href={'/'}>
+        <div className={lstyles.image}>
+          <Image
+            src="/images/accessory/accessory_feminine_1.jpg"
+            alt="全身姿見"
+            width={250}
+            height={250}
+          />
+        </div>
+        <div className={lstyles.detail}>
+          <p>全身姿見</p>
+          <p>¥15,000</p>
+          <p>韓国インテリアのお洒落な全身鏡。</p>
+        </div>
+        </Link>
         </div>
 
       </div>
