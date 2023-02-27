@@ -3,7 +3,14 @@ import Head from 'next/head';
 
 export async function getServerSideProps() {
   const cookie = getCookieValue();
-  const res = await fetch(`http://127.0.0.1:8000/users?`)
+  const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
+  const res = await fetch(`http://127.0.0.1:8000/users?id=${cookie}`, {
+    method: 'GET',
+      headers: {
+        "Authorization": `Bearer ${TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+  });
 }
 
 export default function Profile() {
