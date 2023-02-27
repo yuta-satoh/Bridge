@@ -1,4 +1,10 @@
+import getCookieValue from '@/lib/getCookieValue';
 import Head from 'next/head';
+
+export async function getServerSideProps() {
+  const cookie = getCookieValue();
+  const res = await fetch(`http://127.0.0.1:8000/users?`)
+}
 
 export default function Profile() {
   return (
