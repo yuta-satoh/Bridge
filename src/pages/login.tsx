@@ -1,8 +1,46 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import urStyles from '../styles/userRegister.module.css';
+import { useRouter } from 'next/router';
+import { handleSmoothScroll } from 'next/dist/shared/lib/router/router';
 
-export default function userRegister() {
+export default function Login() {
+  // email, passwordの値を格納するState
+  const [loginData, setLoginData] = useState<{email: string; password: string;}>({
+    email: "",
+    password: "",
+  });
+
+  // ルーターを定義
+  const rooter = useRouter();
+
+  // inputの値をstateに格納するチェンジイベント
+  function updateLoginData(e: ChangeEvent<HTMLInputElement>) {
+    setLoginData({
+      ...loginData,
+      [`${e.target.name}`]: e.target.value,
+    });
+    console.log('loginData', loginData)
+  }
+
+  // email, passwordの値がデータベースに存在するかを確認するSubmitイベント
+  async function handleSubmitLogin(e: SyntheticEvent) {
+    e.preventDefault();
+    const responce = await fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(loginData),
+    });
+    if(responce.status === 200) {
+      rooter.replace("/");
+    } else {
+      console.log("ログイン失敗");
+    }
+  }
+
   return (
     <>
       <Head>
@@ -14,7 +52,8 @@ export default function userRegister() {
             <h1 className={urStyles.h1}>LOGIN</h1>
             <p className={urStyles.p}>ログイン</p>
           </div>
-          <form className={urStyles.form}>
+          <form className={urStyles.form} onSubmit={(e) => handleSubmitLogin(e)}>
+
             <div className={urStyles.inputItems}>
               <label htmlFor="email" className={urStyles.label}>
                 メールアドレス
@@ -26,6 +65,7 @@ export default function userRegister() {
                 id="email"
                 className={`${urStyles.inputParts} border border-neutral-500 rounded pl-2.5`}
                 placeholder="例：bridge@example.com"
+                onChange={(e) => updateLoginData(e)}
               />
               <p className={urStyles.nope}>
                 ※メールアドレスを入力して下さい
@@ -42,13 +82,14 @@ export default function userRegister() {
                 id="password"
                 className={`${urStyles.inputParts} border border-neutral-500 rounded pl-2.5`}
                 placeholder="例：abcdef123456"
+                onChange={(e) => updateLoginData(e)}
               />
               <p className={urStyles.nope}>
                 ※パスワードを入力して下さい
               </p>
             </div>
             <div className={urStyles.buttonArea}>
-              <button type="button" className={urStyles.loginButton}>
+              <button type="submit" className={urStyles.loginButton}>
                 ログイン<span className={urStyles.buttonSpan}>→</span>
               </button>
             </div>
