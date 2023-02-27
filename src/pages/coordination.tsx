@@ -5,7 +5,22 @@ import cModule from '../styles/coordination.module.css';
 import Generator from '@/components/Generator';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import Cookies from 'js-cookie';
 import { type } from 'os';
+
+type Request = {
+  request: {
+    id: number;
+    name: string;
+    description: string;
+    genre: string;
+    category: string;
+    price: number;
+    imgurl: string;
+    stock: number;
+    delete: boolean;
+  }[];
+};
 
 export async function getServerSideProps(context: any) {
   const theme = context.query.name;
@@ -30,34 +45,21 @@ export async function getServerSideProps(context: any) {
   };
 }
 
-type request = {
-  request:{
-    id: number;
-    name:string;
-    description:string;
-    genre:string;
-    category:string;
-    price:number;
-    imgurl:string;
-    stock:number;
-    delete:boolean;
-  }
-}
 
-export default function coordination({ request }: request) {
-  const [theme, setTheme] = useState('');
-  const [send, setSend] = useState('');
+export default function coordination({ request }: Request) {
+  const genre = { genre: '' };
   const router = useRouter();
   const loupe = '/images/icon/loupe.png';
   function selectTheme(e: React.ChangeEvent<HTMLSelectElement>) {
-    setTheme(e.target.value);
+    genre.genre = e.target.value;
+    Cookies.set('genre',e.target.value)
   }
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    const theme = Cookies.get('genre')
     router.push({ pathname: '', query: { name: theme } });
-    setSend(theme);
   };
-  console.log(request);
+
   return (
     <>
       <Head>
@@ -87,7 +89,6 @@ export default function coordination({ request }: request) {
                   className={cModule.select}
                   onChange={selectTheme}
                 >
-                  <option value="">選択する</option>
                   <option value="ナチュラル">ナチュラル</option>
                   <option value="北欧風">北欧風</option>
                   <option value="フェミニン">フェミニン</option>
@@ -101,7 +102,7 @@ export default function coordination({ request }: request) {
               </div>
             </form>
           </div>
-          <Generator send={send}/>
+          <Generator request={request} />
           <div className={cModule.linkItems}>
             <Link href="#top">
               <button type="button" className={cModule.linkButton}>

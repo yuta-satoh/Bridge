@@ -2,26 +2,26 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import cModule from '../styles/coordination.module.css';
+import Cookies from 'js-cookie';
 import { type } from 'os';
 
-type props = {
-  send: string;
+type items = {
+  id: number;
+  name: string;
+  genre: string;
+  category: string;
+  price: number;
+  imgurl: string;
+}[];
+type item = {
+  id: number;
+  name: string;
+  genre: string;
+  category: string;
+  price: number;
+  imgurl: string;
 };
-type request = {
-    request:{
-      id: number;
-      name:string;
-      description:string;
-      genre:string;
-      category:string;
-      price:number;
-      imgurl:string;
-      stock:number;
-      delete:boolean;
-    }[]
-  }
-
-export default function Generator(send: props, request:request) {
+export default function Generator(props: { request: items }) {
   // ダミーデータ
   const kaguData = {
     url: '/images/accessory/accessory_nordic_3.jpeg',
@@ -29,17 +29,26 @@ export default function Generator(send: props, request:request) {
     price: 5000,
   };
 
-  // ダミーデータ配列
-  const newItems = Array(9).fill(kaguData);
-  const total = newItems.reduce(function (sum, element) {
+  const total = props.request.reduce(function (sum, element) {
     return sum + element.price;
   }, 0);
 
+  const curtain = [];
+  const light = [];
+  const chair = [];
+  const chest = [];
+  const table = [];
+  const rug = [];
+  const bed = [];
+  const sofa = [];
+  const accessory = [];
+  
+
   const url = '/images/accessory/accessory_nordic_3.jpeg';
+  console.log(props.request);
   return (
     <>
       <div>
-        <h1>テーマ：{send.send}</h1>
         <section className={cModule.linkItems}>
           <article className={cModule.coordinateArea}>
             <div className={cModule.empty}></div>
@@ -79,12 +88,12 @@ export default function Generator(send: props, request:request) {
             <p className={cModule.totalPrice}>¥{total}</p>
           </div>
           <div className={cModule.cardList}>
-            {newItems.map((item, index) => (
+            {props.request.map((item) => (
               <>
-                <div key={index} className={cModule.card}>
+                <div key={item.id} className={cModule.card}>
                   <Link href="">
                     <Image
-                      src={item.url}
+                      src={item.imgurl}
                       width={150}
                       height={150}
                       alt=""
