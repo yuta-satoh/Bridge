@@ -6,7 +6,7 @@ INSERT INTO api.items (
     , 'ナチュラル'
     , '椅子'
     , 2500
-    , '/images/chair/chair_natural_1'
+    , '/images/chair/chair_natural_1.jpeg'
     , 150
 ), (
     'ウッディフレームチェア'
@@ -14,7 +14,7 @@ INSERT INTO api.items (
     , 'ナチュラル'
     , '椅子'
     , 7000
-    , '/images/chair/chair_natural_2'
+    , '/images/chair/chair_natural_2.jpeg'
     , 122
 ), (
     'シンプルデスクチェア'
@@ -22,7 +22,7 @@ INSERT INTO api.items (
     , 'ナチュラル'
     , '椅子'
     , 3500
-    , '/images/chair/chair_natural_3'
+    , '/images/chair/chair_natural_3.jpeg'
     , 122
 ), (
     'ウッドテーブル'
@@ -30,7 +30,7 @@ INSERT INTO api.items (
     , 'ナチュラル'
     , 'テーブル'
     , 9400
-    , '/images/table/table_natural_1'
+    , '/images/table/table_natural_1.jpeg'
     , 100
 ), (
     'ホワイトリビングテーブル'
@@ -38,7 +38,7 @@ INSERT INTO api.items (
     , 'ナチュラル'
     , 'テーブル'
     , 6200
-    , '/images/table/table_natural_2'
+    , '/images/table/table_natural_2.jpeg'
     , 100
 ), (
     '木製ラウンドテーブル'
@@ -46,7 +46,7 @@ INSERT INTO api.items (
     , 'ナチュラル'
     , 'テーブル'
     , 5500
-    , '/images/table/table_natural_3'
+    , '/images/table/table_natural_3.jpeg'
     , 112
 ), (
     'シンプルホワイトカーテン'
@@ -54,7 +54,7 @@ INSERT INTO api.items (
     , 'ナチュラル'
     , 'カーテン'
     , 6700
-    , '/images/curtain/curtain_natural_1'
+    , '/images/curtain/curtain_natural_1.jpeg'
     , 200
 ), (
     'ナチュラル採光カーテン'
@@ -62,7 +62,7 @@ INSERT INTO api.items (
     , 'ナチュラル'
     , 'カーテン'
     , 5500
-    , '/images/curtain/curtain_natural_2'
+    , '/images/curtain/curtain_natural_2.jpeg'
     , 180
 ), (
     'グレードレープカーテン'
@@ -70,7 +70,7 @@ INSERT INTO api.items (
     , 'ナチュラル'
     , 'カーテン'
     , 11500
-    , '/images/curtain/curtain_natural_3'
+    , '/images/curtain/curtain_natural_3.jpeg'
     , 150
 ), (
     'ふわふわ起毛絨毯ホワイト'
@@ -78,7 +78,7 @@ INSERT INTO api.items (
     , 'ナチュラル'
     , 'カーペット/ラグ'
     , 10500
-    , '/images/rug/rug_natural_1'
+    , '/images/rug/rug_natural_1.jpeg'
     , 120
 ), (
     'シンプルリビングカーペット'
@@ -86,7 +86,7 @@ INSERT INTO api.items (
     , 'ナチュラル'
     , 'カーペット/ラグ'
     , 8700
-    , '/images/rug/rug_natural_2'
+    , '/images/rug/rug_natural_2.jpeg'
     , 130
 ), (
     'もこもこグレーラグ'
@@ -94,7 +94,7 @@ INSERT INTO api.items (
     , 'ナチュラル'
     , 'カーペット/ラグ'
     , 4400
-    , '/images/rug/rug_natural_3'
+    , '/images/rug/rug_natural_3.jpeg'
     , 130
 ), (
     'リビングソファ'
@@ -102,7 +102,7 @@ INSERT INTO api.items (
     , 'ナチュラル'
     , 'ソファ'
     , 13500
-    , '/images/sofa/sofa_natural_1'
+    , '/images/sofa/sofa_natural_1.jpeg'
     , 23
 ), (
     'ローソファー（ベージュ）'
@@ -110,7 +110,7 @@ INSERT INTO api.items (
     , 'ナチュラル'
     , 'ソファ'
     , 24000
-    , '/images/sofa/sofa_natural_2'
+    , '/images/sofa/sofa_natural_2.jpeg'
     , 30
 ), (
     '木フレームソファ'
@@ -118,7 +118,7 @@ INSERT INTO api.items (
     , 'ナチュラル'
     , 'ソファ'
     , 59800
-    , '/images/sofa/sofa_natural_3'
+    , '/images/sofa/sofa_natural_3.jpeg'
     , 33
 ), (
     '黒フレームラック'
@@ -126,7 +126,7 @@ INSERT INTO api.items (
     , 'ナチュラル'
     , '収納棚'
     , 9800
-    , '/images/chest/chest_natural_1'
+    , '/images/chest/chest_natural_1.jpeg'
     , 200
 ), (
     'ナチュラルラック9マス'
@@ -134,7 +134,7 @@ INSERT INTO api.items (
     , 'ナチュラル'
     , '収納棚'
     , 18700
-    , '/images/chest/chest_natural_2'
+    , '/images/chest/chest_natural_2.jpeg'
     , 200
 ), (
     'シンプル収納ラック（ホワイト）'
@@ -142,7 +142,7 @@ INSERT INTO api.items (
     , 'ナチュラル'
     , '収納棚'
     , 14300
-    , '/images/chest/chest_natural_3'
+    , '/images/chest/chest_natural_3.jpeg'
     , 150
 ), (
     'シーリングライト'
@@ -150,7 +150,7 @@ INSERT INTO api.items (
     , 'ナチュラル'
     , '照明'
     , 6600
-    , '/images/light/light_natural_1'
+    , '/images/light/light_natural_1.jpeg'
     , 250
 ), (
     'LEDシーリングライト4灯'
@@ -158,7 +158,7 @@ INSERT INTO api.items (
     , 'ナチュラル'
     , '照明'
     , 8300
-    , '/images/light/light_natural_2'
+    , '/images/light/light_natural_2.jpeg'
     , 220
 ), (
     'ウッドフレームライト'
@@ -166,7 +166,7 @@ INSERT INTO api.items (
     , 'ナチュラル'
     , '照明'
     , 12400
-    , '/images/light/light_natural_3'
+    , '/images/light/light_natural_3.jpeg'
     , 220
 ), (
     'ダブルサイズベッド（グレー）'
@@ -174,7 +174,7 @@ INSERT INTO api.items (
     , 'ナチュラル'
     , 'ベッド/寝具'
     , 33800
-    , '/images/bed/bed_natural_1'
+    , '/images/bed/bed_natural_1.jpeg'
     , 25
 ), (
     'ナチュラルダブルベッド'
@@ -182,7 +182,7 @@ INSERT INTO api.items (
     , 'ナチュラル'
     , 'ベッド/寝具'
     , 64200
-    , '/images/bed/bed_natural_2'
+    , '/images/bed/bed_natural_2.jpeg'
     , 22
 ), (
     'シンプル収納付きベッド'
@@ -190,7 +190,7 @@ INSERT INTO api.items (
     , 'ナチュラル'
     , 'ベッド/寝具'
     , 55900
-    , '/images/bed/bed_natural_3'
+    , '/images/bed/bed_natural_3.jpeg'
     , 33
 ), (
     'シンプルデザイン時計'
@@ -198,7 +198,7 @@ INSERT INTO api.items (
     , 'ナチュラル'
     , '小物/雑貨'
     , 5740
-    , '/images/accessory/accessory_natural_1'
+    , '/images/accessory/accessory_natural_1.jpeg'
     , 57
 ), (
     'フラワーベースホワイト'
@@ -206,7 +206,7 @@ INSERT INTO api.items (
     , 'ナチュラル'
     , '小物/雑貨'
     , 3200
-    , '/images/accessory/accessory_natural_2'
+    , '/images/accessory/accessory_natural_2.jpeg'
     , 77
 ), (
     '全身鏡ホワイト'
@@ -214,7 +214,7 @@ INSERT INTO api.items (
     , 'ナチュラル'
     , '小物/雑貨'
     , 8900
-    , '/images/accessory/accessory_natural_3'
+    , '/images/accessory/accessory_natural_3.jpeg'
     , 99
 );
 
