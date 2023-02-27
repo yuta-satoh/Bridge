@@ -1,7 +1,9 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import urStyles from '../styles/userRegister.module.css';
+import { useRouter } from 'next/router';
+import { handleSmoothScroll } from 'next/dist/shared/lib/router/router';
 
 export default function Login() {
   // email, passwordの値を格納するState
@@ -10,13 +12,29 @@ export default function Login() {
     password: "",
   });
 
+  // ルーターを定義
+  const rooter = useRouter();
+
   // inputの値をstateに格納するチェンジイベント
   function updateLoginData(e: ChangeEvent<HTMLInputElement>) {
     setLoginData({
       ...loginData,
       [`${e.target.name}`]: e.target.value,
     });
-    console.log('loginData', loginData);
+  }
+
+  // email, passwordの値がデータベースに存在するかを確認するSubmitイベント
+  async function handleSubmitLogin(e: SyntheticEvent) {
+    const responce = await fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(loginData),
+    });
+    if(responce.status === 200) {
+      rooter.replace("/");
+    }
   }
 
   return (
@@ -30,7 +48,7 @@ export default function Login() {
             <h1 className={urStyles.h1}>LOGIN</h1>
             <p className={urStyles.p}>ログイン</p>
           </div>
-          <form className={urStyles.form}>
+          <form className={urStyles.form} onSubmit={(e) => handleSubmitLogin(e)}>
             <div className={urStyles.inputItems}>
               <label htmlFor="email" className={urStyles.label}>
                 メールアドレス
