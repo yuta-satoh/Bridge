@@ -10,7 +10,7 @@ export default function List() {
   return (
     <>
       <Head>
-        <title>インテリア・家具通販【bridge】</title>
+        <title>商品一覧画面</title>
         <meta
           name="viewport"
           content="width=device-width,initial-scale=1.0"
@@ -239,7 +239,6 @@ export default function List() {
           </div>
         </main>
       </div>
-      <Footer />
     </>
   );
 }
