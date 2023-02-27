@@ -1,11 +1,8 @@
-import { url } from 'inspector';
 import Head from 'next/head';
 import Link from 'next/link';
 import urStyles from '../styles/userRegister.module.css';
 import { useState, ChangeEvent, SyntheticEvent } from 'react';
 import { useRouter } from 'next/router';
-
-export default function userRegister() {
 
 type User = {
   lastName: string,
@@ -59,34 +56,19 @@ export default function UserRegister() {
     }
   }
 
-  const searchUser = async (email: string, password: string) => {
-    const searchResult: {email: boolean, password: boolean} = await fetch("/api/register/search", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ email: email, password: password })
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        return data;
-      })
-    return searchResult
-  }
-
   const nameValidation = (name: string) => {
-    if (!name) return '名前を入力して下さい';
+    if (!name) return '※名前を入力して下さい';
     return '';
   }
 
   const genderValidation = (gender: string) => {
-    if (!gender) return "性別を選択して下さい"
+    if (!gender) return "※性別を選択して下さい"
   }
 
   const emailValidation = (email: string) => {
-    if (!email) return "メールアドレスを入力して下さい";
+    if (!email) return "※メールアドレスを入力して下さい";
     if (email.indexOf('@') === -1 || email.indexOf('@') === 0 || email.indexOf('@') === email.length-1) {
-      return 'メールアドレスの形式が不正です';
+      return '※メールアドレスの形式が不正です';
     }
     return '';
   }
@@ -94,33 +76,33 @@ export default function UserRegister() {
   const zipcodeValidation = (key: string, zipcode: string) => {
     switch (key) {
       case 'zipcode1':
-        if (zipcode.length !== 3) return '郵便番号はXXX-XXXXの形式で入力してください';
+        if (zipcode.length !== 3) return '※郵便番号はXXX-XXXXの形式で入力してください';
         return '';
       case 'zipcode2':
-        if (zipcode.length !== 4) return '郵便番号はXXX-XXXXの形式で入力してください';
+        if (zipcode.length !== 4) return '※郵便番号はXXX-XXXXの形式で入力してください';
         return '';
     }
   }
 
   const addressValidation = (address: string) => {
-    if (!address) return '住所を入力して下さい';
+    if (!address) return '※住所を入力して下さい';
     return '';
   }
 
   const telValidation = (tel: string) => {
-    if (!tel) return '電話番号はXXXX-XXXX-XXXXの形式で入力してください';
+    if (!tel) return '※電話番号はXXXX-XXXX-XXXXの形式で入力してください';
     return '';
   }
 
   const passwordValidation = (password: string) => {
-    if (!password) return 'パスワードを入力して下さい';
-    if (password.length < 8 || password.length > 20) return "８文字以上２０文字以内で設定してください"
+    if (!password) return '※パスワードを入力して下さい';
+    if (password.length < 8 || password.length > 20) return "※８文字以上２０文字以内で設定してください"
     return '';
   }
 
   const samePasswordValidation = (confirmationPassword: string) => {
-    if (!confirmationPassword) return "確認用パスワードを入力して下さい"
-    if (confirmationPassword !== userInfo.password) return 'パスワードと確認用パスワードが不一致です';
+    if (!confirmationPassword) return "※確認用パスワードを入力して下さい"
+    if (confirmationPassword !== userInfo.password) return '※パスワードと確認用パスワードが不一致です';
     return '';
   }
 
@@ -166,10 +148,13 @@ export default function UserRegister() {
     }
     if (e.target.value === "female") {
       setUserInfo({...userInfo, gender: "女"})
+      setErrorText({...errorText, gender: ""})
     } else if (e.target.value === "male") {
       setUserInfo({...userInfo, gender: "男"})
+      setErrorText({...errorText, gender: ""})
     } else {
       setUserInfo({...userInfo, gender: "その他"})
+      setErrorText({...errorText, gender: ""})
     }
   }
 
@@ -187,39 +172,51 @@ export default function UserRegister() {
     e.preventDefault();
     if (!canSubmit()) {
       if (!userInfo.lastName || !userInfo.firstName) {
-        setErrorText({...errorText, lastName: "名前を入力して下さい"})
+        setErrorText({...errorText, lastName: "※名前を入力して下さい"})
       }
       if (!userInfo.gender) {
-        setErrorText({...errorText, gender: "性別を選択して下さい"})
+        setErrorText({...errorText, gender: "※性別を選択して下さい"})
       }
       if (!userInfo.email) {
-        setErrorText({...errorText, email: "メールアドレスを入力して下さい"})
+        setErrorText({...errorText, email: "※メールアドレスを入力して下さい"})
       }
       if (!userInfo.tell1 || !userInfo.tell2 || !userInfo.tell3) {
-        setErrorText({...errorText, tell1: "電話番号を入力して下さい"})
+        setErrorText({...errorText, tell1: "※電話番号を入力して下さい"})
       }
       if (!userInfo.zipcode1 || !userInfo.zipcode2) {
-        setErrorText({...errorText, zipcode1: "郵便番号を入力して下さい"})
+        setErrorText({...errorText, zipcode1: "※郵便番号を入力して下さい"})
       }
       if (!userInfo.address) {
-        setErrorText({...errorText, address: "住所を入力して下さい"})
+        setErrorText({...errorText, address: "※住所を入力して下さい"})
       }
       if (!userInfo.password) {
-        setErrorText({...errorText, password: "パスワードを入力して下さい"})
+        setErrorText({...errorText, password: "※パスワードを入力して下さい"})
       }
       if (!userInfo.confirmationPassword) {
-        setErrorText({...errorText, confirmationPassword: "確認用パスワードを入力して下さい"})
+        setErrorText({...errorText, confirmationPassword: "※確認用パスワードを入力して下さい"})
       }
       return
     }
 
-    const searchResult = await searchUser(userInfo.email, userInfo.password);
-    if (!searchResult.email && !searchResult.password) {
-      setErrorText({...errorText, email: "このメールアドレスはすでに使用されています", password: "このパスワードはすでに使用されています"});
-    } else if (searchResult.email) {
-      setErrorText({...errorText, email: "このメールアドレスはすでに使用されています"})
-    } else if (searchResult.password) {
-      setErrorText({...errorText, password: "このパスワードはすでに使用されています"})
+    const searchResult: {email: string, password: string} = await fetch("/api/register/search", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email: userInfo.email, password: userInfo.password })
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        return data;
+      })
+
+    if (searchResult.email !== "" && searchResult.password !== "") {
+      setErrorText({...errorText, email: searchResult.email, password: searchResult.password});
+    } else if (searchResult.email !== "") {
+      setErrorText({...errorText, email: searchResult.email})
+    } else if (searchResult.password !== "") {
+      setErrorText({...errorText, password: searchResult.password})
     } else {
       const postUser = {
         lastname: userInfo.lastName,
@@ -233,20 +230,18 @@ export default function UserRegister() {
         delete: false,
       }
       
-      await fetch("/api/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(postUser),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          router.push("/login")
+      try {
+        await fetch("/api/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(postUser),
         })
-        .catch((err) => {
-          console.log(err)
-        })
+        router.push("/completeRegister")
+      } catch(e) {
+        console.log(e);
+      }
     }
 
   };
@@ -268,7 +263,6 @@ export default function UserRegister() {
                 お名前
               </label>
               <span className={urStyles.primary}>必須</span>
-              <span>{errorText.lastName || errorText.firstName}</span>
               <br />
               <input
                 type="text"
@@ -288,14 +282,13 @@ export default function UserRegister() {
                 value={userInfo.firstName}
                 onChange={handleChange}
               />
-              <p className={urStyles.nope}>※名前を入力して下さい</p>
+              <p className={urStyles.error}>{errorText.lastName || errorText.firstName}</p>
             </div>
             <div className={urStyles.inputItems}>
               <label htmlFor="female" className={urStyles.label}>
                 性別
               </label>
               <span className={urStyles.primary}>必須</span>
-              <span>{errorText.gender}</span>
               <br />
               <div className={urStyles.radioField}>
                 <div
@@ -353,14 +346,13 @@ export default function UserRegister() {
                   </label>
                 </div>
               </div>
-              <p className={urStyles.nope}>※性別を選択して下さい</p>
+              <p className={urStyles.error}>{errorText.gender}</p>
             </div>
             <div className={urStyles.inputItems}>
               <label htmlFor="email" className={urStyles.label}>
                 メールアドレス
               </label>
               <span className={urStyles.primary}>必須</span>
-              <span>{errorText.email}</span>
               <br />
               <input
                 type="email"
@@ -371,16 +363,13 @@ export default function UserRegister() {
                 value={userInfo.email}
                 onChange={handleChange}
               />
-              <p className={urStyles.nope}>
-                ※メールアドレスを入力して下さい
-              </p>
+              <p className={urStyles.error}>{errorText.email}</p>
             </div>
             <div className={urStyles.inputItems}>
               <label htmlFor="tell" className={urStyles.label}>
                 電話番号
               </label>
               <span className={urStyles.primary}>必須</span>
-              <span>{errorText.tell1 || errorText.tell2 || errorText.tell3}</span>
               <br />
               <input
                 type="text"
@@ -411,16 +400,13 @@ export default function UserRegister() {
                 value={userInfo.tell3}
                 onChange={handleChange}
               />
-              <p className={urStyles.nope}>
-                ※電話番号を入力して下さい
-              </p>
+              <p className={urStyles.error}>{errorText.tell1 || errorText.tell2 || errorText.tell3}</p>
             </div>
             <div className={urStyles.inputItems}>
               <label htmlFor="zipcode" className={urStyles.label}>
                 郵便番号
               </label>
               <span className={urStyles.primary}>必須</span>
-              <span>{errorText.zipcode1 || errorText.zipcode2}</span>
               <br />
               <input
                 type="text"
@@ -452,16 +438,13 @@ export default function UserRegister() {
               >
                 住所検索
               </button>
-              <p className={urStyles.nope}>
-                ※郵便番号を入力して下さい
-              </p>
+              <p className={urStyles.error}>{errorText.zipcode1 || errorText.zipcode2}</p>
             </div>
             <div className={urStyles.inputItems}>
               <label htmlFor="address" className={urStyles.label}>
                 住所
               </label>
               <span className={urStyles.primary}>必須</span>
-              <span>{errorText.address}</span>
               <br />
               <input
                 type="text"
@@ -472,14 +455,13 @@ export default function UserRegister() {
                 value={userInfo.address}
                 onChange={handleChange}
               />
-              <p className={urStyles.nope}>※住所を入力して下さい</p>
+              <p className={urStyles.error}>{errorText.address}</p>
             </div>
             <div className={urStyles.inputItems}>
               <label htmlFor="password" className={urStyles.label}>
                 パスワード
               </label>
               <span className={urStyles.primary}>必須</span>
-              <span>{errorText.password}</span>
               <br />
               <input
                 type="password"
@@ -490,12 +472,7 @@ export default function UserRegister() {
                 value={userInfo.password}
                 onChange={handleChange}
               />
-              <p className={urStyles.nope}>
-                ※パスワードを入力して下さい
-              </p>
-              <p className={urStyles.p}>
-                ※8〜20文字で入力してください
-              </p>
+              <p className={urStyles.error}>{errorText.password}</p>
             </div>
             <div className={urStyles.inputItems}>
               <label
@@ -505,7 +482,6 @@ export default function UserRegister() {
                 パスワード確認用
               </label>
               <span className={urStyles.primary}>必須</span>
-              <span>{errorText.confirmationPassword}</span>
               <br />
               <input
                 type="password"
@@ -516,9 +492,7 @@ export default function UserRegister() {
                 value={userInfo.confirmationPassword}
                 onChange={handleChange}
               />
-              <p className={urStyles.nope}>
-                ※パスワード確認用を入力してください
-              </p>
+              <p className={urStyles.error}>{errorText.confirmationPassword}</p>
               <p className={urStyles.p}>
                 ※確認のためパスワードを再入力して下さい
               </p>

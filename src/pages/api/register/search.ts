@@ -26,12 +26,12 @@ const searchUser = async (params: {
     },
 	}).then((res) => res.json()).then((data) => {
     if (data.length !== 0) {
-      return false
+      return "このメールアドレスはすでに使用されています"
     } 
-    return true
+    return ""
   })
 
-  const searchPasswordResult = await fetch(`http://127.0.0.1:8000/users?email=eq.${params.password}`, {
+  const searchPasswordResult = await fetch(`http://127.0.0.1:8000/users?password=eq.${params.password}`, {
     method: "GET",
     headers: {
             "Authorization": `Bearer ${TOKEN}`,
@@ -39,9 +39,9 @@ const searchUser = async (params: {
     },
 	}).then((res) => res.json()).then((data) => {
     if (data.length !== 0) {
-      return false
+      return "このパスワードはすでに使用されています"
     }
-    return true
+    return ""
   })
   return {
     email: searchEmailResult,
@@ -54,6 +54,6 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { email, password } = req.body;
-  const searchResult = searchUser({email, password})
-  res.json(searchResult)
+  const searchResult = await searchUser({email, password})
+  res.status(200).json(searchResult)
 } 
