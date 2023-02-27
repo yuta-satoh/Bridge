@@ -1,8 +1,24 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { ChangeEvent, useState } from 'react';
 import urStyles from '../styles/userRegister.module.css';
 
-export default function userRegister() {
+export default function Login() {
+  // email, passwordの値を格納するState
+  const [loginData, setLoginData] = useState<{email: string; password: string;}>({
+    email: "",
+    password: "",
+  });
+
+  // inputの値をstateに格納するチェンジイベント
+  function updateLoginData(e: ChangeEvent<HTMLInputElement>) {
+    setLoginData({
+      ...loginData,
+      [`${e.target.name}`]: e.target.value,
+    });
+    console.log('loginData', loginData);
+  }
+
   return (
     <>
       <Head>
@@ -26,6 +42,7 @@ export default function userRegister() {
                 id="email"
                 className={`${urStyles.inputParts} border border-neutral-500 rounded pl-2.5`}
                 placeholder="例：bridge@example.com"
+                onChange={(e) => updateLoginData(e)}
               />
               <p className={urStyles.nope}>
                 ※メールアドレスを入力して下さい
@@ -42,6 +59,7 @@ export default function userRegister() {
                 id="password"
                 className={`${urStyles.inputParts} border border-neutral-500 rounded pl-2.5`}
                 placeholder="例：abcdef123456"
+                onChange={(e) => updateLoginData(e)}
               />
               <p className={urStyles.nope}>
                 ※パスワードを入力して下さい

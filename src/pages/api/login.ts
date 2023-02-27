@@ -40,7 +40,7 @@ export default async function handler(
   // ここまで
   // user_idのみ抽出
   const id: number = userData[0].id;
-// レスポンスの定義
+  // レスポンスの定義
   if (responce.ok) {
     res
       .status(200)
