@@ -21,10 +21,12 @@ export default function Login() {
       ...loginData,
       [`${e.target.name}`]: e.target.value,
     });
+    console.log('loginData', loginData)
   }
 
   // email, passwordの値がデータベースに存在するかを確認するSubmitイベント
   async function handleSubmitLogin(e: SyntheticEvent) {
+    e.preventDefault();
     const responce = await fetch('/api/login', {
       method: 'POST',
       headers: {
@@ -34,6 +36,8 @@ export default function Login() {
     });
     if(responce.status === 200) {
       rooter.replace("/");
+    } else {
+      console.log("ログイン失敗");
     }
   }
 
@@ -84,7 +88,7 @@ export default function Login() {
               </p>
             </div>
             <div className={urStyles.buttonArea}>
-              <button type="button" className={urStyles.loginButton}>
+              <button type="submit" className={urStyles.loginButton}>
                 ログイン<span className={urStyles.buttonSpan}>→</span>
               </button>
             </div>
