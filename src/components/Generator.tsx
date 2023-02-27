@@ -2,8 +2,26 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import cModule from '../styles/coordination.module.css';
+import { type } from 'os';
 
-export default function Generator() {
+type props = {
+  send: string;
+};
+type request = {
+    request:{
+      id: number;
+      name:string;
+      description:string;
+      genre:string;
+      category:string;
+      price:number;
+      imgurl:string;
+      stock:number;
+      delete:boolean;
+    }[]
+  }
+
+export default function Generator(send: props, request:request) {
   // ダミーデータ
   const kaguData = {
     url: '/images/accessory/accessory_nordic_3.jpeg',
@@ -21,6 +39,7 @@ export default function Generator() {
   return (
     <>
       <div>
+        <h1>テーマ：{send.send}</h1>
         <section className={cModule.linkItems}>
           <article className={cModule.coordinateArea}>
             <div className={cModule.empty}></div>

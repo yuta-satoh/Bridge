@@ -3,9 +3,61 @@ import Link from 'next/link';
 import Image from 'next/image';
 import cModule from '../styles/coordination.module.css';
 import Generator from '@/components/Generator';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { type } from 'os';
 
-export default function coordination() {
+export async function getServerSideProps(context: any) {
+  const theme = context.query.name;
+  const TOKEN =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
+  const request = await fetch(
+    `http://127.0.0.1:8000/items?genre=eq.${theme}`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+    }
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      return data;
+    });
+  return {
+    props: { request },
+  };
+}
+
+type request = {
+  request:{
+    id: number;
+    name:string;
+    description:string;
+    genre:string;
+    category:string;
+    price:number;
+    imgurl:string;
+    stock:number;
+    delete:boolean;
+  }
+}
+
+export default function coordination({ request }: request) {
+  const [theme, setTheme] = useState('');
+  const [send, setSend] = useState('');
+  const router = useRouter();
   const loupe = '/images/icon/loupe.png';
+  function selectTheme(e: React.ChangeEvent<HTMLSelectElement>) {
+    setTheme(e.target.value);
+  }
+  const handleSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    router.push({ pathname: '', query: { name: theme } });
+    setSend(theme);
+  };
+  console.log(request);
   return (
     <>
       <Head>
@@ -24,17 +76,32 @@ export default function coordination() {
             <h1 className={cModule.title}>
               コーディネートジェネレーター
             </h1>
-            <div className={cModule.selectTheme}>
-              <p className={cModule.theme}>テーマ選択：</p>
-              <select name="example" className={cModule.select}>
-                <option value="ナチュラル">ナチュラル</option>
-                <option value="北欧風">北欧風</option>
-                <option value="フェミニン">フェミニン</option>
-                <option value="和モダン">和モダン</option>
-              </select>
-            </div>
+            <form action="" onSubmit={handleSubmit}>
+              <div className={cModule.selectTheme}>
+                <label htmlFor="select" className={cModule.theme}>
+                  テーマ選択：
+                </label>
+                <select
+                  id="select"
+                  name="example"
+                  className={cModule.select}
+                  onChange={selectTheme}
+                >
+                  <option value="">選択する</option>
+                  <option value="ナチュラル">ナチュラル</option>
+                  <option value="北欧風">北欧風</option>
+                  <option value="フェミニン">フェミニン</option>
+                  <option value="和モダン">和モダン</option>
+                </select>
+              </div>
+              <div className={cModule.button}>
+                <button className={cModule.buttonStyle}>
+                  生成する
+                </button>
+              </div>
+            </form>
           </div>
-          <Generator />
+          <Generator send={send}/>
           <div className={cModule.linkItems}>
             <Link href="#top">
               <button type="button" className={cModule.linkButton}>
