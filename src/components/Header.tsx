@@ -7,7 +7,7 @@ export default function Header() {
             <div className="flex items-center justify-center h-20 w-screen bg-white absolute top-8">
                 <Link href={'/'}>
                     <div className="">
-                        <Image src="/images/logo/ロゴ2.png" alt="bridge-logo" width={500} height={70} className="border mr-36"/>
+                        <Image src="/images/logo/ロゴ1.png" alt="bridge-logo" width={500} height={70}/>
                     </div>
                 </Link>
                 <ul className="flex gap-10 mr-60 ml-30">

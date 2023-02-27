@@ -1,3 +1,5 @@
+// [id]作成次第削除
+
 import ItemList from '@/components/ItemList';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -231,11 +233,7 @@ export default function List() {
           </div>
 
           <div>
-            <ul>
-              <li>
-                <ItemList />
-              </li>
-            </ul>
+            <ItemList />
           </div>
         </main>
       </div>
