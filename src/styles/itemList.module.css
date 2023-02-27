@@ -2,23 +2,187 @@
     display: flex;
     flex-direction: column;
 
+    box-sizing: border-box;
     min-height: 100vh;
 }
 
 .main{
+    box-sizing: border-box;
     width: 100%;
     min-width: 1280px;
-    padding: 30px 40px;
+    padding: 30px 150px;
 }
 
+.serch_boxes{
+    display: flex;
+    align-items:center;
+    flex-direction: column;
+    justify-content:center;
+
+    margin: 10px 0 25px;
+}
+
+.serchbox{
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    
+}
+
+.serch{
+    display: flex;
+    align-items:center;
+    justify-content:center;
+
+    width: 600px;
+    height: 40px;
+    padding: 0 20px;
+
+    border: 1.5px solid #574142;
+    border-radius: 0.25rem;
+}
+
+.serch_button{
+    width: 100px;
+    height: 40px;
+    padding: 0 20px;
+
+    color: #f5f5f5;
+    border-radius: 0.25rem;
+    background-color: #574142;
+}
+
+.serch_itemsmenu{
+    padding: 5px 10px;
+}
+
+.serch_checkbox{
+    display: none;
+}
+
+.serch_menu{
+    font-size: small;
+
+    display: flex;
+    align-items:center;
+    justify-content:center;
+
+    width: 700px;
+    height: 30px;
+    padding: 5px;
+
+    color: #f5f5f5;
+    border: 2px solid #574142;
+    background-color: #574142;
+}
+
+.serchmenu_itembox{
+    display: flex;
+    visibility: hidden;
+    flex-direction: column;
+
+    height: 0;
+    padding: 0px 45px;
+
+    transition:all 0.5s ease-in;
+
+    opacity: 0;
+    background-color:  #f5f5f5;
+}
+
+.serch_checkbox:checked + .serch_menu + .serchmenu_itembox{
+    visibility: visible;
+
+    height: 100%;
+    padding: 30px 45px;
+
+    transition:all 1s ease-in-out;
+
+    opacity: 1;
+}
+
+.itemboxes{
+    padding: 0 15px 15px;
+
+    border-bottom: 1.5px solid #574142;
+}
+
+/* 絞り込み条件 */
+.itembox{  font-weight: bold;
+
+    display: flex;  align-items:center;
+    justify-content:flex-start;
+
+    margin: 0 15px 15px;  
+    }
+
+.itembox_clear{
+    font-size: small;
+    font-weight: lighter;
+
+    align-items:center;
+    justify-content:flex-start;
+
+    margin: 0 15px;
+    padding:5px 10px;
+
+    background-color: #F8C6BD;
+}
+
+.itembox_item{
+    display: flex;
+    flex-direction: column;
+
+    padding: 0 15px;
+}
+
+.itembox_categories,.itembox_genres{
+    display: flex;
+}
+
+.itembox_lists{
+    margin: 0 15px;
+}
+
+.itembox_list{
+    padding: 0 10px;
+}
+
+.menu_contents_title {
+    font-weight:bold;
+
+    display: flex;
+    align-items:center;
+    justify-content:flex-start;
+
+    margin: 0 15px 15px; 
+}
+
+.category_lists {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    padding: 0 15px;
+}
+
+.category_list {
+    flex-basis: 30%;
+
+    padding: 0 15px;
+
+    text-indent: 0%;
+}
+
+/* 商品一覧 */
 .list_outer{
     display: grid;
     overflow: hidden;
 
-    margin: 20px 100px ;
+    box-sizing: border-box;
     padding: 30px;
 
-    grid-gap: 10px;
+    grid-gap: 25px;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     grid-template-rows: repeat(auto-fill,minmax(250px, 1fr));
 }
@@ -29,36 +193,40 @@
     justify-content:center;
 }
 
+.detail{
+    display:flex;
+    align-items:flex-start;
+    flex-direction: column;
+    justify-content:space-around;
+    font-size:small;
+
+    padding: 20px 30px;
+}
+
+.detail:hover,.breadlist:hover,.itembox_clear:hover{
+    color: #FF7C8A;
+}
+
+.image:hover{
+    box-shadow:5px 5px 5px #F8C6BD;
+}
+
+/* パンくずリスト */
 .Breadcrumb{
     font-size: 100%;
 
-    display: block;
+    display: flex;
+    align-items:center;
+    justify-content:flex-start;
 
-    margin: 5px 100px;
-    padding: 20px 0;
+    box-sizing: border-box;
+    margin: 5px 0;
+    padding: 20px 30px;
 
     color: #574142;
 
     -webkit-font-smoothing: antialiased;
 }
-
-.breadcrumb {
-    font-size: 10px;
-
-    display: flex;
-    flex-wrap: wrap;
-
-    box-sizing: border-box;
-    min-height: 38px;
-    margin: 5px 100px;
-    padding: 20px 0;
-
-    list-style: none;
-
-    color: #574142;
-
-    -webkit-font-smoothing: antialiased;
-  }
   
 .breadlist{
     font-size: 100%;
@@ -72,12 +240,7 @@
     -webkit-font-smoothing: antialiased;
 }
 
-.breadlist:hover{
-    color: #FF7C8A;
-}
-
 .breadlist:not(:last-of-type)::after {
-    margin: 0 .6em; 
+    margin: 0 .6em;  content: ">"; color: #574142;
 
-    content: ">"; color: #574142;
     }
