@@ -1,4 +1,6 @@
 import Head from 'next/head';
+import Link from 'next/link';
+import cModule from '../../styles/coordination.module.css';
 
 export default function Password() {
   return (
@@ -132,6 +134,21 @@ export default function Password() {
       `}</style>
       <main>
         <section>
+          <div>
+          <ol className={cModule.links} id="top">
+            <li className={cModule.pageLink}>
+              <Link href="/">Bridge</Link>
+              <span className={cModule.greaterThan}>&gt;</span>
+            </li>
+            <li className={cModule.pageLink}>
+              <Link href="/mypage">マイページ</Link>
+              <span className={cModule.greaterThan}>&gt;</span>
+            </li>
+            <li className={cModule.pageLink}>
+              パスワードの変更
+            </li>
+          </ol>
+          </div>
           <div className='title'>
             <h1>パスワードの変更</h1>
           </div>
