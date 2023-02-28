@@ -78,7 +78,7 @@ INSERT INTO api.items (
     , '北欧風'
     , 'カーペット/ラグ'
     , 5000
-    , '/images/rug/rag_nordic_1.jpeg'
+    , '/images/rug/rug_nordic_1.jpeg'
     , 73
 ), (
     'フェードグレーラグ'
@@ -86,7 +86,7 @@ INSERT INTO api.items (
     , '北欧風'
     , 'カーペット/ラグ'
     , 16500
-    , '/images/rug/rag_nordic_2.jpeg'
+    , '/images/rug/rug_nordic_2.jpeg'
     , 88
 ), (
     'デザイナーズラグ'
@@ -94,7 +94,7 @@ INSERT INTO api.items (
     , '北欧風'
     , 'カーペット/ラグ'
     , 30800
-    , '/images/rug/rag_nordic_3.jpeg'
+    , '/images/rug/rug_nordic_3.jpeg'
     , 99
 ), (
     'カウチソファ'

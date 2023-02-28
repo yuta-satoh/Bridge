@@ -1,20 +1,70 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import useSWR, { Fetcher } from 'swr'
+import { useState, useEffect } from "react";
+import getCookieValue from "../lib/getCookieArray"
+import Recommend from "@/components/Recommend";
+
+type Cart = {
+  id: number,
+  item_id: number,
+  cart_id: number,
+  date: string,
+  quantity: number,
+  delete: boolean,
+}
+
+// カートに入った時の状態を含めたいのでcartInfoプロパティも追加しています
+type Item = {
+  id: number,
+  name: string,
+  description: string,
+  genre: string,
+  category: string,
+  price: number,
+  imgurl: string,
+  stock: number,
+  delete: boolean,
+  cartInfo: Cart,
+}
+
+const fetcher: Fetcher<Item[], string> = (...args) => fetch(...args).then((res) => res.json());
 
 export default function Cart() {
-  // ダミーデータ作成
-  const kaguData = {
-    id: 1,
-    url: '/images/accessory/accessory_nordic_3.jpeg',
-    price: 5000,
-    name: 'アニマルスツール',
-    description: 'ふわふわな毛並み、今にも歩き出しそうな木の脚のスツール。'
-  }
-  const kaguArr = Array(4).fill(kaguData)
-  // 合計金額
-  const sumPrice = kaguArr.reduce((current, kagu) => current + kagu.price, 0)
+  const [userId, setUserId] = useState("")
 
+  // Cookieからuser_idを取得
+  useEffect(() => {
+    const userCookieId = getCookieValue()
+    setUserId(userCookieId)
+  }, [userId])
+  
+  // SWRでアイテムを取得
+  const { data: cartItemData, error } = useSWR(`/api/getCart?id=${userId}`, fetcher)
+
+  // カートにデータがない時の表示
+  if (error) return (
+    <div className="w-4/5 mx-auto">
+      <h2 className="text-3xl font-bold mt-10">カート</h2>
+      <div className="block py-40 mx-auto my-10 bg-neutral-100 rounded">
+        <h2 className="text-center text-3xl font-bold mb-10">カートに商品がありません</h2>
+        <Link href="/">
+          <div className="container mx-auto pt-1.5 text-center h-10 w-1/3 border-2 border-neutral-900 bg-white mt-4">
+            お買い物はこちらから
+          </div>
+        </Link>
+      </div>
+    </div>
+  )
+
+  if (!cartItemData) return <div>loading...</div>
+
+  const filteredItemData = cartItemData.filter((item) => !item.delete)
+  
+  // 合計金額
+  const sumPrice = filteredItemData.reduce((current, item) => current + item.price, 0)
+  
   return (
     <>
       <Head>
@@ -24,13 +74,13 @@ export default function Cart() {
         <div className="w-3/5 mt-10">
           <div className="flex">
             <h2 className="text-3xl font-bold">カート</h2>
-            <span className="mt-2">{`(${kaguArr.length}点の商品)`}</span>
+            <span className="mt-2">{`(${filteredItemData.length}点の商品)`}</span>
           </div>
-          {kaguArr.map((item, index) => (
-            <div key={index} className="border border-neutral-900 my-2 p-3 h-52">
+          {filteredItemData.map((item, index) => (
+            <div key={index} className="border border-neutral-900 my-2 py-3 px-8 h-52">
               <div className="flex gap-5">
                 <Link href={'/'}>
-                  <Image src={item.url} alt={item.name} width={150} height={150} className="rounded"/>
+                  <Image src={item.imgurl} alt={item.name} width={150} height={150} className="rounded"/>
                 </Link>
                 <div className="px-3 py-4">
                   <Link href={'/'}>
@@ -67,26 +117,7 @@ export default function Cart() {
           <div className="mt-16 mb-5">
             <h2 className="text-3xl font-bold">こちらもいかがですか？</h2>
           </div>
-          <div className="flex gap-3 mb-10">
-            {kaguArr.slice(0, 2).map((item, index) => (
-              <div key={index} className="border border-neutral-900 rounded p-3 mx-auto">
-                <div className="flex gap-5">
-                  <Link href={'/'}>
-                    <Image src={item.url} alt={item.name} width={120} height={120} className="rounded"/>
-                  </Link>
-                  <div className="px-2 py-2">
-                    <Link href={'/'}>
-                      <p className="underline mb-1">{item.name}</p>
-                      <p className="mt-1">¥ {item.price.toLocaleString()}</p>
-                    </Link>
-                    <button className="p-1.5 text-center text-white h-10 mt-6 rounded bg-blue-500 hover:bg-blue-700">
-                      カートに入れる
-                    </button>
-                  </div>
-                </div>
-              </div>  
-            ))}
-          </div> 
+          <Recommend filteredItemData={filteredItemData} />
         </div>
         <div className="w-1/4 h-80 mt-10 p-10 border-2 border-neutral-900 rounded bg-gray-100">
           <p>
