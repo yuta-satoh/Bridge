@@ -1,13 +1,13 @@
 import getCookieValue from '@/lib/getCookieValue';
 import Head from 'next/head';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 
 // userデータの型を定義
 type User = {
   id: number;
-  lastName: string;
-  firstName: string;
+  lastname: string;
+  firstname: string;
   gender: 'male' | 'female' | 'other';
   tell: string;
   email: string;
@@ -51,7 +51,8 @@ export const getServerSideProps: GetServerSideProps = async (
       },
     }
   );
-  const data = await res.json();
+  const rawData: User[] = await res.json();
+  const data: User = rawData[0]
 
   // ユーザーをpropsに渡す
   return {
@@ -60,7 +61,9 @@ export const getServerSideProps: GetServerSideProps = async (
 };
 
 export default function Profile({ data }: { data: User }) {
-  console.log('data', data);
+  const [profile, setProfile] = useState<User>(data);
+  console.log('profile', profile)
+
   return (
     <>
       <Head>
@@ -205,14 +208,14 @@ export default function Profile({ data }: { data: User }) {
                   type="text"
                   name="lastName"
                   id="lastName"
-                  // value={"変更前の姓"}
+                  value={profile.lastname}
                   className="border border-neutral-500 rounded pl-2.5"
                 />
                 <input
                   type="text"
                   name="firstName"
                   id="firstName"
-                  // value={"変更前の名"}
+                  value={profile.firstname}
                   className="border border-neutral-500 rounded pl-2.5"
                 />
               </div>
@@ -226,8 +229,9 @@ export default function Profile({ data }: { data: User }) {
                       type="radio"
                       name="gender"
                       id="female"
-                      // value="female"
+                      value="female"
                       className="radioButton"
+                      checked={profile.gender === "female"}
                     />
                     <label htmlFor="female" className="genderLabel">
                       女性&emsp;
@@ -238,8 +242,9 @@ export default function Profile({ data }: { data: User }) {
                       type="radio"
                       name="gender"
                       id="male"
-                      // value="male"
+                      value="male"
                       className="radioButton"
+                      checked={profile.gender === "male"}
                     />
                     <label htmlFor="male" className="genderLabel">
                       男性&emsp;
@@ -250,8 +255,9 @@ export default function Profile({ data }: { data: User }) {
                       type="radio"
                       name="gender"
                       id="other"
-                      // value="other"
+                      value="other"
                       className="radioButton"
+                      checked={profile.gender === "other"}
                     />
                     <label htmlFor="other" className="genderLabel">
                       その他
