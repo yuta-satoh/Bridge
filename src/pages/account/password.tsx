@@ -1,8 +1,92 @@
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
+import { ChangeEvent, useState } from 'react';
 import cModule from '../../styles/coordination.module.css';
 
-export default function Password() {
+// userデータの型を定義
+type User = {
+  id: number;
+  lastname: string;
+  firstname: string;
+  gender: 'male' | 'female' | 'other';
+  tell: string;
+  email: string;
+  zipcode: string;
+  address: string;
+  password: string;
+  delete: Boolean;
+};
+
+// passwordデータの型を定義
+type Password = {
+  password: string;
+  newPassword: string;
+  confirmationPassword: string;
+};
+
+export const getServerSideProps: GetServerSideProps = async (
+  context
+) => {
+  // クッキーの値の取得
+  const cookie = context.req.headers.cookie;
+  const cookieValue = ((cookie: string | undefined) => {
+    if (typeof cookie !== 'undefined') {
+      const cookies = cookie.split(';');
+      // 配列cookiesを=で分割して代入し、
+      // 0番目の要素が"id"なら1番目の要素(cookieの値)を返す
+      for (let cookie of cookies) {
+        const cookiesArray = cookie.split('=');
+        if (cookiesArray[0].trim() === 'id') {
+          return cookiesArray[1]; // (key[0],value[1])
+        }
+      }
+    }
+    // 上記の処理で何もリターンされなければ空文字を返す
+    return '';
+  })(cookie);
+  // TOKEN定義
+  const TOKEN =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
+  // クッキーの値を元にuserデータを取得
+  const res = await fetch(
+    `http://127.0.0.1:8000/users?id=eq.${cookieValue}`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+    }
+  );
+  const rawData: User[] = await res.json();
+  // 現在のパスワードを代入
+  const password: string = rawData[0].password;
+
+  return {
+    props: { password, cookieValue },
+  };
+};
+
+export default function Password({ password, cookieValue }: { password: string; cookieValue: string }) {
+  const initPassword = {
+    password: "",
+    newPassword: "",
+    confirmationPassword: "",
+  }
+  // input入力値を格納
+  const [Passwords, setPasswords] = useState<Password>(initPassword);
+  // エラー文を格納
+  const [errorText, setErrorText] = useState<Password>(initPassword);
+
+  // onChangeハンドラ
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+    setPasswords({
+      ...Passwords,
+      [`${e.target.name}`]: e.target.value,
+    });
+  }
+
   return (
     <>
       <Head>
@@ -162,18 +246,20 @@ export default function Password() {
                 name="password"
                 id="password"
                 className="inputParts border border-neutral-500 rounded pl-2.5"
+                onChange={(e) => handleChange(e)}
               />
             </div>
             <div className="inputItems">
-              <label htmlFor="password">新しいパスワード</label>
+              <label htmlFor="newPassword">新しいパスワード</label>
               <span className="primary">必須</span>
               <br />
               <input
                 type="password"
-                name="password"
-                id="password"
+                name="newPassword"
+                id="newPassword"
                 className="inputParts border border-neutral-500 rounded pl-2.5"
                 placeholder="例：abcdef123456"
+                onChange={(e) => handleChange(e)}
               />
               <p>※8〜20文字で入力してください</p>
             </div>
@@ -189,6 +275,7 @@ export default function Password() {
                 id="confirmationPassword"
                 className="inputParts border border-neutral-500 rounded pl-2.5"
                 placeholder="例：abcdef123456"
+                onChange={(e) => handleChange(e)}
               />
               <p>※確認のためパスワードを再入力して下さい</p>
               <br />
