@@ -7,20 +7,8 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Cookies from 'js-cookie';
 import { type } from 'os';
-
-type Request = {
-  request: {
-    id: number;
-    name: string;
-    description: string;
-    genre: string;
-    category: string;
-    price: number;
-    imgurl: string;
-    stock: number;
-    delete: boolean;
-  }[];
-};
+import { journal } from './lib/generatorFn';
+import { shuffleItems } from './lib/generatorFn';
 
 export async function getServerSideProps(context: any) {
   const theme = context.query.name;
@@ -44,19 +32,62 @@ export async function getServerSideProps(context: any) {
     props: { request },
   };
 }
-
+type Request = {
+  request: {
+    id: number;
+    name: string;
+    description: string;
+    genre: string;
+    category: string;
+    price: number;
+    imgurl: string;
+    stock: number;
+    delete: boolean;
+  }[];
+};
+type item = {
+  id: number;
+  name: string;
+  genre: string;
+  category: string;
+  price: number;
+  imgurl: string;
+}[];
 
 export default function coordination({ request }: Request) {
   const genre = { genre: '' };
   const router = useRouter();
   const loupe = '/images/icon/loupe.png';
+  const curtain: item = [];
+  const light: item = [];
+  const chair: item = [];
+  const chest: item = [];
+  const table: item = [];
+  const rug: item = [];
+  const bed: item = [];
+  const sofa: item = [];
+  const accessory: item = [];
   function selectTheme(e: React.ChangeEvent<HTMLSelectElement>) {
     genre.genre = e.target.value;
-    Cookies.set('genre',e.target.value)
+    Cookies.set('genre', e.target.value);
   }
+  journal(
+    { request },
+    curtain,
+    light,
+    chair,
+    chest,
+    table,
+    rug,
+    bed,
+    sofa,
+    accessory
+  );
+  const test = shuffleItems(curtain)
+
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    const theme = Cookies.get('genre')
+    const theme = Cookies.get('genre');
     router.push({ pathname: '', query: { name: theme } });
   };
 

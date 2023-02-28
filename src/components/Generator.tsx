@@ -33,19 +33,7 @@ export default function Generator(props: { request: items }) {
     return sum + element.price;
   }, 0);
 
-  const curtain = [];
-  const light = [];
-  const chair = [];
-  const chest = [];
-  const table = [];
-  const rug = [];
-  const bed = [];
-  const sofa = [];
-  const accessory = [];
-  
-
   const url = '/images/accessory/accessory_nordic_3.jpeg';
-  console.log(props.request);
   return (
     <>
       <div>
