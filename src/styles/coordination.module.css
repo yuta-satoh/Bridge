@@ -23,6 +23,13 @@
   margin-left: 20px;
   margin-bottom: 20px;
 }
+.selectResTheme {
+  display: flex;
+  font-size: 20px;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
 .theme {
   font-size: 20px;
 }
@@ -150,4 +157,16 @@
   font-weight: bold;
   padding: 10px 80px;
   font-size: 17px;
+}
+.image{
+  width: 150px;
+  height: 150px;
+}
+.display{
+  width: 240px;
+  height: 240px;
+}
+.resForm{
+  margin-top: 20px;
+  margin-bottom: 30px;
 }
