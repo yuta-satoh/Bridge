@@ -124,6 +124,24 @@ export default function Profile({ data }: { data: User }) {
     });
   }
 
+  // 郵便番号検索
+  function searchAddress() {
+    const url = 'https://zipcoda.net/api?';
+    if (zipcode[0] && zipcode[1]) {
+      const params = new URLSearchParams({ zipcode: `${zipcode[0]}${zipcode[1]}` })
+      fetch(url + params)
+          .then(response => response.json())
+          .then(data => {
+              const stateName: string = data.items[0].state_name;
+              const townName: string = data.items[0].address;
+              setProfile({...profile, address: `${stateName + townName}`})
+          })
+          .catch((err: ErrorEvent) => {
+              console.log(err)
+          });
+    }
+  }
+
   return (
     <>
       <Head>
@@ -393,7 +411,7 @@ export default function Profile({ data }: { data: User }) {
                   value={zipcode[1]}
                   onChange={(e) => handleZipcodeChange(e)}
                 />
-                <button className="zipButton text-white bg-neutral-900 border border-neutral-900 rounded px-1">
+                <button type="button" className="zipButton text-white bg-neutral-900 border border-neutral-900 rounded px-1" onClick={() => searchAddress()}>
                   住所検索
                 </button>
               </div>
