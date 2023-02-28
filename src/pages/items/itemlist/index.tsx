@@ -1,12 +1,11 @@
-// [id]作成次第削除
+// itemlist/[id]作成次第削除
 
 import ItemList from '@/components/ItemList';
 import Head from 'next/head';
 import Link from 'next/link';
 import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import lstyles from '../../styles/itemList.module.css';
-import fstyles from '../../styles/Footer.module.css';
+import lstyles from '../../../styles/itemList.module.css';
+import fstyles from '../../../styles/Footer.module.css';
 
 export default function List() {
   return (
@@ -232,6 +231,7 @@ export default function List() {
             </nav>
           </div>
 
+        {/* 商品一覧 */}
           <div>
             <ItemList />
           </div>

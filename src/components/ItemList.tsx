@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import lstyles from '../styles/itemList.module.css';
 import useSWR from 'swr';
-import { Key } from 'react';
 
 type Item = {
   id: number;
@@ -11,19 +10,21 @@ type Item = {
   genre: string;
   category: string;
   price: number;
-  imgUrl: string;
+  imgurl: string;
   stock: number;
   delete: boolean;
 };
 
-export default function ItemList({ item }: { item: Item }): JSX.Element {
+export default function ItemList(): JSX.Element {
   const fetcher = (resource: string) =>
     fetch(resource).then((res) => res.json());
 
   const { data, error } = useSWR('/api/items', fetcher);
   if (error) return <p>エラー</p>;
-  // ロード中のcss入れたい
+  // ロード中のcss入れたい・画面中央に表示したい
   if (!data) return <p>ロード中...</p>;
+
+  console.log(data);
 
   return (
     <>
@@ -34,7 +35,7 @@ export default function ItemList({ item }: { item: Item }): JSX.Element {
               <Link href={`/items/${item.id}`}>
                 <div className={lstyles.image}>
                   <Image
-                    src={item.imgUrl}
+                    src={item.imgurl}
                     alt={item.name}
                     width={250}
                     height={250}

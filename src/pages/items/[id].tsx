@@ -1,11 +1,29 @@
-import ItemList from '@/components/ItemList';
 import Head from 'next/head';
 import Link from 'next/link';
 import lstyles from '../../styles/itemList.module.css';
 import istyles from '../../styles/item.module.css';
 import Image from 'next/image';
+import useSWR from 'swr';
 
-export default function ItemPage() {
+type Item = {
+  id: number;
+  name: string;
+  description: string;
+  genre: string;
+  category: string;
+  price: number;
+  imgurl: string;
+  stock: number;
+  delete: boolean;
+};
+
+
+export default function ItemPage({item}: {item: Item[]}): JSX.Element {
+
+  console.log(item);
+
+  const items = item[0];
+
   return (
     <>
       <Head>
@@ -13,6 +31,7 @@ export default function ItemPage() {
       </Head>
 
       <main className={istyles.main}>
+        {/* パンくずリスト */}
         <div className={lstyles.Breadcrumb}>
           <nav>
             <ol>
@@ -33,107 +52,19 @@ export default function ItemPage() {
         </div>
 
         <div className={istyles.itembox}>
-          <div className={istyles.content_left}>
+
+          <div key={items.id} className={istyles.content_left}>
             <div className={istyles.image}>
               <Image
-                src="/images/accessory/accessory_feminine_1.jpg"
-                alt="全身姿見"
+                src={items.imgurl}
+                alt={items.name}
                 width={550}
                 height={500}
               />
             </div>
 
+          {/* 以下はこんなのもどうですか、ジャンル・カテゴリに合致したものを持ってくる */}
             <div className={istyles.recommend}>
-              <div>
-                <Link href={'/'}>
-                  <div className={istyles.images}>
-                    <Image
-                      src="/images/accessory/accessory_feminine_1.jpg"
-                      alt="全身姿見"
-                      width={150}
-                      height={150}
-                    />
-                  </div>
-                  <div className={istyles.detail}>
-                    <p>全身姿見</p>
-                    <p>¥15,000</p>
-                    <p>韓国インテリアのお洒落な全身鏡。</p>
-                  </div>
-                </Link>
-              </div>
-
-              <div>
-                <Link href={'/'}>
-                  <div className={istyles.images}>
-                    <Image
-                      src="/images/accessory/accessory_feminine_1.jpg"
-                      alt="全身姿見"
-                      width={150}
-                      height={150}
-                    />
-                  </div>
-                  <div className={istyles.detail}>
-                    <p>全身姿見</p>
-                    <p>¥15,000</p>
-                    <p>韓国インテリアのお洒落な全身鏡。</p>
-                  </div>
-                </Link>
-              </div>
-
-              <div>
-                <Link href={'/'}>
-                  <div className={istyles.images}>
-                    <Image
-                      src="/images/accessory/accessory_feminine_1.jpg"
-                      alt="全身姿見"
-                      width={150}
-                      height={150}
-                    />
-                  </div>
-                  <div className={istyles.detail}>
-                    <p>全身姿見</p>
-                    <p>¥15,000</p>
-                    <p>韓国インテリアのお洒落な全身鏡。</p>
-                  </div>
-                </Link>
-              </div>
-
-              <div>
-                <Link href={'/'}>
-                  <div className={istyles.images}>
-                    <Image
-                      src="/images/accessory/accessory_feminine_1.jpg"
-                      alt="全身姿見"
-                      width={150}
-                      height={150}
-                    />
-                  </div>
-                  <div className={istyles.detail}>
-                    <p>全身姿見</p>
-                    <p>¥15,000</p>
-                    <p>韓国インテリアのお洒落な全身鏡。</p>
-                  </div>
-                </Link>
-              </div>
-
-              <div>
-                <Link href={'/'}>
-                  <div className={istyles.images}>
-                    <Image
-                      src="/images/accessory/accessory_feminine_1.jpg"
-                      alt="全身姿見"
-                      width={150}
-                      height={150}
-                    />
-                  </div>
-                  <div className={istyles.detail}>
-                    <p>全身姿見</p>
-                    <p>¥15,000</p>
-                    <p>韓国インテリアのお洒落な全身鏡。</p>
-                  </div>
-                </Link>
-              </div>
-
               <div>
                 <Link href={'/'}>
                   <div className={istyles.images}>
@@ -153,8 +84,9 @@ export default function ItemPage() {
               </div>
             </div>
           </div>
-
+ 
           <div className={istyles.content_right}>
+             {/* 詳細他メニュー */}
             <div>
               <ul className={istyles.product_taglists}>
                 <li className={istyles.product_taglist}>保証付</li>
@@ -168,13 +100,15 @@ export default function ItemPage() {
               </ul>
             </div>
 
+          {/* 商品概要 */}
             <div className={istyles.content_itemname}>
-              <span>全身姿見</span>
+              <span>{items.name}</span>
             </div>
             <div className={istyles.content_itemprice}>
-              <span>¥15,000</span>
+              <span>{items.price}</span>
             </div>
 
+          {/* カートボタン機能 */}
             <div className={istyles.carts}>
               <div className={istyles.cart_left}>
                 <div className={istyles.cart_lclick}>
@@ -200,6 +134,7 @@ export default function ItemPage() {
               </div>
             </div>
 
+          {/* 商品詳細説明 */}
             <div className={istyles.content_description}>
               <div className={istyles.content_itemdescription_title}>
                 <div className={istyles.content_description_title}>
@@ -207,16 +142,17 @@ export default function ItemPage() {
                 </div>
               </div>
               <div className={istyles.content_itemdescription}>
-                <p>韓国インテリアのお洒落な全身鏡。</p>
+                <p>{items.description}</p>
               </div>
             </div>
 
+            {/* 詳細商品カテゴリー */}
             <div className={istyles.category_details}>
               <div className={istyles.category_detail}>
                 商品カテゴリー：
                 <Link href="/">
                   <p className={istyles.category_detailname}>
-                    アクセサリー
+                    {items.category}
                   </p>
                 </Link>
               </div>
@@ -224,7 +160,7 @@ export default function ItemPage() {
                 インテリアジャンル：
                 <Link href="/">
                   <p className={istyles.category_detailname}>
-                    フェミニン
+                    {items.genre}
                   </p>
                 </Link>
               </div>
@@ -234,4 +170,37 @@ export default function ItemPage() {
       </main>
     </>
   );
+}
+
+// パス・データ取得
+
+export async function getStaticPaths() {
+  const res = await fetch('http://127.0.0.1:8000/items');
+  const items = await res.json();
+
+  const paths = items.map((item: { id: number }) => ({
+    params: { 
+      id: `${item.id}` ,
+    },
+  }));
+
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+type Params = {
+  params: {
+    id: number;
+  };
+};
+
+export async function getStaticProps({ params }:Params) {
+  const res = await fetch(`http://127.0.0.1:8000/items?id=eq.${params.id}`);
+  const item = await res.json();
+
+  return {
+    props: { item },
+  };
 }

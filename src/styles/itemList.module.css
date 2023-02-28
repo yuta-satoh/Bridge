@@ -181,7 +181,6 @@
 
     box-sizing: border-box;
     padding: 30px;
-    height: 4000px;
 
     grid-gap: 30px 25px;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -190,8 +189,8 @@
 
 .image{
     display: flex;
-    align-items:center;
-    justify-content:center;
+    width: 250px;
+    height: 250px;
 }
 
 .itemname{

@@ -1,4 +1,6 @@
-// 商品一覧ページを、アイテム数40ずつで次のページに遷移画面（id40ずつで)
+// 商品一覧ページを、アイテム数40ずつで次のページに遷移画面ver（id40ずつで)
+
+
 import Image from 'next/image';
 import Link from 'next/link';
 import lstyles from '../styles/itemList.module.css';

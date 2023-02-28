@@ -27,8 +27,8 @@
 
 .image{
     display: flex;
-    align-items:center;
-    justify-content:center;
+    width: 550px;
+    height: 500px;
 }
 
 .recommend{
@@ -48,8 +48,8 @@
 
 .images{
     display: flex;
-    align-items:center;
-    justify-content:center;
+    width: 550px;
+    height: 500px;
 }
 
 .images:hover{
