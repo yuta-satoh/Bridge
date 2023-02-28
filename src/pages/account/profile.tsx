@@ -216,22 +216,23 @@ export default function Profile({ data }: { data: User }) {
           <div className="body">
             <form>
               <div className="inputItems">
-                <label htmlFor="lastName">お名前</label>
+                <label htmlFor="lastname">お名前</label>
                 <br />
                 <input
                   type="text"
-                  name="lastName"
-                  id="lastName"
+                  name="lastname"
+                  id="lastname"
                   value={profile.lastname}
                   className="border border-neutral-500 rounded pl-2.5"
                   onChange={(e) => handleChange(e)}
                 />
                 <input
                   type="text"
-                  name="firstName"
-                  id="firstName"
+                  name="firstname"
+                  id="firstname"
                   value={profile.firstname}
                   className="border border-neutral-500 rounded pl-2.5"
+                  onChange={(e) => handleChange(e)}
                 />
               </div>
               <div className="inputItems">
