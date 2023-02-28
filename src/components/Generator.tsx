@@ -5,8 +5,8 @@ import cModule from '../styles/coordination.module.css';
 import Cookies from 'js-cookie';
 import { type } from 'os';
 import ItemList from './ItemList';
-import { setURL } from '@/pages/lib/generatorFn';
-import { sum } from '@/pages/lib/generatorFn';
+import { setURL } from '@/lib/generatorFn';
+import { sum } from '@/lib/generatorFn';
 
 type items = {
   id: number;

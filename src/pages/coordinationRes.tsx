@@ -7,10 +7,10 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { type } from 'os';
-import { journal } from './lib/generatorFn';
-import { shuffleItems } from './lib/generatorFn';
-import { createList } from './lib/generatorFn';
-import { setURL } from './lib/generatorFn';
+import { journal } from '../lib/generatorFn';
+import { shuffleItems } from '../lib/generatorFn';
+import { createList } from '../lib/generatorFn';
+import { setURL } from '../lib/generatorFn';
 import Router from 'next/router';
 
 export async function getServerSideProps(context: any) {
