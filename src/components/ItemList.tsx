@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import lstyles from '../styles/itemList.module.css';
+import istyles from '../../styles/item.module.css';
 import useSWR from 'swr';
 
 type Item = {
@@ -15,6 +16,7 @@ type Item = {
   delete: boolean;
 };
 
+// 商品一覧用：商品カテゴリとジャンル問わず取得関数
 export default function ItemList(): JSX.Element {
   const fetcher = (resource: string) =>
     fetch(resource).then((res) => res.json());
@@ -24,7 +26,7 @@ export default function ItemList(): JSX.Element {
   // ロード中のcss入れたい・画面中央に表示したい
   if (!data) return <p>ロード中...</p>;
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <>

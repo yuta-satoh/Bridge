@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+// 商品データ取得
 type Data = {
   message: string;
 };

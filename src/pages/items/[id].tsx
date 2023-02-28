@@ -3,7 +3,10 @@ import Link from 'next/link';
 import lstyles from '../../styles/itemList.module.css';
 import istyles from '../../styles/item.module.css';
 import Image from 'next/image';
-import useSWR from 'swr';
+import CartCounter from '@/components/Cartbutton';
+import Reccomend from '@/components/Reccomend';
+import ItemList from '@/components/ItemList';
+
 
 type Item = {
   id: number;
@@ -20,7 +23,8 @@ type Item = {
 
 export default function ItemPage({item}: {item: Item[]}): JSX.Element {
 
-  console.log(item);
+  // 確認用
+  // console.log(item);
 
   const items = item[0];
 
@@ -64,27 +68,9 @@ export default function ItemPage({item}: {item: Item[]}): JSX.Element {
             </div>
 
           {/* 以下はこんなのもどうですか、ジャンル・カテゴリに合致したものを持ってくる */}
-            <div className={istyles.recommend}>
-              <div>
-                <Link href={'/'}>
-                  <div className={istyles.images}>
-                    <Image
-                      src="/images/accessory/accessory_feminine_1.jpg"
-                      alt="全身姿見"
-                      width={150}
-                      height={150}
-                    />
-                  </div>
-                  <div className={istyles.detail}>
-                    <p>全身姿見</p>
-                    <p>¥15,000</p>
-                    <p>韓国インテリアのお洒落な全身鏡。</p>
-                  </div>
-                </Link>
-              </div>
-            </div>
+          <Reccomend />
           </div>
- 
+
           <div className={istyles.content_right}>
              {/* 詳細他メニュー */}
             <div>
@@ -105,34 +91,11 @@ export default function ItemPage({item}: {item: Item[]}): JSX.Element {
               <span>{items.name}</span>
             </div>
             <div className={istyles.content_itemprice}>
-              <span>{items.price}</span>
+              <span>{items.price}円</span>
             </div>
 
           {/* カートボタン機能 */}
-            <div className={istyles.carts}>
-              <div className={istyles.cart_left}>
-                <div className={istyles.cart_lclick}>
-                  <p>-</p>
-                </div>
-                <form>
-                  <input
-                    type="text"
-                    value="1"
-                    className={istyles.cart_value}
-                  />
-                  {/* <input type="text" value="1" class="input_text _size_63" disabled="disabled" />
-                <input type="hidden" name="changeUnit" value="1" /> */}
-                </form>
-                <div className={istyles.cart_rclick}>
-                  <p>+</p>
-                </div>
-              </div>
-              <div className={istyles.cart_right}>
-                <form>
-                  <button type="button">カートに追加</button>
-                </form>
-              </div>
-            </div>
+            <CartCounter />
 
           {/* 商品詳細説明 */}
             <div className={istyles.content_description}>
