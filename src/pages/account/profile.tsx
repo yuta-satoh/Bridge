@@ -1,19 +1,66 @@
 import getCookieValue from '@/lib/getCookieValue';
 import Head from 'next/head';
+import { useEffect } from 'react';
+import { GetServerSideProps } from 'next';
 
-export async function getServerSideProps() {
-  const cookie = getCookieValue();
-  const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
-  const res = await fetch(`http://127.0.0.1:8000/users?id=${cookie}`, {
-    method: 'GET',
+// userデータの型を定義
+type User = {
+  id: number;
+  lastName: string;
+  firstName: string;
+  gender: 'male' | 'female' | 'other';
+  tell: string;
+  email: string;
+  zipcode: string;
+  address: string;
+  password: string;
+  delete: Boolean;
+};
+
+export const getServerSideProps: GetServerSideProps = async (
+  context
+) => {
+  // クッキーの値の取得
+  const cookie = context.req.headers.cookie;
+  const cookieValue = ((cookie: string | undefined) => {
+    if (typeof cookie !== 'undefined') {
+      const cookies = cookie.split(';');
+      // 配列cookiesを=で分割して代入し、
+      // 0番目の要素が"id"なら1番目の要素(cookieの値)を返す
+      for (let cookie of cookies) {
+        const cookiesArray = cookie.split('=');
+        if (cookiesArray[0].trim() === 'id') {
+          return cookiesArray[1]; // (key[0],value[1])
+        }
+      }
+    }
+    // 上記の処理で何もリターンされなければ空文字を返す
+    return '';
+  })(cookie);
+  // TOKEN定義
+  const TOKEN =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
+  // クッキーの値を元にuserデータを取得
+  const res = await fetch(
+    `http://127.0.0.1:8000/users?id=eq.${cookieValue}`,
+    {
+      method: 'GET',
       headers: {
-        "Authorization": `Bearer ${TOKEN}`,
+        Authorization: `Bearer ${TOKEN}`,
         'Content-Type': 'application/json',
       },
-  });
-}
+    }
+  );
+  const data = await res.json();
 
-export default function Profile() {
+  // ユーザーをpropsに渡す
+  return {
+    props: { data },
+  };
+};
+
+export default function Profile({ data }: { data: User }) {
+  console.log('data', data);
   return (
     <>
       <Head>
