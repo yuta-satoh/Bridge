@@ -6,7 +6,7 @@ INSERT INTO api.items (
     , '北欧風'
     , '椅子'
     , 50000
-    , '/images/chair/chair_nordic_1'
+    , '/images/chair/chair_nordic_1.jpeg'
     , 30
 ), (
     'ラウンジチェア'
@@ -14,7 +14,7 @@ INSERT INTO api.items (
     , '北欧風'
     , '椅子'
     , 8000
-    , '/images/chair/chair_nordic_2'
+    , '/images/chair/chair_nordic_2.jpeg'
     , 33
 ), (
     'エッグチェア'
@@ -22,7 +22,7 @@ INSERT INTO api.items (
     , '北欧風'
     , '椅子'
     , 100000
-    , '/images/chair/chair_nordic_3'
+    , '/images/chair/chair_nordic_3.jpeg'
     , 13
 ), (
     'スペクトラムテーブル'
@@ -30,7 +30,7 @@ INSERT INTO api.items (
     , '北欧風'
     , 'テーブル'
     , 55000
-    , '/images/table/table_nordic_1'
+    , '/images/table/table_nordic_1.jpeg'
     , 55
 ), (
     'コーヒーテーブル'
@@ -38,7 +38,7 @@ INSERT INTO api.items (
     , '北欧風'
     , 'テーブル'
     , 44000
-    , '/images/table/table_nordic_2'
+    , '/images/table/table_nordic_2.jpeg'
     , 66
 ), (
     'ガラステーブル'
@@ -46,7 +46,7 @@ INSERT INTO api.items (
     , '北欧風'
     , 'テーブル'
     , 18000
-    , '/images/table/table_nordic_3'
+    , '/images/table/table_nordic_3.jpeg'
     , 52
 ), (
     'コットンリネンカーテン'
@@ -54,7 +54,7 @@ INSERT INTO api.items (
     , '北欧風'
     , 'カーテン'
     , 5200
-    , '/images/curtain/コットンリネンカーテン'
+    , '/images/curtain/curtain_nordic_1.jpeg'
     , 67
 ), (
     'レースカーテン'
@@ -62,7 +62,7 @@ INSERT INTO api.items (
     , '北欧風'
     , 'カーテン'
     , 5000
-    , '/images/curtain/curtain_nordic_2'
+    , '/images/curtain/curtain_nordic_2.jpeg'
     , 88
 ), (
     'デザインカーテン'
@@ -70,7 +70,7 @@ INSERT INTO api.items (
     , '北欧風'
     , 'カーテン'
     , 3500
-    , '/images/curtain/curtain_nordic_3'
+    , '/images/curtain/curtain_nordic_3.jpeg'
     , 90
 ), (
     'デザインラグ'
@@ -78,7 +78,7 @@ INSERT INTO api.items (
     , '北欧風'
     , 'カーペット/ラグ'
     , 5000
-    , '/images/rug/rag_nordic_1'
+    , '/images/rug/rag_nordic_1.jpeg'
     , 73
 ), (
     'フェードグレーラグ'
@@ -86,7 +86,7 @@ INSERT INTO api.items (
     , '北欧風'
     , 'カーペット/ラグ'
     , 16500
-    , '/images/rug/rag_nordic_2'
+    , '/images/rug/rag_nordic_2.jpeg'
     , 88
 ), (
     'デザイナーズラグ'
@@ -94,7 +94,7 @@ INSERT INTO api.items (
     , '北欧風'
     , 'カーペット/ラグ'
     , 30800
-    , '/images/rug/rag_nordic_3'
+    , '/images/rug/rag_nordic_3.jpeg'
     , 99
 ), (
     'カウチソファ'
@@ -102,7 +102,7 @@ INSERT INTO api.items (
     , '北欧風'
     , 'ソファ'
     , 30000
-    , '/images/sofa/sofa_nordic_1'
+    , '/images/sofa/sofa_nordic_1.jpeg'
     , 35
 ), (
     'フーバ ソファ'
@@ -110,7 +110,7 @@ INSERT INTO api.items (
     , '北欧風'
     , 'ソファ'
     , 250000
-    , '/images/sofa/sofa_nordic_2'
+    , '/images/sofa/sofa_nordic_2.jpeg'
     , 22
 ), (
     'スイフ ソファ'
@@ -118,7 +118,7 @@ INSERT INTO api.items (
     , '北欧風'
     , 'ソファ'
     , 170000
-    , '/images/sofa/sofa_nordic_3'
+    , '/images/sofa/sofa_nordic_3.jpeg'
     , 52
 ), (
     'ヴィンテージシェルフ'
@@ -126,7 +126,7 @@ INSERT INTO api.items (
     , '北欧風'
     , '収納棚'
     , 45000
-    , '/images/chest/chest_nordic_1'
+    , '/images/chest/chest_nordic_1.jpeg'
     , 87
 ), (
     'リビングボード'
@@ -134,7 +134,7 @@ INSERT INTO api.items (
     , '北欧風'
     , '収納棚'
     , 90000
-    , '/images/chest/chest_nordic_2'
+    , '/images/chest/chest_nordic_2.jpeg'
     , 79
 ), (
     'アンティークシェルフ'
@@ -142,7 +142,7 @@ INSERT INTO api.items (
     , '北欧風'
     , '収納棚'
     , 30000
-    , '/images/chest/chest_nordic_3'
+    , '/images/chest/chest_nordic_3.jpeg'
     , 99
 ), (
     'ペンダントライト'
@@ -150,7 +150,7 @@ INSERT INTO api.items (
     , '北欧風'
     , '照明'
     , 7700
-    , '/images/light/light_nordic_1'
+    , '/images/light/light_nordic_1.jpeg'
     , 102
 ), (
     'アーティチョーク'
@@ -158,7 +158,7 @@ INSERT INTO api.items (
     , '北欧風'
     , '照明'
     , 15000
-    , '/images/light/light_nordic_2'
+    , '/images/light/light_nordic_2.jpeg'
     , 95
 ), (
     'シーリングファン'
@@ -166,7 +166,7 @@ INSERT INTO api.items (
     , '北欧風'
     , '照明'
     , 16500
-    , '/images/light/light_nordic_3'
+    , '/images/light/light_nordic_3.jpeg'
     , 88
 ), (
     'シングルベッド'
@@ -174,7 +174,7 @@ INSERT INTO api.items (
     , '北欧風'
     , 'ベッド/寝具'
     , 50000
-    , '/images/bed/bed_nordic_1'
+    , '/images/bed/bed_nordic_1.jpeg'
     , 35
 ), (
     'セミダブルベッド'
@@ -182,7 +182,7 @@ INSERT INTO api.items (
     , '北欧風'
     , 'ベッド/寝具'
     , 60000
-    , '/images/bed/bed_nordic_2'
+    , '/images/bed/bed_nordic_2.jpeg'
     , 25
 ), (
     'セミシングルベッド'
@@ -190,7 +190,7 @@ INSERT INTO api.items (
     , '北欧風'
     , 'ベッド/寝具'
     , 45000
-    , '/images/bed/bed_nordic_3'
+    , '/images/bed/bed_nordic_3.jpeg'
     , 43
 ), (
     'キャンドルランプ '
@@ -198,7 +198,7 @@ INSERT INTO api.items (
     , '北欧風'
     , '小物/雑貨'
     , 2500
-    , '/images/accessory/accessory_nordic_1'
+    , '/images/accessory/accessory_nordic_1.jpeg'
     , 112
 ), (
     'フロアクッション'
@@ -206,7 +206,7 @@ INSERT INTO api.items (
     , '北欧風'
     , '小物/雑貨'
     , 3500
-    , '/images/accessory/accessory_nordic_2'
+    , '/images/accessory/accessory_nordic_2.jpeg'
     , 103
 ), (
     'アニマルスツール'
@@ -214,7 +214,7 @@ INSERT INTO api.items (
     , '北欧風'
     , '小物/雑貨'
     , 38500
-    , '/images/accessory/accessory_nordic_3'
+    , '/images/accessory/accessory_nordic_3.jpeg'
     , 115
 );
 

@@ -21,7 +21,6 @@ export default function Login() {
       ...loginData,
       [`${e.target.name}`]: e.target.value,
     });
-    console.log('loginData', loginData)
   }
 
   // email, passwordの値がデータベースに存在するかを確認するSubmitイベント
