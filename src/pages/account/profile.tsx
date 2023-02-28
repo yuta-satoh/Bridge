@@ -62,7 +62,12 @@ export const getServerSideProps: GetServerSideProps = async (
 
 export default function Profile({ data }: { data: User }) {
   const [profile, setProfile] = useState<User>(data);
+  const [tell, setTell] = useState<string[]>(data.tell.split("-"));
+  const [zipcode, setZipcode] = useState<string[]>(data.zipcode.split("-"));
+  // state確認用(削除予定)
   console.log('profile', profile)
+  console.log('tell', tell);
+  console.log('zipcode', zipcode);
 
   return (
     <>
@@ -273,7 +278,7 @@ export default function Profile({ data }: { data: User }) {
                   name="email"
                   id="email"
                   className="inputParts border border-neutral-500 rounded pl-2.5"
-                  // value={"変更前のメアド"}
+                  value={profile.email}
                 />
               </div>
               <div className="inputItems">
@@ -284,7 +289,7 @@ export default function Profile({ data }: { data: User }) {
                   name="tell"
                   id="tell"
                   className="number border border-neutral-500 rounded pl-2.5"
-                  // value={"変更前の電話番号"}
+                  value={tell[0]}
                 />
                 <span>-</span>
                 <input
@@ -292,7 +297,7 @@ export default function Profile({ data }: { data: User }) {
                   name="tell"
                   id="tell2"
                   className="number border border-neutral-500 rounded pl-2.5"
-                  // value={"変更前の電話番号"}
+                  value={tell[1]}
                 />
                 <span>-</span>
                 <input
@@ -300,7 +305,7 @@ export default function Profile({ data }: { data: User }) {
                   name="tell"
                   id="tell3"
                   className="number border border-neutral-500 rounded pl-2.5"
-                  // value={"変更前の電話番号"}
+                  value={tell[2]}
                 />
               </div>
               <div className="inputItems">
@@ -312,7 +317,7 @@ export default function Profile({ data }: { data: User }) {
                   name="zipcode"
                   id="zipcode"
                   className="number border border-neutral-500 rounded pl-2.5"
-                  // value={"変更前の電話番号"}
+                  value={zipcode[0]}
                 />
                 <span>-</span>
                 <input
@@ -321,7 +326,7 @@ export default function Profile({ data }: { data: User }) {
                   name="zipcode"
                   id="zipcode2"
                   className="number border border-neutral-500 rounded pl-2.5"
-                  // value={"変更前の郵便番号"}
+                  value={zipcode[1]}
                 />
                 <button className="zipButton text-white bg-neutral-900 border border-neutral-900 rounded px-1">
                   住所検索
@@ -335,7 +340,7 @@ export default function Profile({ data }: { data: User }) {
                   name="address"
                   id="address"
                   className="inputParts border border-neutral-500 rounded pl-2.5"
-                  // value={"変更前の住所"}
+                  value={profile.address}
                 />
               </div>
               <div className="buttonArea">
