@@ -99,6 +99,7 @@ export default function Profile({ data, cookieValue }: { data: User; cookieValue
   // console.log('profile', profile)
   // console.log('tell', tell);
   // console.log('zipcode', zipcode);
+  console.log(`errorText`, errorText)
 
     // エラー検証
     const nameValidation = (name: string) => {
@@ -121,9 +122,11 @@ export default function Profile({ data, cookieValue }: { data: User; cookieValue
     const zipcodeValidation = (key: string, zipcode: string) => {
       switch (key) {
         case 'zipcode':
+          if (Number.isNaN(Number(zipcode))) return '※郵便番号は半角数字で入力してください';
           if (zipcode.length !== 3) return '※郵便番号はXXX-XXXXの形式で入力してください';
           return '';
         case 'zipcode2':
+          if (Number.isNaN(Number(zipcode))) return '※郵便番号は半角数字で入力してください'
           if (zipcode.length !== 4) return '※郵便番号はXXX-XXXXの形式で入力してください';
           return '';
       }
@@ -134,16 +137,16 @@ export default function Profile({ data, cookieValue }: { data: User; cookieValue
       return '';
     }
   
-    const telValidation = (tel: string) => {
-      if (!tel) return '※電話番号はXXXX-XXXX-XXXXの形式で入力してください';
-      if (Number.isNaN(Number(tel))) return '※電話番号は半角数字で入力してください'
+    const telValidation = (tell: string) => {
+      if (!tell) return '※電話番号はXXXX-XXXX-XXXXの形式で入力してください';
+      if (Number.isNaN(Number(tell))) return '※電話番号は半角数字で入力してください'
       return '';
     }
   
     const formValidate = (key: string, value: string) => {
       switch (key) {
-        case 'lastName':
-        case 'firstName':
+        case 'lastname':
+        case 'firstname':
           return nameValidation(value);
         case 'gender':
           return genderValidation(value);
@@ -154,9 +157,9 @@ export default function Profile({ data, cookieValue }: { data: User; cookieValue
           return zipcodeValidation(key, value);
         case 'address':
           return addressValidation(value);
-        case 'tel':
-        case 'tel2':
-        case 'tel3':
+        case 'tell':
+        case 'tell2':
+        case 'tell3':
           return telValidation(value);
       }
     }
@@ -199,6 +202,10 @@ export default function Profile({ data, cookieValue }: { data: User; cookieValue
       ...profile,
       tell: `${tell[0] + "-" + tell[1] + "-" + tell[2]}`
     });
+    setErrorText({
+      ...errorText,
+      [`${e.target.name}`]: formValidate(e.target.name, e.target.value),
+    }); 
   }
 
   // zipcodeを"-"で結合してprofileに格納するonChangeハンドラ
@@ -218,6 +225,10 @@ export default function Profile({ data, cookieValue }: { data: User; cookieValue
       ...profile,
       zipcode: `${zipcode[0] + "-" + zipcode[1]}`
     });
+    setErrorText({
+      ...errorText,
+      [`${e.target.name}`]: formValidate(e.target.name, e.target.value),
+    }); 
   }
 
   // 郵便番号検索
@@ -270,8 +281,10 @@ export default function Profile({ data, cookieValue }: { data: User; cookieValue
       if (!profile.address) {
         setErrorText({...errorText, address: "※住所を入力して下さい"})
       }
+      setCompleteText("不正な項目があります");
       return
     } else {
+      setCompleteText("変更が完了しました");
       const TOKEN =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
       const res = await fetch(`http://127.0.0.1:8000/users?id=eq.${cookieValue}`, {
@@ -302,7 +315,7 @@ export default function Profile({ data, cookieValue }: { data: User; cookieValue
         section {
           background-color: rgba(255, 255, 255, 0.9);
           margin: 50px auto;
-          height: 800px;
+          height: 1000px;
           width: 70%;
         }
         .title {
@@ -414,6 +427,12 @@ export default function Profile({ data, cookieValue }: { data: User; cookieValue
           border: 2.3px black solid;
           padding: 10px 40px;
           font-size: 14px;
+        }
+        .completeText {
+          color: red;
+          margin-top: 10px;
+          font-size: 15px;
+          font-weight: bold;
         }
       `}</style>
       <main>
@@ -575,12 +594,13 @@ export default function Profile({ data, cookieValue }: { data: User; cookieValue
                   value={profile.address}
                   onChange={(e) => handleChange(e)}
                 />
-                <p className={urStyles.error}>{errorText.address}</p>
+                <p className={urStyles.error}>{errorText.address}</p> 
               </div>
               <div className="buttonArea">
-                <button type="button" className="submitButton">
+                <button type="submit" className="submitButton">
                   会員情報を変更
                 </button>
+                { completeText && <p className="completeText">{completeText}</p>}
               </div>
             </form>
           </div>
