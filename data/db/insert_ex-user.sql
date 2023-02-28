@@ -3,7 +3,7 @@ INSERT INTO api.users (
 ) VALUES (
     '楽須'
     , '太郎'
-    , '男'
+    , 'male'
     , 'rakus@example.com'
     , '111-1111-1111'
     , '160-0022'
