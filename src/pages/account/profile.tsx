@@ -1,7 +1,7 @@
-import getCookieValue from '@/lib/getCookieValue';
 import Head from 'next/head';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
+import urStyles from '../../styles/userRegister.module.css';
 
 // userデータの型を定義
 type User = {
@@ -16,6 +16,19 @@ type User = {
   password: string;
   delete: Boolean;
 };
+// errorTextの型定義
+type ErrorText = {
+    lastname: string,
+    firstname: string,
+    gender: string,
+    tell: string,
+    tell2: string,
+    tell3: string,
+    email: string,
+    zipcode: string,
+    zipcode2: string,
+    address: string,
+}
 
 export const getServerSideProps: GetServerSideProps = async (
   context
@@ -25,6 +38,7 @@ export const getServerSideProps: GetServerSideProps = async (
   const cookieValue = ((cookie: string | undefined) => {
     if (typeof cookie !== 'undefined') {
       const cookies = cookie.split(';');
+
       // 配列cookiesを=で分割して代入し、
       // 0番目の要素が"id"なら1番目の要素(cookieの値)を返す
       for (let cookie of cookies) {
@@ -34,12 +48,15 @@ export const getServerSideProps: GetServerSideProps = async (
         }
       }
     }
+
     // 上記の処理で何もリターンされなければ空文字を返す
     return '';
   })(cookie);
+  
   // TOKEN定義
   const TOKEN =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
+
   // クッキーの値を元にuserデータを取得
   const res = await fetch(
     `http://127.0.0.1:8000/users?id=eq.${cookieValue}`,
@@ -56,18 +73,93 @@ export const getServerSideProps: GetServerSideProps = async (
 
   // ユーザーをpropsに渡す
   return {
-    props: { data },
+    props: { data, cookieValue },
   };
 };
 
-export default function Profile({ data }: { data: User }) {
+export default function Profile({ data, cookieValue }: { data: User; cookieValue: string }) {
   const [profile, setProfile] = useState<User>(data);
   const [tell, setTell] = useState<string[]>(data.tell.split("-"));
   const [zipcode, setZipcode] = useState<string[]>(data.zipcode.split("-"));
+  const [errorText, setErrorText] = useState<ErrorText>({
+    lastname: "",
+    firstname: "",
+    gender: "",
+    tell: "",
+    tell2: "",
+    tell3: "",
+    email: "",
+    zipcode: "",
+    zipcode2: "",
+    address: "",
+  });
+  const [completeText, setCompleteText] = useState<string>("");
+
   // state確認用(削除予定)
-  console.log('profile', profile)
+  // console.log('profile', profile)
   // console.log('tell', tell);
-  console.log('zipcode', zipcode);
+  // console.log('zipcode', zipcode);
+
+    // エラー検証
+    const nameValidation = (name: string) => {
+      if (!name) return '※名前を入力して下さい';
+      return '';
+    }
+  
+    const genderValidation = (gender: string) => {
+      if (!gender) return "※性別を選択して下さい"
+    }
+  
+    const emailValidation = (email: string) => {
+      if (!email) return "※メールアドレスを入力して下さい";
+      if (email.indexOf('@') === -1 || email.indexOf('@') === 0 || email.indexOf('@') === email.length-1) {
+        return '※メールアドレスの形式が不正です';
+      }
+      return '';
+    }
+  
+    const zipcodeValidation = (key: string, zipcode: string) => {
+      switch (key) {
+        case 'zipcode':
+          if (zipcode.length !== 3) return '※郵便番号はXXX-XXXXの形式で入力してください';
+          return '';
+        case 'zipcode2':
+          if (zipcode.length !== 4) return '※郵便番号はXXX-XXXXの形式で入力してください';
+          return '';
+      }
+    }
+  
+    const addressValidation = (address: string) => {
+      if (!address) return '※住所を入力して下さい';
+      return '';
+    }
+  
+    const telValidation = (tel: string) => {
+      if (!tel) return '※電話番号はXXXX-XXXX-XXXXの形式で入力してください';
+      if (Number.isNaN(Number(tel))) return '※電話番号は半角数字で入力してください'
+      return '';
+    }
+  
+    const formValidate = (key: string, value: string) => {
+      switch (key) {
+        case 'lastName':
+        case 'firstName':
+          return nameValidation(value);
+        case 'gender':
+          return genderValidation(value);
+        case 'email':
+          return emailValidation(value);
+        case 'zipcode':
+        case 'zipcode2':
+          return zipcodeValidation(key, value);
+        case 'address':
+          return addressValidation(value);
+        case 'tel':
+        case 'tel2':
+        case 'tel3':
+          return telValidation(value);
+      }
+    }
 
   // valueをstateに格納するonChangeハンドラ
   // tell/zipcodeは別の関数を使用
@@ -75,7 +167,11 @@ export default function Profile({ data }: { data: User }) {
     setProfile({
       ...profile,
       [`${e.target.name}`]: e.target.value,
-    })
+    });
+    setErrorText({
+      ...errorText,
+      [`${e.target.name}`]: formValidate(e.target.name, e.target.value),
+    }); 
   }
 
   // tellを"-"で結合してprofileに格納するonChangeハンドラ
@@ -140,6 +236,54 @@ export default function Profile({ data }: { data: User }) {
               console.log(err)
           });
     }
+  }
+
+  // 送信チェック
+  const canSubmit = (): boolean => {
+    const validInfo = Object.values(profile).filter(value => {
+        return value === '';
+      }).length === 0;
+    const validError = Object.values(errorText).filter(value => {
+        return value !== '' && value !== undefined;
+      }).length === 0;
+    return validInfo && validError
+  };
+
+  async function handleSubmit(e: SyntheticEvent) {
+    e.preventDefault();
+    if (!canSubmit()) {
+      if (!profile.lastname || !profile.firstname) {
+        setErrorText({...errorText, lastname: "※名前を入力して下さい"})
+      }
+      if (!profile.gender) {
+        setErrorText({...errorText, gender: "※性別を選択して下さい"})
+      }
+      if (!profile.email) {
+        setErrorText({...errorText, email: "※メールアドレスを入力して下さい"})
+      }
+      if (!tell[0] || !tell[1] || !tell[2]) {
+        setErrorText({...errorText, tell: "※電話番号を入力して下さい"})
+      }
+      if (!zipcode[0] || !zipcode[1]) {
+        setErrorText({...errorText, zipcode: "※郵便番号を入力して下さい"})
+      }
+      if (!profile.address) {
+        setErrorText({...errorText, address: "※住所を入力して下さい"})
+      }
+      return
+    } else {
+      const TOKEN =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
+      const res = await fetch(`http://127.0.0.1:8000/users?id=eq.${cookieValue}`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(profile),
+      })
+    }
+    
   }
 
   return (
@@ -278,7 +422,7 @@ export default function Profile({ data }: { data: User }) {
             <h1>会員情報の確認/変更</h1>
           </div>
           <div className="body">
-            <form>
+            <form method='put' onSubmit={(e) => handleSubmit(e)}>
               <div className="inputItems">
                 <label htmlFor="lastname">お名前</label>
                 <br />
@@ -298,6 +442,7 @@ export default function Profile({ data }: { data: User }) {
                   className="border border-neutral-500 rounded pl-2.5"
                   onChange={(e) => handleChange(e)}
                 />
+                <p className={urStyles.error}>{errorText.lastname || errorText.firstname}</p>
               </div>
               <div className="inputItems">
                 <label htmlFor="female">性別</label>
@@ -346,6 +491,7 @@ export default function Profile({ data }: { data: User }) {
                     </label>
                   </div>
                 </div>
+                <p className={urStyles.error}>{errorText.gender}</p>
               </div>
               <div className="inputItems">
                 <label htmlFor="email">メールアドレス</label>
@@ -358,6 +504,7 @@ export default function Profile({ data }: { data: User }) {
                   value={profile.email}
                   onChange={(e) => handleChange(e)}
                 />
+                <p className={urStyles.error}>{errorText.email}</p>
               </div>
               <div className="inputItems">
                 <label htmlFor="tell">電話番号</label>
@@ -388,6 +535,7 @@ export default function Profile({ data }: { data: User }) {
                   value={tell[2]}
                   onChange={(e) => handleTellChange(e)}
                 />
+              <p className={urStyles.error}>{errorText.tell || errorText.tell2 || errorText.tell3}</p>
               </div>
               <div className="inputItems">
                 <label htmlFor="zipcode">郵便番号</label>
@@ -414,6 +562,7 @@ export default function Profile({ data }: { data: User }) {
                 <button type="button" className="zipButton text-white bg-neutral-900 border border-neutral-900 rounded px-1" onClick={() => searchAddress()}>
                   住所検索
                 </button>
+                <p className={urStyles.error}>{errorText.zipcode || errorText.zipcode2}</p>
               </div>
               <div className="inputItems">
                 <label htmlFor="address">住所</label>
@@ -426,6 +575,7 @@ export default function Profile({ data }: { data: User }) {
                   value={profile.address}
                   onChange={(e) => handleChange(e)}
                 />
+                <p className={urStyles.error}>{errorText.address}</p>
               </div>
               <div className="buttonArea">
                 <button type="button" className="submitButton">
