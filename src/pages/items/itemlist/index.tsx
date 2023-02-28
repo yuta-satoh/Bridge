@@ -225,7 +225,7 @@ export default function List() {
                   <Link href="/">TOPページ</Link>
                 </li>
                 <li className={lstyles.breadlist}>
-                  <Link href="">現在のページ</Link>
+                  商品一覧ページ
                 </li>
               </ol>
             </nav>

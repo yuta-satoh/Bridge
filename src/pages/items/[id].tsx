@@ -43,13 +43,13 @@ export default function ItemPage({item}: {item: Item[]}): JSX.Element {
                 <Link href="/">TOPページ</Link>
               </li>
               <li className={lstyles.breadlist}>
-                <Link href="">インテリアジャンル</Link>
+                <Link href={`/items?genre=eq.${items.genre}`}>{items.genre}</Link>
               </li>
               <li className={lstyles.breadlist}>
-                <Link href="">商品カテゴリ</Link>
+                <Link href={`/items?category=eq.${items.category}`}>{items.category}</Link>
               </li>
               <li className={lstyles.breadlist}>
-                <Link href="">商材ページ</Link>
+                {items.name}
               </li>
             </ol>
           </nav>
@@ -62,7 +62,7 @@ export default function ItemPage({item}: {item: Item[]}): JSX.Element {
               <Image
                 src={items.imgurl}
                 alt={items.name}
-                width={550}
+                width={580}
                 height={500}
               />
             </div>

@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import lstyles from '../styles/itemList.module.css';
-import istyles from '../../styles/item.module.css';
 import useSWR from 'swr';
 
 type Item = {
@@ -39,7 +38,7 @@ export default function ItemList(): JSX.Element {
                   <Image
                     src={item.imgurl}
                     alt={item.name}
-                    width={250}
+                    width={280}
                     height={250}
                   />
                 </div>

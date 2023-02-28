@@ -26,29 +26,28 @@ export default function Reccomend(): JSX.Element {
   // ロード中のcss入れたい・画面中央に表示したい
   if (!data) return <p>ロード中...</p>;
 
-  // console.log(data);
+  console.log(data);
 
   return (
     <>
-      <div className={lstyles.list_outer}>
+      <div>
+        <h2 className={istyles.recommend_title}>この商品のシリーズ</h2>
         <div className={istyles.recommend}>
-          <h2>この商品のシリーズ</h2>
           {data.map((item: Item) => {
             return (
               <div key={item.id}>
                 <Link href={`/items/${item.id}`}>
-                  <div className={istyles.image}>
+                  <div className={istyles.images}>
                     <Image
                       src={item.imgurl}
                       alt={item.name}
-                      width={150}
-                      height={150}
+                      width={130}
+                      height={110}
                     />
                   </div>
                   <div className={istyles.detail}>
-                    <p className={lstyles.itemname}>{item.name}</p>
-                    <p>{item.price}円</p>
-                    <p>{item.description}</p>
+                    <p className={istyles.itemname}>{item.name}</p>
+                    <p className={istyles.itemname}>{item.price}円</p>
                   </div>
                 </Link>
               </div>
@@ -59,3 +58,5 @@ export default function Reccomend(): JSX.Element {
     </>
   );
 }
+
+// 絞り込みver作成
