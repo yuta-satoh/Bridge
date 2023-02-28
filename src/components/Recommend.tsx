@@ -20,7 +20,6 @@ export default function Recommend({ filteredItemData }: { filteredItemData: Item
   const endCartItem = filteredItemData[filteredItemData.length - 1]
   const itemQuery = filteredItemData.reduce((query, item) => query + `,id.eq.${item.id}`, "").replace(",", "")
   const { data: recommendItem, error } = useSWR(`/api/items?genre=eq.${endCartItem.genre}&not.or=(${itemQuery})`, fetcher)
-  console.log(recommendItem)
 
   if (error) return (
     <div className="w-4/5 mx-auto">
