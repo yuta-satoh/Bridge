@@ -66,7 +66,7 @@ export default function Profile({ data }: { data: User }) {
   const [zipcode, setZipcode] = useState<string[]>(data.zipcode.split("-"));
   // state確認用(削除予定)
   console.log('profile', profile)
-  console.log('tell', tell);
+  // console.log('tell', tell);
   console.log('zipcode', zipcode);
 
   // valueをstateに格納するonChangeハンドラ
@@ -76,6 +76,52 @@ export default function Profile({ data }: { data: User }) {
       ...profile,
       [`${e.target.name}`]: e.target.value,
     })
+  }
+
+  // tellを"-"で結合してprofileに格納するonChangeハンドラ
+  function handleTellChange(e: ChangeEvent<HTMLInputElement>) {
+    if (e.target.name === "tell") {
+      setTell([
+        tell[0] = e.target.value,
+        tell[1] = tell[1],
+        tell[2] = tell[2],
+      ]);
+    } else if (e.target.name === "tell2") {
+      setTell([
+        tell[0] = tell[0],
+        tell[1] = e.target.value,
+        tell[2] = tell[2],
+      ]);
+    } else {
+      setTell([
+        tell[0] = tell[0],
+        tell[1] = tell[1],
+        tell[2] = e.target.value,
+      ]);
+    }
+    setProfile({
+      ...profile,
+      tell: `${tell[0] + "-" + tell[1] + "-" + tell[2]}`
+    });
+  }
+
+  // zipcodeを"-"で結合してprofileに格納するonChangeハンドラ
+  function handleZipcodeChange(e: ChangeEvent<HTMLInputElement>) {
+    if (e.target.name === "zipcode") {
+      setZipcode([
+        zipcode[0] = e.target.value,
+        zipcode[1] = zipcode[1],
+      ]);
+    } else {
+      setZipcode([
+        zipcode[0] = zipcode[0],
+        zipcode[1] = e.target.value,
+      ]);
+    }
+    setProfile({
+      ...profile,
+      zipcode: `${zipcode[0] + "-" + zipcode[1]}`
+    });
   }
 
   return (
@@ -304,22 +350,25 @@ export default function Profile({ data }: { data: User }) {
                   id="tell"
                   className="number border border-neutral-500 rounded pl-2.5"
                   value={tell[0]}
+                  onChange={(e) => handleTellChange(e)}
                 />
                 <span>-</span>
                 <input
                   type="tell"
-                  name="tell"
+                  name="tell2"
                   id="tell2"
                   className="number border border-neutral-500 rounded pl-2.5"
                   value={tell[1]}
+                  onChange={(e) => handleTellChange(e)}
                 />
                 <span>-</span>
                 <input
                   type="tell"
-                  name="tell"
+                  name="tell3"
                   id="tell3"
                   className="number border border-neutral-500 rounded pl-2.5"
                   value={tell[2]}
+                  onChange={(e) => handleTellChange(e)}
                 />
               </div>
               <div className="inputItems">
@@ -332,15 +381,17 @@ export default function Profile({ data }: { data: User }) {
                   id="zipcode"
                   className="number border border-neutral-500 rounded pl-2.5"
                   value={zipcode[0]}
+                  onChange={(e) => handleZipcodeChange(e)}
                 />
                 <span>-</span>
                 <input
                   type="text"
                   pattern="^[0-9]+$"
-                  name="zipcode"
+                  name="zipcode2"
                   id="zipcode2"
                   className="number border border-neutral-500 rounded pl-2.5"
                   value={zipcode[1]}
+                  onChange={(e) => handleZipcodeChange(e)}
                 />
                 <button className="zipButton text-white bg-neutral-900 border border-neutral-900 rounded px-1">
                   住所検索
