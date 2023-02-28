@@ -129,7 +129,7 @@ export default function Generator(props: {
           <p className={cModule.subTitle}>コーディネートアイテム</p>
           <div className={cModule.price}>
             <p className={cModule.total}>TOTAL</p>
-            <p className={cModule.totalPrice}>¥{total}</p>
+            <p className={cModule.totalPrice}>¥{total.toLocaleString()}</p>
           </div>
           <div className={cModule.cardList}>
             {list.map((item) => {
@@ -139,7 +139,7 @@ export default function Generator(props: {
               return (
                 <>
                   <div key={item.id} className={cModule.card}>
-                    <Link href="">
+                    <Link href="" className={cModule.cardStyle}>
                       <Image
                         src={item.imgurl}
                         width={150}
@@ -150,7 +150,7 @@ export default function Generator(props: {
                       <div className={cModule.cardDetail}>
                         <p>{item.name}</p>
                         <div className={cModule.cardContents}>
-                          <p>¥{item.price}</p>
+                          <p>¥{item.price.toLocaleString()}</p>
                           <p className={cModule.priceFree}>
                             送料無料
                           </p>
