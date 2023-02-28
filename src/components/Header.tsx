@@ -25,7 +25,7 @@ export default function Header() {
                             <span className="inline-block mt-1">ログイン</span>
                         </div>
                     </Link>
-                    <Link href={'/'}>
+                    <Link href={'/cart'}>
                         <div>
                             <span className="inline-block mt-1">カート</span>
                         </div>
