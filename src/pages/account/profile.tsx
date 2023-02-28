@@ -1,6 +1,6 @@
 import getCookieValue from '@/lib/getCookieValue';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 
 // userデータの型を定義
@@ -68,6 +68,15 @@ export default function Profile({ data }: { data: User }) {
   console.log('profile', profile)
   console.log('tell', tell);
   console.log('zipcode', zipcode);
+
+  // valueをstateに格納するonChangeハンドラ
+  // tell/zipcodeは別の関数を使用
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+    setProfile({
+      ...profile,
+      [`${e.target.name}`]: e.target.value,
+    })
+  }
 
   return (
     <>
@@ -215,6 +224,7 @@ export default function Profile({ data }: { data: User }) {
                   id="lastName"
                   value={profile.lastname}
                   className="border border-neutral-500 rounded pl-2.5"
+                  onChange={(e) => handleChange(e)}
                 />
                 <input
                   type="text"
@@ -229,7 +239,6 @@ export default function Profile({ data }: { data: User }) {
                 <br />
                 <div className="radioField">
                   <div className="radioForm border-neutral-500 rounded pl-2.5">
-                    {/* 変更前の性別を規定値に設定 */}
                     <input
                       type="radio"
                       name="gender"
@@ -237,6 +246,7 @@ export default function Profile({ data }: { data: User }) {
                       value="female"
                       className="radioButton"
                       checked={profile.gender === "female"}
+                      onChange={(e) => handleChange(e)}
                     />
                     <label htmlFor="female" className="genderLabel">
                       女性&emsp;
@@ -250,6 +260,7 @@ export default function Profile({ data }: { data: User }) {
                       value="male"
                       className="radioButton"
                       checked={profile.gender === "male"}
+                      onChange={(e) => handleChange(e)}
                     />
                     <label htmlFor="male" className="genderLabel">
                       男性&emsp;
@@ -263,6 +274,7 @@ export default function Profile({ data }: { data: User }) {
                       value="other"
                       className="radioButton"
                       checked={profile.gender === "other"}
+                      onChange={(e) => handleChange(e)}
                     />
                     <label htmlFor="other" className="genderLabel">
                       その他
@@ -279,6 +291,7 @@ export default function Profile({ data }: { data: User }) {
                   id="email"
                   className="inputParts border border-neutral-500 rounded pl-2.5"
                   value={profile.email}
+                  onChange={(e) => handleChange(e)}
                 />
               </div>
               <div className="inputItems">
@@ -341,6 +354,7 @@ export default function Profile({ data }: { data: User }) {
                   id="address"
                   className="inputParts border border-neutral-500 rounded pl-2.5"
                   value={profile.address}
+                  onChange={(e) => handleChange(e)}
                 />
               </div>
               <div className="buttonArea">
