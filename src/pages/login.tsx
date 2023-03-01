@@ -15,6 +15,8 @@ export default function Login() {
     email: '',
     password: '',
   });
+  // エラー文
+  const [errorText, setErrorText] = useState<string>("");
 
   // ルーターを定義
   const rooter = useRouter();
@@ -38,10 +40,11 @@ export default function Login() {
       body: JSON.stringify(loginData),
     });
     if (responce.status === 200) {
+      setErrorText("");
       rooter.replace('/');
       Cookies.set('status', 'true');
     } else {
-      console.log('ログイン失敗');
+      setErrorText("メールアドレスかパスワードが間違っています");
     }
   }
 
@@ -95,6 +98,7 @@ export default function Login() {
               </p>
             </div>
             <div className={urStyles.buttonArea}>
+            <p className={urStyles.error}>{errorText}</p>
               <button type="submit" className={urStyles.loginButton}>
                 ログイン<span className={urStyles.buttonSpan}>→</span>
               </button>
