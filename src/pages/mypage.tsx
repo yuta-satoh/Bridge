@@ -108,16 +108,6 @@ export default function Mypage() {
                 <div>
                   <h2>カートの商品</h2>
                 </div>
-                <div>
-                  <span className="cartLink">
-                    <Link
-                      href="ここにカートページへのリンクを追加"
-                      className="textBottom"
-                    >
-                      すべて見る
-                    </Link>
-                  </span>
-                </div>
               </div>
               <div className="cartList">
                 <div className="cartItems">
@@ -161,6 +151,16 @@ export default function Mypage() {
                   <p>価格</p>
                 </div>
               </div>
+              <div>
+                  <span className="cartLink">
+                    <Link
+                      href="/cart"
+                      className="textBottom"
+                    >
+                      すべて見る
+                    </Link>
+                  </span>
+                </div>
             </div>
             <div className="container">
               <div className="subtitle">
