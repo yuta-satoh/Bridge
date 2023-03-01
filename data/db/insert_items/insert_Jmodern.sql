@@ -15,7 +15,7 @@ INSERT INTO api.items (
     , '和モダン'
     , '椅子'
     , 12000
-    , '/images/public/chair_jmodern_2.jpeg'
+    , '/images/chair/chair_jmodern_2.jpeg'
     , 100
 ), (
     '和座椅子'
