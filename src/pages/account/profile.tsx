@@ -4,6 +4,7 @@ import { GetServerSideProps } from 'next';
 import urStyles from '../../styles/userRegister.module.css';
 import Link from 'next/link';
 import cModule from '../../styles/coordination.module.css';
+import Auth from '../auth/auth';
 
 // userデータの型を定義
 type User = {
@@ -431,6 +432,7 @@ export default function Profile({ data, cookieValue }: { data: User; cookieValue
           font-weight: bold;
         }
       `}</style>
+      <Auth>
       <main>
         <section>
         <div>
@@ -615,6 +617,7 @@ export default function Profile({ data, cookieValue }: { data: User; cookieValue
           </div>
         </section>
       </main>
+      </Auth>
     </>
   );
 }

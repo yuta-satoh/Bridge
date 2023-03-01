@@ -4,12 +4,16 @@ import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import urStyles from '../styles/userRegister.module.css';
 import { useRouter } from 'next/router';
 import { handleSmoothScroll } from 'next/dist/shared/lib/router/router';
+import Cookies from 'js-cookie';
 
 export default function Login() {
   // email, passwordの値を格納するState
-  const [loginData, setLoginData] = useState<{email: string; password: string;}>({
-    email: "",
-    password: "",
+  const [loginData, setLoginData] = useState<{
+    email: string;
+    password: string;
+  }>({
+    email: '',
+    password: '',
   });
 
   // ルーターを定義
@@ -33,10 +37,11 @@ export default function Login() {
       },
       body: JSON.stringify(loginData),
     });
-    if(responce.status === 200) {
-      rooter.replace("/");
+    if (responce.status === 200) {
+      rooter.replace('/');
+      Cookies.set('status', 'true');
     } else {
-      console.log("ログイン失敗");
+      console.log('ログイン失敗');
     }
   }
 
@@ -51,8 +56,10 @@ export default function Login() {
             <h1 className={urStyles.h1}>LOGIN</h1>
             <p className={urStyles.p}>ログイン</p>
           </div>
-          <form className={urStyles.form} onSubmit={(e) => handleSubmitLogin(e)}>
-
+          <form
+            className={urStyles.form}
+            onSubmit={(e) => handleSubmitLogin(e)}
+          >
             <div className={urStyles.inputItems}>
               <label htmlFor="email" className={urStyles.label}>
                 メールアドレス

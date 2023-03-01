@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
+import Cookies from 'js-cookie';
+import Auth from './auth/auth';
 import Logout from '@/components/Logout';
 import cModule from '../styles/coordination.module.css';
 import { GetServerSideProps } from 'next';
@@ -113,6 +115,7 @@ export default function Mypage( {cookieValue}: { cookieValue: string } ) {
           margin: 20px auto;
         }
       `}</style>
+      <Auth>
       <main>
         <section>
           <div className="head">
@@ -165,9 +168,7 @@ export default function Mypage( {cookieValue}: { cookieValue: string } ) {
               <div className="subtitle">
                 <h2>ログアウト/退会</h2>
               </div>
-              <div>
-                <Logout />
-              </div>
+                <Logout/>
               <div>
                 <Link href="#">
                   退会手続き
@@ -177,6 +178,7 @@ export default function Mypage( {cookieValue}: { cookieValue: string } ) {
           </div>
         </section>
       </main>
+      </Auth>
     </>
   );
 }

@@ -1,0 +1,19 @@
+.menu{
+    display: flex;
+    justify-content: space-evenly;
+}
+.body{
+    max-width: 100%;
+}
+.menuLabel{
+    font-size: 13px;
+}
+.iconModule{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.form{
+    display: flex;
+    align-items: center;
+}
