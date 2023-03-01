@@ -30,7 +30,7 @@ const fetcher: Fetcher<Item[], string> = (...args) => fetch(...args).then((res) 
 
 export default function UserCart({ userId }: { userId: string }) {
 	// SWRでアイテムを取得
-  const { data: cartItemData, error } = useSWR(`/api/getCart?id=${userId}`, fetcher)
+  const { data: cartItemData, error } = useSWR(`/api/getCart/items?id=${userId}`, fetcher)
 
   // カートにデータがない時の表示
 	if (error) return (
@@ -99,9 +99,6 @@ export default function UserCart({ userId }: { userId: string }) {
             </div>
           </div>  
         ))}
-        <div className="mt-16 mb-5">
-          <h2 className="text-3xl font-bold">こちらもいかがですか？</h2>
-        </div>
         <Recommend filteredItemData={filteredItemData} />
       </div>
       <div className="w-1/4 h-80 mt-10 p-10 border-2 border-neutral-900 rounded bg-gray-100">
