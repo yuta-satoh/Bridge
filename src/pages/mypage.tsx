@@ -3,8 +3,37 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Logout from '@/components/Logout';
 import cModule from '../styles/coordination.module.css';
+import { GetServerSideProps } from 'next';
+import CurrentCartItems from '@/components/currentCartItems';
 
-export default function Mypage() {
+export const getServerSideProps: GetServerSideProps = async( context ) => {
+  // クッキーの値の取得
+  const cookie = context.req.headers.cookie;
+  const cookieValue = ((cookie: string | undefined) => {
+    if (typeof cookie !== 'undefined') {
+      const cookies = cookie.split(';');
+
+      // 配列cookiesを=で分割して代入し、
+      // 0番目の要素が"id"なら1番目の要素(cookieの値)を返す
+      for (let cookie of cookies) {
+        const cookiesArray = cookie.split('=');
+        if (cookiesArray[0].trim() === 'id') {
+          return cookiesArray[1]; // (key[0],value[1])
+        }
+      }
+    }
+
+    // 上記の処理で何もリターンされなければ空文字を返す
+    return '';
+  })(cookie);
+  // クッキーの値をpropsに渡す
+  if (cookieValue === undefined) return { props: {}, };
+  return {
+    props: {cookieValue}
+  };
+}
+
+export default function Mypage( {cookieValue}: { cookieValue: string } ) {
   return (
     <>
       <Head>
@@ -62,10 +91,6 @@ export default function Mypage() {
           margin: 10px auto;
           display: flex;
         }
-        .cartItems {
-          margin: 8px;
-          float: left;
-        }
         .subtitle {
           border-bottom: 1px solid black;
         }
@@ -110,46 +135,7 @@ export default function Mypage() {
                 </div>
               </div>
               <div className="cartList">
-                <div className="cartItems">
-                  <Image
-                    src={'/images/chair/chair_feminine_1.jpg'}
-                    alt={'kagu'}
-                    width={210}
-                    height={210}
-                  />
-                  <p>商品名</p>
-                  <p>価格</p>
-                </div>
-                <div className="cartItems">
-                  <Image
-                    src={'/images/chair/chair_feminine_1.jpg'}
-                    alt={'kagu'}
-                    width={210}
-                    height={210}
-                  />
-                  <p>商品名</p>
-                  <p>価格</p>
-                </div>
-                <div className="cartItems">
-                  <Image
-                    src={'/images/chair/chair_feminine_1.jpg'}
-                    alt={'kagu'}
-                    width={210}
-                    height={210}
-                  />
-                  <p>商品名</p>
-                  <p>価格</p>
-                </div>
-                <div className="cartItems">
-                  <Image
-                    src={'/images/chair/chair_feminine_1.jpg'}
-                    alt={'kagu'}
-                    width={210}
-                    height={210}
-                  />
-                  <p>商品名</p>
-                  <p>価格</p>
-                </div>
+               <CurrentCartItems cookie={cookieValue}/>
               </div>
               <div>
                   <span className="cartLink">
@@ -183,7 +169,7 @@ export default function Mypage() {
                 <Logout />
               </div>
               <div>
-                <Link href="ここに退会ページへのリンクを追加">
+                <Link href="#">
                   退会手続き
                 </Link>
               </div>
