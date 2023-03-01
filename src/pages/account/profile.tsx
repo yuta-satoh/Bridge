@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import urStyles from '../../styles/userRegister.module.css';
+import Auth from '../auth/auth';
 
 // userデータの型を定義
 type User = {
@@ -429,6 +430,7 @@ export default function Profile({ data, cookieValue }: { data: User; cookieValue
           font-weight: bold;
         }
       `}</style>
+      <Auth>
       <main>
         <section>
           <div className="title">
@@ -600,6 +602,7 @@ export default function Profile({ data, cookieValue }: { data: User; cookieValue
           </div>
         </section>
       </main>
+      </Auth>
     </>
   );
 }

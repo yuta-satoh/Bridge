@@ -1,8 +1,14 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
+import Cookies from 'js-cookie';
+import Auth from './auth/auth';
+import Logout from '@/components/Logout';
 
 export default function Mypage() {
+  const logout = () => {
+    Cookies.remove("status")
+  }
   return (
     <>
       <Head>
@@ -86,6 +92,7 @@ export default function Mypage() {
           margin: 20px auto;
         }
       `}</style>
+      <Auth>
       <main>
         <section>
           <div className="head">
@@ -168,11 +175,7 @@ export default function Mypage() {
               <div className="subtitle">
                 <h2>ログアウト/退会</h2>
               </div>
-              <div>
-                <Link href="ここにトップページへのリンクを追加">
-                  ログアウト
-                </Link>
-              </div>
+              <Logout/>
               <div>
                 <Link href="ここに退会ページへのリンクを追加">
                   退会手続き
@@ -182,6 +185,7 @@ export default function Mypage() {
           </div>
         </section>
       </main>
+      </Auth>
     </>
   );
 }
