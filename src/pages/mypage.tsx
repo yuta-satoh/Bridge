@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import Logout from '@/components/Logout';
+import cModule from '../styles/coordination.module.css';
 
 export default function Mypage() {
   return (
@@ -90,6 +91,15 @@ export default function Mypage() {
       <main>
         <section>
           <div className="head">
+          <nav>
+            <ol className={cModule.links} id="top">
+              <li className={cModule.pageLink}>
+                <Link href="/">Bridge</Link>
+                <span className={cModule.greaterThan}>&gt;</span>
+              </li>
+              <li className={cModule.pageLink}>マイページ</li>
+            </ol>
+          </nav>
             <h1>マイページ</h1>
           </div>
           <div className="body">
