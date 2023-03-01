@@ -61,19 +61,18 @@ export const getServerSideProps: GetServerSideProps = async (
     }
   );
   const rawData: User[] = await res.json();
-  // 現在のパスワードを代入
-  const oldPassword: string = rawData[0].password;
+  const Data: User = rawData[0];
 
   return {
-    props: { oldPassword, cookieValue },
+    props: { Data, cookieValue },
   };
 };
 
 export default function Password({
-  oldPassword,
+  Data,
   cookieValue,
 }: {
-  oldPassword: string;
+  Data: User;
   cookieValue: string;
 }) {
   const initPassword = {
@@ -82,7 +81,7 @@ export default function Password({
     confirmationPassword: '',
   };
   // input入力値を格納
-  const [passwords, setpasswords] = useState<Password>(initPassword);
+  const [passwords, setPasswords] = useState<Password>(initPassword);
   // エラー文を格納
   const [errorText, setErrorText] = useState<Password>(initPassword);
   // 送信完了可否のメッセージを格納
@@ -91,7 +90,7 @@ export default function Password({
   // エラーを検証
   // 現在のパスワードのチェック
   function passwordValidation(password: string) {
-    if (password !== oldPassword) return 'パスワードが一致しません';
+    if (password !== Data.password) return 'パスワードが一致しません';
     return '';
   }
   // 新しいパスワードのチェック
@@ -123,7 +122,7 @@ export default function Password({
 
   // onChangeハンドラ
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    setpasswords({
+    setPasswords({
       ...passwords,
       [`${e.target.name}`]: e.target.value,
     });
@@ -171,8 +170,24 @@ export default function Password({
           confirmationPassword: '確認用パスワードを入力してください',
         });
       }
+      setCompleteText("不正な項目があります");
     } else {
-
+      const TOKEN =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
+      const res = await fetch(`http://127.0.0.1:8000/users?id=eq.${cookieValue}`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...Data,
+          password: passwords.newPassword
+        }),
+      })
+      if (res.ok) {
+        setCompleteText("変更が完了しました");
+      };
     }
   }
 
@@ -304,6 +319,12 @@ export default function Password({
           padding: 10px 40px;
           font-size: 14px;
         }
+        .completeText {
+          color: red;
+          margin-top: 10px;
+          font-size: 15px;
+          font-weight: bold;
+        }
       `}</style>
       <main>
         <section>
@@ -323,7 +344,7 @@ export default function Password({
           <div className="title">
             <h1>パスワードの変更</h1>
           </div>
-          <form>
+          <form onSubmit={(e) => handleSubmit(e)}>
             <div className="inputItems">
               <label htmlFor="password">現在のパスワード</label>
               <span className="primary">必須</span>
@@ -375,9 +396,10 @@ export default function Password({
               <br />
             </div>
             <div className="buttonArea">
-              <button type="button" className="submitButton">
+              <button type="submit" className="submitButton">
                 パスワードを変更
               </button>
+              { completeText && <p className="completeText">{completeText}</p>}
             </div>
           </form>
         </section>
