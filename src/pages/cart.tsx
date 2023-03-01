@@ -26,7 +26,12 @@ export default function Cart({ userId }: { userId: string }) {
   // クライアントサイドでlocalstrageを取得
   useEffect(() => {
     // 仮データをセット
-    const guestCartItems = ['5', '8', '12'];
+    const guestCartItems = [
+      { itemId: 5, quantity: 1 },
+      { itemId: 8, quantity: 1 },
+      { itemId: 12, quantity: 1 },
+    ];
+
     const itemsJson = JSON.stringify(guestCartItems);
     localStorage.setItem('GuestCart', itemsJson);
 

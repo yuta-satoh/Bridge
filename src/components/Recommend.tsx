@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import useSWR, { Fetcher } from 'swr';
+import addCart from "@/lib/addCart";
 
 type Item = {
   id: number,
@@ -19,8 +20,8 @@ export default function Recommend({ filteredItemData }: { filteredItemData: Item
   
   const endCartItem = filteredItemData[filteredItemData.length - 1]
   const itemQuery = filteredItemData.reduce((query, item) => query + `,id.eq.${item.id}`, "").replace(",", "")
-  const queryParams = `genre=eq.${endCartItem.genre}&not.or=(${itemQuery})`
-  const { data: recommendItem, error } = useSWR(`/api/getItems?id=${queryParams}`, fetcher)
+  const queryParams = `not.or=(${itemQuery})`
+  const { data: recommendItem, error } = useSWR(`/api/getItems?genre=eq.${endCartItem.genre}&id=${queryParams}`, fetcher)
 
   if (error) return (
     <div className="w-4/5 mx-auto">
@@ -38,17 +39,22 @@ export default function Recommend({ filteredItemData }: { filteredItemData: Item
       </div>
       <div className="flex gap-3 mb-10">
         {recommendItem.slice(0, 2).map((item, index) => (
-          <div key={index} className="border border-neutral-900 rounded p-3 mx-auto">
+          <div key={index} className="border border-neutral-900 w-1/2 rounded p-3 mx-auto">
             <div className="flex gap-5">
               <Link href={'/'}>
-                <Image src={item.imgurl} alt={item.name} width={120} height={120} className="rounded"/>
+                <Image src={item.imgurl} alt={item.name} width={100} height={100} className="rounded"/>
               </Link>
               <div className="px-2 py-2">
                 <Link href={'/'}>
-                  <p className="underline mb-1">{item.name}</p>
+                  <p className="underline mb-1 text-sm">{item.name}</p>
                   <p className="mt-1">¥ {item.price.toLocaleString()}</p>
                 </Link>
-                <button className="p-1.5 text-center text-white h-10 mt-6 rounded bg-blue-500 hover:bg-blue-700">
+                <button
+                  className="p-1.5 text-center text-white h-10 mt-3 rounded bg-blue-500 hover:bg-blue-700"
+                  onClick={() => {
+                    addCart(item.id, 1);
+                  }}
+                >
                   カートに入れる
                 </button>
               </div>

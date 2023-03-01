@@ -16,10 +16,11 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ItemData[]>
 ) {
-	const queryParams = req.query.id as string
+	const queryId = req.query.id as string;
+  const queryGenre = req.query.genre as string;
 	const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
   const responseItems = await fetch(
-    `http://127.0.0.1:8000/items?${queryParams}`,
+    `http://127.0.0.1:8000/items?${queryGenre}&${queryId}`,
     {
       method: 'GET',
       headers: {

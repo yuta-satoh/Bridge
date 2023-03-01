@@ -13,7 +13,7 @@ CREATE TABLE api.items (
 );
 GRANT SELECT ON api.items TO web_anon;
 GRANT ALL ON api.items to api_user;
-GRANT USAGE ON SEQUENCE api.users_id_seq TO api_user;
+GRANT USAGE ON SEQUENCE api.items_id_seq TO api_user;
 
 -- @block
 DROP TABLE IF EXISTS api.users CASCADE;
@@ -42,7 +42,7 @@ CREATE TABLE api.carts (
 );
 GRANT SELECT ON api.carts TO web_anon;
 GRANT ALL ON api.carts to api_user;
-GRANT USAGE ON SEQUENCE api.users_id_seq TO api_user;
+GRANT USAGE ON SEQUENCE api.carts_id_seq TO api_user;
 
 -- @block
 DROP TABLE IF EXISTS api.cart_items CASCADE;
@@ -56,7 +56,7 @@ CREATE TABLE api.cart_items (
 );
 GRANT SELECT ON api.cart_items TO web_anon;
 GRANT ALL ON api.cart_items to api_user;
-GRANT USAGE ON SEQUENCE api.users_id_seq TO api_user;
+GRANT USAGE ON SEQUENCE api.cart_items_id_seq TO api_user;
 
 -- @block
 DROP TABLE IF EXISTS api.order_histories CASCADE;
@@ -76,4 +76,4 @@ CREATE TABLE api.order_histories (
 );
 GRANT SELECT ON api.order_histories TO web_anon;
 GRANT ALL ON api.order_histories to api_user;
-GRANT USAGE ON SEQUENCE api.users_id_seq TO api_user;
+GRANT USAGE ON SEQUENCE api.order_histories_id_seq TO api_user;

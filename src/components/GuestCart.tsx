@@ -16,11 +16,16 @@ type Item = {
   delete: boolean,
 }
 
+type GuestCartType = {
+  itemId: string,
+  quantity: number,
+}
+
 const fetcher: Fetcher<Item[], string> = (...args) => fetch(...args).then((res) => res.json());
 
-export default function GuestCart({ guestCart }: { guestCart: string[] }) {
+export default function GuestCart({ guestCart }: { guestCart: GuestCartType[] }) {
   // 受け取ったゲストカートからクエリパラメータを作成
-  const itemQuery = guestCart.reduce((query, cartItem) => query + `,id.eq.${cartItem}`, "").replace(",", "");
+  const itemQuery = guestCart.reduce((query, cartItem) => query + `,id.eq.${cartItem.itemId}`, "").replace(",", "");
   const queryParams = `or=(${itemQuery})`
 
 	// SWRでアイテムを取得
@@ -94,7 +99,6 @@ export default function GuestCart({ guestCart }: { guestCart: string[] }) {
             </div>
           </div>  
         ))}
-
         <Recommend filteredItemData={filteredItemData} />
       </div>
       <div className="w-1/4 h-80 mt-10 p-10 border-2 border-neutral-900 rounded bg-gray-100">
