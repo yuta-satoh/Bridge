@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Cookies from 'js-cookie';
 
 export default function Logout() {
   // クリック時にクッキーを破棄
@@ -7,6 +8,7 @@ export default function Logout() {
       return;
     } else {
       document.cookie = "id=;path=/;expires=Thu, 1-Jan-1970 00:00:00 GMT;";
+      Cookies.remove('status')
     }
   }
 

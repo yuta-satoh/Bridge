@@ -3,7 +3,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import lstyles from '../styles/itemList.module.css';
+import lstyles from '../../../styles/itemList.module.css';
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
 

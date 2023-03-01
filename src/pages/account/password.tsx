@@ -6,6 +6,7 @@ import { root } from 'postcss';
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import cModule from '../../styles/coordination.module.css';
 import urStyles from '../../styles/userRegister.module.css';
+import Auth from '../auth/auth';
 
 // userデータの型を定義
 type User = {
@@ -331,6 +332,7 @@ export default function Password({
           font-weight: bold;
         }
       `}</style>
+      <Auth>
       <main>
         <section>
           <div>
@@ -409,6 +411,7 @@ export default function Password({
           </form>
         </section>
       </main>
+      </Auth>
     </>
   );
 }
