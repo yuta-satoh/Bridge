@@ -2,6 +2,8 @@ import Head from 'next/head';
 import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import urStyles from '../../styles/userRegister.module.css';
+import Link from 'next/link';
+import cModule from '../../styles/coordination.module.css';
 import Auth from '../auth/auth';
 
 // userデータの型を定義
@@ -433,6 +435,19 @@ export default function Profile({ data, cookieValue }: { data: User; cookieValue
       <Auth>
       <main>
         <section>
+        <div>
+            <ol className={cModule.links} id="top">
+              <li className={cModule.pageLink}>
+                <Link href="/">Bridge</Link>
+                <span className={cModule.greaterThan}>&gt;</span>
+              </li>
+              <li className={cModule.pageLink}>
+                <Link href="/mypage">マイページ</Link>
+                <span className={cModule.greaterThan}>&gt;</span>
+              </li>
+              <li className={cModule.pageLink}>会員情報の確認/変更</li>
+            </ol>
+          </div>
           <div className="title">
             <h1>会員情報の確認/変更</h1>
           </div>
