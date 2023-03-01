@@ -1,0 +1,44 @@
+.logo{
+    background-color: rgba(255, 255, 255, 0.7);
+}
+.buttonArea{
+    margin-top: 30px;
+}
+.main{
+    height: 2100px;
+    width: 100%;
+}
+.content{
+    margin-top: 75px;
+}
+.buttonContent{
+    text-align: center;
+}
+.categoryList{
+    margin-top: 40px;
+}
+.scrollArea{
+    margin-top: 75px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.scroll{
+    margin-top: 30px;
+    width: 65%;
+    height: 350px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    border: 2px rgba(133, 133, 133, 0.1) solid;
+}
+.announce{
+    margin: 15px 20px;
+    border-bottom: 1px black solid;
+}
+.date{
+    font-size: 13px;
+}
+.announceData{
+    padding: 10px;
+}
