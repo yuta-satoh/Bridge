@@ -1,8 +1,41 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
+import Cookies from 'js-cookie';
+import Auth from './auth/auth';
+import Logout from '@/components/Logout';
+import cModule from '../styles/coordination.module.css';
+import { GetServerSideProps } from 'next';
+import CurrentCartItems from '@/components/currentCartItems';
 
-export default function Mypage() {
+export const getServerSideProps: GetServerSideProps = async( context ) => {
+  // クッキーの値の取得
+  const cookie = context.req.headers.cookie;
+  const cookieValue = ((cookie: string | undefined) => {
+    if (typeof cookie !== 'undefined') {
+      const cookies = cookie.split(';');
+
+      // 配列cookiesを=で分割して代入し、
+      // 0番目の要素が"id"なら1番目の要素(cookieの値)を返す
+      for (let cookie of cookies) {
+        const cookiesArray = cookie.split('=');
+        if (cookiesArray[0].trim() === 'id') {
+          return cookiesArray[1]; // (key[0],value[1])
+        }
+      }
+    }
+
+    // 上記の処理で何もリターンされなければ空文字を返す
+    return '';
+  })(cookie);
+  // クッキーの値をpropsに渡す
+  if (cookieValue === undefined) return { props: {}, };
+  return {
+    props: {cookieValue}
+  };
+}
+
+export default function Mypage( {cookieValue}: { cookieValue: string } ) {
   return (
     <>
       <Head>
@@ -60,10 +93,6 @@ export default function Mypage() {
           margin: 10px auto;
           display: flex;
         }
-        .cartItems {
-          margin: 8px;
-          float: left;
-        }
         .subtitle {
           border-bottom: 1px solid black;
         }
@@ -86,9 +115,19 @@ export default function Mypage() {
           margin: 20px auto;
         }
       `}</style>
+      <Auth>
       <main>
         <section>
           <div className="head">
+          <nav>
+            <ol className={cModule.links} id="top">
+              <li className={cModule.pageLink}>
+                <Link href="/">Bridge</Link>
+                <span className={cModule.greaterThan}>&gt;</span>
+              </li>
+              <li className={cModule.pageLink}>マイページ</li>
+            </ol>
+          </nav>
             <h1>マイページ</h1>
           </div>
           <div className="body">
@@ -97,59 +136,20 @@ export default function Mypage() {
                 <div>
                   <h2>カートの商品</h2>
                 </div>
-                <div>
+              </div>
+              <div className="cartList">
+               <CurrentCartItems cookie={cookieValue}/>
+              </div>
+              <div>
                   <span className="cartLink">
                     <Link
-                      href="ここにカートページへのリンクを追加"
+                      href="/cart"
                       className="textBottom"
                     >
                       すべて見る
                     </Link>
                   </span>
                 </div>
-              </div>
-              <div className="cartList">
-                <div className="cartItems">
-                  <Image
-                    src={'/images/chair/chair_feminine_1.jpg'}
-                    alt={'kagu'}
-                    width={210}
-                    height={210}
-                  />
-                  <p>商品名</p>
-                  <p>価格</p>
-                </div>
-                <div className="cartItems">
-                  <Image
-                    src={'/images/chair/chair_feminine_1.jpg'}
-                    alt={'kagu'}
-                    width={210}
-                    height={210}
-                  />
-                  <p>商品名</p>
-                  <p>価格</p>
-                </div>
-                <div className="cartItems">
-                  <Image
-                    src={'/images/chair/chair_feminine_1.jpg'}
-                    alt={'kagu'}
-                    width={210}
-                    height={210}
-                  />
-                  <p>商品名</p>
-                  <p>価格</p>
-                </div>
-                <div className="cartItems">
-                  <Image
-                    src={'/images/chair/chair_feminine_1.jpg'}
-                    alt={'kagu'}
-                    width={210}
-                    height={210}
-                  />
-                  <p>商品名</p>
-                  <p>価格</p>
-                </div>
-              </div>
             </div>
             <div className="container">
               <div className="subtitle">
@@ -168,13 +168,9 @@ export default function Mypage() {
               <div className="subtitle">
                 <h2>ログアウト/退会</h2>
               </div>
+                <Logout/>
               <div>
-                <Link href="ここにトップページへのリンクを追加">
-                  ログアウト
-                </Link>
-              </div>
-              <div>
-                <Link href="ここに退会ページへのリンクを追加">
+                <Link href="#">
                   退会手続き
                 </Link>
               </div>
@@ -182,6 +178,7 @@ export default function Mypage() {
           </div>
         </section>
       </main>
+      </Auth>
     </>
   );
 }

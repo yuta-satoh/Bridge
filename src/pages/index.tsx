@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';
+import topStyle from '../styles/top.module.css';
 
 export default function Home() {
   // ダミーデータ
@@ -66,24 +67,26 @@ export default function Home() {
       <Head>
         <title>トップページ</title>
       </Head>
-      <main className="mx-auto">
+      <main className={`${topStyle.main} mx-auto`}>
         <div className="relative">
           {/* 背景イメージは後から変えてください（３枚だけ用意してます） */}
           <Image
             src={'/images/background/top_image_2.jpeg'}
             alt={'top-image'}
             width={1920}
-            height={800}
+            height={1000}
           />
           {/* ロゴは後で作成予定 */}
           <Image
-            src={''}
+            src={'/images/logo/top_logo.png'}
             alt={'top-logo'}
-            width={400}
-            height={200}
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 border"
+            width={350}
+            height={350}
+            className={`${topStyle.logo} absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
           />
-          <div className="absolute left-1/2 top-3/4 -translate-x-1/2 -translate-y-1/2">
+          <div
+            className={`${topStyle.buttonArea} absolute left-1/2 top-3/4 -translate-x-1/2 -translate-y-1/2`}
+          >
             <button className="bg-white">
               <Link href="/coordination">
                 <div className="mx-auto pt-1.5 text-center w-96 h-10 border-2 border-neutral-900">
@@ -94,9 +97,9 @@ export default function Home() {
             </button>
           </div>
         </div>
-        <div className="mt-10">
+        <div className={`${topStyle.content} mt-10`}>
           <h2 className="text-center text-xl font-bold">新着商品</h2>
-          <div className="container mx-auto p-2 flex gap-5 justify-center">
+          <div className={`${topStyle.categoryList} container mx-auto p-2 flex gap-5 justify-center`}>
             {/* 大きく表示する商品 */}
             <Link href={'/'}>
               <div>
@@ -131,21 +134,27 @@ export default function Home() {
               ))}
             </ul>
           </div>
-          <button className="absolute left-1/2 -translate-x-1/2">
-            <Link href="/">
-              <div className="mx-auto pt-1.5 text-center w-96 h-10 border-2 border-neutral-900">
-                <span>商品一覧へ</span>
-                <span className="float-right mr-1">→</span>
-              </div>
+          <div className={topStyle.buttonContent}>
+            <Link href="/items/itemlist">
+              <button className={`${topStyle.buttonArea}`}>
+                <div className="mx-auto pt-1.5 text-center w-96 h-10 border-2 border-neutral-900">
+                  <span>商品一覧へ</span>
+                  <span className="float-right mr-1">→</span>
+                </div>
+              </button>
             </Link>
-          </button>
+          </div>
         </div>
-        <div className="mx-auto mt-20 justify-center">
+        <div
+          className={`${topStyle.content} mx-auto mt-20 justify-center`}
+        >
           {/* カテゴリの表示は２段で別々にmap()を使っています */}
           <h2 className="text-center text-xl font-bold">
             商品カテゴリから探す
           </h2>
-          <ul className="grid grid-cols-5 gap-8 w-4/5 mx-auto mt-5">
+          <ul
+            className={`${topStyle.categoryList} grid grid-cols-5 gap-8 w-4/5 mx-auto mt-5`}
+          >
             {category.slice(0, 5).map((item) => (
               <li key={item.alt}>
                 <Link href={'/'}>
@@ -166,7 +175,9 @@ export default function Home() {
               </li>
             ))}
           </ul>
-          <ul className="grid grid-cols-4 gap-7 w-3/5 mx-auto mt-5">
+          <ul
+            className={`${topStyle.categoryList} grid grid-cols-4 gap-7 w-3/5 mx-auto mt-5`}
+          >
             {category.slice(5, 9).map((item) => (
               <li key={item.alt}>
                 <Link href={'/'}>
@@ -187,6 +198,47 @@ export default function Home() {
               </li>
             ))}
           </ul>
+        </div>
+        <div className={topStyle.scrollArea}>
+          <h2 className="text-center text-xl font-bold">お知らせ</h2>
+          <div className={topStyle.scroll}>
+          <div className={topStyle.announce}>
+              <p className={topStyle.date}>2023-1-4</p>
+              <p className={topStyle.announceData}>新年のご挨拶</p>
+            </div>
+            <div className={topStyle.announce}>
+              <p className={topStyle.date}>2022-12-28</p>
+              <p className={topStyle.announceData}>年末年始の営業のお知らせ</p>
+            </div>
+            <div className={topStyle.announce}>
+              <p className={topStyle.date}>2022-XX-XX</p>
+              <p className={topStyle.announceData}>テキストテキストテキストテキストテキストテキストテキストテキスト</p>
+            </div>
+            <div className={topStyle.announce}>
+              <p className={topStyle.date}>2022-XX-XX</p>
+              <p className={topStyle.announceData}>テキストテキストテキストテキストテキストテキストテキストテキスト</p>
+            </div>
+            <div className={topStyle.announce}>
+              <p className={topStyle.date}>2022-XX-XX</p>
+              <p className={topStyle.announceData}>テキストテキストテキストテキストテキストテキストテキストテキスト</p>
+            </div>
+            <div className={topStyle.announce}>
+              <p className={topStyle.date}>2022-XX-XX</p>
+              <p className={topStyle.announceData}>テキストテキストテキストテキストテキストテキストテキストテキスト</p>
+            </div>
+            <div className={topStyle.announce}>
+              <p className={topStyle.date}>2022-XX-XX</p>
+              <p className={topStyle.announceData}>テキストテキストテキストテキストテキストテキストテキストテキスト</p>
+            </div>
+            <div className={topStyle.announce}>
+              <p className={topStyle.date}>2022-XX-XX</p>
+              <p className={topStyle.announceData}>テキストテキストテキストテキストテキストテキストテキストテキスト</p>
+            </div>
+            <div className={topStyle.announce}>
+              <p className={topStyle.date}>2022-XX-XX</p>
+              <p className={topStyle.announceData}>テキストテキストテキストテキストテキストテキストテキストテキスト</p>
+            </div>
+          </div>
         </div>
       </main>
     </>

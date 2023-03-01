@@ -1,12 +1,8 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import lstyles from '../../../styles/itemList.module.css';
-import istyles from '../../../styles/item.module.css';
-import Image from 'next/image';
-import CartCounter from '@/components/Cartbutton';
-import ItemdetailReccomend from '@/components/ItemdetailReccomend';
-import ItemList from '@/components/ItemList';
-
+import useSWR from 'swr';
+import { useRouter } from 'next/router';
 
 type Item = {
   id: number;

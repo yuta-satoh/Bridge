@@ -2,6 +2,9 @@ import Head from 'next/head';
 import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import urStyles from '../../styles/userRegister.module.css';
+import Link from 'next/link';
+import cModule from '../../styles/coordination.module.css';
+import Auth from '../auth/auth';
 
 // userデータの型を定義
 type User = {
@@ -94,12 +97,6 @@ export default function Profile({ data, cookieValue }: { data: User; cookieValue
     address: "",
   });
   const [completeText, setCompleteText] = useState<string>("");
-
-  // state確認用(削除予定)
-  // console.log('profile', profile)
-  // console.log('tell', tell);
-  // console.log('zipcode', zipcode);
-  console.log(`errorText`, errorText)
 
     // エラー検証
     const nameValidation = (name: string) => {
@@ -435,8 +432,22 @@ export default function Profile({ data, cookieValue }: { data: User; cookieValue
           font-weight: bold;
         }
       `}</style>
+      <Auth>
       <main>
         <section>
+        <div>
+            <ol className={cModule.links} id="top">
+              <li className={cModule.pageLink}>
+                <Link href="/">Bridge</Link>
+                <span className={cModule.greaterThan}>&gt;</span>
+              </li>
+              <li className={cModule.pageLink}>
+                <Link href="/mypage">マイページ</Link>
+                <span className={cModule.greaterThan}>&gt;</span>
+              </li>
+              <li className={cModule.pageLink}>会員情報の確認/変更</li>
+            </ol>
+          </div>
           <div className="title">
             <h1>会員情報の確認/変更</h1>
           </div>
@@ -606,6 +617,7 @@ export default function Profile({ data, cookieValue }: { data: User; cookieValue
           </div>
         </section>
       </main>
+      </Auth>
     </>
   );
 }
