@@ -1,8 +1,9 @@
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import cModule from '../../styles/coordination.module.css';
+import urStyles from '../../styles/userRegister.module.css';
 
 // userデータの型を定義
 type User = {
@@ -61,30 +62,119 @@ export const getServerSideProps: GetServerSideProps = async (
   );
   const rawData: User[] = await res.json();
   // 現在のパスワードを代入
-  const password: string = rawData[0].password;
+  const oldPassword: string = rawData[0].password;
 
   return {
-    props: { password, cookieValue },
+    props: { oldPassword, cookieValue },
   };
 };
 
-export default function Password({ password, cookieValue }: { password: string; cookieValue: string }) {
+export default function Password({
+  oldPassword,
+  cookieValue,
+}: {
+  oldPassword: string;
+  cookieValue: string;
+}) {
   const initPassword = {
-    password: "",
-    newPassword: "",
-    confirmationPassword: "",
-  }
+    password: '',
+    newPassword: '',
+    confirmationPassword: '',
+  };
   // input入力値を格納
-  const [Passwords, setPasswords] = useState<Password>(initPassword);
+  const [passwords, setpasswords] = useState<Password>(initPassword);
   // エラー文を格納
   const [errorText, setErrorText] = useState<Password>(initPassword);
 
+  // 確認用コンソール出力(削除予定)
+  console.log('oldPassword', oldPassword);
+  console.log('passwords', passwords);
+  console.log('errorText', errorText);
+
+  // エラーを検証
+  // 現在のパスワードのチェック
+  function passwordValidation(password: string) {
+    if (password !== oldPassword) return 'パスワードが一致しません';
+    return '';
+  }
+  // 新しいパスワードのチェック
+  const newPasswordValidation = (newPassword: string) => {
+    if (!newPassword) return '※パスワードを入力して下さい';
+    if (newPassword.length < 8 || newPassword.length > 20)
+      return '※８文字以上２０文字以内で設定してください';
+    return '';
+  };
+  // 確認用パスワードのチェック
+  const samePasswordValidation = (confirmationPassword: string) => {
+    if (!confirmationPassword)
+      return '※確認用パスワードを入力して下さい';
+    if (confirmationPassword !== passwords.newPassword)
+      return '※パスワードと確認用パスワードが不一致です';
+    return '';
+  };
+  // 上記3つの関数を統合
+  const formValidate = (key: string, value: string) => {
+    switch (key) {
+      case 'password':
+        return passwordValidation(value);
+      case 'newPassword':
+        return newPasswordValidation(value);
+      case 'confirmationPassword':
+        return samePasswordValidation(value);
+    }
+  };
+
   // onChangeハンドラ
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    setPasswords({
-      ...Passwords,
+    setpasswords({
+      ...passwords,
       [`${e.target.name}`]: e.target.value,
     });
+    setErrorText({
+      ...errorText,
+      [`${e.target.name}`]: formValidate(
+        e.target.name,
+        e.target.value
+      ),
+    });
+  }
+
+  // 送信チェック
+  const canSubmit = (): boolean => {
+    const validInfo =
+      Object.values(passwords).filter((value) => {
+        return value === '';
+      }).length === 0;
+    const validError =
+      Object.values(errorText).filter((value) => {
+        return value !== '' && value !== undefined;
+      }).length === 0;
+    return validInfo && validError;
+  };
+
+  // onSubmitハンドラ
+  async function handleSubmit(e: SyntheticEvent) {
+    e.preventDefault();
+    if (!canSubmit()) {
+      if (!passwords.password) {
+        setErrorText({
+          ...errorText,
+          password: '現在のパスワードを入力してください',
+        });
+      }
+      if (!passwords.newPassword) {
+        setErrorText({
+          ...errorText,
+          newPassword: '新しいパスワードを入力してください',
+        });
+      }
+      if (!passwords.confirmationPassword) {
+        setErrorText({
+          ...errorText,
+          confirmationPassword: '現在のパスワードを入力してください',
+        });
+      }
+    }
   }
 
   return (
@@ -219,25 +309,23 @@ export default function Password({ password, cookieValue }: { password: string; 
       <main>
         <section>
           <div>
-          <ol className={cModule.links} id="top">
-            <li className={cModule.pageLink}>
-              <Link href="/">Bridge</Link>
-              <span className={cModule.greaterThan}>&gt;</span>
-            </li>
-            <li className={cModule.pageLink}>
-              <Link href="/mypage">マイページ</Link>
-              <span className={cModule.greaterThan}>&gt;</span>
-            </li>
-            <li className={cModule.pageLink}>
-              パスワードの変更
-            </li>
-          </ol>
+            <ol className={cModule.links} id="top">
+              <li className={cModule.pageLink}>
+                <Link href="/">Bridge</Link>
+                <span className={cModule.greaterThan}>&gt;</span>
+              </li>
+              <li className={cModule.pageLink}>
+                <Link href="/mypage">マイページ</Link>
+                <span className={cModule.greaterThan}>&gt;</span>
+              </li>
+              <li className={cModule.pageLink}>パスワードの変更</li>
+            </ol>
           </div>
-          <div className='title'>
+          <div className="title">
             <h1>パスワードの変更</h1>
           </div>
           <form>
-          <div className="inputItems">
+            <div className="inputItems">
               <label htmlFor="password">現在のパスワード</label>
               <span className="primary">必須</span>
               <br />
@@ -248,6 +336,7 @@ export default function Password({ password, cookieValue }: { password: string; 
                 className="inputParts border border-neutral-500 rounded pl-2.5"
                 onChange={(e) => handleChange(e)}
               />
+              <p className={urStyles.error}>{errorText.password}</p>
             </div>
             <div className="inputItems">
               <label htmlFor="newPassword">新しいパスワード</label>
@@ -261,6 +350,9 @@ export default function Password({ password, cookieValue }: { password: string; 
                 placeholder="例：abcdef123456"
                 onChange={(e) => handleChange(e)}
               />
+              <p className={urStyles.error}>
+                {errorText.newPassword}
+              </p>
               <p>※8〜20文字で入力してください</p>
             </div>
             <div className="inputItems">
@@ -277,14 +369,17 @@ export default function Password({ password, cookieValue }: { password: string; 
                 placeholder="例：abcdef123456"
                 onChange={(e) => handleChange(e)}
               />
+              <p className={urStyles.error}>
+                {errorText.confirmationPassword}
+              </p>
               <p>※確認のためパスワードを再入力して下さい</p>
               <br />
             </div>
             <div className="buttonArea">
-                <button type="button" className="submitButton">
-                  パスワードを変更
-                </button>
-              </div>
+              <button type="button" className="submitButton">
+                パスワードを変更
+              </button>
+            </div>
           </form>
         </section>
       </main>
