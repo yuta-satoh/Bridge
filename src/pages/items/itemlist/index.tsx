@@ -1,16 +1,17 @@
+// itemlist/[id]作成次第削除
+
 import ItemList from '@/components/ItemList';
 import Head from 'next/head';
 import Link from 'next/link';
 import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import lstyles from '../../styles/itemList.module.css';
-import fstyles from '../../styles/Footer.module.css';
+import lstyles from '../../../styles/itemList.module.css';
+import fstyles from '../../../styles/Footer.module.css';
 
 export default function List() {
   return (
     <>
       <Head>
-        <title>インテリア・家具通販【bridge】</title>
+        <title>商品一覧画面</title>
         <meta
           name="viewport"
           content="width=device-width,initial-scale=1.0"
@@ -224,22 +225,18 @@ export default function List() {
                   <Link href="/">TOPページ</Link>
                 </li>
                 <li className={lstyles.breadlist}>
-                  <Link href="">現在のページ</Link>
+                  商品一覧ページ
                 </li>
               </ol>
             </nav>
           </div>
 
+        {/* 商品一覧 */}
           <div>
-            <ul>
-              <li>
-                <ItemList />
-              </li>
-            </ul>
+            <ItemList />
           </div>
         </main>
       </div>
-      <Footer />
     </>
   );
 }

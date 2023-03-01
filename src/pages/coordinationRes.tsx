@@ -137,14 +137,27 @@ export default function coordination({ request }: Request) {
             <h1 className={cModule.title}>
               コーディネートジェネレーター
             </h1>
-            <form action="" onSubmit={handleSubmit} className={cModule.resForm}>
-                <p className={cModule.selectResTheme}>選択テーマ：{theme}</p>
+            <form
+              action=""
+              onSubmit={handleSubmit}
+              className={cModule.resForm}
+            >
+              <p className={cModule.selectResTheme}>
+                選択テーマ：{theme}
+              </p>
               <div className={cModule.button}>
                 <button className={cModule.buttonStyle}>
                   再生成する
                 </button>
               </div>
             </form>
+            <div className={cModule.button}>
+              <Link href="/coordination">
+                <button className={cModule.backButtonStyle}>
+                  テーマ選択
+                </button>
+              </Link>
+            </div>
           </div>
           <Generator list={list} urlData={urlData} />
           <div className={cModule.linkItems}>

@@ -6,7 +6,7 @@ INSERT INTO api.items (
     , 'フェミニン'
     , '椅子'
     , 16000
-    , '/images/chair/chair_feminine_1.jpeg'
+    , '/images/chair/chair_feminine_1.jpg'
     , 72
 ), (
     '丸椅子スツール'
@@ -14,7 +14,7 @@ INSERT INTO api.items (
     , 'フェミニン'
     , '椅子'
     , 10000
-    , '/images/chair/chair_feminine_2.jpeg'
+    , '/images/chair/chair_feminine_2.jpg'
     , 99
 ), (
     'ブルーアームチェア'
@@ -22,7 +22,7 @@ INSERT INTO api.items (
     , 'フェミニン'
     , '椅子'
     , 20000
-    , '/images/chair/chair_feminine_3.jpeg'
+    , '/images/chair/chair_feminine_3.jpg'
     , 100
 ), (
     'ガラスローテーブル'
@@ -30,7 +30,7 @@ INSERT INTO api.items (
     , 'フェミニン'
     , 'テーブル'
     , 29000
-    , '/images/table/table_feminine_1.jpeg'
+    , '/images/table/table_feminine_1.jpg'
     , 52
 ), (
     'セントラル円形テーブル'
@@ -38,7 +38,7 @@ INSERT INTO api.items (
     , 'フェミニン'
     , 'テーブル'
     , 22000
-    , '/images/table/table_feminine_2.jpeg'
+    , '/images/table/table_feminine_2.jpg'
     , 74
 ), (
     'ウェーブサイドテーブル'
@@ -46,7 +46,7 @@ INSERT INTO api.items (
     , 'フェミニン'
     , 'テーブル'
     , 35000
-    , '/images/table/table_feminine_3.jpeg'
+    , '/images/table/table_feminine_3.jpg'
     , 88
 ), (
     'フレンチシフォンカーテン'
@@ -54,7 +54,7 @@ INSERT INTO api.items (
     , 'フェミニン'
     , 'カーテン'
     , 21000
-    , '/images/curtain/curtain_feminine_1.jpeg'
+    , '/images/curtain/curtain_feminine_1.jpg'
     , 88
 ), (
     'ライトグレーカーテン'
@@ -62,7 +62,7 @@ INSERT INTO api.items (
     , 'フェミニン'
     , 'カーテン'
     , 16000
-    , '/images/curtain/curtain_feminine_2.jpeg'
+    , '/images/curtain/curtain_feminine_2.jpg'
     , 100
 ), (
     'グリーンレースカーテン'
@@ -70,7 +70,7 @@ INSERT INTO api.items (
     , 'フェミニン'
     , 'カーテン'
     , 30000
-    , '/images/curtain/curtain_feminine_3.jpeg'
+    , '/images/curtain/curtain_feminine_3.jpg'
     , 77
 ), (
     'ピンクゴールドラグ'
@@ -78,7 +78,7 @@ INSERT INTO api.items (
     , 'フェミニン'
     , 'カーペット/ラグ'
     , 19000
-    , '/images/rug/rug_feminine_1.jpeg'
+    , '/images/rug/rug_feminine_1.jpg'
     , 104
 ), (
     'ペルシャ風ラグ'
@@ -86,7 +86,7 @@ INSERT INTO api.items (
     , 'フェミニン'
     , 'カーペット/ラグ'
     , 15000
-    , '/images/rug/rug_feminine_2.jpeg'
+    , '/images/rug/rug_feminine_2.jpg'
     , 112
 ), (
     'シャギーラグ'
@@ -94,7 +94,7 @@ INSERT INTO api.items (
     , 'フェミニン'
     , 'カーペット/ラグ'
     , 25000
-    , '/images/rug/rug_feminine_3.jpeg'
+    , '/images/rug/rug_feminine_3.jpg'
     , 99
 ), (
     'ダークピンクベロアソファ'
@@ -102,7 +102,7 @@ INSERT INTO api.items (
     , 'フェミニン'
     , 'ソファ'
     , 80000
-    , '/images/sofa/sofa_feminine_1.jpeg'
+    , '/images/sofa/sofa_feminine_1.jpg'
     , 77
 ), (
     'コーナーソファ'
@@ -110,7 +110,7 @@ INSERT INTO api.items (
     , 'フェミニン'
     , 'ソファ'
     , 65000
-    , '/images/sofa/sofa_feminine_2.jpeg'
+    , '/images/sofa/sofa_feminine_2.jpg'
     , 25
 ), (
     'ライトブルーソファ'
@@ -118,7 +118,7 @@ INSERT INTO api.items (
     , 'フェミニン'
     , 'ソファ'
     , 100000
-    , '/images/sofa/sofa_feminine_3.jpeg'
+    , '/images/sofa/sofa_feminine_3.png'
     , 33
 ), (
     'スクエアキャビネット'
@@ -126,7 +126,7 @@ INSERT INTO api.items (
     , 'フェミニン'
     , '収納棚'
     , 38000
-    , '/images/chest/chest_feminine_1.jpeg'
+    , '/images/chest/chest_feminine_1.jpg'
     , 152
 ), (
     '4段ラック'
@@ -134,7 +134,7 @@ INSERT INTO api.items (
     , 'フェミニン'
     , '収納棚'
     , 12000
-    , '/images/chest/chest_feminine_2.jpeg'
+    , '/images/chest/chest_feminine_2.jpg'
     , 112
 ), (
     'デザインラック'
@@ -142,7 +142,7 @@ INSERT INTO api.items (
     , 'フェミニン'
     , '収納棚'
     , 20000
-    , '/images/chest/chest_feminine_3.jpeg'
+    , '/images/chest/chest_feminine_3.jpg'
     , 95
 ), (
     '花柄シーリングライト'
@@ -150,7 +150,7 @@ INSERT INTO api.items (
     , 'フェミニン'
     , '照明'
     , 20000
-    , '/images/light/light_feminine_1.jpeg'
+    , '/images/light/light_feminine_1.png'
     , 220
 ), (
     'ペンダントライト'
@@ -158,7 +158,7 @@ INSERT INTO api.items (
     , 'フェミニン'
     , '照明'
     , 10000
-    , '/images/light/light_feminine_2.jpeg'
+    , '/images/light/light_feminine_2.jpg'
     , 154
 ), (
     'レトロシャンデリア'
@@ -166,7 +166,7 @@ INSERT INTO api.items (
     , 'フェミニン'
     , '照明'
     , 45000
-    , '/images/light/light_feminine_3.jpeg'
+    , '/images/light/light_feminine_3.jpg'
     , 85
 ), (
     'プリンセスパイプベッド'
@@ -174,7 +174,7 @@ INSERT INTO api.items (
     , 'フェミニン'
     , 'ベッド/寝具'
     , 40000
-    , '/images/bed/bed_feminine_1.jpeg'
+    , '/images/bed/bed_feminine_1.jpg'
     , 22
 ), (
     'カントリー調ベッド'
@@ -182,7 +182,7 @@ INSERT INTO api.items (
     , 'フェミニン'
     , 'ベッド/寝具'
     , 32000
-    , '/images/bed/bed_feminine_2.jpeg'
+    , '/images/bed/bed_feminine_2.jpg'
     , 12
 ), (
     'ハイバックベッド'
@@ -190,7 +190,7 @@ INSERT INTO api.items (
     , 'フェミニン'
     , 'ベッド/寝具'
     , 60000
-    , '/images/bed/bed_feminine_3.jpeg'
+    , '/images/bed/bed_feminine_3.jpg'
     , 30
 ), (
     '全身姿見'
@@ -198,7 +198,7 @@ INSERT INTO api.items (
     , 'フェミニン'
     , '小物/雑貨'
     , 15000
-    , '/images/accessory/accessory_feminine_1.jpeg'
+    , '/images/accessory/accessory_feminine_1.jpg'
     , 120
 ), (
     'お洒落パーテーション'
@@ -206,7 +206,7 @@ INSERT INTO api.items (
     , 'フェミニン'
     , '小物/雑貨'
     , 30000
-    , '/images/accessory/accessory_feminine_2.jpeg'
+    , '/images/accessory/accessory_feminine_2.png'
     , 112
 ), (
     'ウッド壁掛け時計'
@@ -214,7 +214,7 @@ INSERT INTO api.items (
     , 'フェミニン'
     , '小物/雑貨'
     , 6000
-    , '/images/accessory/accessory_feminine_3.jpeg'
+    , '/images/accessory/accessory_feminine_3.png'
     , 158
 );
 

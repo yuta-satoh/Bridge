@@ -27,8 +27,21 @@
 
 .image{
     display: flex;
-    align-items:center;
-    justify-content:center;
+    width: 580px;
+    height: 500px;
+
+    box-sizing: border-box;
+    margin: 20px;
+}
+
+.recommend_title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    margin: 40px 0 20px;
+    padding: 10px 0;
 }
 
 .recommend{
@@ -38,18 +51,17 @@
     justify-content: space-around;
 
     box-sizing: border-box;
-    margin: 20px 0 ;
-    padding: 30px 0;
+
 
     grid-gap: 10px;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-template-rows: repeat(auto-fill,minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    grid-template-rows: repeat(auto-fill,minmax(110px, 1fr));
 }
 
 .images{
     display: flex;
-    align-items:center;
-    justify-content:center;
+    width: 130px;
+    height: 110px;
 }
 
 .images:hover{
@@ -63,6 +75,10 @@
     justify-content:space-around;
 
     padding: 15px;
+}
+
+.itemname{
+    font-size: small;
 }
 
 .content_right{
