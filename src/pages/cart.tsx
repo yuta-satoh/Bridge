@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import useSWR, { Fetcher } from 'swr'
 import { useState, useEffect } from "react";
-import getCookieValue from "../lib/getCookieValue"
+import getCookieValue from "../lib/getCookieArray"
 import Recommend from "@/components/Recommend";
 
 type Cart = {
