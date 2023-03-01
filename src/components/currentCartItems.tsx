@@ -37,7 +37,7 @@ export default function CurrentCartItems({
 }) {
   //   SWRでアイテムを取得
   const { data: cartItemData, error } = useSWR<Item[], Error>(
-    `/api/getCart?id=${cookie}`,
+    `/api/getCart/items?id=${cookie}`,
     fetcher
   );
 
