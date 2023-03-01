@@ -3,15 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import Recommend from "./Recommend";
 
-type Cart = {
-  id: number,
-  item_id: number,
-  cart_id: number,
-  date: string,
-  quantity: number,
-  delete: boolean,
-}
-
 // カートに入った時の状態を含めたいのでcartInfoプロパティも追加しています
 type Item = {
   id: number,
@@ -23,12 +14,12 @@ type Item = {
   imgurl: string,
   stock: number,
   delete: boolean,
-  cartInfo: Cart,
 }
 
 const fetcher: Fetcher<Item[], string> = (...args) => fetch(...args).then((res) => res.json());
 
 export default function GuestCart({ guestCart }: { guestCart: string[] }) {
+  // 受け取ったゲストカートからクエリパラメータを作成
   const itemQuery = guestCart.reduce((query, cartItem) => query + `,id.eq.${cartItem}`, "").replace(",", "");
   const queryParams = `or=(${itemQuery})`
 
@@ -51,7 +42,8 @@ export default function GuestCart({ guestCart }: { guestCart: string[] }) {
   )
 
 	if (!cartItemData) return <div>loading...</div>
-
+  
+  // deleteフラグの立っているアイテムを除去
   const filteredItemData = cartItemData.filter((item) => !item.delete)
   
   // 合計金額
@@ -102,9 +94,7 @@ export default function GuestCart({ guestCart }: { guestCart: string[] }) {
             </div>
           </div>  
         ))}
-        <div className="mt-16 mb-5">
-          <h2 className="text-3xl font-bold">こちらもいかがですか？</h2>
-        </div>
+
         <Recommend filteredItemData={filteredItemData} />
       </div>
       <div className="w-1/4 h-80 mt-10 p-10 border-2 border-neutral-900 rounded bg-gray-100">
@@ -122,9 +112,9 @@ export default function GuestCart({ guestCart }: { guestCart: string[] }) {
             <span className="float-right">¥ {(sumPrice + (sumPrice * 0.1)).toLocaleString()}</span>
           </p>
         </div>
-        <Link href="/">
+        <Link href="/login">
           <div className="container pt-1.5 text-center h-10 border-2 border-neutral-900 bg-white mt-8">
-            <span>ご注文手続き</span>
+            <span>ログイン</span>
           </div>
         </Link>
         <Link href="/">

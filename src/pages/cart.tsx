@@ -5,8 +5,10 @@ import GuestCart from "@/components/GuestCart";
 import { useEffect, useState } from "react";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  // リクエストからクッキーを取得
   const userId = ctx.req.cookies['id']
 
+  // クッキーがない時はprops無し
   if (userId === undefined) {
     return {
       props: {},
@@ -18,13 +20,17 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 }
 
 export default function Cart({ userId }: { userId: string }) {
-  
+  // ゲスト用カートの状態を保存
   const [guestCart, setGuestCart] = useState([])
   
+  // クライアントサイドでlocalstrageを取得
   useEffect(() => {
+    // 仮データをセット
     const guestCartItems = ['5', '8', '12'];
     const itemsJson = JSON.stringify(guestCartItems);
     localStorage.setItem('GuestCart', itemsJson);
+
+    // localstrageを取得しstateに格納、nullの場合は何も格納しない
     const strageData = localStorage.getItem('GuestCart');
     if (strageData === null) {
       setGuestCart([])
@@ -33,6 +39,7 @@ export default function Cart({ userId }: { userId: string }) {
     }
   }, [])
 
+  // ユーザーとゲストで表示を切り替え
   if (userId) {
     return (
       <>
