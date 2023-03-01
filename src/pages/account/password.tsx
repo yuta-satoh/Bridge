@@ -85,11 +85,8 @@ export default function Password({
   const [passwords, setpasswords] = useState<Password>(initPassword);
   // エラー文を格納
   const [errorText, setErrorText] = useState<Password>(initPassword);
-
-  // 確認用コンソール出力(削除予定)
-  console.log('oldPassword', oldPassword);
-  console.log('passwords', passwords);
-  console.log('errorText', errorText);
+  // 送信完了可否のメッセージを格納
+  const [completeText, setCompleteText] = useState<string>("");
 
   // エラーを検証
   // 現在のパスワードのチェック
@@ -171,9 +168,11 @@ export default function Password({
       if (!passwords.confirmationPassword) {
         setErrorText({
           ...errorText,
-          confirmationPassword: '現在のパスワードを入力してください',
+          confirmationPassword: '確認用パスワードを入力してください',
         });
       }
+    } else {
+
     }
   }
 
