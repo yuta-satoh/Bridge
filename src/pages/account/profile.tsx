@@ -95,12 +95,6 @@ export default function Profile({ data, cookieValue }: { data: User; cookieValue
   });
   const [completeText, setCompleteText] = useState<string>("");
 
-  // state確認用(削除予定)
-  // console.log('profile', profile)
-  // console.log('tell', tell);
-  // console.log('zipcode', zipcode);
-  console.log(`errorText`, errorText)
-
     // エラー検証
     const nameValidation = (name: string) => {
       if (!name) return '※名前を入力して下さい';
