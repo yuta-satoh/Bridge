@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
+import Logout from '@/components/Logout';
 
 export default function Mypage() {
   return (
@@ -169,9 +170,7 @@ export default function Mypage() {
                 <h2>ログアウト/退会</h2>
               </div>
               <div>
-                <Link href="ここにトップページへのリンクを追加">
-                  ログアウト
-                </Link>
+                <Logout />
               </div>
               <div>
                 <Link href="ここに退会ページへのリンクを追加">
