@@ -15,11 +15,11 @@ const nextConfig = {
   },
 }
 
-// module.exports = nextConfig
+module.exports = nextConfig
 
-module.exports = {
-  nextConfig,
-  experimental: {
-    optimizeFonts: true,
-  },
-};
+// module.exports = {
+//   nextConfig,
+//   experimental: {
+//     optimizeFonts: true,
+//   },
+// };

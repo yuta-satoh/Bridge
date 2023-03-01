@@ -2,7 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import lstyles from '../styles/itemList.module.css';
 import istyles from '../styles/item.module.css';
-import useSWR from 'swr';
+import useSWR, { Fetcher, useSWRConfig } from 'swr';
+import { useState } from 'react';
 
 type Item = {
   id: number;
@@ -17,18 +18,26 @@ type Item = {
 };
 
 // 商品レコメンド用：商品カテゴリとジャンルが合致したものを取得
-export default function Reccomend(): JSX.Element {
+
+export default function ItemdetailReccomend(props:{
+  genre:string;
+  category:string
+}): JSX.Element {
   const fetcher = (resource: string) =>
     fetch(resource).then((res) => res.json());
 
-  const { data, error } = useSWR('/api/items', fetcher);
+  // propsで持ってきた内容
+  console.log(props);
+  
+  const { data, error } = useSWR(`/api/items?genre=eq.${props.genre}&category=eq.${props.category}`, fetcher);
+    
   if (error) return <p>エラー</p>;
   // ロード中のcss入れたい・画面中央に表示したい
   if (!data) return <p>ロード中...</p>;
 
   console.log(data);
-
-  return (
+  
+   return (
     <>
       <div>
         <h2 className={istyles.recommend_title}>この商品のシリーズ</h2>
@@ -58,5 +67,3 @@ export default function Reccomend(): JSX.Element {
     </>
   );
 }
-
-// 絞り込みver作成

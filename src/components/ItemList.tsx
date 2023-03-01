@@ -25,7 +25,7 @@ export default function ItemList(): JSX.Element {
   // ロード中のcss入れたい・画面中央に表示したい
   if (!data) return <p>ロード中...</p>;
 
-  // console.log(data);
+  console.log(data);
 
   return (
     <>
@@ -33,7 +33,7 @@ export default function ItemList(): JSX.Element {
         {data.map((item: Item) => {
           return (
             <div key={item.id}>
-              <Link href={`/items/${item.id}`}>
+              <Link href={`/items/itemlist/${item.id}`}>
                 <div className={lstyles.image}>
                   <Image
                     src={item.imgurl}
