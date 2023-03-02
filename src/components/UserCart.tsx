@@ -4,30 +4,28 @@ import Image from "next/image";
 import Recommend from "./Recommend";
 import deleteCart from "@/lib/deleteCart";
 
+type Item = {
+  id: number,
+	name: string,
+	description: string,
+	genre: string,
+	category: string,
+	price: number,
+	imgurl: string,
+	stock: number,
+	delete: boolean,
+}
+
 type Cart = {
   id: number,
-  item_id: number,
+  items: Item,
   cart_id: number,
   date: string,
   quantity: number,
   delete: boolean,
 }
 
-// カートに入った時の状態を含めたいのでcartInfoプロパティも追加しています
-type Item = {
-  id: number,
-  name: string,
-  description: string,
-  genre: string,
-  category: string,
-  price: number,
-  imgurl: string,
-  stock: number,
-  delete: boolean,
-  cartInfo: Cart,
-}
-
-const fetcher: Fetcher<Item[], string> = (...args) => fetch(...args).then((res) => res.json());
+const fetcher: Fetcher<Cart[], string> = (...args) => fetch(...args).then((res) => res.json());
 
 export default function UserCart({ userId }: { userId: string }) {
   // SWRでアイテムを取得
@@ -50,10 +48,17 @@ export default function UserCart({ userId }: { userId: string }) {
 
 	if (!cartItemData) return <div>loading...</div>
 
-  const filtercartItems = cartItemData.filter((item) => item.cartInfo.delete === false)
+  const filtercartItems = cartItemData.filter((cart) => cart.delete === false)
+
+  const recommend = filtercartItems.map((cart) => {
+    return {
+      id: cart.items.id,
+      genre: cart.items.genre
+    }
+  })
 
   // 合計金額
-  const sumPrice = filtercartItems.reduce((current, item) => current + item.price, 0)
+  const sumPrice = filtercartItems.reduce((current, cart) => current + cart.items.price, 0)
 
 	return (
     <>
@@ -64,25 +69,25 @@ export default function UserCart({ userId }: { userId: string }) {
               <h2 className="text-3xl font-bold">カート</h2>
               <span className="mt-2">{`(${filtercartItems.length}点の商品)`}</span>
             </div>
-            {filtercartItems.map((item, index) => (
+            {filtercartItems.map((cart, index) => (
               <div key={index} className="border border-neutral-900 my-2 py-3 px-8 h-52">
                 <div className="flex gap-5">
                   <Link href={'/'}>
-                    <Image src={item.imgurl} alt={item.name} width={150} height={150} className="rounded"/>
+                    <Image src={cart.items.imgurl} alt={cart.items.name} width={150} height={150} className="rounded"/>
                   </Link>
                   <div className="px-3 py-4">
                     <Link href={'/'}>
-                      <p className="underline mb-1 text-xl">{item.name}</p>
+                      <p className="underline mb-1 text-xl">{cart.items.name}</p>
                     </Link>
-                    <p className="text-sm mt-1">{item.description}</p>
-                    <p className="mt-1 text-lg">¥ {item.price.toLocaleString()}</p>
+                    <p className="text-sm mt-1">{cart.items.description}</p>
+                    <p className="mt-1 text-lg">¥ {cart.items.price.toLocaleString()}</p>
                   </div>
                 </div>
                 <div className="text-right">
                   <button
                     className="text-white bg-neutral-900 border border-neutral-900 rounded px-1"
                     onClick={() => {
-                      deleteCart(item.id, item.cartInfo.cart_id);
+                      deleteCart(cart.items.id, cart.id);
                       mutate(cartItemData);
                     }}  
                   >
@@ -108,7 +113,7 @@ export default function UserCart({ userId }: { userId: string }) {
                 </div>
               </div>  
             ))}
-            <Recommend cartItemData={filtercartItems} />
+            <Recommend recommend={recommend} />
           </div>
           <div className="w-1/4 h-80 mt-10 p-10 border-2 border-neutral-900 rounded bg-gray-100">
             <p>

@@ -4,27 +4,25 @@ import Image from "next/image";
 import Recommend from "./Recommend";
 import deleteCart from "@/lib/deleteCart";
 
+type Item = {
+  id: number,
+	name: string,
+	description: string,
+	genre: string,
+	category: string,
+	price: number,
+	imgurl: string,
+	stock: number,
+	delete: boolean,
+}
+
 type Cart = {
   id: number,
-  item_id: number,
+  items: Item,
   cart_id: number,
   date: string,
   quantity: number,
   delete: boolean,
-}
-
-// カートに入った時の状態を含めたいのでcartInfoプロパティも追加しています
-type Item = {
-  id: number,
-  name: string,
-  description: string,
-  genre: string,
-  category: string,
-  price: number,
-  imgurl: string,
-  stock: number,
-  delete: boolean,
-  cartInfo: Cart,
 }
 
 type GuestCartType = {
@@ -118,7 +116,7 @@ export default function GuestCart({ guestCart, reloadStrage }: { guestCart: Gues
             </div>
           </div>  
         ))}
-        <Recommend cartItemData={filteredItemData} reloadStrage={reloadStrage} />
+        <Recommend recommend={filteredItemData} reloadStrage={reloadStrage} />
       </div>
       <div className="w-1/4 h-80 mt-10 p-10 border-2 border-neutral-900 rounded bg-gray-100">
         <p>

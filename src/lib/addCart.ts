@@ -60,8 +60,22 @@ export default async function addCart(itemId: number, quantity: number) {
 			localStorage.setItem('GuestCart', JSON.stringify(newStrageData));
 		} else {
 			const nextStrageData: GuestCart[] = JSON.parse(currentStrageData);
-			nextStrageData.push({ itemId: itemId, quantity: quantity });
-			localStorage.setItem('GuestCart', JSON.stringify(nextStrageData));
+			const filterStrageData = nextStrageData.filter((item) => item.itemId === itemId)
+			if (filterStrageData.length === 0) {
+				// 商品が被っていない時の処理
+				nextStrageData.push({ itemId: itemId, quantity: quantity });
+				localStorage.setItem('GuestCart', JSON.stringify(nextStrageData));
+			} else {
+				// 商品が被っている時の処理
+
+				const rewriteItem = {
+					itemId: filterStrageData[0].itemId,
+					quantity: filterStrageData[0].quantity + quantity
+				}
+				const rewriteStrageData = nextStrageData.filter((item) => item.itemId !== itemId)
+				rewriteStrageData.push(rewriteItem)
+				localStorage.setItem('GuestCart', JSON.stringify(rewriteStrageData));
+			}
 		}
   }
 }

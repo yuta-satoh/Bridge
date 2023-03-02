@@ -3,35 +3,38 @@ import Image from "next/image";
 import useSWR, { Fetcher } from 'swr';
 import addCart from "@/lib/addCart";
 
+type Item = {
+  id: number,
+	name: string,
+	description: string,
+	genre: string,
+	category: string,
+	price: number,
+	imgurl: string,
+	stock: number,
+	delete: boolean,
+}
+
 type Cart = {
   id: number,
-  item_id: number,
+  items: Item,
   cart_id: number,
   date: string,
   quantity: number,
   delete: boolean,
 }
 
-type Item = {
+type Recommend = {
   id: number,
-  name: string,
-  description: string,
   genre: string,
-  category: string,
-  price: number,
-  imgurl: string,
-  stock: number,
-  delete: boolean,
-  cartInfo: Cart,
 }
 
-export default function Recommend({ cartItemData, reloadStrage }: { cartItemData: Item[], reloadStrage?: () => void }) {
+export default function Recommend({ recommend, reloadStrage }: { recommend: Recommend[], reloadStrage?: () => void }) {
   const fetcher: Fetcher<Item[], string> = (...args) => fetch(...args).then((res) => res.json());
   
-  const endCartItem = cartItemData[cartItemData.length - 1]
-  const itemQuery = cartItemData.reduce((query, item) => query + `,id.eq.${item.id}`, "").replace(",", "")
+  const itemQuery = recommend.reduce((query, item) => query + `,id.eq.${item.id}`, "").replace(",", "")
   const queryParams = `not.or=(${itemQuery})`
-  const { data: recommendItem, error } = useSWR(`/api/getItems?genre=eq.${endCartItem.genre}&id=${queryParams}`, fetcher)
+  const { data: recommendItem, error } = useSWR(`/api/getItems?genre=eq.${recommend[0].genre}&id=${queryParams}`, fetcher)
 
   if (error) return (
     <div className="w-4/5 mx-auto">
