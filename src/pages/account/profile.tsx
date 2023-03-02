@@ -259,6 +259,16 @@ export default function Profile({ data, cookieValue }: { data: User; cookieValue
 
   async function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
+    // 重複チェック
+    const res = await fetch('/api/account/re_search_email', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email: profile.email, cookie: cookieValue })
+    });
+    const data: { email: string } = await res.json();
+
     if (!canSubmit()) {
       if (!profile.lastname || !profile.firstname) {
         setErrorText({...errorText, lastname: "※名前を入力して下さい"})
@@ -279,7 +289,14 @@ export default function Profile({ data, cookieValue }: { data: User; cookieValue
         setErrorText({...errorText, address: "※住所を入力して下さい"})
       }
       setCompleteText("不正な項目があります");
-      return
+      return;
+    } else if(data.email) {
+      setErrorText({
+        ...errorText,
+        email: data.email,
+      });
+      setCompleteText("不正な項目があります");
+      return;
     } else {
       setCompleteText("変更が完了しました");
       const TOKEN =
