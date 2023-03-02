@@ -16,17 +16,8 @@ type Item = {
 	delete: boolean,
 }
 
-type Cart = {
-  id: number,
-  items: Item,
-  cart_id: number,
-  date: string,
-  quantity: number,
-  delete: boolean,
-}
-
 type GuestCartType = {
-  itemId: string,
+  itemId: number,
   quantity: number,
 }
 

@@ -5,6 +5,7 @@ import urStyles from '../styles/userRegister.module.css';
 import { useRouter } from 'next/router';
 import { handleSmoothScroll } from 'next/dist/shared/lib/router/router';
 import Cookies from 'js-cookie';
+import strageToCart from '@/lib/strageToCart';
 
 export default function Login() {
   // email, passwordの値を格納するState
@@ -41,6 +42,7 @@ export default function Login() {
     });
     if (responce.status === 200) {
       setErrorText("");
+      await strageToCart()
       rooter.replace('/');
       Cookies.set('status', 'true');
     } else {

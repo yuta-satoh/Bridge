@@ -21,14 +21,14 @@ export default function Cart() {
   // クライアントサイドでlocalstrageを取得
   useEffect(() => {
     // 仮データをセット
-    const guestCartItems = [
-      { itemId: 5, quantity: 1 },
-      { itemId: 8, quantity: 1 },
-      { itemId: 12, quantity: 1 },
-    ];
+    // const guestCartItems = [
+    //   { itemId: 5, quantity: 1 },
+    //   { itemId: 8, quantity: 1 },
+    //   { itemId: 12, quantity: 1 },
+    // ];
 
-    const itemsJson = JSON.stringify(guestCartItems);
-    localStorage.setItem('GuestCart', itemsJson);
+    // const itemsJson = JSON.stringify(guestCartItems);
+    // localStorage.setItem('GuestCart', itemsJson);
 
     // localstrageを取得しstateに格納、nullの場合は何も格納しない
     reloadStrage();
