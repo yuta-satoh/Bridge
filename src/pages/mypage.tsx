@@ -6,7 +6,7 @@ import Auth from './auth/auth';
 import Logout from '@/components/Logout';
 import cModule from '../styles/coordination.module.css';
 import { GetServerSideProps } from 'next';
-import CurrentCartItems from '@/components/currentCartItems';
+import CurrentCartItems from '@/components/CurrentCartItems';
 
 export const getServerSideProps: GetServerSideProps = async( context ) => {
   // クッキーの値の取得
@@ -146,7 +146,7 @@ export default function Mypage( {cookieValue}: { cookieValue: string } ) {
                       href="/cart"
                       className="textBottom"
                     >
-                      すべて見る
+                      &gt;&gt;カート一覧
                     </Link>
                   </span>
                 </div>
