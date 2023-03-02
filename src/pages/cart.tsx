@@ -1,28 +1,23 @@
 import Head from "next/head";
-import { GetServerSideProps } from "next";
 import UserCart from "@/components/UserCart";
 import GuestCart from "@/components/GuestCart";
 import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  // リクエストからクッキーを取得
-  const userId = ctx.req.cookies['id']
-
-  // クッキーがない時はprops無し
-  if (userId === undefined) {
-    return {
-      props: {},
-    };
+export default function Cart() {
+  const status = () => {
+    const userId = Cookies.get('id');
+    if (userId === undefined) {
+      return userId;
+    } else {
+      return userId;
+    }
   }
-  return {
-    props: { userId },
-  };
-}
+  const userId = status();
 
-export default function Cart({ userId }: { userId: string }) {
   // ゲスト用カートの状態を保存
   const [guestCart, setGuestCart] = useState([])
-  
+
   // クライアントサイドでlocalstrageを取得
   useEffect(() => {
     // 仮データをセット
@@ -36,16 +31,21 @@ export default function Cart({ userId }: { userId: string }) {
     localStorage.setItem('GuestCart', itemsJson);
 
     // localstrageを取得しstateに格納、nullの場合は何も格納しない
+    reloadStrage();
+
+  }, [])
+
+  const reloadStrage = () => {
     const strageData = localStorage.getItem('GuestCart');
     if (strageData === null) {
       setGuestCart([])
     } else {
       setGuestCart(JSON.parse(strageData));
     }
-  }, [])
+  }
 
   // ユーザーとゲストで表示を切り替え
-  if (userId) {
+  if (userId !== undefined) {
     return (
       <>
         <Head>
@@ -60,7 +60,7 @@ export default function Cart({ userId }: { userId: string }) {
         <Head>
           <title>カート</title>
         </Head>
-        <GuestCart guestCart={guestCart} />
+        <GuestCart guestCart={guestCart} reloadStrage={reloadStrage} />
       </>
     )
   }

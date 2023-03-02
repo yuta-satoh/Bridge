@@ -45,7 +45,7 @@ export default async function handler(
 
   const cartId: number = cartData[0].id;
 	const responceCartItems = await fetch(
-    `http://127.0.0.1:8000/cart_items?cart_id=eq.${cartId}`,
+    `http://127.0.0.1:8000/cart_items?cart_id=eq.${cartId}&delete=eq.false`,
     {
       method: 'GET',
       headers: {

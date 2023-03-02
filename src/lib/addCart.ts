@@ -51,11 +51,9 @@ export default async function addCart(itemId: number, quantity: number) {
 		} catch(e) {
 			console.log(e);
 		}
-  } else {
+  	} else {
 		// cookieがない場合はlocalstrageに格納
-    const currentStrageData = localStorage.getItem('GuestCart');
-		console.log(currentStrageData);
-
+    	const currentStrageData = localStorage.getItem('GuestCart');
 		// 型ガードしつつストレージの有無によって処理を切り替え
 		if (currentStrageData === null) {
 			const newStrageData: GuestCart[] = [{ itemId: itemId, quantity: quantity }];
@@ -63,6 +61,7 @@ export default async function addCart(itemId: number, quantity: number) {
 		} else {
 			const nextStrageData: GuestCart[] = JSON.parse(currentStrageData);
 			nextStrageData.push({ itemId: itemId, quantity: quantity });
+			localStorage.setItem('GuestCart', JSON.stringify(nextStrageData));
 		}
   }
 }

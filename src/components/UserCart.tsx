@@ -2,6 +2,7 @@ import useSWR, { Fetcher } from "swr";
 import Link from "next/link";
 import Image from "next/image";
 import Recommend from "./Recommend";
+import deleteCart from "@/lib/deleteCart";
 
 type Cart = {
   id: number,
@@ -29,8 +30,8 @@ type Item = {
 const fetcher: Fetcher<Item[], string> = (...args) => fetch(...args).then((res) => res.json());
 
 export default function UserCart({ userId }: { userId: string }) {
-	// SWRでアイテムを取得
-  const { data: cartItemData, error } = useSWR(`/api/getCart/items?id=${userId}`, fetcher)
+  // SWRでアイテムを取得
+  const { data: cartItemData, error, mutate } = useSWR(`/api/getCart/items?id=${userId}`, fetcher)
 
   // カートにデータがない時の表示
 	if (error) return (
@@ -49,19 +50,22 @@ export default function UserCart({ userId }: { userId: string }) {
 
 	if (!cartItemData) return <div>loading...</div>
 
-  const filteredItemData = cartItemData.filter((item) => !item.delete)
+  console.log(cartItemData);
+
+  // const filteredItemData = cartItemData.filter((item) => item.delete === false)
+  // console.log(filteredItemData)
   
   // 合計金額
-  const sumPrice = filteredItemData.reduce((current, item) => current + item.price, 0)
+  const sumPrice = cartItemData.reduce((current, item) => current + item.price, 0)
 
 	return (
     <div className="flex mx-auto w-4/5 gap-32">
       <div className="w-3/5 mt-10">
         <div className="flex">
           <h2 className="text-3xl font-bold">カート</h2>
-          <span className="mt-2">{`(${filteredItemData.length}点の商品)`}</span>
+          <span className="mt-2">{`(${cartItemData.length}点の商品)`}</span>
         </div>
-        {filteredItemData.map((item, index) => (
+        {cartItemData.map((item, index) => (
           <div key={index} className="border border-neutral-900 my-2 py-3 px-8 h-52">
             <div className="flex gap-5">
               <Link href={'/'}>
@@ -76,7 +80,13 @@ export default function UserCart({ userId }: { userId: string }) {
               </div>
             </div>
             <div className="text-right">
-              <button className="text-white bg-neutral-900 border border-neutral-900 rounded px-1">
+              <button
+                className="text-white bg-neutral-900 border border-neutral-900 rounded px-1"
+                onClick={() => {
+                  deleteCart(item.id, item.cartInfo.cart_id);
+                  mutate(cartItemData);
+                }}  
+              >
                 削除
               </button>
               {/* 個数を変えたら金額も変更したい（CSRで） */}
@@ -99,7 +109,7 @@ export default function UserCart({ userId }: { userId: string }) {
             </div>
           </div>  
         ))}
-        <Recommend filteredItemData={filteredItemData} />
+        <Recommend cartItemData={cartItemData} />
       </div>
       <div className="w-1/4 h-80 mt-10 p-10 border-2 border-neutral-900 rounded bg-gray-100">
         <p>

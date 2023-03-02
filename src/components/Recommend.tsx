@@ -3,6 +3,15 @@ import Image from "next/image";
 import useSWR, { Fetcher } from 'swr';
 import addCart from "@/lib/addCart";
 
+type Cart = {
+  id: number,
+  item_id: number,
+  cart_id: number,
+  date: string,
+  quantity: number,
+  delete: boolean,
+}
+
 type Item = {
   id: number,
   name: string,
@@ -13,13 +22,14 @@ type Item = {
   imgurl: string,
   stock: number,
   delete: boolean,
+  cartInfo: Cart,
 }
 
-export default function Recommend({ filteredItemData }: { filteredItemData: Item[] }) {
+export default function Recommend({ cartItemData, reloadStrage }: { cartItemData: Item[], reloadStrage?: () => void }) {
   const fetcher: Fetcher<Item[], string> = (...args) => fetch(...args).then((res) => res.json());
   
-  const endCartItem = filteredItemData[filteredItemData.length - 1]
-  const itemQuery = filteredItemData.reduce((query, item) => query + `,id.eq.${item.id}`, "").replace(",", "")
+  const endCartItem = cartItemData[cartItemData.length - 1]
+  const itemQuery = cartItemData.reduce((query, item) => query + `,id.eq.${item.id}`, "").replace(",", "")
   const queryParams = `not.or=(${itemQuery})`
   const { data: recommendItem, error } = useSWR(`/api/getItems?genre=eq.${endCartItem.genre}&id=${queryParams}`, fetcher)
 
@@ -31,6 +41,12 @@ export default function Recommend({ filteredItemData }: { filteredItemData: Item
     </div>
   )
   if (!recommendItem) return <div>loading...</div>
+
+  const addCartReload = async (itemId: number) => {
+    await addCart(itemId, 1);
+    if (reloadStrage === undefined) return
+    reloadStrage();
+  }
 
   return (
     <>
@@ -52,7 +68,7 @@ export default function Recommend({ filteredItemData }: { filteredItemData: Item
                 <button
                   className="p-1.5 text-center text-white h-10 mt-3 rounded bg-blue-500 hover:bg-blue-700"
                   onClick={() => {
-                    addCart(item.id, 1);
+                    addCartReload(item.id)
                   }}
                 >
                   カートに入れる
