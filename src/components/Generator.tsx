@@ -40,7 +40,7 @@ export default function Generator(props: {
     <>
       <div>
         <section className={cModule.linkItems}>
-          <article className={cModule.coordinateArea}>
+          {/* <article className={cModule.coordinateArea}>
             <div className={cModule.empty}></div>
             <div className={cModule.images_b} id="curtain">
               <Image
@@ -125,7 +125,7 @@ export default function Generator(props: {
                 className={cModule.display}
               />
             </div>
-          </article>
+          </article> */}
           <p className={cModule.subTitle}>コーディネートアイテム</p>
           <div className={cModule.price}>
             <p className={cModule.total}>TOTAL</p>
