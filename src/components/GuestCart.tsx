@@ -2,17 +2,26 @@ import useSWR, { Fetcher } from "swr";
 import Link from "next/link";
 import Image from "next/image";
 import Recommend from "./Recommend";
+import deleteCart from "@/lib/deleteCart";
 
-// カートに入った時の状態を含めたいのでcartInfoプロパティも追加しています
 type Item = {
   id: number,
-  name: string,
-  description: string,
-  genre: string,
-  category: string,
-  price: number,
-  imgurl: string,
-  stock: number,
+	name: string,
+	description: string,
+	genre: string,
+	category: string,
+	price: number,
+	imgurl: string,
+	stock: number,
+	delete: boolean,
+}
+
+type Cart = {
+  id: number,
+  items: Item,
+  cart_id: number,
+  date: string,
+  quantity: number,
   delete: boolean,
 }
 
@@ -23,7 +32,7 @@ type GuestCartType = {
 
 const fetcher: Fetcher<Item[], string> = (...args) => fetch(...args).then((res) => res.json());
 
-export default function GuestCart({ guestCart }: { guestCart: GuestCartType[] }) {
+export default function GuestCart({ guestCart, reloadStrage }: { guestCart: GuestCartType[], reloadStrage: () => void }) {
   // 受け取ったゲストカートからクエリパラメータを作成
   const itemQuery = guestCart.reduce((query, cartItem) => query + `,id.eq.${cartItem.itemId}`, "").replace(",", "");
   const queryParams = `or=(${itemQuery})`
@@ -54,6 +63,11 @@ export default function GuestCart({ guestCart }: { guestCart: GuestCartType[] })
   // 合計金額
   const sumPrice = filteredItemData.reduce((current, item) => current + item.price, 0)
 
+  const handleDelete = async (itemId: number) => {
+    await deleteCart(itemId);
+    reloadStrage()
+  }
+
 	return (
     <div className="flex mx-auto w-4/5 gap-32">
       <div className="w-3/5 mt-10">
@@ -76,7 +90,10 @@ export default function GuestCart({ guestCart }: { guestCart: GuestCartType[] })
               </div>
             </div>
             <div className="text-right">
-              <button className="text-white bg-neutral-900 border border-neutral-900 rounded px-1">
+              <button
+                className="text-white bg-neutral-900 border border-neutral-900 rounded px-1"
+                onClick={() => handleDelete(item.id)}  
+              >
                 削除
               </button>
               {/* 個数を変えたら金額も変更したい（CSRで） */}
@@ -99,7 +116,7 @@ export default function GuestCart({ guestCart }: { guestCart: GuestCartType[] })
             </div>
           </div>  
         ))}
-        <Recommend filteredItemData={filteredItemData} />
+        <Recommend recommend={filteredItemData} reloadStrage={reloadStrage} />
       </div>
       <div className="w-1/4 h-80 mt-10 p-10 border-2 border-neutral-900 rounded bg-gray-100">
         <p>

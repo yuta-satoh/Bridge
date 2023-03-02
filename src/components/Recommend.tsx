@@ -5,23 +5,27 @@ import addCart from "@/lib/addCart";
 
 type Item = {
   id: number,
-  name: string,
-  description: string,
-  genre: string,
-  category: string,
-  price: number,
-  imgurl: string,
-  stock: number,
-  delete: boolean,
+	name: string,
+	description: string,
+	genre: string,
+	category: string,
+	price: number,
+	imgurl: string,
+	stock: number,
+	delete: boolean,
 }
 
-export default function Recommend({ filteredItemData }: { filteredItemData: Item[] }) {
+type Recommend = {
+  id: number,
+  genre: string,
+}
+
+export default function Recommend({ recommend, reloadStrage }: { recommend: Recommend[], reloadStrage?: () => void }) {
   const fetcher: Fetcher<Item[], string> = (...args) => fetch(...args).then((res) => res.json());
   
-  const endCartItem = filteredItemData[filteredItemData.length - 1]
-  const itemQuery = filteredItemData.reduce((query, item) => query + `,id.eq.${item.id}`, "").replace(",", "")
+  const itemQuery = recommend.reduce((query, item) => query + `,id.eq.${item.id}`, "").replace(",", "")
   const queryParams = `not.or=(${itemQuery})`
-  const { data: recommendItem, error } = useSWR(`/api/getItems?genre=eq.${endCartItem.genre}&id=${queryParams}`, fetcher)
+  const { data: recommendItem, error } = useSWR(`/api/getItems?genre=eq.${recommend[0].genre}&id=${queryParams}`, fetcher)
 
   if (error) return (
     <div className="w-4/5 mx-auto">
@@ -31,6 +35,14 @@ export default function Recommend({ filteredItemData }: { filteredItemData: Item
     </div>
   )
   if (!recommendItem) return <div>loading...</div>
+
+  const addCartReload = async (itemId: number) => {
+    await addCart(itemId, 1);
+    // ローカルストレージを空にする処理が入っていないので更新処理できない
+    if (reloadStrage === undefined) return
+    // ゲストユーザーの更新処理のみ可能
+    reloadStrage();
+  }
 
   return (
     <>
@@ -52,7 +64,7 @@ export default function Recommend({ filteredItemData }: { filteredItemData: Item
                 <button
                   className="p-1.5 text-center text-white h-10 mt-3 rounded bg-blue-500 hover:bg-blue-700"
                   onClick={() => {
-                    addCart(item.id, 1);
+                    addCartReload(item.id)
                   }}
                 >
                   カートに入れる
