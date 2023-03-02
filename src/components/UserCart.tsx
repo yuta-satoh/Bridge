@@ -2,6 +2,7 @@ import useSWR, { Fetcher } from "swr";
 import Link from "next/link";
 import Image from "next/image";
 import Recommend from "./Recommend";
+import React from "react";
 
 type Cart = {
   id: number,

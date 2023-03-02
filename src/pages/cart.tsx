@@ -1,8 +1,9 @@
 import Head from "next/head";
 import { GetServerSideProps } from "next";
-import UserCart from "@/components/UserCart";
-import GuestCart from "@/components/GuestCart";
+import UserCart from "../components/UserCart";
+import GuestCart from "../components/GuestCart";
 import { useEffect, useState } from "react";
+import React from "react";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   // リクエストからクッキーを取得
