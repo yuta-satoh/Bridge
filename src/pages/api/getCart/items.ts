@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-type CartItem = {
+type Cart = {
   id: number,
   item_id: number,
   cart_id: number,
@@ -9,7 +9,7 @@ type CartItem = {
   delete: boolean,
 }
 
-type ItemData = {
+type Item = {
 	id: number,
 	name: string,
 	description: string,
@@ -21,9 +21,22 @@ type ItemData = {
 	delete: boolean,
 }
 
+type ItemType = {
+  id: number,
+	name: string,
+	description: string,
+	genre: string,
+	category: string,
+	price: number,
+	imgurl: string,
+	stock: number,
+	delete: boolean,
+  cartInfo: Cart
+}
+
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ItemData[]>
+  res: NextApiResponse<ItemType[]>
 ) {
 	const userId = req.query.id as string
 	const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
@@ -45,7 +58,7 @@ export default async function handler(
 
   const cartId: number = cartData[0].id;
 	const responceCartItems = await fetch(
-    `http://127.0.0.1:8000/cart_items?cart_id=eq.${cartId}&delete=eq.false`,
+    `http://127.0.0.1:8000/cart_items?cart_id=eq.${cartId}`,
     {
       method: 'GET',
       headers: {
@@ -54,19 +67,18 @@ export default async function handler(
       },
     }
   );
-  const cartItemData: CartItem[] = await responceCartItems.json();
+  const cartItemData: Cart[] = await responceCartItems.json();
 	
 	const itemQuery = cartItemData.reduce((query, cartItem) => query + `,id.eq.${cartItem.item_id}`, "").replace(",", "")
   const responseItem = await fetch(
 		`http://127.0.0.1:8000/items?or=(${itemQuery})`)
-  const itemData: ItemData[] = await responseItem.json()
-
-	const responceItemData = itemData.map((item, index) => {
-		return {
-			...item,
-			cartInfo: cartItemData[index]
-		}
-	})
+  const itemData: Item[] = await responseItem.json()
+  const responceItemData = itemData.map((item, index) => {
+    return {
+      ...item,
+      cartInfo: cartItemData[index]
+    }
+  })
 
   // レスポンスの定義
   if (responceCartItems.ok) {
