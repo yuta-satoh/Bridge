@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import useSWR, { Fetcher } from 'swr';
 import addCart from "@/lib/addCart";
+import { useRouter } from "next/router";
 
 type Item = {
   id: number,
@@ -22,6 +23,7 @@ type Recommend = {
 
 export default function Recommend({ recommend, reloadStrage }: { recommend: Recommend[], reloadStrage?: () => void }) {
   const fetcher: Fetcher<Item[], string> = (...args) => fetch(...args).then((res) => res.json());
+  const router = useRouter()
   
   const itemQuery = recommend.reduce((query, item) => query + `,id.eq.${item.id}`, "").replace(",", "")
   const queryParams = `not.or=(${itemQuery})`
@@ -39,7 +41,10 @@ export default function Recommend({ recommend, reloadStrage }: { recommend: Reco
   const addCartReload = async (itemId: number) => {
     await addCart(itemId, 1);
     // ローカルストレージを空にする処理が入っていないので更新処理できない
-    if (reloadStrage === undefined) return
+    if (reloadStrage === undefined) {
+      router.reload()
+      return
+    }
     // ゲストユーザーの更新処理のみ可能
     reloadStrage();
   }
