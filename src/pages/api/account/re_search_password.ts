@@ -16,23 +16,9 @@ const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.O
 
 const searchUser = async (params: {
   cookie: string;
-  email: string,
-  password: string
+  newPassword: string
 }) => {
-  const searchEmailResult = await fetch(`http://127.0.0.1:8000/users?email=eq.${params.email}`, {
-    method: "GET",
-    headers: {
-            "Authorization": `Bearer ${TOKEN}`,
-            "Content-Type": "application/json",
-    },
-	}).then((res) => res.json()).then((data) => {
-    if (data.length !== 0) {
-      return "このメールアドレスはすでに使用されています"
-    } 
-    return ""
-  })
-
-  const searchPasswordResult = await fetch(`http://127.0.0.1:8000/users?password=eq.${params.password}`, {
+  const searchPasswordResult = await fetch(`http://127.0.0.1:8000/users?id=neq.${params.cookie}&password=eq.${params.newPassword}`, {
     method: "GET",
     headers: {
             "Authorization": `Bearer ${TOKEN}`,
@@ -45,7 +31,6 @@ const searchUser = async (params: {
     return ""
   })
   return {
-    email: searchEmailResult,
     password: searchPasswordResult,
   }
 }
@@ -54,7 +39,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { email, password, cookie } = req.body;
-  const searchResult = await searchUser({email, password, cookie})
+  const { newPassword, cookie } = req.body;
+  const searchResult = await searchUser({newPassword, cookie})
   res.status(200).json(searchResult)
 } 

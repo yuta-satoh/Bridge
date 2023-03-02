@@ -108,7 +108,7 @@ export default function Profile({ data, cookieValue }: { data: User; cookieValue
       if (!gender) return "※性別を選択して下さい"
     }
   
-    const emailValidation = (email: string) => {
+    const emailValidation = async(email: string) => {
       if (!email) return "※メールアドレスを入力して下さい";
       if (email.indexOf('@') === -1 || email.indexOf('@') === 0 || email.indexOf('@') === email.length-1) {
         return '※メールアドレスの形式が不正です';
