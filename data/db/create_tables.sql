@@ -77,3 +77,23 @@ CREATE TABLE api.order_histories (
 GRANT SELECT ON api.order_histories TO web_anon;
 GRANT ALL ON api.order_histories to api_user;
 GRANT USAGE ON SEQUENCE api.order_histories_id_seq TO api_user;
+
+-- @block
+DROP TABLE IF EXISTS api.reviews CASCADE;
+CREATE TABLE api.reviews (
+    id SERIAL PRIMARY KEY,
+    item_id INTEGER NOT NULL REFERENCES api.items (id),
+    user_id INTEGER NOT NULL REFERENCES api.users (id),
+    name TEXT NOT NULL,
+    description TEXT NOT NULL,
+    genre TEXT NOT NULL,
+    category TEXT NOT NULL,
+    price INTEGER NOT NULL,
+    imgUrl TEXT NOT NULL,
+    date DATE NOT NULL,
+    quantity INTEGER NOT NULL,
+    delete BOOLEAN DEFAULT false NOT NULL
+);
+GRANT SELECT ON api.reviews TO web_anon;
+GRANT ALL ON api.reviews to api_user;
+GRANT USAGE ON SEQUENCE api.reviews_id_seq TO api_user;
