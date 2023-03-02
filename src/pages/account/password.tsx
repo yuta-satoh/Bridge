@@ -156,6 +156,15 @@ export default function Password({
   // onSubmitハンドラ
   async function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
+    // 重複チェック
+    const res = await fetch('/api/account/re_search_password', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ password: passwords.newPassword, cookie: cookieValue })
+    });
+    const data: { password: string } = await res.json();
     if (!canSubmit()) {
       if (!passwords.password) {
         setErrorText({
@@ -176,6 +185,17 @@ export default function Password({
         });
       }
       setCompleteText("不正な項目があります");
+      return;
+    } else if (data.password) {
+      setErrorText({
+        ...errorText,
+        newPassword: data.password,
+      });
+      setPasswords({
+        ...passwords,
+      });
+      setCompleteText("不正な項目があります");
+      return;
     } else {
       const TOKEN =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
