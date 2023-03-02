@@ -133,7 +133,7 @@ export default function coordination(
               <Link href="/coordination">ジェネレーター</Link>
               <span className={cModule.greaterThan}>&gt;</span>
             </li>
-            <li className={cModule.pageLink}>{theme}</li>
+            <li className={cModule.pageLink}>{listItem.genre}</li>
           </ol>
           <div className={cModule.titleItems}>
             <h1 className={cModule.title}>
@@ -145,7 +145,7 @@ export default function coordination(
               className={cModule.resForm}
             >
               <p className={cModule.selectResTheme}>
-                選択テーマ：{theme}
+                選択テーマ：{listItem.genre}
               </p>
               <div className={cModule.button}>
                 <button className={cModule.buttonStyle}>
