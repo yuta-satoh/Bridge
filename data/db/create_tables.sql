@@ -84,14 +84,9 @@ CREATE TABLE api.reviews (
     id SERIAL PRIMARY KEY,
     item_id INTEGER NOT NULL REFERENCES api.items (id),
     user_id INTEGER NOT NULL REFERENCES api.users (id),
-    name TEXT NOT NULL,
-    description TEXT NOT NULL,
-    genre TEXT NOT NULL,
-    category TEXT NOT NULL,
-    price INTEGER NOT NULL,
-    imgUrl TEXT NOT NULL,
-    date DATE NOT NULL,
-    quantity INTEGER NOT NULL,
+    evaluation TEXT NOT NULL,
+    title TEXT,
+    description TEXT,
     delete BOOLEAN DEFAULT false NOT NULL
 );
 GRANT SELECT ON api.reviews TO web_anon;
