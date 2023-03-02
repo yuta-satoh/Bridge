@@ -16,9 +16,9 @@ const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.O
 
 const searchUser = async (params: {
   cookie: string;
-  newPassword: string
+  password: string
 }) => {
-  const searchPasswordResult = await fetch(`http://127.0.0.1:8000/users?id=neq.${params.cookie}&password=eq.${params.newPassword}`, {
+  const searchPasswordResult = await fetch(`http://127.0.0.1:8000/users?id=neq.${params.cookie}&password=eq.${params.password}`, {
     method: "GET",
     headers: {
             "Authorization": `Bearer ${TOKEN}`,
@@ -39,7 +39,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { newPassword, cookie } = req.body;
-  const searchResult = await searchUser({newPassword, cookie})
+  const { password, cookie } = req.body;
+  const searchResult = await searchUser({password, cookie})
   res.status(200).json(searchResult)
 } 
