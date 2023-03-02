@@ -29,18 +29,6 @@ type CartItemsData = {
   carts: Carts;
 }
 
-type ItemType = {
-  id: number,
-	name: string,
-	description: string,
-	genre: string,
-	category: string,
-	price: number,
-	imgurl: string,
-	stock: number,
-	delete: boolean,
-}
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<CartItemsData[]>

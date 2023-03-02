@@ -60,6 +60,12 @@ export default function UserCart({ userId }: { userId: string }) {
   // 合計金額
   const sumPrice = filtercartItems.reduce((current, cart) => current + cart.items.price, 0)
 
+  const handleDelete = async (itemId: number, cartId: number) => {
+    console.log(itemId, cartId);
+    await deleteCart(itemId, cartId);
+    mutate(filtercartItems);
+  }
+
 	return (
     <>
       {filtercartItems.length !== 0 ? (
@@ -86,10 +92,7 @@ export default function UserCart({ userId }: { userId: string }) {
                 <div className="text-right">
                   <button
                     className="text-white bg-neutral-900 border border-neutral-900 rounded px-1"
-                    onClick={() => {
-                      deleteCart(cart.items.id, cart.id);
-                      mutate(cartItemData);
-                    }}  
+                    onClick={() => handleDelete(cart.items.id, cart.cart_id)}  
                   >
                     削除
                   </button>

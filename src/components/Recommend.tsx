@@ -15,15 +15,6 @@ type Item = {
 	delete: boolean,
 }
 
-type Cart = {
-  id: number,
-  items: Item,
-  cart_id: number,
-  date: string,
-  quantity: number,
-  delete: boolean,
-}
-
 type Recommend = {
   id: number,
   genre: string,
@@ -47,7 +38,9 @@ export default function Recommend({ recommend, reloadStrage }: { recommend: Reco
 
   const addCartReload = async (itemId: number) => {
     await addCart(itemId, 1);
+    // ローカルストレージを空にする処理が入っていないので更新処理できない
     if (reloadStrage === undefined) return
+    // ゲストユーザーの更新処理のみ可能
     reloadStrage();
   }
 
