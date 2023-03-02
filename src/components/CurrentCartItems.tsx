@@ -2,19 +2,7 @@ import Image from 'next/image';
 import useSWR, { Fetcher } from 'swr';
 
 // 型定義
-//カート
-type Cart = {
-  id: number;
-  item_id: number;
-  cart_id: number;
-  date: string;
-  quantity: number;
-  delete: boolean;
-};
-
-// アイテム
-// カートに入った時の状態を含めたいのでcartInfoプロパティも追加しています
-type Item = {
+type Items = {
   id: number;
   name: string;
   description: string;
@@ -24,10 +12,26 @@ type Item = {
   imgurl: string;
   stock: number;
   delete: boolean;
-  cartInfo: Cart;
-};
+}
 
-const fetcher: Fetcher<Item[], string> = (args: string) =>
+type Carts = {
+  id: number;
+  user_id: number;
+  delete: boolean;
+}
+
+type CartItemsData = {
+  id: number;
+  item_id: number;
+  cart_id: number;
+  date: Date;
+  quantity: number;
+  delete: boolean;
+  items: Items;
+  carts: Carts;
+}
+
+const fetcher: Fetcher<CartItemsData[], string> = (args: string) =>
   fetch(args).then((res) => res.json());
 
 export default function CurrentCartItems({
@@ -36,7 +40,7 @@ export default function CurrentCartItems({
   cookie: string;
 }) {
   //   SWRでアイテムを取得
-  const { data: cartItemData, error } = useSWR<Item[], Error>(
+  const { data: cartItemData, error } = useSWR<CartItemsData[], Error>(
     `/api/getCart/items?id=${cookie}`,
     fetcher
   );
@@ -97,7 +101,7 @@ export default function CurrentCartItems({
         `}</style>
         <div className="container">
           <div className="background">
-            <p>カートに商品がありません</p>
+            <p>ロード中...</p>
           </div>
         </div>
       </>
@@ -109,7 +113,6 @@ export default function CurrentCartItems({
     (item) => !item.delete
   );
 
-  // カート追加順に直して(array.reverse())、
   // 上位4つまで抽出(array.slice(0, 3))
   const currentCartItems = filteredItemData.slice(0, 4);
 
@@ -125,18 +128,18 @@ export default function CurrentCartItems({
         }
       `}</style>
       <div className="cartItemsArea">
-        {currentCartItems.map((item) => {
+        {currentCartItems.map((cartItem) => {
             return (
-              <div className="cartItems" key={item.id}>
+              <div className="cartItems" key={cartItem.id}>
                 <Image
-                  src={item.imgurl}
+                  src={cartItem.items.imgurl}
                   alt={'kagu'}
                   width={150}
                   height={150}
                 />
-                <p>{item.name}</p>
-                <p>{`${item.price}円`}</p>
-                <p>{`${item.cartInfo.quantity}個`}</p>
+                <p>{cartItem.items.name}</p>
+                <p>{`${cartItem.items.price}円`}</p>
+                <p>{`${cartItem.quantity}個`}</p>
               </div>
             );
         })}
