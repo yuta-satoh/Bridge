@@ -6,15 +6,16 @@ import Generator from '@/components/Generator';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
-import { type } from 'os';
+import { GetServerSideProps } from 'next';
 import { journal } from '../lib/generatorFn';
-import { shuffleItems } from '../lib/generatorFn';
 import { createList } from '../lib/generatorFn';
 import { setURL } from '../lib/generatorFn';
 import Router from 'next/router';
 
-export async function getServerSideProps(context: any) {
-  const theme = context.query.name;
+export const getServerSideProps: GetServerSideProps = async (
+  context
+) => {
+  const theme = context.req.cookies['genre'];
   const TOKEN =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
   const request = await fetch(
@@ -32,9 +33,9 @@ export async function getServerSideProps(context: any) {
       return data;
     });
   return {
-    props: { request },
+    props: { request, theme }
   };
-}
+};
 type Request = {
   request: {
     id: number;
@@ -57,7 +58,10 @@ type item = {
   imgurl: string;
 }[];
 
-export default function coordination({ request }: Request) {
+export default function coordination(
+  { request }: Request,
+  { theme }: { theme: string }
+) {
   const loupe = '/images/icon/loupe.png';
   const curtain: item = [];
   const light: item = [];
@@ -81,8 +85,6 @@ export default function coordination({ request }: Request) {
     sofa: url,
     accessory: url,
   };
-
-  const theme = Cookies.get('genre');
   journal(
     { request },
     curtain,
@@ -109,9 +111,9 @@ export default function coordination({ request }: Request) {
   );
   const listItem = list[0];
   setURL(urlData, list, listItem);
+  console.log(theme)
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    const theme = Cookies.get('genre');
     Router.push({ query: { name: theme } });
   };
 
