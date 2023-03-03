@@ -5,6 +5,8 @@ import Head from 'next/head';
 import { type } from 'os';
 import { useState } from 'react';
 import { procedure } from '@/lib/purchaseFn';
+import Link from 'next/link';
+import urStyles from '../styles/userRegister.module.css';
 
 type items = {
   id: number;
@@ -112,7 +114,7 @@ export default function purchase({
         <h1 className={pModule.title}>購入確認</h1>
         <table className={pModule.itemTable}>
           <tbody>
-            <tr>
+            <tr className={pModule.tableTLine}>
               <th className={pModule.nameTag}>品名</th>
               <th className={pModule.item}>個数</th>
               <th className={pModule.itemTag}>単価</th>
@@ -137,10 +139,10 @@ export default function purchase({
             ))}
           </tbody>
           <tbody>
-            <tr className={pModule.topContent}>
+            <tr className={pModule.content}>
               <td colSpan={2}></td>
-              <td className={pModule.subTotal}>本体合計</td>
-              <td className={pModule.text}>
+              <td className={pModule.subTTotal}>本体合計</td>
+              <td className={pModule.topText}>
                 ¥&nbsp;{total.toLocaleString()}
               </td>
             </tr>
@@ -173,6 +175,13 @@ export default function purchase({
             購入する
           </button>
         </div>
+        <div className={urStyles.loginLink}>
+            <Link href="/cart">
+              <button type="button" className={urStyles.linkButton}>
+                カートに戻る<span className={urStyles.buttonSpan}>→</span>
+              </button>
+            </Link>
+            </div>
       </div>
     </>
   );

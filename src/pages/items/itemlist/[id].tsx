@@ -36,7 +36,7 @@ export default function ItemPage({item}: {item: Item[]}): JSX.Element {
         <title>商品詳細</title>
       </Head>
 
-      <main className={styles.main}>
+      <main className={lstyles.main}>
         {/* パンくずリスト */}
         <div className={lstyles.Breadcrumb}>
           <nav>
