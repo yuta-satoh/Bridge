@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Recommend from "./Recommend";
 import deleteCart from "@/lib/deleteCart";
+import { ChangeEvent } from "react";
 
 type Item = {
   id: number,
@@ -58,12 +59,29 @@ export default function UserCart({ userId }: { userId: string }) {
   })
 
   // 合計金額
-  const sumPrice = filtercartItems.reduce((current, cart) => current + cart.items.price, 0)
+  const sumPrice = filtercartItems.reduce((current, cart) => current + (cart.items.price * cart.quantity), 0)
 
   const handleDelete = async (itemId: number, cartId: number) => {
     console.log(itemId, cartId);
     await deleteCart(itemId, cartId);
     mutate(filtercartItems);
+  }
+
+  const handleChange = async (ev: ChangeEvent<HTMLSelectElement>, itemId: number, cartId: number) => {
+    const value = ev.target.value
+    console.log(value)
+    await fetch("/api/selectQuantity", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        item_id: itemId,
+        cart_id: cartId,
+        quantity: Number(value),
+      })
+    }).then((res) => console.log("ステータス:", res.status))
+    mutate(filtercartItems)
   }
 
 	return (
@@ -101,6 +119,8 @@ export default function UserCart({ userId }: { userId: string }) {
                     name="quantity"
                     id="cart_quantity"
                     className="ml-5 border border-neutral-900 rounded p-1"
+                    defaultValue={cart.quantity}
+                    onChange={(ev) => handleChange(ev, cart.items.id, cart.cart_id)}
                   >
                     <option value={1}>1</option>
                     <option value={2}>2</option>
@@ -118,7 +138,7 @@ export default function UserCart({ userId }: { userId: string }) {
             ))}
             <Recommend recommend={recommend} />
           </div>
-          <div className="w-1/4 h-80 mt-10 p-10 border-2 border-neutral-900 rounded bg-gray-100">
+          <div className="w-1/4 h-80 mt-20 p-10 border-2 border-neutral-900 rounded bg-gray-100 sticky top-10">
             <p>
               <span>商品合計</span>
               <span className="float-right">¥ {sumPrice.toLocaleString()}</span>

@@ -67,7 +67,6 @@ export default async function addCart(itemId: number, quantity: number) {
 				localStorage.setItem('GuestCart', JSON.stringify(nextStrageData));
 			} else {
 				// 商品が被っている時の処理
-
 				const rewriteItem = {
 					itemId: filterStrageData[0].itemId,
 					quantity: filterStrageData[0].quantity + quantity
