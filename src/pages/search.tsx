@@ -24,48 +24,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     const genre = query.genre;
     const category = query.category;
 
-    if (typeof genre === 'string' && typeof category === 'string') {
-        const response = await fetch(`http://127.0.0.1:8000/items?genre=eq.${genre}&category=eq.${category}`)
-        const filter = await response.json()
-        return {
-            props: {
-                filter
-            }
-        }
-    } else if (typeof genre === 'string' && typeof category !== 'string') {
-        const categoryQuery = category.reduce((current, query) => current + `,category.eq.${query}`, '').replace(',', '')
-        console.log(categoryQuery)
-        const response = await fetch(`http://127.0.0.1:8000/items?genre=eq.${genre}&or=(${categoryQuery})`)
-        const filter = await response.json()
-        return {
-            props: {
-                filter
-            }
-        }
-    } else if (typeof genre !== 'string' && typeof category === 'string') {
-        const genreQuery = genre.reduce((current, query) => current + `,genre.eq.${query}`, '').replace(',', '')
-        console.log(genreQuery)
-        const response = await fetch(`http://127.0.0.1:8000/items?category=eq.${category}&or=(${genreQuery})`)
-        const filter = await response.json()
-        return {
-            props: {
-                filter
-            }
-        }
-    } else if (typeof genre !== 'string' && typeof category !== 'string') {
-        const genreQuery = genre.reduce((current, query) => current + `,genre.eq.${query}`, '').replace(',', '');
-        const categoryQuery = category.reduce((current, query) => current + `,category.eq.${query}`, '').replace(',', '');
-        console.log(genreQuery, categoryQuery)
-        const response = await fetch(`http://127.0.0.1:8000/items?and=(or(${genreQuery}),or(${categoryQuery}))`);
-        const filter = await response.json();
-        return {
-            props: {
-                filter
-            }
-        }
-    }
-
-    const response = await fetch(`http://127.0.0.1:8000/items`)
+    // ジャンルとカテゴリを/api/searchに渡す
+    const response = await fetch(`http://localhost:3000/api/search?genre=${genre}&category=${category}`)
     const filter = await response.json()
     return {
         props: {
@@ -75,8 +35,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 }
 
 const Search = ({ filter }: { filter: Item[] }) => {
-    console.log("データ", filter);
-
     if (!filter || filter.length === 0) {
         return <div>検索結果がありません</div>
     }

@@ -31,7 +31,7 @@ export default function SearchBoxTest() {
         'フェミニン',
     ];
 
-  // インテリアジャンル
+  // チェンジイベントの関数はシンプルに配列に追加するタイプ
     const handleGenreChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
         const isChecked = e.target.checked;
@@ -44,7 +44,6 @@ export default function SearchBoxTest() {
             }
         });
     }
-
     const handleCategoryChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
         const isChecked = e.target.checked;
@@ -58,7 +57,6 @@ export default function SearchBoxTest() {
         });
     }
 
-
     // 絞り込みクリア
     const handleClearClick = () => {
         setCategories([]);
@@ -66,13 +64,9 @@ export default function SearchBoxTest() {
     };
 
     // 検索後ページ遷移
-    // ruterで絞り込み条件渡す
     const handleSubmit = () => {
         if (genres.length !== 0 || categories.length !== 0) {
-            // e.preventDefault();
-            
-            console.log("ジャンル", genres);
-            console.log("カテゴリ", categories);
+            // ジャンルやカテゴリが空の時は全要素をクエリに渡す
             if (genres.length === 0 && categories.length === 0) {
                 router.push({
                     pathname: '/search',
@@ -93,12 +87,7 @@ export default function SearchBoxTest() {
                     pathname: '/search',
                     query: { genre: genres, category: categories },
                 });
-            } else {
-                router.push({
-                    pathname: '/search',
-                    query: { genre: genredatas, category: categorydatas },
-                });
-            }    
+            }  
         } else {
             alert('絞り込みを実施してください');
         }
