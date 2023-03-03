@@ -34,7 +34,7 @@ export default function Generator(props: {
   const listItem = props.list[0];
   const total = sum(listItem, props.list);
   const list = props.list
-  const urlData = props.urlData
+  // const urlData = props.urlData
 
   return (
     <>
@@ -147,7 +147,7 @@ export default function Generator(props: {
                         alt=""
                         className={cModule.image}
                       />
-                      <div className={cModule.cardDetail}>
+                      <div key={item.id} className={cModule.cardDetail}>
                         <p>{item.name}</p>
                         <div className={cModule.cardContents}>
                           <p>¥{item.price.toLocaleString()}</p>
