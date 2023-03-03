@@ -1,5 +1,5 @@
 import { url } from "inspector";
-import { useState } from "react";
+import { ChangeEvent, SyntheticEvent, useState } from "react";
 
 type postReviews = {
     item_id: number;
@@ -36,16 +36,70 @@ export default function PostReview({ itemId, userId } : { itemId: number, userId
     // inputの値を格納するstate
     const [review, setReview] = useState<postReviews>(initReview);
 
+    // inputのvalueをstateに格納するチェンジイベントハンドラ(anonymous以外)
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setReview({
+            ...review,
+            [`${e.target.name}`]: e.target.value,
+        });
+    }
+
+    // 匿名ボタンのクリックイベントハンドラ
+    const handleAnonymousClick = (e: ChangeEvent<HTMLInputElement>) => {
+        setReview({
+            ...review,
+            anonymous: !review.anonymous,
+        });
+    }
+
+    // reviewsにPUTするサブミットイベントハンドラ
+    const handleSubmit = async(e: SyntheticEvent) => {
+        e.preventDefault();
+        const TOKEN =
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
+        const res = await fetch(`http://127.0.0.1:8000/api/reviews`, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${TOKEN}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(review),
+        });
+    }
+
     return (
         <>
             <div className="postReview">
-                <form>
+                <form onSubmit={(e) => handleSubmit(e)}>
                     <div>
                         <label htmlFor="anonymous">匿名</label>
-                        <input type="checkbox" name="anonymous" id="anonymous" checked/>
+                        <input type="checkbox" name="anonymous" id="anonymous" onChange={(e) => handleAnonymousClick(e)} checked/>
                     </div>
                     <div>
-                        <input type="radio" name="evaluation" value={5}/>
+                        <p>評価</p>
+                        <div className="radio">
+                            <input type="radio" id="review05" name="evaluation" value={5} onChange={(e) => handleChange(e)}/>
+                            <label htmlFor="review05">★</label>
+                            <input type="radio" id="review04" name="evaluation" value={4} onChange={(e) => handleChange(e)}/>
+                            <label htmlFor="review05">★</label>
+                            <input type="radio" id="review03" name="evaluation" value={3} onChange={(e) => handleChange(e)}/>
+                            <label htmlFor="review05">★</label>
+                            <input type="radio" id="review02" name="evaluation" value={2} onChange={(e) => handleChange(e)}/>
+                            <label htmlFor="review05">★</label>
+                            <input type="radio" id="review01" name="evaluation" value={1} onChange={(e) => handleChange(e)} required/>
+                            <label htmlFor="review05">★</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label htmlFor="title">タイトル</label>
+                        <input type="text" name="title" id="title" placeholder="※未記入でも可" onChange={(e) => handleChange(e)}/>
+                    </div>
+                    <div>
+                        <label htmlFor="description">説明</label>
+                        <textarea name="description" id="description" cols={30} rows={10} placeholder="※未記入でも可" onChange={(e) => handleChange(e)} />
+                    </div>
+                    <div>
+                        <button type="submit">レビューを投稿</button>
                     </div>
                 </form>
             </div>
