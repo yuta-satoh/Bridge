@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Recommend from "./Recommend";
 import deleteCart from "@/lib/deleteCart";
+import { ChangeEvent } from "react";
 
 type Item = {
   id: number,
@@ -52,11 +53,30 @@ export default function GuestCart({ guestCart, reloadStrage }: { guestCart: Gues
   const filteredItemData = cartItemData.filter((item) => !item.delete)
   
   // 合計金額
-  const sumPrice = filteredItemData.reduce((current, item) => current + item.price, 0)
+  const sumPrice = filteredItemData.reduce((current, item) =>
+    current + item.price * guestCart.filter((gitem) => gitem.itemId === item.id)[0].quantity, 0)
 
   const handleDelete = async (itemId: number) => {
     await deleteCart(itemId);
     reloadStrage()
+  }
+
+  const handleChange = async (ev: ChangeEvent<HTMLSelectElement>, itemId: number) => {
+    const value = ev.target.value
+    console.log(value);
+    const strageData = localStorage.getItem("GuestCart");
+    if (strageData === null) {
+      return
+    } else {
+      const parseStrageData: GuestCartType[] = JSON.parse(strageData);
+      const changeStrageData = parseStrageData.filter((gitem) => gitem.itemId === itemId)[0]
+      changeStrageData.quantity = Number(value);
+      const nextStrageData = parseStrageData.filter((gitem) => gitem.itemId !== itemId);
+      nextStrageData.push(changeStrageData);
+      console.log(nextStrageData);
+      localStorage.setItem("GuestCart", JSON.stringify(nextStrageData));
+      reloadStrage()
+    }
   }
 
 	return (
@@ -92,6 +112,8 @@ export default function GuestCart({ guestCart, reloadStrage }: { guestCart: Gues
                 name="quantity"
                 id="cart_quantity"
                 className="ml-5 border border-neutral-900 rounded p-1"
+                defaultValue={guestCart.filter((gitem) => gitem.itemId === item.id)[0].quantity}
+                onChange={(ev) => handleChange(ev, item.id)}
               >
                 <option value={1}>1</option>
                 <option value={2}>2</option>

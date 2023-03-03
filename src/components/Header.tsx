@@ -13,21 +13,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 };
 
 export default function Header({auth}:{auth:boolean|undefined}) {
-  // const router = useRouter();
-  // const [auth, setAuth] = useState<boolean>();
-  // useEffect(() => {
-  //   const status = Cookies.get('status');
-  //   if (status === 'true' && auth === true) {
-  //     return;
-  //   } else if (status === 'true' && auth !== true) {
-  //     // router.reload();
-  //     setAuth(true);
-  //   } else {
-  //     setAuth(false); 
-  //   }
-  // }, []);
 
-  console.log(auth);
   return (
     <header
       className={`${headModule.body} h-28 w-screen bg-orange-900`}

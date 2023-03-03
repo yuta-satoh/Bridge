@@ -79,9 +79,11 @@
 .serchmenu_itembox{
     display: flex;
     visibility: hidden;
-    flex-direction: column;
+    flex-direction: center;
+    justify-content: center;
 
     height: 0;
+    width: 700px;
     padding: 0px 45px;
 
     transition:all 0.5s ease-in;
@@ -95,6 +97,7 @@
 
     height: 100%;
     padding: 30px 45px;
+    flex-direction: column;
 
     transition:all 1s ease-in-out;
 
@@ -108,10 +111,12 @@
 }
 
 /* 絞り込み条件 */
-.itembox{  font-weight: bold;
+.itembox{  
+    font-weight: bold;
 
-    display: flex;  align-items:center;
-    justify-content:flex-start;
+    display: flex;  
+    align-items:center;
+    justify-content:center;
 
     margin: 0 15px 15px;  
     }
@@ -158,6 +163,12 @@
     margin: 0 15px 15px; 
 }
 
+.categorybox {
+    display: flex;
+    align-items:flex-start;
+    justify-content:center;
+}
+
 .category_lists {
     display: flex;
     align-items: flex-start;
@@ -167,7 +178,7 @@
 }
 
 .category_list {
-    flex-basis: 30%;
+    /* flex-basis: 30%; */
 
     padding: 0 15px;
 

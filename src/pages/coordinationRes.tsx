@@ -11,6 +11,7 @@ import { journal } from '../lib/generatorFn';
 import { createList } from '../lib/generatorFn';
 import { setURL } from '../lib/generatorFn';
 import Router from 'next/router';
+import { sum } from '@/lib/generatorFn';
 
 export const getServerSideProps: GetServerSideProps = async (
   context
@@ -111,6 +112,7 @@ export default function coordination(
   );
   const listItem = list[0];
   setURL(urlData, list, listItem);
+  const total = sum(listItem,list);
   console.log(theme)
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();

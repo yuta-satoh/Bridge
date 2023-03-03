@@ -46,7 +46,7 @@ export default async function handler(
 				"Content-Type": "application/json",
 	  		},
 			body: JSON.stringify({
-				quantity: cartItems[0].quantity + body.quantity,
+				quantity: body.quantity,
 				delete: false
 			})
 		})

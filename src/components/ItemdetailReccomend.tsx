@@ -1,9 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import lstyles from '../styles/itemList.module.css';
 import istyles from '../styles/item.module.css';
 import useSWR, { Fetcher, useSWRConfig } from 'swr';
-import { useState } from 'react';
 
 type Item = {
   id: number;
@@ -45,7 +43,7 @@ export default function ItemdetailReccomend(props:{
           {data.map((item: Item) => {
             return (
               <div key={item.id}>
-                <Link href={`/items/${item.id}`}>
+                <Link href={`/items/itemlist/${item.id}`}>
                   <div className={istyles.images}>
                     <Image
                       src={item.imgurl}
