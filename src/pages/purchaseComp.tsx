@@ -2,6 +2,7 @@ import Image from "next/image";
 import Head from "next/head";
 import Link from "next/link";
 import pstyles from "../styles/purchaseComp.module.css"
+import React from "react";
 
 export default function purchaseComp(){
 

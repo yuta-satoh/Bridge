@@ -9,17 +9,18 @@ const CartCounter = () => {
   return (
     <div className={istyles.carts}>
     <div className={istyles.cart_left}>
-      <button className={istyles.cart_lclick} onClick={() => setCount(count - 1 )}>-</button>
+      <button className={istyles.cart_lclick} onClick={() => setCount((count) => count - 1 )}>-</button>
       <form>
       <input type="text" value={count} className={istyles.cart_value}/>
       </form>
-      <button className={istyles.cart_rclick} onClick={() => setCount(count + 1 )}>+</button>
+      <button className={istyles.cart_rclick} onClick={() => setCount((count) => count + 1 )}>+</button>
     </div>
+    {/* イベント実行後、ローカルストレージに付与するのみ。カートページでgetしている。 */}
     <div className={istyles.cart_right}>
     <button type="button">カートに追加</button>
   </div>
     </div>
   )
-}
+    }
 
 export default CartCounter;
