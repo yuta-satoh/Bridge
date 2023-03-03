@@ -6,17 +6,28 @@ INSERT INTO api.cart_items (
     , '2023-03-01'
     , 1
 ), (
-        2
+    2
     , 1
     , '2023-03-01'
     , 1
 ), (
-        3
+    3
     , 1
     , '2023-03-01'
     , 1
 ), (
-        4
+    6
+    , 1
+    , '2023-03-01'
+    , 1
+);
+
+-- @block
+-- カートアイテム追加用
+INSERT INTO api.cart_items (
+    item_id, cart_id, date, quantity
+) VALUES (
+    5
     , 1
     , '2023-03-01'
     , 1
