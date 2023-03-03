@@ -116,7 +116,7 @@ export default function UserCart({ userId }: { userId: string }) {
             <span className="float-right">¥ {(sumPrice + (sumPrice * 0.1)).toLocaleString()}</span>
           </p>
         </div>
-        <Link href="/">
+        <Link href="/purchase">
           <div className="container pt-1.5 text-center h-10 border-2 border-neutral-900 bg-white mt-8">
             <span>ご注文手続き</span>
           </div>
