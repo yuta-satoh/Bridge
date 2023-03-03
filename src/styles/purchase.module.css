@@ -21,10 +21,6 @@
   align-items: flex-end;
   margin: auto;
 }
-.content {
-  display: flex;
-  padding: 2px 0;
-}
 .item {
   text-align: end;
   padding: 3px 0;
@@ -39,15 +35,24 @@
   padding: 3px 0;
 }
 .text {
-  padding-left: 20px;
+  text-align: end;
+}
+.content{
+  padding : 3px 0 3px;
+}
+.topContent{
+  padding : 10px 0 3px;
+}
+.subTotal {
+  text-align: end;
 }
 .total {
   padding-left: 20px;
   font-weight: bold;
   font-size: 18px;
+  text-align: end;
 }
 .totalContent {
-  display: flex;
   border-top: 1px black solid;
   padding: 3px 0;
   margin-top: 2px;
@@ -59,13 +64,13 @@
   padding: 10px 80px;
   font-size: 17px;
 }
-.addressArea{
-    width: 80%;
-    margin: 20px auto;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+.addressArea {
+  width: 80%;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
-.buttonArea{
-    text-align: center;
+.buttonArea {
+  text-align: center;
 }
