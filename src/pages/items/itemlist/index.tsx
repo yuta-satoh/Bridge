@@ -5,7 +5,8 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import lstyles from '../../../styles/itemList.module.css';
-import SearchBox from '@/components/SerchBox';
+import SearchBox from '../../../components/SerchBox';
+
 
 
 export default function List() {

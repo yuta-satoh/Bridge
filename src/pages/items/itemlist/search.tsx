@@ -4,34 +4,27 @@
 import lstyles from '../../../styles/itemList.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
+import { GetServerSideProps } from 'next';
 
-export async function getServerSideProps(context:any) {
-  const genres = context.query.genre;
-  const categories = context.query.category;
-  // const theme = Cookies.get('genre');
-  // Router.push({ query: { name: theme } });
+// 以下query
+// const path = or=`genre.eq.${sendCategory}`
 
-  const TOKEN =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoid2ViX2Fub24ifQ.kiTZsh70Ir2nvvv3SDXEHwAMdwgVyGiQFDt3HROGqPg';
-  const request = await fetch(
-    `http://127.0.0.1:8000/items?genre=or.${genres}&category=or.${categories}`,
-    {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-        'Content-Type': 'application/json',
-      },
-    }
-  )
-    .then((res) => res.json())
-    .then((data) => {
-      return data;
-    });
+export const getServerSideProps:GetServerSideProps = async ({query}) => {
+  const realsendCategory = `?or=(${query.name})`;
+  const respons = await fetch(`http://127.0.0.1:8000/items${realsendCategory}`)
+  const filter:Item[] = await respons.json();
+
+  // const filter = [{genre:query.genre}];
+
+  console.log(realsendCategory);
+
   return {
-    props: { filter },
+    props: {
+      filter,
+    },
   };
-
 }
+
 
 type Item = {
   id: number;
@@ -47,15 +40,12 @@ type Item = {
 
 export default function SearchItem({filter}:{filter:Item[]}) {
 
-  const fetcher = (resource:string) => 
-    fetch(resource).then((res) => res.json());
-
-  //確認用 
+//確認用 
   console.log(filter);
 
   return(
     <>
-       <div className={lstyles.list_outer}>
+       {/* <div className={lstyles.list_outer}>
         {filter.map((fil:Item) => {
           return (
             <div key={fil.id}>
@@ -77,7 +67,7 @@ export default function SearchItem({filter}:{filter:Item[]}) {
             </div>
           );
         })}
-      </div>
+      </div> */}
     </>
   );
 } 
