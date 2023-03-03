@@ -13,14 +13,11 @@ export default async function handler(
 
   const body: ReqBody = req.body
   const response = await fetch(`http://127.0.0.1:8000/cart_items?cart_id=eq.${body.cart_id}&item_id=eq.${body.item_id}`, {
-		method: "PATCH",
+		method: "DELETE",
 		headers: {
-            "Authorization": `Bearer ${TOKEN}`,
-            "Content-Type": "application/json",
-        },
-		body: JSON.stringify({
-            delete: true,
-        })
+      "Authorization": `Bearer ${TOKEN}`,
+      "Content-Type": "application/json",
+    },
 	})
 
 	if (response.ok) {
