@@ -1,9 +1,59 @@
-/* .body{
-    width: 80%;
-    margin: 50px auto;
-
+.body {
+  width: 80%;
+  margin: 50px auto 90px;
 }
-.card{
+.title {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  margin: 50px 0;
+}
+.tableBody {
+  width: 80%;
+  margin: auto;
+}
+.tableLine {
+  /* border: 1px black solid; */
+  border-bottom: 1px black solid;
+  border-top: 1px black solid;
+  height: 100px;
+  margin: 20px 0;
+}
+.tableCell {
+  text-align: end;
+}
+.tableCellCenter {
+  text-align: center;
+  font-size: 17px;
+  padding: 20px 0;
+  margin: auto;
+}
+.tableCellCenterSub {
+    text-align: center;
+    font-size: 13px;
+    padding-bottom: 15px;
+    margin: auto;
+  }
+.cardImage {
+  height: 100%;
+  width: auto;
+  padding-left: 40px;
+}
+.noData {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  margin: 50px 0;
+}
+.buttonStyle {
+  background-color: white;
+  color: black;
+  border: 1px black solid;
+  font-weight: bold;
+  padding: 10px 30px;
+  font-size: 10px;
+}
+/* .card{
     display: flex;
     height: 100px;
 }
@@ -11,17 +61,5 @@
     display: flex;
     flex-direction: column;
 }
-.cardImage{
-    height: 100%;
-    width: auto;
-}
-.title{
-    font-size: 30px;
-    font-weight: bold;
-}
-.noData{
-    font-size: 30px;
-    font-weight: bold;
-    text-align: center;
-    margin: 50px 0; 
-} */
+
+ */

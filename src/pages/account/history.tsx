@@ -55,46 +55,51 @@ export default function history({
       {data.length !== 0 ? (
         <div className={hModule.body}>
           <h1 className={hModule.title}>購入履歴</h1>
-          <table>
+          <table className={hModule.tableBody}>
             <tbody>
               <tr>
                 <th></th>
                 <th>商品名</th>
-                <th>購入数</th>
-                <th>単価</th>
-                <th>小計</th>
+                <th className={hModule.tableCell}>購入数</th>
+                <th className={hModule.tableCell}>単価</th>
+                <th className={hModule.tableCell}>小計</th>
               </tr>
             </tbody>
             {data.map((item: Item) => (
               <tbody>
-                <tr key={item.item_id} className={hModule.card}>
-                  <td>
+                <tr key={item.item_id} className={hModule.tableLine}>
+                  <td className={hModule.tableCellCenter}>
                     <Link href={`../items/itemlist/${item.item_id}`}>
                       <Image
                         src={item.imgurl}
                         alt={item.name}
-                        width={50}
-                        height={50}
+                        width={100}
+                        height={100}
                         className={hModule.cardImage}
                       />
                     </Link>
                   </td>
-                  <Link href={`../items/itemlist/${item.item_id}`}>
-                    <td>{item.name}</td>
-                  </Link>
-                  <td>{item.quantity}個</td>
-                  <td>
+                  <td className={hModule.tableCellCenter}>
+                    <Link href={`../items/itemlist/${item.item_id}`}>
+                      {item.name}
+                    </Link>
+                  </td>
+                  <td className={hModule.tableCell}>
+                    {item.quantity}個
+                  </td>
+                  <td className={hModule.tableCell}>
                     ¥ {(item.quantity * item.price).toLocaleString()}
                   </td>
-                  <td>
+                  <td className={hModule.tableCell}>
                     ¥ {(item.quantity * item.price).toLocaleString()}
                   </td>
-                  <td>
-                    <button type='button'>レビューする</button>
+                  <td className={hModule.tableCellCenter}>
+                    <button type="button" className={hModule.buttonStyle}>レビューする</button>
                   </td>
                 </tr>
                 <tr>
-                  <td>購入日：{item.date}</td>
+                  <td colSpan={5}></td>
+                  <td className={hModule.tableCellCenterSub}>購入日：{item.date}</td>
                 </tr>
               </tbody>
             ))}
