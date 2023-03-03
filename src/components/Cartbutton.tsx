@@ -1,26 +1,48 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, ChangeEvent} from 'react';
 import istyles from '../styles/item.module.css';
+import addCart from '@/lib/addCart';
 
 // valueをカートに付与して送信
 // valueのcountがマイナスになってしまう場合もあるので条件追記必要
-const CartCounter = () => {
-  const [count, setCount] = useState(0);
+const CartCounter = ({ itemId }: { itemId: number }) => {
+  const [quantity, setQuantity] = useState(0);
+
+  const handleChange = (ev: ChangeEvent<HTMLSelectElement>) => {
+    const value = ev.target.value;
+    setQuantity(Number(value))
+  }
 
   return (
     <div className={istyles.carts}>
-    <div className={istyles.cart_left}>
-      <button className={istyles.cart_lclick} onClick={() => setCount((count) => count - 1 )}>-</button>
-      <form>
-      <input type="text" value={count} className={istyles.cart_value}/>
-      </form>
-      <button className={istyles.cart_rclick} onClick={() => setCount((count) => count + 1 )}>+</button>
-    </div>
+      <div className={istyles.cart_left}>
+        <select
+          name="quantity"
+          id="cart_quantity"
+          className={istyles.cart_value}
+          defaultValue={quantity}
+          onChange={(ev) => handleChange(ev)}
+        >
+          <option value={1}>1</option>
+          <option value={2}>2</option>
+          <option value={3}>3</option>
+          <option value={4}>4</option>
+          <option value={5}>5</option>
+          <option value={6}>6</option>
+          <option value={7}>7</option>
+          <option value={8}>8</option>
+          <option value={9}>9</option>
+          <option value={10}>10</option>
+        </select>
+      </div>
     {/* イベント実行後、ローカルストレージに付与するのみ。カートページでgetしている。 */}
     <div className={istyles.cart_right}>
-    <button type="button">カートに追加</button>
-  </div>
+      <button
+        type="button"
+        onClick={() => addCart(itemId, quantity)}
+      >カートに追加</button>
+    </div>
     </div>
   )
-    }
+}
 
 export default CartCounter;
