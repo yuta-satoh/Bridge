@@ -6,7 +6,7 @@ import Auth from './auth/auth';
 import Logout from '@/components/Logout';
 import cModule from '../styles/coordination.module.css';
 import { GetServerSideProps } from 'next';
-import CurrentCartItems from '@/components/currentCartItems';
+import CurrentCartItems from '@/components/CurrentCartItems';
 
 export const getServerSideProps: GetServerSideProps = async( context ) => {
   // クッキーの値の取得
@@ -146,7 +146,7 @@ export default function Mypage( {cookieValue}: { cookieValue: string } ) {
                       href="/cart"
                       className="textBottom"
                     >
-                      すべて見る
+                      &gt;&gt;カート一覧
                     </Link>
                   </span>
                 </div>
@@ -161,6 +161,9 @@ export default function Mypage( {cookieValue}: { cookieValue: string } ) {
                   </button>
                   <button type="button" className='updateProfButton' onClick={() => location.href='/account/password'}>
                       パスワードの変更
+                  </button>
+                  <button type="button" className='updateProfButton' onClick={() => location.href='/account/history'}>
+                      購入履歴
                   </button>
               </div>
             </div>

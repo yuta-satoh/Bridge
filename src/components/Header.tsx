@@ -2,18 +2,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 import headModule from '../styles/header.module.css';
 import Cookies from 'js-cookie';
+import { GetServerSideProps } from 'next';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
-export default function Header() {
-  function status() {
-    const status = Cookies.get('status');
-    if (status === 'true') {
-      return true;
-    }
-    return false;
-  }
-  const auth = status();
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  return {
+    props: {},
+  };
+};
 
-  console.log(status);
+export default function Header({auth}:{auth:boolean|undefined}) {
+
   return (
     <header
       className={`${headModule.body} h-28 w-screen bg-orange-900`}
@@ -90,13 +90,11 @@ export default function Header() {
               width={25}
               height={25}
             />
-            <div>
-              <span
-                className={`${headModule.menuLabel} inline-block mt-1`}
-              >
-                カート
-              </span>
-            </div>
+            <span
+              className={`${headModule.menuLabel} inline-block mt-1`}
+            >
+              カート
+            </span>
           </Link>
         </div>
       </div>

@@ -34,13 +34,13 @@ export default function Generator(props: {
   const listItem = props.list[0];
   const total = sum(listItem, props.list);
   const list = props.list
-  const urlData = props.urlData
+  // const urlData = props.urlData
 
   return (
     <>
       <div>
         <section className={cModule.linkItems}>
-          <article className={cModule.coordinateArea}>
+          {/* <article className={cModule.coordinateArea}>
             <div className={cModule.empty}></div>
             <div className={cModule.images_b} id="curtain">
               <Image
@@ -125,7 +125,7 @@ export default function Generator(props: {
                 className={cModule.display}
               />
             </div>
-          </article>
+          </article> */}
           <p className={cModule.subTitle}>コーディネートアイテム</p>
           <div className={cModule.price}>
             <p className={cModule.total}>TOTAL</p>
@@ -147,7 +147,7 @@ export default function Generator(props: {
                         alt=""
                         className={cModule.image}
                       />
-                      <div className={cModule.cardDetail}>
+                      <div key={item.id} className={cModule.cardDetail}>
                         <p>{item.name}</p>
                         <div className={cModule.cardContents}>
                           <p>¥{item.price.toLocaleString()}</p>
