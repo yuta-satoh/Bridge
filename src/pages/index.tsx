@@ -2,17 +2,33 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';
 import topStyle from '../styles/top.module.css';
+import { GetServerSideProps } from 'next';
 
-export default function Home() {
-  // ダミーデータ
-  const kaguData = {
-    url: '/images/accessory/accessory_nordic_3.jpeg',
-    price: 5000,
-  };
+type Item = {
+  id: number;
+  name: string;
+  description: string;
+  genre: string;
+  category: string;
+  price: number;
+  imgurl: string;
+  stock: number;
+  delete: boolean;
+};
 
-  // ダミーデータ配列
-  const newItems = Array(8).fill(kaguData);
+export const getServerSideProps: GetServerSideProps = async () => {
+  const response = await fetch('http://localhost:3000/api/newItems')
+  const data: Item[] = await response.json()
 
+  return {
+    props: {
+      data: data
+    }
+  }
+}
+
+export default function Home({ data }: { data: Item[] }) {
+  const newItems = data.slice(1);
   // カテゴリ用配列
   const category = [
     {
@@ -101,27 +117,27 @@ export default function Home() {
           <h2 className="text-center text-xl font-bold">新着商品</h2>
           <div className={`${topStyle.categoryList} container mx-auto p-2 flex gap-5 justify-center`}>
             {/* 大きく表示する商品 */}
-            <Link href={'/'}>
+            <Link href={`/items/itemlist/${data[0].id}`}>
               <div>
                 <Image
-                  src={kaguData.url}
-                  alt={'kagu'}
+                  src={data[0].imgurl}
+                  alt={data[0].name}
                   width={285}
                   height={285}
                   className="rounded"
                 />
                 <p className="text-lg">
-                  ¥{kaguData.price.toLocaleString()}
+                  ¥{data[0].price.toLocaleString()}
                 </p>
               </div>
             </Link>
             <ul className="grid grid-cols-4 gap-4">
               {newItems.map((item, index) => (
-                <Link href={'/'} key={index}>
+                <Link href={`/items/itemlist/${item.id}`} key={index}>
                   <li>
                     <Image
-                      src={item.url}
-                      alt={'kagu'}
+                      src={item.imgurl}
+                      alt={item.name}
                       width={120}
                       height={120}
                       className="rounded"
