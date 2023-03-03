@@ -97,7 +97,7 @@ export default function ItemPage({item}: {item: Item[]}): JSX.Element {
             </div>
 
           {/* カートボタン機能 */}
-            <CartCounter />
+            <CartCounter itemId={items.id} />
 
           {/* 商品詳細説明 */}
             <div className={istyles.content_description}>
