@@ -17,23 +17,25 @@ type items = {
   imgurl: string;
 }[];
 type url = {
-  curtain: string;
-  light: string;
-  chair: string;
-  chest: string;
-  table: string;
-  rug: string;
-  bed: string;
-  sofa: string;
-  accessory: string;
+  urlData: {
+    curtain: string;
+    light: string;
+    chair: string;
+    chest: string;
+    table: string;
+    rug: string;
+    bed: string;
+    sofa: string;
+    accessory: string;
+  };
 };
 export default function Generator(props: {
   list: items;
-  urlData: url;
+  // urlData: url;
 }) {
   const listItem = props.list[0];
   const total = sum(listItem, props.list);
-  const list = props.list
+  const list = props.list;
   // const urlData = props.urlData
 
   return (
@@ -129,7 +131,9 @@ export default function Generator(props: {
           <p className={cModule.subTitle}>コーディネートアイテム</p>
           <div className={cModule.price}>
             <p className={cModule.total}>TOTAL</p>
-            <p className={cModule.totalPrice}>¥{total.toLocaleString()}</p>
+            <p className={cModule.totalPrice}>
+              ¥{total.toLocaleString()}
+            </p>
           </div>
           <div className={cModule.cardList}>
             {list.map((item) => {
@@ -139,7 +143,7 @@ export default function Generator(props: {
               return (
                 <>
                   <div key={item.id} className={cModule.card}>
-                    <Link href="" className={cModule.cardStyle}>
+                    <Link href="" className={cModule.cardStyle} key={item.id}>
                       <Image
                         src={item.imgurl}
                         width={150}
@@ -147,9 +151,12 @@ export default function Generator(props: {
                         alt=""
                         className={cModule.image}
                       />
-                      <div key={item.id} className={cModule.cardDetail}>
+                      <div
+                        key={item.id}
+                        className={cModule.cardDetail}
+                      >
                         <p>{item.name}</p>
-                        <div className={cModule.cardContents}>
+                        <div className={cModule.cardContents} key={item.id}>
                           <p>¥{item.price.toLocaleString()}</p>
                           <p className={cModule.priceFree}>
                             送料無料

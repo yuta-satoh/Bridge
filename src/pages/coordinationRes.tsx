@@ -33,37 +33,6 @@ export const getServerSideProps: GetServerSideProps = async (
     .then((data) => {
       return data;
     });
-  return {
-    props: { request, theme }
-  };
-};
-type Request = {
-  request: {
-    id: number;
-    name: string;
-    description: string;
-    genre: string;
-    category: string;
-    price: number;
-    imgurl: string;
-    stock: number;
-    delete: boolean;
-  }[];
-};
-type item = {
-  id: number;
-  name: string;
-  genre: string;
-  category: string;
-  price: number;
-  imgurl: string;
-}[];
-
-export default function coordination(
-  { request }: Request,
-  { theme }: { theme: string }
-) {
-  const loupe = '/images/icon/loupe.png';
   const curtain: item = [];
   const light: item = [];
   const chair: item = [];
@@ -112,8 +81,38 @@ export default function coordination(
   );
   const listItem = list[0];
   setURL(urlData, list, listItem);
-  const total = sum(listItem,list);
-  console.log(theme)
+  return {
+    props: { list, theme },
+  };
+};
+type list = {
+  list: {
+    id: number;
+    name: string;
+    genre: string;
+    category: string;
+    price: number;
+    imgurl: string;
+  }[];
+};
+type item = {
+  id: number;
+  name: string;
+  genre: string;
+  category: string;
+  price: number;
+  imgurl: string;
+}[];
+
+export default function coordination(
+  { list }: list,
+  { theme }: { theme: string },
+) {
+  const loupe = '/images/icon/loupe.png';
+  console.log(list);
+  const listItem = list[0];
+  const total = sum(listItem, list);
+  console.log(theme);
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     Router.push({ query: { name: theme } });
@@ -163,7 +162,7 @@ export default function coordination(
               </Link>
             </div>
           </div>
-          <Generator list={list} urlData={urlData} />
+          <Generator list={list} />
           <div className={cModule.linkItems}>
             <Link href="#top">
               <button type="button" className={cModule.linkButton}>

@@ -6,6 +6,7 @@ import { GetServerSideProps } from 'next';
 import useSWR from 'swr';
 import { type } from 'os';
 import hModule from '../../styles/history.module.css';
+import urStyles from '../../styles/userRegister.module.css';
 
 type Item = {
   id: number;
@@ -45,35 +46,50 @@ export default function history({
   );
   if (error) return <p>エラー</p>;
   if (!data) return <p>ロード中...</p>;
+  console.log(data);
   return (
     <>
       <Head>
         <title>購入履歴</title>
       </Head>
-      <div className={hModule.body}>
-        <h1 className={hModule.title}>購入履歴</h1>
-        <ul>
-          {data.map((item: Item) => (
-            <li key={item.item_id} className={hModule.card}>
-              <Image
-                src={item.imgurl}
-                alt={item.name}
-                width={50}
-                height={50}
-                className={hModule.cardImage}
-              />
-              <div className={hModule.cardContents}>
-                <p>{item.name}</p>
-                <p>購入数：{item.quantity}個</p>
-                <p>
-                  金額：¥ {(item.quantity * item.price).toLocaleString()}
-                </p>
-                <p>購入日：{item.date}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {data.length !== 0 ? (
+        <div className={hModule.body}>
+          <h1 className={hModule.title}>購入履歴</h1>
+          <ul>
+            {data.map((item: Item) => (
+              <li key={item.item_id} className={hModule.card}>
+                <Image
+                  src={item.imgurl}
+                  alt={item.name}
+                  width={50}
+                  height={50}
+                  className={hModule.cardImage}
+                />
+                <div className={hModule.cardContents}>
+                  <p>{item.name}</p>
+                  <p>購入数：{item.quantity}個</p>
+                  <p>
+                    金額：¥{' '}
+                    {(item.quantity * item.price).toLocaleString()}
+                  </p>
+                  <p>購入日：{item.date}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <div className={hModule.body}>
+          <h1 className={hModule.noData}>履歴はありません</h1>
+          <div className={urStyles.loginLink}>
+            <Link href="/mypage">
+              <button type="button" className={urStyles.linkButton}>
+                マイページ<span className={urStyles.buttonSpan}>→</span>
+              </button>
+            </Link>
+            </div>
+        </div>
+      )}
     </>
   );
 }

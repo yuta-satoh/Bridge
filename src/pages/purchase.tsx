@@ -89,6 +89,9 @@ export default function purchase({
   );
   if (error) return <p>エラー</p>;
   if (!data) return <p>ロード中...</p>;
+  if (data.length === 0) {
+    location.href = '/cart';
+  }
   data.map((item) => {
     price.push({
       id: item.item_id,
@@ -102,9 +105,9 @@ export default function purchase({
   const tax = total * 0.1;
   return (
     <>
-    <Head>
+      <Head>
         <title>購入確認</title>
-    </Head>
+      </Head>
       <div className={pModule.body}>
         <h1 className={pModule.title}>購入確認</h1>
         <table className={pModule.itemTable}>
@@ -133,33 +136,40 @@ export default function purchase({
               </tr>
             ))}
           </tbody>
+          <tbody>
+            <tr className={pModule.topContent}>
+              <td colSpan={2}></td>
+              <td className={pModule.subTotal}>本体合計</td>
+              <td className={pModule.text}>
+                ¥&nbsp;{total.toLocaleString()}
+              </td>
+            </tr>
+            <tr className={pModule.content}>
+              <td colSpan={2}></td>
+              <td className={pModule.subTotal}>消費税</td>
+              <td className={pModule.text}>
+                ¥&nbsp;{tax.toLocaleString()}
+              </td>
+            </tr>
+            <tr className={pModule.totalContent}>
+              <td colSpan={2}></td>
+              <td className={pModule.total}>合計</td>
+              <td className={pModule.total}>
+                ¥&nbsp;{(total + tax).toLocaleString()}
+              </td>
+            </tr>
+          </tbody>
         </table>
-        <div className={pModule.listItems}>
-          <div className={pModule.content}>
-            <p>本体合計：</p>
-            <p className={pModule.text}>
-              ¥&nbsp;{total.toLocaleString()}
-            </p>
-          </div>
-          <div className={pModule.content}>
-            <p>消費税：</p>
-            <p className={pModule.text}>
-              ¥&nbsp;{tax.toLocaleString()}
-            </p>
-          </div>
-          <div className={pModule.totalContent}>
-            <p className={pModule.total}>合計：</p>
-            <p className={pModule.total}>
-              ¥&nbsp;{(total + tax).toLocaleString()}
-            </p>
-          </div>
-        </div>
         <div className={pModule.addressArea}>
           <p className={pModule.total}>お届け先住所</p>
           <p>{user[0].address}</p>
         </div>
         <div className={pModule.buttonArea}>
-          <button type="button" onClick={() => procedure(data)} className={pModule.buttonStyle}>
+          <button
+            type="button"
+            onClick={() => procedure(data)}
+            className={pModule.buttonStyle}
+          >
             購入する
           </button>
         </div>
