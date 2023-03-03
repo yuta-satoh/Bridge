@@ -1,0 +1,71 @@
+.title {
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+.itemTable {
+  width: 90%;
+  margin: 30px 0;
+}
+.tableCell {
+  padding: 10px 0;
+}
+.body {
+  width: 80%;
+  margin: 30px auto;
+}
+.listItems {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: auto;
+}
+.content {
+  display: flex;
+  padding: 2px 0;
+}
+.item {
+  text-align: end;
+  padding: 3px 0;
+}
+.itemTag {
+  text-align: end;
+  padding-right: 20px;
+  padding: 3px 0;
+}
+.itemName {
+  text-align: center;
+  padding: 3px 0;
+}
+.text {
+  padding-left: 20px;
+}
+.total {
+  padding-left: 20px;
+  font-weight: bold;
+  font-size: 18px;
+}
+.totalContent {
+  display: flex;
+  border-top: 1px black solid;
+  padding: 3px 0;
+  margin-top: 2px;
+}
+.buttonStyle {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  padding: 10px 80px;
+  font-size: 17px;
+}
+.addressArea{
+    width: 80%;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.buttonArea{
+    text-align: center;
+}

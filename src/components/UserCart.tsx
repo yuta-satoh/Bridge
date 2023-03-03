@@ -153,9 +153,28 @@ export default function UserCart({ userId }: { userId: string }) {
                 <span className="float-right">¥ {(sumPrice + (sumPrice * 0.1)).toLocaleString()}</span>
               </p>
             </div>
-            <Link href="/">
-              <div className="container pt-1.5 text-center h-10 border-2 border-neutral-900 bg-white mt-8">
-                <span>ご注文手続き</span>
+          </div>  
+        ))}
+        <Recommend filteredItemData={filteredItemData} />
+      </div>
+      <div className="w-1/4 h-80 mt-10 p-10 border-2 border-neutral-900 rounded bg-gray-100">
+        <p>
+          <span>商品合計</span>
+          <span className="float-right">¥ {sumPrice.toLocaleString()}</span>
+        </p>
+        <p>
+          <span>消費税</span>
+          <span className="float-right">¥ {(sumPrice * 0.1).toLocaleString()}</span>
+        </p>
+        <div className="border-b border-black">
+          <p className="mt-10 text-lg font-bold">
+            <span>合計</span>
+            <span className="float-right">¥ {(sumPrice + (sumPrice * 0.1)).toLocaleString()}</span>
+          </p>
+        </div>
+        <Link href="/purchase">
+          <div className="container pt-1.5 text-center h-10 border-2 border-neutral-900 bg-white mt-8">
+            <span>ご注文手続き</span>
               </div>
             </Link>
             <Link href="/">
@@ -163,6 +182,7 @@ export default function UserCart({ userId }: { userId: string }) {
                 <span>お買い物を続ける</span>
               </div>
             </Link>
+
           </div>
         </div>
       ) : (
