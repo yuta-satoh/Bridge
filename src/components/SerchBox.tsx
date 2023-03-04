@@ -37,6 +37,24 @@ export default function SearchBox() {
     'フェミニン',
   ];
 
+  const categoryEdatas = [
+    'chair',
+    'table',
+    'cartain',
+    'rug',
+    'sofa',
+    'chest',
+    'bed',
+    'accessory',
+  ];
+
+  const genreEdatas = [
+    'nordic',
+    'natural',
+    'jmodern',
+    'feminine',
+  ];
+
   // インテリアジャンル
   const handleGenreChange = (e: any) => {
     const { value } = e.target;
@@ -72,7 +90,9 @@ export default function SearchBox() {
         return prevCategories.filter((category) => category !== value);
       }
     });
-      let copy
+      let copyCategoryClicked = categoryClicked;
+      copyCategoryClicked[index] =  !copyCategoryClicked[index]
+      setCategoryClicked(copyCategoryClicked);
   }
 
 
@@ -89,15 +109,19 @@ export default function SearchBox() {
       e.preventDefault();
 
       // ?or=(genre.eq.${genres},genre.eq.${genres})&or.(category.eq.${categories},category=eq.${categories})`
+      
+      // サーバー側で組み立てる必要
       function sendGenre() {
-        return `or=(${genres.toString})`
-      }
+        return genres.toString();
+      };
+
+      function sendCategory() {
+        return categories.toString();
+      };
 
       // queryに含むフラグがtrueかどうかを確認し、trueならsendGenre関数でqueryを返す
       const genrePath = genreClicked.includes(true) ? sendGenre() : "";
-      const categoryPath = categoryClicked.includes(true) ? sendGenre() : "";
-      // const realsendCategory = `?or=(${sendCategory})`;
-      // console.log(realsendCategory);
+      const categoryPath = categoryClicked.includes(true) ? sendCategory() : "";  
 
       // 検索ページディレクトリに遷移
       // 何も入っていない時はpushしない。条件を追記
@@ -185,7 +209,7 @@ export default function SearchBox() {
                               id={index.toString()}
                               type="checkbox"
                               name='categorydatas'
-                              value={genredata}
+                              value={genreEdatas[index]}
                               onChange={(e)=>handleGenreChange(e)}
                               // checked={genres.includes(genredata)}
                             />
@@ -212,7 +236,7 @@ export default function SearchBox() {
                               type="checkbox"
                               id={index.toString()}
                               name='genredatas'
-                              value={categorydata}
+                              value={categoryEdatas[index]}
                               onChange={handleCategoryChange}
                               // checked={categories.includes(
                               //   categorydata
