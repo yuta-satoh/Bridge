@@ -23,10 +23,10 @@ function getToday() {
 
 
 
-export default function PostReview({ itemId, userId, onClick } : { 
+export default function PostReview({ itemId, userId, setPostReview } : { 
     itemId: number; 
     userId: number; 
-    onClick: () => void;
+    setPostReview: Dispatch<SetStateAction<boolean>>;
 }) {
     // reviewの初期値
     const initReview = {
@@ -43,6 +43,8 @@ export default function PostReview({ itemId, userId, onClick } : {
     const [review, setReview] = useState<postReviews>(initReview);
     // nicknameはerrorじゃないか
     const [isNicknameError, setIsNicknameError] = useState<boolean>(false);
+    // reviewデータのpostに成功したか
+    const [isPosted, setIsPosted] = useState<boolean>(false);
 
     // inputのvalueをstateに格納するチェンジイベントハンドラ(anonymous以外)
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -88,8 +90,22 @@ export default function PostReview({ itemId, userId, onClick } : {
                 },
                 body: JSON.stringify(review),
             });
-            onClick();
+            setIsPosted(true);
     }
+    }
+
+    // レビュー投稿成功画面
+    if (isPosted) {
+        return (
+            <>
+                <p>レビューを投稿しました</p>
+                <button type="button" onClick={() => {
+                    setPostReview(false);
+                    setIsPosted(false);
+                }}>
+                閉じる</button>
+            </>
+        );
     }
 
     return (
@@ -137,7 +153,7 @@ export default function PostReview({ itemId, userId, onClick } : {
                     </div>
                     <div>
                         <button type="submit">レビューを投稿</button>
-                        <button type="button" onClick={() => onClick()}>キャンセル</button>
+                        <button type="button" onClick={() => setPostReview(false)}>キャンセル</button>
                     </div>
                 </form>
             </div>

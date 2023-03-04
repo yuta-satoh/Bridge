@@ -53,11 +53,6 @@ export default function History({
   if (!data) return <p>ロード中...</p>;
   console.log(data);
 
-  // review投稿欄の表示の切替
-  function handlePostReviewClick(){
-    setPostReview(!postReview);
-  }
-
   return (
     <>
       <Head>
@@ -118,7 +113,7 @@ export default function History({
                       <button
                         type="button"
                         className={hModule.buttonStyle}
-                        onClick={() => handlePostReviewClick()}
+                        onClick={() => setPostReview(true)}
                       >
                         レビューする
                       </button>
@@ -136,7 +131,7 @@ export default function History({
                     <PostReview 
                       itemId={item.item_id} 
                       userId={item.user_id} 
-                      onClick={handlePostReviewClick} 
+                      setPostReview={setPostReview} 
                     />
                   :
                     <></>
