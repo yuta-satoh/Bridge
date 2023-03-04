@@ -7,6 +7,9 @@ import Header from '@/components/Header';
 import lstyles from '../../../styles/itemList.module.css';
 import SearchBox from '../../../components/SerchBox';
 
+// テスト用　中嶋
+import SearchBoxTest from '@/components/SearchBoxTest';
+
 
 
 export default function List() {
@@ -22,10 +25,11 @@ export default function List() {
       </Head>
 
       <div className={lstyles.container}>
-        <Header />
+        {/* <Header /> */}
         <main className={lstyles.main}>
           {/* 検索ボックス */}
-          <SearchBox/>
+          <SearchBoxTest />
+          {/* <SearchBox */}
           <div className={lstyles.Breadcrumb}>
             <nav>
               <ol>

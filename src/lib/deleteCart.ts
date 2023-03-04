@@ -20,7 +20,10 @@ export default async function deleteCart(itemId: number, cartId?: number) {
 				.then((res) => console.log("ステータス:", res.status))
 		} catch(e) {
 			console.log(e);
-		}
+		} finally {
+            location.reload()
+        }
+
     } else {
         const strageData = localStorage.getItem('GuestCart');
         if (strageData === null) {
