@@ -1,16 +1,8 @@
-// itemlist/[id]作成次第削除
-
 import ItemList from '@/components/ItemList';
 import Head from 'next/head';
 import Link from 'next/link';
-import Header from '@/components/Header';
 import lstyles from '../../../styles/itemList.module.css';
-import SearchBox from '../../../components/SerchBox';
-
-// テスト用　中嶋
-import SearchBoxTest from '@/components/SearchBoxTest';
-
-
+import SearchBox from '../../../components/SearchBox';
 
 export default function List() {
 
@@ -25,11 +17,9 @@ export default function List() {
       </Head>
 
       <div className={lstyles.container}>
-        {/* <Header /> */}
         <main className={lstyles.main}>
           {/* 検索ボックス */}
-          <SearchBoxTest />
-          {/* <SearchBox */}
+          <SearchBox />
           <div className={lstyles.Breadcrumb}>
             <nav>
               <ol>

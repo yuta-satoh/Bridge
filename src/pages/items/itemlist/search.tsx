@@ -1,76 +1,7 @@
-//  カテゴリーとジャンルごとのページ
 import lstyles from '../../../styles/itemList.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
 import { GetServerSideProps } from 'next';
-
-// 以下query
-// query:{ genre: genrePath, category: categoryPath}}
-
-export const getServerSideProps:GetServerSideProps = async ({query}) => {
-  const[realsendGenre,realsendCategory] = [`(${query.genre})`,`(${query.category})`];
-
-  // 商品カテゴリー和訳
-  const categoryValue = (() => {
-    const categoryArr = realsendCategory.split(",");
-    const japanizeCategory = categoryArr.map((category) => {
-      if (category === "chair") {
-        return "椅子";
-      } if (category === "table") {
-        return "テーブル";
-      } if (category === "cartain") {
-        return "カーテン";
-      } if (category === "rug") {
-        return "カーペット/ラグ";
-      } if (category === "sofa") {
-        return "ソファ";
-      } if (category === "chest") {
-        return "収納棚";
-      } if (category === "bed") {
-        return "ベッド/寝具";
-      } if (category === "accessory") {
-        return "小物/雑貨";
-      } else {
-        return "";
-      }
-    });
-    return japanizeCategory.toString();
-  })();
-
-  // インテリアジャンル和訳
-  const genreValue = (() => {
-    const genreArr = realsendGenre.split(",");
-    const japanizeGenre = genreArr.map((genre) => {
-      if (genre === "nordic") {
-        return "北欧風";
-      } if (genre === "natural") {
-        return "ナチュラル";
-      } if (genre === "jmodern") {
-        return "和モダン";
-      } if (genre === "feminine") {
-        return "フェミニン";
-      } else {
-        return "";
-      }
-    });
-    return japanizeGenre.toString();
-  })();
-
-  // `items?${genreValue.length !== 0 ? `or=(${genreValue}) : ""`}&...`
-  const respons = await fetch(`http://127.0.0.1:8000/items?${genreValue.length !== 0 ? `or=(${genreValue})` : ""}&${categoryValue.length !== 0 ? `or=(${categoryValue})` : ""}`);
-  const filter:Item[] = await respons.json();
-
-  // 確認用
-  console.log(genreValue);
-  console.log(categoryValue);
-
-  return {
-    props: {
-      filter,
-    },
-  };
-}
-
 
 type Item = {
   id: number;
@@ -84,11 +15,30 @@ type Item = {
   delete: boolean;
 };
 
-export default function SearchItem({filter}:{filter:Item[]}) {
+export const getServerSideProps:GetServerSideProps = async ({query}) => {
+  if (query.genre === undefined || query.category === undefined) {
+    return {
+      props: {}
+    }
+  }
 
-//確認用 
-  console.log(filter);
+  const genre = query.genre;
+  const category = query.category;
 
+  // ジャンルとカテゴリを/api/searchに渡す
+  const response = await fetch(`http://localhost:3000/api/search?genre=${genre}&category=${category}`)
+  const filter = await response.json()
+  return {
+      props: {
+        filter
+      }
+  }
+  }
+
+export default function Search({filter}:{filter:Item[]}) {
+  if (!filter || filter.length === 0) {
+    return <div>検索結果がありません</div>
+  }
   return(
     <>
        <div className={lstyles.list_outer}>
