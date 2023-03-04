@@ -1,8 +1,9 @@
 INSERT INTO api.reviews (
-    item_id, user_id, anonymous ,evaluation, title, description, date
+    item_id, user_id, nickname, anonymous ,evaluation, title, description, date
 ) VALUES (
     1
     , 2
+    , 'ラク子'
     , false
     , 4
     , '可愛いくて使いやすい'
@@ -11,6 +12,7 @@ INSERT INTO api.reviews (
 ), (
     1
     , 1
+    , 'ラク夫'
     , true
     , 3
     , ''
@@ -19,6 +21,7 @@ INSERT INTO api.reviews (
 ), (
     2
     , 1
+    , 'ラク夫'
     , true
     , 2
     , 'タイトル'
@@ -27,6 +30,7 @@ INSERT INTO api.reviews (
 ), (
     3
     , 1
+    , 'ラク夫'
     , true
     , 4
     , 'タイトル'
@@ -35,6 +39,7 @@ INSERT INTO api.reviews (
 ), (
     4
     , 2
+    , 'ラク子'
     , false
     , 5
     , 'タイトル'

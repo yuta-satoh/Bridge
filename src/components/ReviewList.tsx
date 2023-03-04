@@ -4,6 +4,7 @@ type Reviews = {
   id: number;
   item_id: number;
   user_id: number;
+  nickname: string;
   anonymous: boolean;
   evaluation: string;
   title: string;
@@ -85,8 +86,8 @@ export default function ReviewList({ itemId }: { itemId: string }) {
                     <div className="reviewHead">
                       <h3>
                         {review.anonymous
-                          ? '匿名さん'
-                          : `${review.users.lastname}&nbsp;${review.users.firstname}`}
+                          ? '匿名'
+                          : review.nickname}
                       </h3>
                       <p>{review.evaluation}</p>
                       <p>{review.title}</p>

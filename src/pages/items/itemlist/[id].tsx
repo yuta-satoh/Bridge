@@ -7,6 +7,7 @@ import useSWR from 'swr';
 import { useRouter } from 'next/router';
 import ItemdetailReccomend from '@/components/ItemdetailReccomend';
 import CartCounter from '@/components/Cartbutton';
+import ReviewList from '@/components/ReviewList';
 
 type Item = {
   id: number;
@@ -67,6 +68,10 @@ export default function ItemPage({item}: {item: Item[]}): JSX.Element {
                 width={580}
                 height={500}
               />
+            </div>
+
+            <div>
+              <ReviewList itemId={items.id.toString()}/>
             </div>
 
           {/* 以下はこんなのもどうですか、ジャンル・カテゴリに合致したものを持ってくる */}

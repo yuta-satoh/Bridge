@@ -7,6 +7,8 @@ import useSWR from 'swr';
 import { type } from 'os';
 import hModule from '../../styles/history.module.css';
 import urStyles from '../../styles/userRegister.module.css';
+import PostReview from '@/components/PostReview';
+import { SyntheticEvent, useState } from 'react';
 
 type Item = {
   id: number;
@@ -32,11 +34,14 @@ export const getServerSideProps: GetServerSideProps = async (
   };
 };
 
-export default function history({
+export default function History({
   cookie,
 }: {
   cookie: string | undefined;
 }) {
+  // レビュー投稿画面の表示の切替を管理するstate
+  const [postReview, setPostReview] = useState<boolean>(false);
+
   const userId = Number(cookie);
   const fetcher = (url: string) =>
     fetch(url).then((res) => res.json());
@@ -47,6 +52,7 @@ export default function history({
   if (error) return <p>エラー</p>;
   if (!data) return <p>ロード中...</p>;
   console.log(data);
+
   return (
     <>
       <Head>
@@ -66,42 +72,72 @@ export default function history({
               </tr>
             </tbody>
             {data.map((item: Item) => (
-              <tbody>
-                <tr key={item.item_id} className={hModule.tableLine}>
-                  <td className={hModule.tableCellCenter}>
-                    <Link href={`../items/itemlist/${item.item_id}`}>
-                      <Image
-                        src={item.imgurl}
-                        alt={item.name}
-                        width={100}
-                        height={100}
-                        className={hModule.cardImage}
-                      />
-                    </Link>
-                  </td>
-                  <td className={hModule.tableCellCenter}>
-                    <Link href={`../items/itemlist/${item.item_id}`}>
-                      {item.name}
-                    </Link>
-                  </td>
-                  <td className={hModule.tableCell}>
-                    {item.quantity}個
-                  </td>
-                  <td className={hModule.tableCell}>
-                    ¥ {(item.quantity * item.price).toLocaleString()}
-                  </td>
-                  <td className={hModule.tableCell}>
-                    ¥ {(item.quantity * item.price).toLocaleString()}
-                  </td>
-                  <td className={hModule.tableCellCenter}>
-                    <button type="button" className={hModule.buttonStyle}>レビューする</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td colSpan={5}></td>
-                  <td className={hModule.tableCellCenterSub}>購入日：{item.date}</td>
-                </tr>
-              </tbody>
+              <>
+                <tbody key={item.item_id}>
+                  <tr
+                    key={item.item_id}
+                    className={hModule.tableLine}
+                  >
+                    <td className={hModule.tableCellCenter}>
+                      <Link
+                        href={`../items/itemlist/${item.item_id}`}
+                      >
+                        <Image
+                          src={item.imgurl}
+                          alt={item.name}
+                          width={100}
+                          height={100}
+                          className={hModule.cardImage}
+                        />
+                      </Link>
+                    </td>
+                    <td className={hModule.tableCellCenter}>
+                      <Link
+                        href={`../items/itemlist/${item.item_id}`}
+                      >
+                        {item.name}
+                      </Link>
+                    </td>
+                    <td className={hModule.tableCell}>
+                      {item.quantity}個
+                    </td>
+                    <td className={hModule.tableCell}>
+                      ¥{' '}
+                      {(item.quantity * item.price).toLocaleString()}
+                    </td>
+                    <td className={hModule.tableCell}>
+                      ¥{' '}
+                      {(item.quantity * item.price).toLocaleString()}
+                    </td>
+                    <td className={hModule.tableCellCenter}>
+                      <button
+                        type="button"
+                        className={hModule.buttonStyle}
+                        onClick={() => setPostReview(true)}
+                      >
+                        レビューする
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colSpan={5}></td>
+                    <td className={hModule.tableCellCenterSub}>
+                      購入日：{item.date}
+                    </td>
+                  </tr>
+                </tbody>
+                <div>
+                  {postReview ? 
+                    <PostReview 
+                      itemId={item.item_id} 
+                      userId={item.user_id} 
+                      setPostReview={setPostReview} 
+                    />
+                  :
+                    <></>
+                  }
+                </div>
+              </>
             ))}
           </table>
         </div>
