@@ -84,6 +84,7 @@ CREATE TABLE api.reviews (
     id SERIAL PRIMARY KEY,
     item_id INTEGER NOT NULL REFERENCES api.items (id),
     user_id INTEGER NOT NULL REFERENCES api.users (id),
+    nickname TEXT DEFAULT '名無しさん',
     anonymous BOOLEAN DEFAULT false NOT NULL,
     evaluation TEXT DEFAULT 4 NOT NULL ,
     title TEXT,

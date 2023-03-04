@@ -4,6 +4,7 @@ import { ChangeEvent, SyntheticEvent, useState } from "react";
 type postReviews = {
     item_id: number;
     user_id: number;
+    nickname: string;
     anonymous: boolean;
     evaluation: number;
     title: string;
@@ -27,6 +28,7 @@ export default function PostReview({ itemId, userId } : { itemId: number, userId
     const initReview = {
         item_id: Number(itemId),
         user_id: Number(userId),
+        nickname: "名無しさん",
         anonymous: true,
         evaluation: 4,
         title: "",
@@ -72,8 +74,17 @@ export default function PostReview({ itemId, userId } : { itemId: number, userId
             <div className="postReview">
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <div>
-                        <label htmlFor="anonymous">匿名</label>
-                        <input type="checkbox" name="anonymous" id="anonymous" onChange={(e) => handleAnonymousClick(e)} checked/>
+                        <div>
+                            <label htmlFor="nickname">ニックネーム</label>
+                            {review.anonymous ? 
+                                <input type="text" name="nickname" id="nickname" placeholder="名無しさん" readOnly/>
+                            :
+                                <input type="text" name="nickname" id="nickname" onChange={(e) => handleAnonymousClick(e)} placeholder="名無しさん"/>}
+                        </div>
+                        <div>
+                            <label htmlFor="anonymous">匿名</label>
+                            <input type="checkbox" name="anonymous" id="anonymous" onChange={(e) => handleAnonymousClick(e)} checked/>
+                        </div>
                     </div>
                     <div>
                         <p>評価</p>
