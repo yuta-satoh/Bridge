@@ -17,6 +17,7 @@ export default function SearchBoxTest() {
         '椅子',
         'テーブル',
         'カーテン',
+        '照明',
         'カーペット/ラグ',
         'ソファ',
         '収納棚',
@@ -65,7 +66,6 @@ export default function SearchBoxTest() {
 
     // 検索後ページ遷移
     const handleSubmit = () => {
-        if (genres.length !== 0 || categories.length !== 0) {
             // ジャンルやカテゴリが空の時は全要素をクエリに渡す
             if (genres.length === 0 && categories.length === 0) {
                 router.push({
@@ -88,10 +88,7 @@ export default function SearchBoxTest() {
                     query: { genre: genres, category: categories },
                 });
             }  
-        } else {
-            alert('絞り込みを実施してください');
         }
-    };
 
   return (
     <>
