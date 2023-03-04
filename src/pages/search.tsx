@@ -16,22 +16,35 @@ type Item = {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-    if (query.genre === undefined || query.category === undefined) {
+    const genre = query.genre;
+    const category = query.category;
+    // const input = query.input;
+    if (genre === undefined || category === undefined) {
         return {
             props: {}
         }
     }
-    const genre = query.genre;
-    const category = query.category;
 
-    // ジャンルとカテゴリを/api/searchに渡す
-    const response = await fetch(`http://localhost:3000/api/search?genre=${genre}&category=${category}`)
-    const filter = await response.json()
-    return {
-        props: {
-            filter
-        }
-    }
+    // inputの検索ボックス用処理
+    // if (input) {
+    //   console.log('input')
+    //   const response = await fetch(`http://localhost:3000/api/searchInput?search=${input}`)
+    //   const filter = await response.json()
+    //   return {
+    //       props: {
+    //           filter
+    //       }
+    //   }
+    // } else {
+      // ジャンルとカテゴリを/api/searchに渡す
+      const response = await fetch(`http://localhost:3000/api/search?genre=${genre}&category=${category}`)
+      const filter = await response.json()
+      return {
+          props: {
+              filter
+          }
+      }
+    // }
 }
 
 const Search = ({ filter }: { filter: Item[] }) => {
