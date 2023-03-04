@@ -86,7 +86,7 @@ export default function ReviewList({ itemId }: { itemId: string }) {
                     <div className="reviewHead">
                       <h3>
                         {review.anonymous
-                          ? '匿名さん'
+                          ? '匿名'
                           : review.nickname}
                       </h3>
                       <p>{review.evaluation}</p>

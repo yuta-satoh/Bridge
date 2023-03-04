@@ -8,6 +8,7 @@ import { type } from 'os';
 import hModule from '../../styles/history.module.css';
 import urStyles from '../../styles/userRegister.module.css';
 import PostReview from '@/components/PostReview';
+import { SyntheticEvent, useState } from 'react';
 
 type Item = {
   id: number;
@@ -38,6 +39,9 @@ export default function History({
 }: {
   cookie: string | undefined;
 }) {
+  // レビュー投稿画面の表示の切替を管理するstate
+  const [postReview, setPostReview] = useState<boolean>(false);
+
   const userId = Number(cookie);
   const fetcher = (url: string) =>
     fetch(url).then((res) => res.json());
@@ -48,6 +52,12 @@ export default function History({
   if (error) return <p>エラー</p>;
   if (!data) return <p>ロード中...</p>;
   console.log(data);
+
+  // review投稿欄の表示の切替
+  function handlePostReviewClick(){
+    setPostReview(!postReview);
+  }
+
   return (
     <>
       <Head>
@@ -108,6 +118,7 @@ export default function History({
                       <button
                         type="button"
                         className={hModule.buttonStyle}
+                        onClick={() => handlePostReviewClick()}
                       >
                         レビューする
                       </button>
@@ -121,7 +132,15 @@ export default function History({
                   </tr>
                 </tbody>
                 <div>
-                  <PostReview itemId={item.item_id} userId={item.user_id} />
+                  {postReview ? 
+                    <PostReview 
+                      itemId={item.item_id} 
+                      userId={item.user_id} 
+                      onClick={handlePostReviewClick} 
+                    />
+                  :
+                    <></>
+                  }
                 </div>
               </>
             ))}

@@ -30,7 +30,7 @@ VALUES (
         'フェミニン',
         '椅子',
         10000,
-        '/images/chair/chair_feminine_1.jpg',
+        '/images/chair/chair_feminine_2.jpg',
         '2023-03-01',
         1
     ),
@@ -42,7 +42,7 @@ VALUES (
         'フェミニン',
         '椅子',
         20000,
-        '/images/chair/chair_feminine_1.jpg',
+        '/images/chair/chair_feminine_3.jpg',
         '2023-03-01',
         1
     ),
