@@ -1,135 +1,86 @@
-// モーダルウィンドウ
-// 検索ボックス部分一致で渡す
-// ruter.push
-// クエリで渡してpage表示時に、SSRで引っ張ってくる
-
 import lstyles from '../styles/itemList.module.css';
 import fstyles from '../styles/Footer.module.css';
-import { useState } from 'react';
-import Link from 'next/link'
+import { ChangeEvent, useState } from 'react';
 import { useRouter } from 'next/router';
-import path from 'path';
-import { arrayBuffer } from 'stream/consumers';
 
-export default function SearchBox() {
+export default function SearchBoxTest() {
   const router = useRouter();
   const [genres, setGenres] = useState<string[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
-  // trueのもののみ、queryに含める
-  const [genreClicked, setGenreClicked] = useState<boolean[]>(Array(4).fill(false));
-  const [categoryClicked, setCategoryClicked] = useState<boolean[]>(Array(8).fill(false));
 
-  const categorydatas = [
+  const categoryDatas = [
     '椅子',
     'テーブル',
     'カーテン',
+    '照明',
     'カーペット/ラグ',
     'ソファ',
     '収納棚',
     'ベッド/寝具',
     '小物/雑貨',
   ];
-
-  const genredatas = [
+  const genreDatas = [
     '北欧風',
     'ナチュラル',
     '和モダン',
     'フェミニン',
   ];
 
-  const categoryEdatas = [
-    'chair',
-    'table',
-    'cartain',
-    'rug',
-    'sofa',
-    'chest',
-    'bed',
-    'accessory',
-  ];
-
-  const genreEdatas = [
-    'nordic',
-    'natural',
-    'jmodern',
-    'feminine',
-  ];
-
-  // インテリアジャンル
-  const handleGenreChange = (e: any) => {
+  // チェンジイベントの関数はシンプルに配列に追加するタイプ
+  const handleGenreChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     const isChecked = e.target.checked;
-    const index = Number(e.target.id);
-
     setGenres((prevGenres) => {
       if (isChecked) {
-        return [...prevGenres, `genre.eq.${value}`];
-        // setGenreClicked(genreClicked[n] = true);
+        return [...prevGenres, value];
       } else {
         return prevGenres.filter((genre) => genre !== value);
-        // setGenreClicked(genreClicked[n] = false);
       }
     });
-
-    // query追加有無の作業後、さらに送信データに含めるかをindexをもとに
-    let copyGenreClicked = genreClicked;
-    copyGenreClicked[index] = !copyGenreClicked[index]
-    setGenreClicked(copyGenreClicked);
   }
-
-  // 商品カテゴリ 
-  const handleCategoryChange = (e: any) => {
+  const handleCategoryChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     const isChecked = e.target.checked;
-    const index = Number(e.target.id);
-
     setCategories((prevCategories) => {
       if (isChecked) {
-        return [...prevCategories, `category.eq.${value}`];
+        return [...prevCategories, value];
       } else {
         return prevCategories.filter((category) => category !== value);
       }
     });
-      let copyCategoryClicked = categoryClicked;
-      copyCategoryClicked[index] =  !copyCategoryClicked[index]
-      setCategoryClicked(copyCategoryClicked);
   }
 
-
   // 絞り込みクリア
-  const handleClearClick = (e: any) => {
+  const handleClearClick = () => {
     setCategories([]);
     setGenres([]);
   };
 
   // 検索後ページ遷移
-  // ruterで絞り込み条件渡す
-  const handleSubmit = (e: any) => {
-    if (genres.length !== 0 || categories.length !== 0) {
-      e.preventDefault();
-
-      // ?or=(genre.eq.${genres},genre.eq.${genres})&or.(category.eq.${categories},category=eq.${categories})`
-      
-      // サーバー側で組み立てる必要
-      function sendGenre() {
-        return genres.toString();
-      };
-
-      function sendCategory() {
-        return categories.toString();
-      };
-
-      // queryに含むフラグがtrueかどうかを確認し、trueならsendGenre関数でqueryを返す
-      const genrePath = genreClicked.includes(true) ? sendGenre() : "";
-      const categoryPath = categoryClicked.includes(true) ? sendCategory() : "";  
-
-      // 検索ページディレクトリに遷移
-      // 何も入っていない時はpushしない。条件を追記
-      router.push({pathname: "/items/itemlist/search"},{query:{ genre: genrePath, category: categoryPath}});
-    } else {
-      alert('絞り込みを実施してください');
-    }
-  };
+  const handleSubmit = () => {
+    // ジャンルやカテゴリが空の時は全要素をクエリに渡す
+    if (genres.length === 0 && categories.length === 0) {
+      router.push({
+        pathname: '/items/itemlist/search',
+        query: { genre: genreDatas, category: categoryDatas },
+      });
+    } else if (genres.length === 0 && categories.length !== 0) {
+      router.push({
+        pathname: '/items/itemlist/search',
+        query: { genre: genreDatas, category: categories },
+      });
+    } else if (genres.length !== 0 && categories.length == 0) {
+      router.push({
+        pathname: '/items/itemlist/search',
+        query: { genre: genres, category: categoryDatas },
+      });
+    } else if (genres.length !== 0 && categories.length !== 0) {
+      router.push({
+        pathname: '/items/itemlist/search',
+        query: { genre: genres, category: categories },
+      });
+    }  
+  }
 
   return (
     <>
@@ -201,19 +152,18 @@ export default function SearchBox() {
                 </p>
                 <div className={lstyles.category_lists}>
                   <ul className={lstyles.category_list}>
-                    {genredatas.map((genredata, index) => {
+                    {genreDatas.map((genreData, index) => {
                       return (
-                        <li key={genredata}>
+                        <li key={genreData}>
                           <label>
                             <input
                               id={index.toString()}
                               type="checkbox"
                               name='categorydatas'
-                              value={genreEdatas[index]}
+                              value={genreData}
                               onChange={(e)=>handleGenreChange(e)}
-                              // checked={genres.includes(genredata)}
                             />
-                            {genredata}
+                            {genreData}
                           </label>
                         </li>
                       );
@@ -228,21 +178,18 @@ export default function SearchBox() {
                 </p>
                 <div className={lstyles.category_lists}>
                   <ul className={lstyles.category_list}>
-                    {categorydatas.map((categorydata, index) => {
+                    {categoryDatas.map((categoryData, index) => {
                       return (
-                        <li key={categorydata}>
+                        <li key={categoryData}>
                           <label>
                             <input
                               type="checkbox"
                               id={index.toString()}
-                              name='genredatas'
-                              value={categoryEdatas[index]}
+                              name='categorydata'
+                              value={categoryData}
                               onChange={handleCategoryChange}
-                              // checked={categories.includes(
-                              //   categorydata
-                              // )}
                             />
-                            {categorydata}
+                            {categoryData}
                           </label>
                         </li>
                       );

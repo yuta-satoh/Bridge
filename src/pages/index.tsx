@@ -47,7 +47,7 @@ export default function Home({ data }: { data: Item[] }) {
       alt: 'sofa',
     },
     {
-      name: 'ベッド',
+      name: 'ベッド/寝具',
       src: '/images/bed/bed_natural_3.jpg',
       alt: 'bed',
     },
@@ -57,7 +57,7 @@ export default function Home({ data }: { data: Item[] }) {
       alt: 'chest',
     },
     {
-      name: 'ラグ',
+      name: 'カーペット/ラグ',
       src: '/images/rug/rug_nordic_2.jpeg',
       alt: 'rug',
     },
@@ -72,7 +72,7 @@ export default function Home({ data }: { data: Item[] }) {
       alt: 'curtain',
     },
     {
-      name: 'インテリア雑貨',
+      name: '小物/雑貨',
       src: '/images/accessory/accessory_jmodern_3.jpeg',
       alt: 'accessory',
     },
@@ -173,7 +173,7 @@ export default function Home({ data }: { data: Item[] }) {
           >
             {category.slice(0, 5).map((item) => (
               <li key={item.alt}>
-                <Link href={'/'}>
+                <Link href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=${item.name}`}>
                   <div className="relative block h-16 border-2 border-neutral-500">
                     <div className="absolute flex ml-2 top-1/2 -translate-y-1/2">
                       <Image
@@ -196,7 +196,7 @@ export default function Home({ data }: { data: Item[] }) {
           >
             {category.slice(5, 9).map((item) => (
               <li key={item.alt}>
-                <Link href={'/'}>
+                <Link href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=${item.name}`}>
                   <div className="relative block h-16 border-2 border-neutral-500">
                     <div className="absolute ml-2 flex top-1/2 -translate-y-1/2">
                       <Image
