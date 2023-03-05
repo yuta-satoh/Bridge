@@ -3,7 +3,7 @@ import Link from 'next/link';
 import headModule from '../styles/header.module.css';
 import Cookies from 'js-cookie';
 import { GetServerSideProps } from 'next';
-import { useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
@@ -13,6 +13,45 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 };
 
 export default function Header({auth}:{auth:boolean|undefined}) {
+  const router = useRouter();
+  const [input, setInput] = useState('');
+
+  const categoryDatas = [
+    '椅子',
+    'テーブル',
+    'カーテン',
+    '照明',
+    'カーペット/ラグ',
+    'ソファ',
+    '収納棚',
+    'ベッド/寝具',
+    '小物/雑貨',
+  ];
+  const genreDatas = [
+    '北欧風',
+    'ナチュラル',
+    '和モダン',
+    'フェミニン',
+  ];
+
+  const handleChange = (ev:ChangeEvent<HTMLInputElement>) => {
+    const value = ev.target.value;
+    setInput(value);
+  }
+
+  const handleSubmit = (ev: FormEvent) => {
+    ev.preventDefault();
+
+    if (!input) {
+      return
+    }
+    
+    // ジャンルやカテゴリが空の時は全要素をクエリに渡す
+    router.push({
+      pathname: '/items/itemlist/search',
+      query: { genre: genreDatas, category: categoryDatas, input: input },
+    });
+  }
 
   return (
     <header
@@ -37,11 +76,13 @@ export default function Header({auth}:{auth:boolean|undefined}) {
           <li>ヘルプ</li>
         </ul>
         <div className="flex gap-10">
-          <form className={headModule.form}>
+          <form className={headModule.form} onSubmit={handleSubmit} >
             <input
               className="h-8 border border-neutral-500 rounded-l pl-2.5"
               type="text"
               placeholder="何をお探しですか？"
+              value={input}
+              onChange={handleChange}
             />
             <button
               className="h-8 text-white bg-neutral-900 border border-neutral-900 rounded-r px-1"

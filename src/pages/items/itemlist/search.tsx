@@ -21,19 +21,19 @@ export const getServerSideProps:GetServerSideProps = async ({query}) => {
       props: {}
     }
   }
-
   const genre = query.genre;
   const category = query.category;
+  const input = query.input;
 
   // ジャンルとカテゴリを/api/searchに渡す
-  const response = await fetch(`http://localhost:3000/api/search?genre=${genre}&category=${category}`)
+  const response = await fetch(`http://localhost:3000/api/search?genre=${genre}&category=${category}&input=${input}`)
   const filter = await response.json()
   return {
-      props: {
-        filter
-      }
+    props: {
+      filter
+    }
   }
-  }
+}
 
 export default function Search({filter}:{filter:Item[]}) {
   if (!filter || filter.length === 0) {
