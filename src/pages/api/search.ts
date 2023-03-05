@@ -18,8 +18,9 @@ export default async function handler(
 ) {
     const genre = req.query.genre;
     const category = req.query.category;
+    const input = req.query.input;
 
-    if (genre === undefined || category === undefined || typeof genre !== 'string' || typeof category !== 'string') {
+    if (typeof genre !== 'string' || typeof category !== 'string' || typeof input !== 'string') {
         // 型ガード
         res.status(400).end()
     } else {
@@ -33,9 +34,12 @@ export default async function handler(
             .split(",")
             .reduce((current, query) => current + `,category.eq.${query}`, '')
             .replace(',', '');
+        const inputQuery = input.length === 0 ? "" : input
+            .split(/\s+/)
+            .reduce((current, query) => current + `,or(name.like.%${query}%,genre.like.%${query}%,description.like.%${query}%,category.like.%${query}%)`, '')
 
         // orとandを組み合わせてfetch
-        const response = await fetch(`http://127.0.0.1:8000/items?and=(or(${genreQuery}),or(${categoryQuery}))`);
+        const response = await fetch(`http://127.0.0.1:8000/items?and=(or(${genreQuery}),or(${categoryQuery})${inputQuery})`);
         const filter = await response.json();
         if (response.ok) {
             res.status(200).json(filter);

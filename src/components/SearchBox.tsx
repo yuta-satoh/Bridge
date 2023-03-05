@@ -7,6 +7,7 @@ export default function SearchBoxTest() {
   const router = useRouter();
   const [genres, setGenres] = useState<string[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
+  const [input, setInput] = useState('')
 
   const categoryDatas = [
     '椅子',
@@ -62,22 +63,22 @@ export default function SearchBoxTest() {
     if (genres.length === 0 && categories.length === 0) {
       router.push({
         pathname: '/items/itemlist/search',
-        query: { genre: genreDatas, category: categoryDatas },
+        query: { genre: genreDatas, category: categoryDatas, input: input },
       });
     } else if (genres.length === 0 && categories.length !== 0) {
       router.push({
         pathname: '/items/itemlist/search',
-        query: { genre: genreDatas, category: categories },
+        query: { genre: genreDatas, category: categories, input: input },
       });
     } else if (genres.length !== 0 && categories.length == 0) {
       router.push({
         pathname: '/items/itemlist/search',
-        query: { genre: genres, category: categoryDatas },
+        query: { genre: genres, category: categoryDatas, input: input },
       });
     } else if (genres.length !== 0 && categories.length !== 0) {
       router.push({
         pathname: '/items/itemlist/search',
-        query: { genre: genres, category: categories },
+        query: { genre: genres, category: categories, input: input },
       });
     }  
   }
@@ -91,6 +92,8 @@ export default function SearchBoxTest() {
             className={lstyles.serch}
             type="text"
             placeholder="何をお探しですか？"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
           />
           <button
             className={lstyles.serch_button}
