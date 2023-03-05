@@ -16,30 +16,41 @@ export default function Header({auth}:{auth:boolean|undefined}) {
   const router = useRouter();
   const [input, setInput] = useState('');
 
+  const categoryDatas = [
+    '椅子',
+    'テーブル',
+    'カーテン',
+    '照明',
+    'カーペット/ラグ',
+    'ソファ',
+    '収納棚',
+    'ベッド/寝具',
+    '小物/雑貨',
+  ];
+  const genreDatas = [
+    '北欧風',
+    'ナチュラル',
+    '和モダン',
+    'フェミニン',
+  ];
+
   const handleChange = (ev:ChangeEvent<HTMLInputElement>) => {
     const value = ev.target.value;
     setInput(value);
   }
 
   const handleSubmit = (ev: FormEvent) => {
-    ev.preventDefault;
+    ev.preventDefault();
 
     if (!input) {
       return
     }
-
-    const splitInput = input.split(" ");
-    console.log(splitInput);
-
+    
+    // ジャンルやカテゴリが空の時は全要素をクエリに渡す
     router.push({
-      pathname: '/search',
-      query: {
-        genre: undefined,
-        category: undefined,
-        input: splitInput
-      },
-      
-  });
+      pathname: '/items/itemlist/search',
+      query: { genre: genreDatas, category: categoryDatas, input: input },
+    });
   }
 
   return (

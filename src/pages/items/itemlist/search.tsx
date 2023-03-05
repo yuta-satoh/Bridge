@@ -21,12 +21,9 @@ export const getServerSideProps:GetServerSideProps = async ({query}) => {
       props: {}
     }
   }
-
   const genre = query.genre;
   const category = query.category;
   const input = query.input;
-
-  console.log("クエリ", genre, category, input)
 
   // ジャンルとカテゴリを/api/searchに渡す
   const response = await fetch(`http://localhost:3000/api/search?genre=${genre}&category=${category}&input=${input}`)

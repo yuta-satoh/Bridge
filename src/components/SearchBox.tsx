@@ -1,6 +1,6 @@
 import lstyles from '../styles/itemList.module.css';
 import fstyles from '../styles/Footer.module.css';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 
 export default function SearchBoxTest() {
@@ -58,7 +58,8 @@ export default function SearchBoxTest() {
   };
 
   // 検索後ページ遷移
-  const handleSubmit = () => {
+  const handleSubmit = (ev: FormEvent) => {
+    ev.preventDefault()
     // ジャンルやカテゴリが空の時は全要素をクエリに渡す
     if (genres.length === 0 && categories.length === 0) {
       router.push({
@@ -87,7 +88,7 @@ export default function SearchBoxTest() {
     <>
       <div className={lstyles.serch_boxes}>
         {/* 検索欄 */}
-        <div className={lstyles.serchbox}>
+        <form className={lstyles.serchbox} onSubmit={handleSubmit} >
           <input
             className={lstyles.serch}
             type="text"
@@ -98,11 +99,10 @@ export default function SearchBoxTest() {
           <button
             className={lstyles.serch_button}
             type="submit"
-            onClick={handleSubmit}
           >
             検索
           </button>
-        </div>
+        </form>
 
         {/* スライド開くボタン */}
         <div className={lstyles.serch_itemsmenu}>
