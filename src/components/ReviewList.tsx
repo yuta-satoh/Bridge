@@ -74,33 +74,31 @@ export default function ReviewList({ itemId }: { itemId: string }) {
   return (
     <>
       <div className="reviwsArea">
-        <div className="background">
-          <div className="title">
-            <h2>みんなのレビュー</h2>
-          </div>
-          <div className="scroll">
-            {data.map((review) => {
-              return (
-                <>
-                  <div className="review">
-                    <div className="reviewHead">
-                      <h3>
-                        {review.anonymous
-                          ? '匿名'
-                          : review.nickname}
-                      </h3>
-                      <p>{review.evaluation}</p>
-                      <p>{review.title}</p>
-                      <p>{shapingDate(review.date)}</p>
-                    </div>
-                    <div className="reviewContainer">
-                      <p className='reviewDescription'>{review.description}</p>
-                    </div>
+        <div className="title">
+          <h2>みんなのレビュー</h2>
+        </div>
+        <div className="scroll">
+          {data.map((review) => {
+            return (
+              <>
+                <div className="review">
+                  <div className="reviewHead">
+                    <h3>
+                      {review.anonymous
+                        ? '匿名'
+                        : review.nickname}
+                    </h3>
+                    <p>{review.evaluation}</p>
+                    <p>{review.title}</p>
+                    <p>{shapingDate(review.date)}</p>
                   </div>
-                </>
-              );
-            })}
-          </div>
+                  <div className="reviewContainer">
+                    <p className='reviewDescription'>{review.description}</p>
+                  </div>
+                </div>
+              </>
+            );
+          })}
         </div>
       </div>
     </>
