@@ -7,7 +7,7 @@ export default function SearchBoxTest() {
   const router = useRouter();
   const [genres, setGenres] = useState<string[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
-  const [input, setInput] = useState('')
+  const [input, setInput] = useState("")
 
   const categoryDatas = [
     '椅子',
@@ -60,26 +60,26 @@ export default function SearchBoxTest() {
   // 検索後ページ遷移
   const handleSubmit = (ev: FormEvent) => {
     ev.preventDefault()
-    // ジャンルやカテゴリが空の時は全要素をクエリに渡す
+    // ジャンルやカテゴリが空の時は全要素をクエリに渡す、orderはデフォルトで新着順
     if (genres.length === 0 && categories.length === 0) {
       router.push({
         pathname: '/items/itemlist/search',
-        query: { genre: genreDatas, category: categoryDatas, input: input },
+        query: { genre: genreDatas, category: categoryDatas, input: input, order: 'id.desc' },
       });
     } else if (genres.length === 0 && categories.length !== 0) {
       router.push({
         pathname: '/items/itemlist/search',
-        query: { genre: genreDatas, category: categories, input: input },
+        query: { genre: genreDatas, category: categories, input: input, order: 'id.desc' },
       });
     } else if (genres.length !== 0 && categories.length == 0) {
       router.push({
         pathname: '/items/itemlist/search',
-        query: { genre: genres, category: categoryDatas, input: input },
+        query: { genre: genres, category: categoryDatas, input: input, order: 'id.desc' },
       });
     } else if (genres.length !== 0 && categories.length !== 0) {
       router.push({
         pathname: '/items/itemlist/search',
-        query: { genre: genres, category: categories, input: input },
+        query: { genre: genres, category: categories, input: input, order: 'id.desc' },
       });
     }  
   }
