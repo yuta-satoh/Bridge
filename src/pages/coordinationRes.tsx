@@ -327,7 +327,7 @@ export default function coordination(
                       height={10}
                       alt=""
                     />
-                    <p>&emsp;インテリア雑貨&emsp;</p>
+                    <p>&emsp;小物/雑貨&emsp;</p>
                   </div>
                 </Link>
               </div>

@@ -25,51 +25,51 @@ export default function Footer() {
               <ul className={fstyles.category_list}>
                 <li>
                   {/* SSRで再レンダリングした、カテゴリ検索結果リンクが入る想定です */}
-                  <Link href="" className={fstyles.category_listItem}>
+                  <Link href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=椅子&input=&order=id.desc`} className={fstyles.category_listItem}>
                     椅子
                   </Link>
                 </li>
                 <li>
-                  <Link href="" className={fstyles.category_listItem}>
+                  <Link href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=テーブル&input=&order=id.desc`} className={fstyles.category_listItem}>
                     テーブル
                   </Link>
                 </li>
                 <li>
-                  <Link href="" className={fstyles.category_listItem}>
+                  <Link href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=カーテン&input=&order=id.desc`} className={fstyles.category_listItem}>
                     カーテン
                   </Link>
                 </li>
               </ul>
               <ul className={fstyles.category_list}>
                 <li>
-                  <Link href="" className={fstyles.category_listItem}>
+                  <Link href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=カーペット/ラグ&input=&order=id.desc`} className={fstyles.category_listItem}>
                     カーペット/ラグ
                   </Link>
                 </li>
                 <li>
-                  <Link href="" className={fstyles.category_listItem}>
+                  <Link href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=ソファ&input=&order=id.desc`} className={fstyles.category_listItem}>
                     ソファ
                   </Link>
                 </li>
                 <li>
-                  <Link href="" className={fstyles.category_listItem}>
+                  <Link href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=収納棚&input=&order=id.desc`} className={fstyles.category_listItem}>
                     収納棚
                   </Link>
                 </li>
               </ul>
               <ul className={fstyles.category_list}>
                 <li>
-                  <Link href="" className={fstyles.category_listItem}>
+                  <Link href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=照明&input=&order=id.desc`} className={fstyles.category_listItem}>
                     照明
                   </Link>
                 </li>
                 <li>
-                  <Link href="" className={fstyles.category_listItem}>
+                  <Link href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=ベッド/寝具&input=&order=id.desc`} className={fstyles.category_listItem}>
                     ベッド/寝具
                   </Link>
                 </li>
                 <li>
-                  <Link href="" className={fstyles.category_listItem}>
+                  <Link href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=小物/雑貨&input=&order=id.desc`} className={fstyles.category_listItem}>
                     小物/雑貨
                   </Link>
                 </li>
@@ -84,24 +84,24 @@ export default function Footer() {
             <div className={fstyles.category_lists}>
               <ul className={fstyles.category_list}>
                 <li>
-                  <Link href="" className={fstyles.category_listItem}>
+                  <Link href={`/items/itemlist/search?genre=北欧風&category=椅子&category=テーブル&category=カーテン&category=照明&category=カーペット%2Fラグ&category=ソファ&category=収納棚&category=ベッド%2F寝具&category=小物%2F雑貨&input=&order=id.desc`} className={fstyles.category_listItem}>
                     北欧風
                   </Link>
                 </li>
                 <li>
-                  <Link href="" className={fstyles.category_listItem}>
+                  <Link href={`/items/itemlist/search?genre=ナチュラル&category=椅子&category=テーブル&category=カーテン&category=照明&category=カーペット%2Fラグ&category=ソファ&category=収納棚&category=ベッド%2F寝具&category=小物%2F雑貨&input=&order=id.desc`} className={fstyles.category_listItem}>
                     ナチュラル
                   </Link>
                 </li>
               </ul>
               <ul className={fstyles.category_list}>
                 <li>
-                  <Link href="" className={fstyles.category_listItem}>
+                  <Link href={`/items/itemlist/search?genre=和モダン&category=椅子&category=テーブル&category=カーテン&category=照明&category=カーペット%2Fラグ&category=ソファ&category=収納棚&category=ベッド%2F寝具&category=小物%2F雑貨&input=&order=id.desc`}  className={fstyles.category_listItem}>
                     和モダン
                   </Link>
                 </li>
                 <li>
-                  <Link href="" className={fstyles.category_listItem}>
+                  <Link href={`/items/itemlist/search?genre=フェミニン&category=椅子&category=テーブル&category=カーテン&category=照明&category=カーペット%2Fラグ&category=ソファ&category=収納棚&category=ベッド%2F寝具&category=小物%2F雑貨&input=&order=id.desc`}  className={fstyles.category_listItem}>
                     フェミニン
                   </Link>
                 </li>
@@ -135,7 +135,7 @@ export default function Footer() {
 
         <div className={fstyles.message}>
           <form>
-            <button type="submit">お問い合わせ　→</button>
+            <button type="button">お問い合わせ　→</button>
           </form>
         </div>
       </div>
