@@ -1,5 +1,7 @@
 import { url } from "inspector";
 import { ChangeEvent, Dispatch, SetStateAction, SyntheticEvent, useState } from "react";
+import urStyles from '../styles/userRegister.module.css';
+import prStyles from '../styles/postReview.module.css';
 
 type postReviews = {
     item_id: number;
@@ -61,14 +63,14 @@ export default function PostReview({ itemId, userId, setPostReview } : {
             setReview({
                 ...review,
                 nickname: "",
-                anonymous: !review.anonymous,
+                anonymous: false,
             });
         // クリック時にanonymousがfalseなら、nicknameを"匿名"にしてanonymousをtrueにする
         } else {
             setReview({
                 ...review,
                 nickname: "匿名",
-                anonymous: !review.anonymous,
+                anonymous: true,
             });
         }
     }
@@ -98,8 +100,8 @@ export default function PostReview({ itemId, userId, setPostReview } : {
     if (isPosted) {
         return (
             <>
-                <p>レビューを投稿しました</p>
-                <button type="button" onClick={() => {
+                <p className={prStyles.complete}>レビューを投稿しました</p>
+                <button type="button" className={prStyles.button} onClick={() => {
                     setPostReview(false);
                     setIsPosted(false);
                 }}>
@@ -111,49 +113,57 @@ export default function PostReview({ itemId, userId, setPostReview } : {
     return (
         <>
             <div className="postReview">
-                <form onSubmit={(e) => handleSubmit(e)}>
+                <form>
                     <div>
                         <div>
                             <label htmlFor="nickname">ニックネーム</label>
                             {/* anonymousがtrueならreadOnly、falseなら入力欄を表示する */}
                             {review.anonymous ? 
-                                <input type="text" name="nickname" id="nickname" value={review.nickname} readOnly/>
+                                <input className={prStyles.inputBorder} type="text" name="nickname" id="nickname" value={review.nickname} readOnly/>
                             :
-                                <input type="text" name="nickname" id="nickname" value={review.nickname} onChange={(e) => handleChange(e)} placeholder="ニックネームを記入"/>}
+                                <input className={prStyles.inputBorder} type="text" name="nickname" id="nickname" value={review.nickname} onChange={(e) => handleChange(e)} placeholder="ニックネームを記入"/>}
                             {/* anonymousがtrueかつnicknameが空欄ならエラーを表示 */}
-                            {isNicknameError ? <p>ニックネームを入力してください</p> : <></>}
-                        </div>
-                        <div>
-                            <label htmlFor="anonymous">匿名</label>
-                            <input type="checkbox" name="anonymous" id="anonymous" onChange={(e) => handleAnonymousClick(e)}/>
+                            {isNicknameError ? <p className={urStyles.error}>ニックネームを入力してください</p> : <></>}
+                            <span>
+                                <label htmlFor="anonymous">匿名</label>
+                                <input type="checkbox" name="anonymous" id="anonymous" onChange={(e) => handleAnonymousClick(e)}/>
+                            </span>
                         </div>
                     </div>
-                    <div>
-                        <p>評価</p>
-                        <div className="radio">
-                            <input type="radio" id="review05" name="evaluation" value={5} onChange={(e) => handleChange(e)}/>
-                            <label htmlFor="review05">★</label>
-                            <input type="radio" id="review04" name="evaluation" value={4} onChange={(e) => handleChange(e)} defaultChecked/>
-                            <label htmlFor="review05">★</label>
-                            <input type="radio" id="review03" name="evaluation" value={3} onChange={(e) => handleChange(e)}/>
-                            <label htmlFor="review05">★</label>
-                            <input type="radio" id="review02" name="evaluation" value={2} onChange={(e) => handleChange(e)}/>
-                            <label htmlFor="review05">★</label>
-                            <input type="radio" id="review01" name="evaluation" value={1} onChange={(e) => handleChange(e)} required/>
-                            <label htmlFor="review05">★</label>
+                    <div className={prStyles.starArea}>
+                        <p>評価&nbsp;</p>
+                        <div>
+                            <span className={prStyles.stars}>
+                                <input className={prStyles.inputStar} type="radio" id="review05" name="evaluation" value={5} onChange={(e) => handleChange(e)}/>
+                                <label htmlFor="review05">★</label>
+                                <input className={prStyles.inputStar} type="radio" id="review04" name="evaluation" value={4} onChange={(e) => handleChange(e)} defaultChecked/>
+                                <label htmlFor="review04">★</label>
+                                <input className={prStyles.inputStar} type="radio" id="review03" name="evaluation" value={3} onChange={(e) => handleChange(e)}/>
+                                <label htmlFor="review03">★</label>
+                                <input className={prStyles.inputStar} type="radio" id="review02" name="evaluation" value={2} onChange={(e) => handleChange(e)}/>
+                                <label htmlFor="review02">★</label>
+                                <input className={prStyles.inputStar} type="radio" id="review01" name="evaluation" value={1} onChange={(e) => handleChange(e)} required/>
+                                <label htmlFor="review01">★</label>
+                            </span>
                         </div>
                     </div>
                     <div>
                         <label htmlFor="title">タイトル</label>
-                        <input type="text" name="title" id="title" placeholder="※未記入でも可" onChange={(e) => handleChange(e)}/>
+                        <input className={prStyles.inputBorder} type="text" name="title" id="title" placeholder="未記入可" onChange={(e) => handleChange(e)}/>
+                    </div>
+                    <div className={prStyles.descriptionArea}>
+                        <div>
+                            <label htmlFor="description">説明</label>
+                        </div>
+                        <div>
+                            <textarea className={prStyles.textarea} name="description" id="description" cols={50} rows={5} placeholder="未記入可" onChange={(e) => handleChange(e)} />
+                        </div>
                     </div>
                     <div>
-                        <label htmlFor="description">説明</label>
-                        <textarea name="description" id="description" cols={30} rows={10} placeholder="※未記入でも可" onChange={(e) => handleChange(e)} />
+                        <button className={prStyles.prButton} type="button"  onClick={(e) => handleSubmit(e)}>レビューを投稿</button>
                     </div>
                     <div>
-                        <button type="submit">レビューを投稿</button>
-                        <button type="button" onClick={() => setPostReview(false)}>キャンセル</button>
+                        <button className={prStyles.button} type="button" onClick={() => setPostReview(false)}>キャンセル</button>
                     </div>
                 </form>
             </div>
