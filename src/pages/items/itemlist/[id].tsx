@@ -96,7 +96,7 @@ export default function ItemPage({item}: {item: Item[]}): JSX.Element {
               <span>{items.name}</span>
             </div>
             <div className={istyles.content_itemprice}>
-              <span>{items.price}円</span>
+              <span>¥ {(items.price * 1.1).toLocaleString()}</span><span className={istyles.inTax}>(税込)</span>
             </div>
 
           {/* カートボタン機能 */}

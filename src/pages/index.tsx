@@ -17,15 +17,15 @@ type Item = {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const response = await fetch('http://localhost:3000/api/newItems')
-  const data: Item[] = await response.json()
+  const response = await fetch('http://localhost:3000/api/newItems');
+  const data: Item[] = await response.json();
 
   return {
     props: {
-      data: data
-    }
-  }
-}
+      data: data,
+    },
+  };
+};
 
 export default function Home({ data }: { data: Item[] }) {
   const newItems = data.slice(1);
@@ -115,7 +115,9 @@ export default function Home({ data }: { data: Item[] }) {
         </div>
         <div className={`${topStyle.content} mt-10`}>
           <h2 className="text-center text-xl font-bold">新着商品</h2>
-          <div className={`${topStyle.categoryList} container mx-auto p-2 flex gap-5 justify-center`}>
+          <div
+            className={`${topStyle.categoryList} container mx-auto p-2 flex gap-5 justify-center`}
+          >
             {/* 大きく表示する商品 */}
             <Link href={`/items/itemlist/${data[0].id}`}>
               <div>
@@ -124,10 +126,10 @@ export default function Home({ data }: { data: Item[] }) {
                   alt={data[0].name}
                   width={285}
                   height={285}
-                  className="rounded"
+                  className={`${topStyle.bigImage} rounded`}
                 />
-                <p className="text-lg">
-                  ¥{data[0].price.toLocaleString()}
+                <p className={`${topStyle.price} text-lg`}>
+                  ¥{(data[0].price * 1.1).toLocaleString()}
                 </p>
               </div>
             </Link>
@@ -140,11 +142,13 @@ export default function Home({ data }: { data: Item[] }) {
                       alt={item.name}
                       width={120}
                       height={120}
-                      className="rounded"
+                      className={`${topStyle.smallImage} rounded`}
                     />
-                    <p className="text-lg">
-                      ¥{item.price.toLocaleString()}
-                    </p>
+                    <div className={topStyle.smallImagePrice}> 
+                      <p className={`${topStyle.price} text-lg`}>
+                        ¥{(item.price * 1.1).toLocaleString()}
+                      </p>
+                    </div>
                   </li>
                 </Link>
               ))}
@@ -173,7 +177,9 @@ export default function Home({ data }: { data: Item[] }) {
           >
             {category.slice(0, 5).map((item) => (
               <li key={item.alt}>
-                <Link href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=${item.name}&input=&order=id.desc&page=0`}>
+                <Link
+                  href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=${item.name}&input=&order=id.desc&page=0`}
+                >
                   <div className="relative block h-16 border-2 border-neutral-500">
                     <div className="absolute flex ml-2 top-1/2 -translate-y-1/2">
                       <Image
@@ -196,7 +202,9 @@ export default function Home({ data }: { data: Item[] }) {
           >
             {category.slice(5, 9).map((item) => (
               <li key={item.alt}>
-                <Link href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=${item.name}&input=&order=id.desc&page=0`}>
+                <Link
+                  href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=${item.name}&input=&order=id.desc&page=0`}
+                >
                   <div className="relative block h-16 border-2 border-neutral-500">
                     <div className="absolute ml-2 flex top-1/2 -translate-y-1/2">
                       <Image
@@ -215,44 +223,60 @@ export default function Home({ data }: { data: Item[] }) {
             ))}
           </ul>
         </div>
-        <div className={topStyle.scrollArea}>
+        <div className={topStyle.scrollArea} id="remind">
           <h2 className="text-center text-xl font-bold">お知らせ</h2>
           <div className={topStyle.scroll}>
-          <div className={topStyle.announce}>
+            <div className={topStyle.announce}>
               <p className={topStyle.date}>2023-1-4</p>
               <p className={topStyle.announceData}>新年のご挨拶</p>
             </div>
             <div className={topStyle.announce}>
               <p className={topStyle.date}>2022-12-28</p>
-              <p className={topStyle.announceData}>年末年始の営業のお知らせ</p>
+              <p className={topStyle.announceData}>
+                年末年始の営業のお知らせ
+              </p>
             </div>
             <div className={topStyle.announce}>
               <p className={topStyle.date}>2022-XX-XX</p>
-              <p className={topStyle.announceData}>テキストテキストテキストテキストテキストテキストテキストテキスト</p>
+              <p className={topStyle.announceData}>
+                テキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
             </div>
             <div className={topStyle.announce}>
               <p className={topStyle.date}>2022-XX-XX</p>
-              <p className={topStyle.announceData}>テキストテキストテキストテキストテキストテキストテキストテキスト</p>
+              <p className={topStyle.announceData}>
+                テキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
             </div>
             <div className={topStyle.announce}>
               <p className={topStyle.date}>2022-XX-XX</p>
-              <p className={topStyle.announceData}>テキストテキストテキストテキストテキストテキストテキストテキスト</p>
+              <p className={topStyle.announceData}>
+                テキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
             </div>
             <div className={topStyle.announce}>
               <p className={topStyle.date}>2022-XX-XX</p>
-              <p className={topStyle.announceData}>テキストテキストテキストテキストテキストテキストテキストテキスト</p>
+              <p className={topStyle.announceData}>
+                テキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
             </div>
             <div className={topStyle.announce}>
               <p className={topStyle.date}>2022-XX-XX</p>
-              <p className={topStyle.announceData}>テキストテキストテキストテキストテキストテキストテキストテキスト</p>
+              <p className={topStyle.announceData}>
+                テキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
             </div>
             <div className={topStyle.announce}>
               <p className={topStyle.date}>2022-XX-XX</p>
-              <p className={topStyle.announceData}>テキストテキストテキストテキストテキストテキストテキストテキスト</p>
+              <p className={topStyle.announceData}>
+                テキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
             </div>
             <div className={topStyle.announce}>
               <p className={topStyle.date}>2022-XX-XX</p>
-              <p className={topStyle.announceData}>テキストテキストテキストテキストテキストテキストテキストテキスト</p>
+              <p className={topStyle.announceData}>
+                テキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
             </div>
           </div>
         </div>
