@@ -6,7 +6,7 @@ type Reviews = {
   user_id: number;
   nickname: string;
   anonymous: boolean;
-  evaluation: string;
+  evaluation: number;
   title: string;
   description: string;
   date: Date;
@@ -57,6 +57,10 @@ export default function ReviewList({ itemId }: { itemId: string }) {
     return shapedDate;
   }
 
+  // 総合評価
+  const totalEvaluation = data.map((data: Reviews) => data.evaluation).reduce((a, b) => a + b);
+  console.log('totalEvaluation', totalEvaluation);
+
   // descriptionを正しく改行して返す関数(CSSで出来るので削除予定)
   // function shapingDescription(description: string) {
   //   if (description.length === 0) {
@@ -76,6 +80,9 @@ export default function ReviewList({ itemId }: { itemId: string }) {
       <div className="reviwsArea">
         <div className="title">
           <h2>みんなのレビュー</h2>
+        </div>
+        <div>
+
         </div>
         <div className="scroll">
           {data.map((review) => {
