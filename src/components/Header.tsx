@@ -3,20 +3,99 @@ import Link from 'next/link';
 import headModule from '../styles/header.module.css';
 import Cookies from 'js-cookie';
 import { GetServerSideProps } from 'next';
-import { useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/router';
+import useSWR from 'swr';
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  return {
-    props: {},
-  };
+type items = {
+  id: number;
+  name: string;
+  description: string;
+  genre: string;
+  category: string;
+  price: number;
+  imgurl: string;
+  stock: number;
+  delete: boolean;
 };
 
-export default function Header({auth}:{auth:boolean|undefined}) {
+type cart = {
+  id: number;
+  item_id: number;
+  items: items;
+  cart_id: number;
+  date: string;
+  quantity: number;
+  delete: boolean;
+}[];
 
+export default function Header({
+  auth,
+}: {
+  auth: boolean | undefined;
+}) {
+  const router = useRouter();
+  const [input, setInput] = useState('');
+
+  const categoryDatas = [
+    '椅子',
+    'テーブル',
+    'カーテン',
+    '照明',
+    'カーペット/ラグ',
+    'ソファ',
+    '収納棚',
+    'ベッド/寝具',
+    '小物/雑貨',
+  ];
+  const genreDatas = [
+    '北欧風',
+    'ナチュラル',
+    '和モダン',
+    'フェミニン',
+  ];
+
+  const userId = Cookies.get('id');
+  const fetcher = (url: string) =>
+    fetch(url).then((res) => res.json());
+
+  const { data, error }: { data: cart; error: any } = useSWR(
+    `/api/cart_items?select=*,items(*),carts(*)&cart_id=eq.${userId}`,
+    fetcher,
+    { refreshInterval: 0.1 }
+  );
+  if (error) return <p>エラー</p>;
+  if (!data) return <p>ロード中...</p>;
+
+  const total = data.reduce(function (sum, element) {
+    return sum + element.quantity;
+  }, 0);
+
+  const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
+    const value = ev.target.value;
+    setInput(value);
+  };
+
+  const handleSubmit = (ev: FormEvent) => {
+    ev.preventDefault();
+
+    // if (!input) {
+    //   return;
+    // }
+
+    // // ジャンルやカテゴリが空の時は全要素をクエリに渡す
+    // router.push({
+    //   pathname: '/items/itemlist/search',
+    //   query: {
+    //     genre: genreDatas,
+    //     category: categoryDatas,
+    //     input: input,
+    //   },
+    // });
+  };
   return (
     <header
-      className={`${headModule.body} h-28 w-screen bg-orange-900`}
+      className={`${headModule.body} h-28 w-full bg-orange-900`}
     >
       <div
         className={`${headModule.menu} flex items-center justify-center h-20 w-screen bg-white absolute top-8`}
@@ -31,24 +110,30 @@ export default function Header({auth}:{auth:boolean|undefined}) {
             />
           </div>
         </Link>
-        <ul className="flex gap-10 mr-60 ml-30">
-          <li>商品</li>
-          <li>お知らせ</li>
+        <ul className="flex gap-10 mr-60 ml-30 whitespace-nowrap">
+          <li><Link href="/items/itemlist">商品</Link></li>
+          <li><Link href="/#remind" className={headModule.toRemind}>お知らせ</Link></li>
           <li>ヘルプ</li>
         </ul>
         <div className="flex gap-10">
-          <form className={headModule.form}>
+          <form className={headModule.form} onSubmit={handleSubmit}>
             <input
               className="h-8 border border-neutral-500 rounded-l pl-2.5"
               type="text"
               placeholder="何をお探しですか？"
+              value={input}
+              onChange={handleChange}
             />
-            <button
-              className="h-8 text-white bg-neutral-900 border border-neutral-900 rounded-r px-1"
-              type="submit"
+            <Link
+              href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=椅子&category=テーブル&category=カーテン&category=照明&category=カーペット%2Fラグ&category=ソファ&category=収納棚&category=ベッド%2F寝具&category=小物%2F雑貨&input=${input}&order=id.desc&page=0`}
             >
-              検索
-            </button>
+              <button
+                className="h-8 text-white bg-neutral-900 border border-neutral-900 rounded-r px-1"
+                type="submit"
+              >
+                検索
+              </button>
+            </Link>
           </form>
           {auth ? (
             <Link href={'/mypage'} className={headModule.iconModule}>
@@ -76,7 +161,7 @@ export default function Header({auth}:{auth:boolean|undefined}) {
               />
               <div>
                 <span
-                  className={`${headModule.menuLabel} inline-block mt-1`}
+                  className={`${headModule.menuLabel} inline-block mt-1 whitespace-nowrap`}
                 >
                   ログイン
                 </span>
@@ -84,6 +169,11 @@ export default function Header({auth}:{auth:boolean|undefined}) {
             </Link>
           )}
           <Link href={'/cart'} className={headModule.iconModule}>
+            {total === 0 ? (
+              <></>
+            ) : (
+              <div className={headModule.cartCounter}>{total}</div>
+            )}
             <Image
               src="/images/icon/cart.png"
               alt=""
@@ -91,7 +181,7 @@ export default function Header({auth}:{auth:boolean|undefined}) {
               height={25}
             />
             <span
-              className={`${headModule.menuLabel} inline-block mt-1`}
+              className={`${headModule.menuLabel} inline-block mt-1 whitespace-nowrap`}
             >
               カート
             </span>

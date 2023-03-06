@@ -87,6 +87,7 @@
     flex-direction: column;
     justify-content: center;
 
+    box-sizing: border-box;
     height: 100%;
     padding-left: 50px;
 }
@@ -101,6 +102,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    white-space: nowrap;
 
     min-height: 20px;
     margin: 10px 10px;
@@ -124,7 +126,7 @@
     font-size: 25px;
 
     display: flex;
-    align-items: flex-start;
+    align-items: flex-end;
 
     padding: 20px 30px;
 }
@@ -190,7 +192,12 @@
     background-color: #F8C6BD;
 }
 
-.cart_lclick:hover,.cart_rclick:hover,.cart_right:hover,.detail:hover,.category_detailname:hover{
+.buttonStyle {
+    background-color: #F8C6BD;
+    padding: 20px;
+  }
+
+.cart_lclick:hover,.cart_rclick:hover,.buttonStyle:hover,.detail:hover,.category_detailname:hover{
     color: #FF7C8A;
 }
 
@@ -250,4 +257,9 @@
 
 .category_detailname{
     color:#A96467;
+}
+
+.inTax{
+    font-size: 10px;
+    padding-bottom: 5px;
 }

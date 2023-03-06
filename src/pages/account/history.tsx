@@ -44,6 +44,13 @@ export default function History({
     fetch(url).then((res) => res.json());
   const { data, error } = useSWR<Item[], Error>(
     `/api/order_histories?user_id=eq.${userId}`,
+  const [order, setOrder] = useState('id.desc');
+
+  const userId = Number(cookie);
+  const fetcher = (url: string) =>
+    fetch(url).then((res) => res.json());
+  const { data, error } = useSWR(
+    `/api/order_histories?user_id=eq.${userId}&order=${order}`,
     fetcher
   );
   if (error) return <p>エラー</p>;
@@ -54,6 +61,9 @@ export default function History({
       pathname: '/account/review',
       query: { id: item.id },
     });
+    
+  function selectOrder(e: React.ChangeEvent<HTMLSelectElement>) {
+    setOrder(e.target.value);
   }
 
   return (
@@ -64,6 +74,17 @@ export default function History({
       {data.length !== 0 ? (
         <div className={hModule.body}>
           <h1 className={hModule.title}>購入履歴</h1>
+          <div className={hModule.historyOrder}>
+            <label htmlFor="historyOrder">並び替える:</label>
+            <select
+              name="historyOrder"
+              id="historyOrder"
+              onChange={selectOrder}
+            >
+              <option value="id.desc">新しい順</option>
+              <option value="id.asc">古い順</option>
+            </select>
+          </div>
           <table className={hModule.tableBody}>
             <thead>
               <tr>
@@ -105,12 +126,10 @@ export default function History({
                       {item.quantity}個
                     </td>
                     <td className={hModule.tableCell}>
-                      ¥{' '}
-                      {(item.quantity * item.price).toLocaleString()}
+                      ¥ {(item.price * 1.1).toLocaleString()}
                     </td>
                     <td className={hModule.tableCell}>
-                      ¥{' '}
-                      {(item.quantity * item.price).toLocaleString()}
+                      ¥ {(item.quantity * (item.price * 1.1)).toLocaleString()}
                     </td>
                     <td className={hModule.tableCellCenter}>
                       <button

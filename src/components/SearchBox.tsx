@@ -1,12 +1,13 @@
 import lstyles from '../styles/itemList.module.css';
 import fstyles from '../styles/Footer.module.css';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 
 export default function SearchBoxTest() {
   const router = useRouter();
   const [genres, setGenres] = useState<string[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
+  const [input, setInput] = useState("")
 
   const categoryDatas = [
     '椅子',
@@ -57,27 +58,28 @@ export default function SearchBoxTest() {
   };
 
   // 検索後ページ遷移
-  const handleSubmit = () => {
-    // ジャンルやカテゴリが空の時は全要素をクエリに渡す
+  const handleSubmit = (ev: FormEvent) => {
+    ev.preventDefault()
+    // ジャンルやカテゴリが空の時は全要素をクエリに渡す、orderはデフォルトで新着順
     if (genres.length === 0 && categories.length === 0) {
       router.push({
         pathname: '/items/itemlist/search',
-        query: { genre: genreDatas, category: categoryDatas },
+        query: { genre: genreDatas, category: categoryDatas, input: input, order: 'id.desc', page: '0' },
       });
     } else if (genres.length === 0 && categories.length !== 0) {
       router.push({
         pathname: '/items/itemlist/search',
-        query: { genre: genreDatas, category: categories },
+        query: { genre: genreDatas, category: categories, input: input, order: 'id.desc', page: '0' },
       });
     } else if (genres.length !== 0 && categories.length == 0) {
       router.push({
         pathname: '/items/itemlist/search',
-        query: { genre: genres, category: categoryDatas },
+        query: { genre: genres, category: categoryDatas, input: input, order: 'id.desc', page: '0' },
       });
     } else if (genres.length !== 0 && categories.length !== 0) {
       router.push({
         pathname: '/items/itemlist/search',
-        query: { genre: genres, category: categories },
+        query: { genre: genres, category: categories, input: input, order: 'id.desc', page: '0' },
       });
     }  
   }
@@ -86,20 +88,21 @@ export default function SearchBoxTest() {
     <>
       <div className={lstyles.serch_boxes}>
         {/* 検索欄 */}
-        <div className={lstyles.serchbox}>
+        <form className={lstyles.serchbox} onSubmit={handleSubmit} >
           <input
             className={lstyles.serch}
             type="text"
             placeholder="何をお探しですか？"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
           />
           <button
             className={lstyles.serch_button}
             type="submit"
-            onClick={handleSubmit}
           >
             検索
           </button>
-        </div>
+        </form>
 
         {/* スライド開くボタン */}
         <div className={lstyles.serch_itemsmenu}>

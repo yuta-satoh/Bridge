@@ -1,9 +1,14 @@
 .menu{
     display: flex;
     justify-content: space-evenly;
+    min-width: 1280px;
+    box-sizing: border-box;
+    width: 100%;
 }
 .body{
     max-width: 100%;
+    width: 100%;
+    min-width: 1280px;
 }
 .menuLabel{
     font-size: 13px;
@@ -16,4 +21,17 @@
 .form{
     display: flex;
     align-items: center;
+}
+.cartCounter{
+    position: absolute;
+    background-color: aqua;
+    border-radius: 50%;
+    width: 15px;
+    height:15px;
+    text-align: center;
+    font-size: 10px;
+    margin-left: 25px;
+}
+.toRemind{
+    scroll-behavior: smooth;
 }

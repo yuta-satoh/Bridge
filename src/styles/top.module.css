@@ -7,6 +7,7 @@
 .main{
     height: 2100px;
     width: 100%;
+    min-width: 1280px;
 }
 .content{
     margin-top: 75px;
@@ -41,4 +42,21 @@
 }
 .announceData{
     padding: 10px;
+}
+.bigImage{
+    width: 285px;
+    height: 285px;
+}
+.smallImage{
+    width: 120px;
+    height: 120px;
+}
+.smallImagePrice{
+    display: flex;
+}
+.price{
+    font-size: 15px;
+}
+.inTax{
+    font-size: 10px;
 }
