@@ -70,9 +70,7 @@ export default function ItemPage({item}: {item: Item[]}): JSX.Element {
               />
             </div>
 
-            <div>
-              <ReviewList itemId={items.id.toString()}/>
-            </div>
+          <ReviewList itemId={items.id.toString()}/>
 
           {/* 以下はこんなのもどうですか、ジャンル・カテゴリに合致したものを持ってくる */}
           <ItemdetailReccomend genre={genre} category={category}/>

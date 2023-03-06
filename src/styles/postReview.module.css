@@ -1,0 +1,70 @@
+.completeArea {
+    text-align: center;
+    width: 80%;
+    padding: 10px;
+}
+
+.complete {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.button {
+    text-decoration: underline;
+    font-size: 15px;
+}
+
+.prButton {
+    padding-left: 8px;
+    padding-right: 8px;
+    border: 1px solid gray;
+    border-radius: 2px;
+    font-size: 20px;
+}
+
+.inputBorder {
+    border: 1px solid rgb(179, 179, 179);
+    margin: 5px;
+    border-radius: 2px;
+}
+
+.textarea {
+    border: 1px solid rgb(179, 179, 179);
+    margin: 5px;
+    border-radius: 2px;
+}
+
+.descriptionArea {
+    display: flex;
+    justify-content: center;
+}
+
+/* 星評価用radioボタンの設定 */
+.starArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stars {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.stars input {
+    display: none;
+}
+
+.stars label {
+    color: #d2d2d2;
+    font-size: 30px;
+    padding: 0 5px;
+    cursor: pointer;
+}
+
+.stars label:hover,
+.stars label:hover ~ label,
+.stars input:checked ~ label{
+    color: #F8C601;
+}

@@ -1,4 +1,5 @@
 import useSWR, { Fetcher } from 'swr';
+import rlStyles from '../styles/reviewList.module.css';
 
 type Reviews = {
   id: number;
@@ -29,9 +30,12 @@ export default function ReviewList({ itemId }: { itemId: string }) {
   if (error) {
     return (
       <>
-        <div className="reviwsArea">
-          <div className="background">
-            <p>レビューはまだ投稿されていません</p>
+        <div>
+          <div className={rlStyles.title}>
+            <h2>みんなのレビュー</h2>
+          </div>
+          <div className={rlStyles.background}>
+            <p>エラーが発生しました</p>
           </div>
         </div>
       </>
@@ -41,9 +45,27 @@ export default function ReviewList({ itemId }: { itemId: string }) {
   if (!data) {
     return (
       <>
-        <div className="reviwsArea">
-          <div className="background">
+        <div>
+          <div className={rlStyles.title}>
+            <h2>みんなのレビュー</h2>
+          </div>
+          <div className={rlStyles.background}>
             <p>ロード中...</p>
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  if (data.length === 0) {
+    return (
+      <>
+        <div>
+          <div className={rlStyles.title}>
+            <h2>みんなのレビュー</h2>
+          </div>
+          <div className={rlStyles.background}>
+            <p>レビューはまだ投稿されていません</p>
           </div>
         </div>
       </>
@@ -57,51 +79,58 @@ export default function ReviewList({ itemId }: { itemId: string }) {
     return shapedDate;
   }
 
-  // 総合評価
-  const totalEvaluation = data.map((data: Reviews) => data.evaluation).reduce((a, b) => a + b);
-  console.log('totalEvaluation', totalEvaluation);
+  // 平均評価(小数点第2位で四捨五入)
+  const averageEvaluation = data
+    .map((data: Reviews) => data.evaluation)
+    .reduce((a, b) => (a + b) / data.length)
+    .toFixed(1);
 
   // descriptionを正しく改行して返す関数(CSSで出来るので削除予定)
-  // function shapingDescription(description: string) {
-  //   if (description.length === 0) {
-  //     return '';
-  //   } else {
-  //     const shapedDescriptionJSX = description
-  //       .split(/(\n)/)
-  //       .map((elm, index) => {
-  //         return <>{elm.match(/\n/) ? <br /> : elm}</>;
-  //       });
-  //     return <p>{shapedDescriptionJSX}</p>;
-  //   }
-  // }
+  function shapingDescription(description: string) {
+    if (description.length === 0) {
+      return '';
+    } else {
+      const shapedDescriptionJSX = description
+        .split(/(\n)/)
+        .map((elm) => {
+          return <>{elm.match(/\n/) ? <br /> : elm}</>;
+        });
+      return <p>{shapedDescriptionJSX}</p>;
+    }
+  }
 
   return (
     <>
       <div className="reviwsArea">
-        <div className="title">
+        <div className={rlStyles.title}>
           <h2>みんなのレビュー</h2>
         </div>
         <div>
-
+          <p className="evaluation">
+            平均評価:&nbsp;
+            <span className="averageEvaluation">
+              {averageEvaluation}
+            </span>
+          </p>
         </div>
-        <div className="scroll">
+        <div className={rlStyles.scroll}>
           {data.map((review) => {
             return (
               <>
-                <div className="review">
-                  <div className="reviewHead">
-                    <h3>
-                      {review.anonymous
-                        ? '匿名'
-                        : review.nickname}
-                    </h3>
-                    <p>{review.evaluation}</p>
-                    <p>{review.title}</p>
-                    <p>{shapingDate(review.date)}</p>
-                  </div>
-                  <div className="reviewContainer">
-                    <p className='reviewDescription'>{review.description}</p>
-                  </div>
+                <div className={rlStyles.review}>
+                <div className={rlStyles.review_head}>
+                  <h3>
+                    {review.anonymous ? '非公開' : review.nickname}
+                  </h3>
+                  <p>評価:&nbsp;{review.evaluation}</p>
+                  <p>{shapingDate(review.date)}</p>
+                </div>
+                <hr/>
+                <div className={rlStyles.review_container}>
+                  <h4>{review.title}</h4>
+                  <p>{shapingDescription(review.description)}</p>
+                </div>
+                <hr className={rlStyles.black_hr}/>
                 </div>
               </>
             );

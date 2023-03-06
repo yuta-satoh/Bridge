@@ -1,0 +1,62 @@
+/* タイトルのスタイル */
+.title h2 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* エラー、ロード中、レビュー未投稿時のスタイル */
+.background {
+    width: 80%;
+    height: 50px;
+    margin: auto;
+    background-color: #f5f5f5;
+    text-align: center;
+    display: table;
+}
+.background p {
+    vertical-align: middle;
+    display: table-cell;
+}
+
+/* リストのスタイル */
+.scroll {
+    width: 95%;
+    height: 250px;
+    border: 1px solid #f5f5f5;
+    overflow-y: scroll;
+    margin: auto;
+}
+
+.review {
+    width: 90%;
+    margin: 10px auto 30px auto;
+}
+
+.black_hr {
+    border-color: black;
+}
+
+.review h3 {
+    font-size: 15px;
+}
+
+.review_head {
+    display: flex;
+    align-items: baseline;
+}
+
+.review_head p {
+    margin-left: 20px;
+    font-size: 13px;
+}
+
+.review_container h4 {
+    margin: 10px auto;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.review_container p {
+    margin: 10px auto;
+    font-size: 15px;
+}

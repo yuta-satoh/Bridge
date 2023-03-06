@@ -9,6 +9,7 @@ import hModule from '../../styles/history.module.css';
 import urStyles from '../../styles/userRegister.module.css';
 import PostReview from '@/components/PostReview';
 import { SyntheticEvent, useState } from 'react';
+import prStyles from '../../styles/postReview.module.css';
 
 type Item = {
   id: number;
@@ -62,7 +63,7 @@ export default function History({
         <div className={hModule.body}>
           <h1 className={hModule.title}>購入履歴</h1>
           <table className={hModule.tableBody}>
-            <tbody>
+            <thead>
               <tr>
                 <th></th>
                 <th>商品名</th>
@@ -70,7 +71,7 @@ export default function History({
                 <th className={hModule.tableCell}>単価</th>
                 <th className={hModule.tableCell}>小計</th>
               </tr>
-            </tbody>
+            </thead>
             {data.map((item: Item) => (
               <>
                 <tbody key={item.item_id}>
@@ -125,18 +126,20 @@ export default function History({
                       購入日：{item.date}
                     </td>
                   </tr>
+                  <tr>
+                    <td  className={prStyles.completeArea} colSpan={6}>
+                      {postReview ? (
+                        <PostReview
+                          itemId={item.item_id}
+                          userId={item.user_id}
+                          setPostReview={setPostReview}
+                        />
+                      ) : (
+                        <></>
+                      )}
+                    </td>
+                  </tr>
                 </tbody>
-                <div>
-                  {postReview ? 
-                    <PostReview 
-                      itemId={item.item_id} 
-                      userId={item.user_id} 
-                      setPostReview={setPostReview} 
-                    />
-                  :
-                    <></>
-                  }
-                </div>
               </>
             ))}
           </table>
