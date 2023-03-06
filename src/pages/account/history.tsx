@@ -8,6 +8,7 @@ import { type } from 'os';
 import hModule from '../../styles/history.module.css';
 import urStyles from '../../styles/userRegister.module.css';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 type Item = {
   id: number;
@@ -39,17 +40,12 @@ export default function History({
   cookie: string | undefined;
 }) {
   const router = useRouter();
-  const userId = Number(cookie);
-  const fetcher = (url: string) =>
-    fetch(url).then((res) => res.json());
-  const { data, error } = useSWR<Item[], Error>(
-    `/api/order_histories?user_id=eq.${userId}`,
   const [order, setOrder] = useState('id.desc');
 
   const userId = Number(cookie);
   const fetcher = (url: string) =>
     fetch(url).then((res) => res.json());
-  const { data, error } = useSWR(
+  const { data, error } = useSWR<Item[], Error>(
     `/api/order_histories?user_id=eq.${userId}&order=${order}`,
     fetcher
   );
@@ -61,6 +57,7 @@ export default function History({
       pathname: '/account/review',
       query: { id: item.id },
     });
+  }
     
   function selectOrder(e: React.ChangeEvent<HTMLSelectElement>) {
     setOrder(e.target.value);
