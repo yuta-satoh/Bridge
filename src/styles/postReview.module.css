@@ -1,3 +1,4 @@
+/* index */
 /* 全体のスタイル */
 .main {
     width: 100%;
@@ -8,6 +9,16 @@
     margin: auto;
 }
 
+/* 商品情報のスタイル */
+.itemInfo {
+    margin-bottom: 20px;
+}
+
+.itemInfo table {
+    margin: auto;
+}
+
+/* レビュー投稿欄のスタイル */
 .nickname {
     margin: auto;
     display: flex;
@@ -102,5 +113,28 @@
 
 .complete {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 30px;
+    padding-bottom: 10px;
+}
+
+
+/* complete */
+.comp_main {
+    width: 100%;
+    height: 300px;
+}
+
+.comp_body {
+    width: 80%;
+    height: 300px;
+    margin: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.comp_link {
+    text-decoration: underline;
 }
