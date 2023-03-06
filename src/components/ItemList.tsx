@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import lstyles from '../styles/itemList.module.css';
-import useSWR from 'swr';
+import useSWR, { Fetcher } from 'swr';
 import { useState } from 'react';
 
 type Item = {
@@ -20,14 +20,24 @@ type Item = {
 export default function ItemList(): JSX.Element {
   // ソート用のstateを管理、onChangeで変更、mutateで再取得
   const [order, setOrder] = useState("?order=id.desc")
+  const [page, setPage] = useState(1)
 
-  const fetcher = (resource: string) =>
+  const fetcher: Fetcher<Item[], string> = (resource) =>
     fetch(resource).then((res) => res.json());
 
   const { data, error, mutate } = useSWR(`/api/items${order}`, fetcher);
   if (error) return <p>エラー</p>;
   // ロード中のcss入れたい・画面中央に表示したい
   if (!data) return <p>ロード中...</p>;
+
+  // ページ数の確認
+  const pageAmount = data.length % 18 === 0 ? data.length / 18 : Math.floor(data.length / 18) + 1;
+  
+  // ページ数の配列
+  const pageArr = Array(pageAmount).fill(0).map((num, index) => index)
+  
+  // データの成形
+  const pagingData = data.slice(page * 18, page * 18 + 18);
 
   return (
     <>
@@ -50,7 +60,7 @@ export default function ItemList(): JSX.Element {
         </select>
       </div>
       <div className={lstyles.list_outer}>
-        {data.map((item: Item) => {
+        {pagingData.map((item: Item) => {
           return (
             <div key={item.id}>
               <Link href={`/items/itemlist/${item.id}`}>
@@ -71,6 +81,24 @@ export default function ItemList(): JSX.Element {
             </div>
           );
         })}
+      </div>
+      {/* ページング用 */}
+      <div>
+        <ul>
+          {pageArr.map((num) => (
+            <li key={`page_${num}`}>
+              <button
+                type='button'
+                onClick={() => {
+                  setPage(num)
+                  window.scroll({ top: 0 });
+                }}
+              >
+                {num + 1}
+              </button>
+            </li>
+          ))}
+        </ul>
       </div>
     </>
   );

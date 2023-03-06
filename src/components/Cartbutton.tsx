@@ -6,7 +6,7 @@ import Link from 'next/link';
 // valueをカートに付与して送信
 // valueのcountがマイナスになってしまう場合もあるので条件追記必要
 const CartCounter = ({ itemId }: { itemId: number }) => {
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
 
   const handleChange = (ev: ChangeEvent<HTMLSelectElement>) => {
     const value = ev.target.value;
