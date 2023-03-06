@@ -192,7 +192,12 @@
     background-color: #F8C6BD;
 }
 
-.cart_lclick:hover,.cart_rclick:hover,.cart_right:hover,.detail:hover,.category_detailname:hover{
+.buttonStyle {
+    background-color: #F8C6BD;
+    padding: 20px;
+  }
+
+.cart_lclick:hover,.cart_rclick:hover,.buttonStyle:hover,.detail:hover,.category_detailname:hover{
     color: #FF7C8A;
 }
 

@@ -34,7 +34,7 @@ export default function ItemPage({item}: {item: Item[]}): JSX.Element {
   return (
     <>
       <Head>
-        <title>商品詳細</title>
+        <title>{items.name}</title>
       </Head>
 
       <main className={lstyles.main}>
