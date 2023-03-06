@@ -515,7 +515,7 @@ export default function UserRegister() {
               </button>
             </div>
             <div className={urStyles.buttonArea}>
-              <button type="button" className={urStyles.clearButton} onClick={checkInput}>
+              <button type="button" className={urStyles.clearButton} onClick={() => setUserInfo(initUserInfo)}>
                 入力クリア
               </button>
             </div>
