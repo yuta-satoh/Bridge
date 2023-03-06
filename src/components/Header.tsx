@@ -5,14 +5,35 @@ import Cookies from 'js-cookie';
 import { GetServerSideProps } from 'next';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/router';
+import useSWR from 'swr';
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  return {
-    props: {},
-  };
+type items = {
+  id: number;
+  name: string;
+  description: string;
+  genre: string;
+  category: string;
+  price: number;
+  imgurl: string;
+  stock: number;
+  delete: boolean;
 };
 
-export default function Header({auth}:{auth:boolean|undefined}) {
+type cart = {
+  id: number;
+  item_id: number;
+  items: items;
+  cart_id: number;
+  date: string;
+  quantity: number;
+  delete: boolean;
+}[];
+
+export default function Header({
+  auth,
+}: {
+  auth: boolean | undefined;
+}) {
   const router = useRouter();
   const [input, setInput] = useState('');
 
@@ -34,25 +55,45 @@ export default function Header({auth}:{auth:boolean|undefined}) {
     'フェミニン',
   ];
 
-  const handleChange = (ev:ChangeEvent<HTMLInputElement>) => {
+  const userId = Cookies.get('id');
+  const fetcher = (url: string) =>
+    fetch(url).then((res) => res.json());
+
+  const { data, error }: { data: cart; error: any } = useSWR(
+    `/api/cart_items?select=*,items(*),carts(*)&cart_id=eq.${userId}`,
+    fetcher,
+    { refreshInterval: 0.1 }
+  );
+  if (error) return <p>エラー</p>;
+  if (!data) return <p>ロード中...</p>;
+
+  const total = data.reduce(function (sum, element) {
+    return sum + element.quantity;
+  }, 0);
+
+
+  const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
     const value = ev.target.value;
     setInput(value);
-  }
+  };
 
   const handleSubmit = (ev: FormEvent) => {
     ev.preventDefault();
 
     if (!input) {
-      return
+      return;
     }
-    
+
     // ジャンルやカテゴリが空の時は全要素をクエリに渡す
     router.push({
       pathname: '/items/itemlist/search',
-      query: { genre: genreDatas, category: categoryDatas, input: input },
+      query: {
+        genre: genreDatas,
+        category: categoryDatas,
+        input: input,
+      },
     });
-  }
-
+  };
   return (
     <header
       className={`${headModule.body} h-28 w-full bg-orange-900`}
@@ -76,7 +117,7 @@ export default function Header({auth}:{auth:boolean|undefined}) {
           <li>ヘルプ</li>
         </ul>
         <div className="flex gap-10">
-          <form className={headModule.form} onSubmit={handleSubmit} >
+          <form className={headModule.form} onSubmit={handleSubmit}>
             <input
               className="h-8 border border-neutral-500 rounded-l pl-2.5"
               type="text"
@@ -125,6 +166,7 @@ export default function Header({auth}:{auth:boolean|undefined}) {
             </Link>
           )}
           <Link href={'/cart'} className={headModule.iconModule}>
+          {total === 0 ? (<></>) : (<div className={headModule.cartCounter}>{total}</div>)}
             <Image
               src="/images/icon/cart.png"
               alt=""
