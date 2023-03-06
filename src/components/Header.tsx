@@ -55,7 +55,7 @@ export default function Header({auth}:{auth:boolean|undefined}) {
 
   return (
     <header
-      className={`${headModule.body} h-28 w-screen bg-orange-900`}
+      className={`${headModule.body} h-28 w-full bg-orange-900`}
     >
       <div
         className={`${headModule.menu} flex items-center justify-center h-20 w-screen bg-white absolute top-8`}
