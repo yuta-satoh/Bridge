@@ -1,12 +1,13 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import istyles from '../styles/item.module.css';
 import addCart from '@/lib/addCart';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 // valueをカートに付与して送信
 // valueのcountがマイナスになってしまう場合もあるので条件追記必要
 const CartCounter = ({ itemId }: { itemId: number }) => {
   const [quantity, setQuantity] = useState(1);
+  const router = useRouter();
 
   const handleChange = (ev: ChangeEvent<HTMLSelectElement>) => {
     const value = ev.target.value;
@@ -36,15 +37,16 @@ const CartCounter = ({ itemId }: { itemId: number }) => {
         </select>
       </div>
       {/* イベント実行後、ローカルストレージに付与するのみ。カートページでgetしている。 */}
-      <Link href="/cart">
-          <button
-            type="button"
-            onClick={() => addCart(itemId, quantity)}
-            className={istyles.buttonStyle}
-          >
-            カートに追加
-          </button>
-      </Link>
+      <button
+        type="button"
+        onClick={async () => {
+          await addCart(itemId, quantity)
+          router.push("/cart")
+        }}
+        className={istyles.buttonStyle}
+      >
+        カートに追加
+      </button>
     </div>
   );
 };

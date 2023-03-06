@@ -20,7 +20,7 @@ type Item = {
 export default function ItemList(): JSX.Element {
   // ソート用のstateを管理、onChangeで変更、mutateで再取得
   const [order, setOrder] = useState("?order=id.desc")
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState(0)
 
   const fetcher: Fetcher<Item[], string> = (resource) =>
     fetch(resource).then((res) => res.json());
