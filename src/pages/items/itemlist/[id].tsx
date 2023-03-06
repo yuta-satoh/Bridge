@@ -21,9 +21,11 @@ type Item = {
   delete: boolean;
 };
 
-
-export default function ItemPage({item}: {item: Item[]}): JSX.Element {
-
+export default function ItemPage({
+  item,
+}: {
+  item: Item[];
+}): JSX.Element {
   // 確認用
   // console.log(item);
 
@@ -46,20 +48,30 @@ export default function ItemPage({item}: {item: Item[]}): JSX.Element {
                 <Link href="/">TOPページ</Link>
               </li>
               <li className={lstyles.breadlist}>
-                <Link href={`/items/?genre=eq.${items.genre}`}>{items.genre}</Link>
+                <Link href="/items/itemlist">商品一覧ページ</Link>
               </li>
+              {/* ジャンル絞り込み */}
               <li className={lstyles.breadlist}>
-                <Link href={`/items/?category=eq.${items.category}`}>{items.category}</Link>
+                <Link
+                  href={`/items/itemlist/search?genre=${items.genre}&category=椅子&category=テーブル&category=カーテン&category=照明&category=カーペット%2Fラグ&category=ソファ&category=収納棚&category=ベッド%2F寝具&category=小物%2F雑貨&input=&order=id.desc&page=0`}
+                >
+                  {items.genre}
+                </Link>
               </li>
+              {/* ジャンルとカテゴリ絞り込み */}
               <li className={lstyles.breadlist}>
-                {items.name}
+                <Link
+                  href={`/items/itemlist/search?genre=${items.genre}&category=${items.category}&input=&order=id.desc&page=0`}
+                >
+                  {items.category}
+                </Link>
               </li>
+              <li className={lstyles.breadlist}>{items.name}</li>
             </ol>
           </nav>
         </div>
 
         <div className={istyles.itembox}>
-
           <div key={items.id} className={istyles.content_left}>
             <div className={istyles.image}>
               <Image
@@ -70,14 +82,14 @@ export default function ItemPage({item}: {item: Item[]}): JSX.Element {
               />
             </div>
 
-          <ReviewList itemId={items.id.toString()}/>
+            <ReviewList itemId={items.id.toString()} />
 
-          {/* 以下はこんなのもどうですか、ジャンル・カテゴリに合致したものを持ってくる */}
-          <ItemdetailReccomend genre={genre} category={category}/>
+            {/* 以下はこんなのもどうですか、ジャンル・カテゴリに合致したものを持ってくる */}
+            <ItemdetailReccomend genre={genre} category={category} />
           </div>
 
           <div className={istyles.content_right}>
-             {/* 詳細他メニュー */}
+            {/* 詳細他メニュー */}
             <div>
               <ul className={istyles.product_taglists}>
                 <li className={istyles.product_taglist}>保証付</li>
@@ -91,7 +103,7 @@ export default function ItemPage({item}: {item: Item[]}): JSX.Element {
               </ul>
             </div>
 
-          {/* 商品概要 */}
+            {/* 商品概要 */}
             <div className={istyles.content_itemname}>
               <span>{items.name}</span>
             </div>
@@ -99,10 +111,10 @@ export default function ItemPage({item}: {item: Item[]}): JSX.Element {
               <span>{items.price}円</span>
             </div>
 
-          {/* カートボタン機能 */}
+            {/* カートボタン機能 */}
             <CartCounter itemId={items.id} />
 
-          {/* 商品詳細説明 */}
+            {/* 商品詳細説明 */}
             <div className={istyles.content_description}>
               <div className={istyles.content_itemdescription_title}>
                 <div className={istyles.content_description_title}>
@@ -118,7 +130,9 @@ export default function ItemPage({item}: {item: Item[]}): JSX.Element {
             <div className={istyles.category_details}>
               <div className={istyles.category_detail}>
                 商品カテゴリー：
-                <Link href="/">
+                <Link
+                  href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=${items.category}&input=&order=id.desc&page=0`}
+                >
                   <p className={istyles.category_detailname}>
                     {items.category}
                   </p>
@@ -126,7 +140,9 @@ export default function ItemPage({item}: {item: Item[]}): JSX.Element {
               </div>
               <div className={istyles.category_detail}>
                 インテリアジャンル：
-                <Link href="/">
+                <Link
+                  href={`/items/itemlist/search?genre=${items.genre}&category=椅子&category=テーブル&category=カーテン&category=照明&category=カーペット%2Fラグ&category=ソファ&category=収納棚&category=ベッド%2F寝具&category=小物%2F雑貨&input=&order=id.desc&page=0`}
+                >
                   <p className={istyles.category_detailname}>
                     {items.genre}
                   </p>
@@ -147,8 +163,8 @@ export async function getStaticPaths() {
   const items = await res.json();
 
   const paths = items.map((item: { id: number }) => ({
-    params: { 
-      id: `${item.id}` ,
+    params: {
+      id: `${item.id}`,
     },
   }));
 
@@ -164,8 +180,10 @@ type Params = {
   };
 };
 
-export async function getStaticProps({ params }:Params) {
-  const res = await fetch(`http://127.0.0.1:8000/items?id=eq.${params.id}`);
+export async function getStaticProps({ params }: Params) {
+  const res = await fetch(
+    `http://127.0.0.1:8000/items?id=eq.${params.id}`
+  );
   const item = await res.json();
 
   return {

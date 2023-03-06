@@ -83,10 +83,10 @@ export default function ItemList(): JSX.Element {
         })}
       </div>
       {/* ページング用 */}
-      <div>
-        <ul>
+      <div className={lstyles.paging}>
+        <ul className={lstyles.pages}>
           {pageArr.map((num) => (
-            <li key={`page_${num}`}>
+            <li key={`page_${num}`} className={lstyles.page}>
               <button
                 type='button'
                 onClick={() => {
