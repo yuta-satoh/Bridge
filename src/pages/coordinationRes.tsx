@@ -106,22 +106,25 @@ type item = {
 
 export default function coordination(
   { list }: list,
-  { theme }: { theme: string },
+  { theme }: { theme: string }
 ) {
   const loupe = '/images/icon/loupe.png';
-  console.log(list);
+  function selectTheme(e: React.ChangeEvent<HTMLSelectElement>) {
+    genre.genre = e.target.value;
+  }
   const listItem = list[0];
   const total = sum(listItem, list);
-  console.log(theme);
+  const genre = { genre: `${listItem.genre}` };
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    Router.push({ query: { name: theme } });
+    Cookies.set('genre', genre.genre);
+    Router.push({pathname:""});
   };
 
   return (
     <>
       <Head>
-        <title>コーディネートジェネレーター</title>
+        <title>{listItem.genre}</title>
       </Head>
       <div className={cModule.body}>
         <main>
@@ -138,29 +141,45 @@ export default function coordination(
           </ol>
           <div className={cModule.titleItems}>
             <h1 className={cModule.title}>
-              コーディネートジェネレーター
+              コーディネートジェネレーター（{listItem.genre}）
             </h1>
             <form
               action=""
               onSubmit={handleSubmit}
               className={cModule.resForm}
             >
-              <p className={cModule.selectResTheme}>
-                選択テーマ：{listItem.genre}
-              </p>
+              <div className={cModule.selectTheme}>
+                <label htmlFor="select" className={cModule.theme}>
+                  テーマ選択：
+                </label>
+                <select
+                  id="select"
+                  name="example"
+                  className={cModule.select}
+                  onChange={selectTheme}
+                >
+                  <option value={`${listItem.genre}`}>
+                    選択する
+                  </option>
+                  <option value="ナチュラル">ナチュラル</option>
+                  <option value="北欧風">北欧風</option>
+                  <option value="フェミニン">フェミニン</option>
+                  <option value="和モダン">和モダン</option>
+                </select>
+              </div>
               <div className={cModule.button}>
                 <button className={cModule.buttonStyle}>
                   再生成する
                 </button>
               </div>
             </form>
-            <div className={cModule.button}>
+            {/* <div className={cModule.button}>
               <Link href="/coordination">
                 <button className={cModule.backButtonStyle}>
                   テーマ選択
                 </button>
               </Link>
-            </div>
+            </div> */}
           </div>
           <Generator list={list} />
           <div className={cModule.linkItems}>
@@ -174,7 +193,11 @@ export default function coordination(
                 関連カテゴリの商品を見る
               </p>
               <div className={cModule.categoriesList}>
-                <Link href="/api/items?category=eq.table">
+                <Link
+                  href={`/items/itemlist/search?genre=${listItem.genre}&category=テーブル&input=&order=id.desc`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <div className={cModule.categories}>
                     <Image
                       src={loupe}
@@ -185,7 +208,11 @@ export default function coordination(
                     <p>&emsp;テーブル&emsp;</p>
                   </div>
                 </Link>
-                <Link href="/api/items?category=eq.chair">
+                <Link
+                  href={`/items/itemlist/search?genre=${listItem.genre}&category=椅子&input=&order=id.desc`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <div className={cModule.categories}>
                     <Image
                       src={loupe}
@@ -196,7 +223,11 @@ export default function coordination(
                     <p>&emsp;椅子&emsp;</p>
                   </div>
                 </Link>
-                <Link href="/api/items?category=eq.sofa">
+                <Link
+                  href={`/items/itemlist/search?genre=${listItem.genre}&category=ソファ&input=&order=id.desc`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <div className={cModule.categories}>
                     <Image
                       src={loupe}
@@ -207,7 +238,11 @@ export default function coordination(
                     <p>&emsp;ソファ&emsp;</p>
                   </div>
                 </Link>
-                <Link href="/api/items?category=eq.bed">
+                <Link
+                  href={`/items/itemlist/search?genre=${listItem.genre}&category=ベッド%2F寝具&input=&order=id.desc`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <div className={cModule.categories}>
                     <Image
                       src={loupe}
@@ -215,10 +250,14 @@ export default function coordination(
                       height={10}
                       alt=""
                     />
-                    <p>&emsp;ベッド&emsp;</p>
+                    <p>&emsp;ベッド/寝具&emsp;</p>
                   </div>
                 </Link>
-                <Link href="/api/items?category=eq.chest">
+                <Link
+                  href={`/items/itemlist/search?genre=${listItem.genre}&category=収納棚&input=&order=id.desc`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <div className={cModule.categories}>
                     <Image
                       src={loupe}
@@ -231,7 +270,11 @@ export default function coordination(
                 </Link>
               </div>
               <div className={cModule.categoriesList}>
-                <Link href="/api/items?category=eq.rug">
+                <Link
+                  href={`/items/itemlist/search?genre=${listItem.genre}&category=小物%2F雑貨&input=&order=id.desc`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <div className={cModule.categories}>
                     <Image
                       src={loupe}
@@ -242,7 +285,11 @@ export default function coordination(
                     <p>&emsp;ラグ&emsp;</p>
                   </div>
                 </Link>
-                <Link href="/api/items?category=eq.light">
+                <Link
+                  href={`/items/itemlist/search?genre=${listItem.genre}&category=照明&input=&order=id.desc`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <div className={cModule.categories}>
                     <Image
                       src={loupe}
@@ -253,7 +300,11 @@ export default function coordination(
                     <p>&emsp;照明&emsp;</p>
                   </div>
                 </Link>
-                <Link href="/api/items?category=eq.curtain">
+                <Link
+                  href={`/items/itemlist/search?genre=${listItem.genre}&category=カーテン&input=&order=id.desc`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <div className={cModule.categories}>
                     <Image
                       src={loupe}
@@ -264,7 +315,11 @@ export default function coordination(
                     <p>&emsp;カーテン&emsp;</p>
                   </div>
                 </Link>
-                <Link href="/api/items?category=eq.accessory">
+                <Link
+                  href={`/items/itemlist/search?genre=${listItem.genre}&category=小物%2F雑貨&input=&order=id.desc`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <div className={cModule.categories}>
                     <Image
                       src={loupe}

@@ -14,14 +14,11 @@ import { setURL } from '../lib/generatorFn';
 import Router from 'next/router';
 
 export default function coordination() {
-  // const [theme, setTheme] = useState('');
   const genre = { genre: 'ナチュラル' };
-  // const router = useRouter();
   const loupe = '/images/icon/loupe.png';
 
   function selectTheme(e: React.ChangeEvent<HTMLSelectElement>) {
     genre.genre = e.target.value;
-    // setTheme(e.target.value)
   }
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -74,7 +71,7 @@ export default function coordination() {
               </div>
             </form>
           </div>
-          <div className={cModule.linkItems}>
+          {/* <div className={cModule.linkItems}>
             <Link href="#top">
               <button type="button" className={cModule.linkButton}>
                 トップへ<span className={cModule.buttonSpan}>↑</span>
@@ -188,7 +185,7 @@ export default function coordination() {
                 </Link>
               </div>
             </div>
-          </div>
+          </div> */}
         </main>
       </div>
     </>

@@ -142,8 +142,14 @@ export default function Generator(props: {
               }
               return (
                 <>
-                  <div key={item.id} className={cModule.card}>
-                    <Link href="" className={cModule.cardStyle} key={item.id}>
+                  <div key={item.id} className={`${cModule.card} ${cModule.fadein}`}>
+                    <Link
+                      href={`/items/itemlist/${item.id}`}
+                      className={cModule.cardStyle}
+                      key={item.id}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <Image
                         src={item.imgurl}
                         width={150}
@@ -156,7 +162,10 @@ export default function Generator(props: {
                         className={cModule.cardDetail}
                       >
                         <p>{item.name}</p>
-                        <div className={cModule.cardContents} key={item.id}>
+                        <div
+                          className={cModule.cardContents}
+                          key={item.id}
+                        >
                           <p>¥{item.price.toLocaleString()}</p>
                           <p className={cModule.priceFree}>
                             送料無料
