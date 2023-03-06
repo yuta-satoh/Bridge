@@ -43,7 +43,7 @@ export default function History({
   // レビュー投稿画面の表示の切替を管理するstate
   const [postReview, setPostReview] = useState<boolean>(false);
 
-  const [order,setOrder] = useState('id.desc')
+  const [order, setOrder] = useState('id.desc');
 
   const userId = Number(cookie);
   const fetcher = (url: string) =>
@@ -69,7 +69,11 @@ export default function History({
           <h1 className={hModule.title}>購入履歴</h1>
           <div className={hModule.historyOrder}>
             <label htmlFor="historyOrder">並び替える:</label>
-            <select name="historyOrder" id="historyOrder" onChange={selectOrder}>
+            <select
+              name="historyOrder"
+              id="historyOrder"
+              onChange={selectOrder}
+            >
               <option value="id.desc">新しい順</option>
               <option value="id.asc">古い順</option>
             </select>
@@ -115,12 +119,10 @@ export default function History({
                       {item.quantity}個
                     </td>
                     <td className={hModule.tableCell}>
-                      ¥{' '}
-                      {(item.quantity * item.price).toLocaleString()}
+                      ¥ {(item.price * 1.1).toLocaleString()}
                     </td>
                     <td className={hModule.tableCell}>
-                      ¥{' '}
-                      {(item.quantity * item.price).toLocaleString()}
+                      ¥ {(item.quantity * (item.price * 1.1)).toLocaleString()}
                     </td>
                     <td className={hModule.tableCellCenter}>
                       <button
@@ -139,7 +141,7 @@ export default function History({
                     </td>
                   </tr>
                   <tr>
-                    <td  className={prStyles.completeArea} colSpan={6}>
+                    <td className={prStyles.completeArea} colSpan={6}>
                       {postReview ? (
                         <PostReview
                           itemId={item.item_id}
