@@ -64,22 +64,22 @@ export default function SearchBoxTest() {
     if (genres.length === 0 && categories.length === 0) {
       router.push({
         pathname: '/items/itemlist/search',
-        query: { genre: genreDatas, category: categoryDatas, input: input, order: 'id.desc' },
+        query: { genre: genreDatas, category: categoryDatas, input: input, order: 'id.desc', page: '0' },
       });
     } else if (genres.length === 0 && categories.length !== 0) {
       router.push({
         pathname: '/items/itemlist/search',
-        query: { genre: genreDatas, category: categories, input: input, order: 'id.desc' },
+        query: { genre: genreDatas, category: categories, input: input, order: 'id.desc', page: '0' },
       });
     } else if (genres.length !== 0 && categories.length == 0) {
       router.push({
         pathname: '/items/itemlist/search',
-        query: { genre: genres, category: categoryDatas, input: input, order: 'id.desc' },
+        query: { genre: genres, category: categoryDatas, input: input, order: 'id.desc', page: '0' },
       });
     } else if (genres.length !== 0 && categories.length !== 0) {
       router.push({
         pathname: '/items/itemlist/search',
-        query: { genre: genres, category: categories, input: input, order: 'id.desc' },
+        query: { genre: genres, category: categories, input: input, order: 'id.desc', page: '0' },
       });
     }  
   }

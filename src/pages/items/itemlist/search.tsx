@@ -23,6 +23,7 @@ type Order = {
   categories: string | string[],
   input: string,
   order: string,
+  page: string,
 }
 
 export const getServerSideProps:GetServerSideProps = async ({query}) => {
@@ -35,28 +36,38 @@ export const getServerSideProps:GetServerSideProps = async ({query}) => {
   const category = query.category;
   const input = query.input;
   const order = query.order;
+  const page = query.page;
 
   // ジャンルとカテゴリを/api/searchに渡す
   const response = await fetch(`http://localhost:3000/api/search?genre=${genre}&category=${category}&input=${input}&order=${order}`)
-  const filter = await response.json()
+  const data: Item[] = await response.json();
 
+  // ページ数表示用にページの最大数を確認
+  const maxPage = data.length % 18 === 0 ? data.length / 18 : Math.floor(data.length / 18) + 1;
+
+  const filter = data.slice(Number(page) * 18, Number(page) * 18 + 18)
+  
   // propsにはページ内で使用予定のものを渡す
   return {
     props: {
       filter,
+      maxPage: String(maxPage),
       nowOrder: {
         genres: genre,
         categories: category,
         input: typeof input !== "string" ? "" : input,
-        order: typeof order !== "string" ? "new" : order
+        order: typeof order !== "string" ? "new" : order,
+        page: typeof page !== "string" ? "0" : page,
       }
     }
   }
 }
 
-export default function Search({ filter, nowOrder }:{ filter:Item[], nowOrder: Order }) {
+export default function Search({ filter, maxPage, nowOrder }:{ filter:Item[], maxPage: string, nowOrder: Order }) {
   const router = useRouter();
   const [order, setOrder] = useState(nowOrder.order);
+
+  const pageArr = Array(Number(maxPage)).fill(0).map((num, index) => index)
 
   const handleClick = () => {
     // onClick時にorderの値を変更してリダイレクト
@@ -66,7 +77,20 @@ export default function Search({ filter, nowOrder }:{ filter:Item[], nowOrder: O
         genre: nowOrder.genres,
         category: nowOrder.categories,
         input: nowOrder.input,
-        order: order
+        order: order,
+        page: '0'
+      },
+    });
+  }
+
+  const handleClickPaging = (page: string) => {
+    router.push({
+      query: {
+        genre: nowOrder.genres,
+        category: nowOrder.categories,
+        input: nowOrder.input,
+        order: order,
+        page: page
       },
     });
   }
@@ -120,6 +144,21 @@ export default function Search({ filter, nowOrder }:{ filter:Item[], nowOrder: O
             </div>
           );
         })}
+      </div>
+      {/* ページング用 */}
+      <div>
+        <ul>
+          {pageArr.map((num) => (
+            <li key={`page_${num}`}>
+              <button
+                type='button'
+                onClick={() => handleClickPaging(String(num))}
+              >
+                {num + 1}
+              </button>
+            </li>
+          ))}
+        </ul>
       </div>
     </>
   );
