@@ -71,7 +71,6 @@ export default function Header({
     return sum + element.quantity;
   }, 0);
 
-
   const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
     const value = ev.target.value;
     setInput(value);
@@ -80,19 +79,19 @@ export default function Header({
   const handleSubmit = (ev: FormEvent) => {
     ev.preventDefault();
 
-    if (!input) {
-      return;
-    }
+    // if (!input) {
+    //   return;
+    // }
 
-    // ジャンルやカテゴリが空の時は全要素をクエリに渡す
-    router.push({
-      pathname: '/items/itemlist/search',
-      query: {
-        genre: genreDatas,
-        category: categoryDatas,
-        input: input,
-      },
-    });
+    // // ジャンルやカテゴリが空の時は全要素をクエリに渡す
+    // router.push({
+    //   pathname: '/items/itemlist/search',
+    //   query: {
+    //     genre: genreDatas,
+    //     category: categoryDatas,
+    //     input: input,
+    //   },
+    // });
   };
   return (
     <header
@@ -112,8 +111,8 @@ export default function Header({
           </div>
         </Link>
         <ul className="flex gap-10 mr-60 ml-30 whitespace-nowrap">
-          <li>商品</li>
-          <li>お知らせ</li>
+          <li><Link href="/items/itemlist">商品</Link></li>
+          <li><Link href="/#remind" className={headModule.toRemind}>お知らせ</Link></li>
           <li>ヘルプ</li>
         </ul>
         <div className="flex gap-10">
@@ -125,12 +124,16 @@ export default function Header({
               value={input}
               onChange={handleChange}
             />
-            <button
-              className="h-8 text-white bg-neutral-900 border border-neutral-900 rounded-r px-1"
-              type="submit"
+            <Link
+              href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=椅子&category=テーブル&category=カーテン&category=照明&category=カーペット%2Fラグ&category=ソファ&category=収納棚&category=ベッド%2F寝具&category=小物%2F雑貨&input=${input}&order=id.desc&page=0`}
             >
-              検索
-            </button>
+              <button
+                className="h-8 text-white bg-neutral-900 border border-neutral-900 rounded-r px-1"
+                type="submit"
+              >
+                検索
+              </button>
+            </Link>
           </form>
           {auth ? (
             <Link href={'/mypage'} className={headModule.iconModule}>
@@ -166,7 +169,11 @@ export default function Header({
             </Link>
           )}
           <Link href={'/cart'} className={headModule.iconModule}>
-          {total === 0 ? (<></>) : (<div className={headModule.cartCounter}>{total}</div>)}
+            {total === 0 ? (
+              <></>
+            ) : (
+              <div className={headModule.cartCounter}>{total}</div>
+            )}
             <Image
               src="/images/icon/cart.png"
               alt=""

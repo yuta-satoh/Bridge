@@ -32,3 +32,6 @@
     font-size: 10px;
     margin-left: 25px;
 }
+.toRemind{
+    scroll-behavior: smooth;
+}

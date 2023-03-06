@@ -74,7 +74,7 @@ export default function ItemList(): JSX.Element {
                 </div>
                 <div className={lstyles.detail}>
                   <p className={lstyles.itemname}>{item.name}</p>
-                  <p>{item.price}円</p>
+                  <p>¥ {(item.price * 1.1).toLocaleString()}</p>
                   <p>{item.description}</p>
                 </div>
               </Link>

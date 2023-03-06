@@ -43,16 +43,21 @@ export default function History({
   // レビュー投稿画面の表示の切替を管理するstate
   const [postReview, setPostReview] = useState<boolean>(false);
 
+  const [order,setOrder] = useState('id.desc')
+
   const userId = Number(cookie);
   const fetcher = (url: string) =>
     fetch(url).then((res) => res.json());
   const { data, error } = useSWR(
-    `/api/order_histories?user_id=eq.${userId}`,
+    `/api/order_histories?user_id=eq.${userId}&order=${order}`,
     fetcher
   );
   if (error) return <p>エラー</p>;
   if (!data) return <p>ロード中...</p>;
-  console.log(data);
+
+  function selectOrder(e: React.ChangeEvent<HTMLSelectElement>) {
+    setOrder(e.target.value);
+  }
 
   return (
     <>
@@ -62,6 +67,13 @@ export default function History({
       {data.length !== 0 ? (
         <div className={hModule.body}>
           <h1 className={hModule.title}>購入履歴</h1>
+          <div className={hModule.historyOrder}>
+            <label htmlFor="historyOrder">並び替える:</label>
+            <select name="historyOrder" id="historyOrder" onChange={selectOrder}>
+              <option value="id.desc">新しい順</option>
+              <option value="id.asc">古い順</option>
+            </select>
+          </div>
           <table className={hModule.tableBody}>
             <thead>
               <tr>

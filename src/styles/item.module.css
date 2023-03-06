@@ -126,7 +126,7 @@
     font-size: 25px;
 
     display: flex;
-    align-items: flex-start;
+    align-items: flex-end;
 
     padding: 20px 30px;
 }
@@ -257,4 +257,9 @@
 
 .category_detailname{
     color:#A96467;
+}
+
+.inTax{
+    font-size: 10px;
+    padding-bottom: 5px;
 }

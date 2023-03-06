@@ -137,7 +137,7 @@ export default function Search({ filter, maxPage, nowOrder }:{ filter:Item[], ma
                 </div>
                 <div className={lstyles.detail}>
                   <p className={lstyles.itemname}>{fil.name}</p>
-                  <p>{fil.price}円</p>
+                  <p>¥ {(fil.price * 1.1).toLocaleString()}</p>
                   <p>{fil.description}</p>
                 </div>
               </Link>
