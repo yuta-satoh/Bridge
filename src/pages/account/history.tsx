@@ -7,6 +7,7 @@ import useSWR from 'swr';
 import { type } from 'os';
 import hModule from '../../styles/history.module.css';
 import urStyles from '../../styles/userRegister.module.css';
+import { useRouter } from 'next/router';
 
 type Item = {
   id: number;
@@ -37,7 +38,7 @@ export default function History({
 }: {
   cookie: string | undefined;
 }) {
-
+  const router = useRouter();
   const userId = Number(cookie);
   const fetcher = (url: string) =>
     fetch(url).then((res) => res.json());
@@ -47,6 +48,13 @@ export default function History({
   );
   if (error) return <p>エラー</p>;
   if (!data) return <p>ロード中...</p>;
+
+  function handlePathTransition(item: Item) {
+    router.push({
+      pathname: '/account/review',
+      query: { id: item.id },
+    });
+  }
 
   return (
     <>
@@ -108,6 +116,7 @@ export default function History({
                       <button
                         type="button"
                         className={hModule.buttonStyle}
+                        onClick={() => handlePathTransition(item)}
                       >
                         レビューする
                       </button>

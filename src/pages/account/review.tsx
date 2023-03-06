@@ -1,4 +1,3 @@
-import { url } from "inspector";
 import { ChangeEvent, Dispatch, SetStateAction, SyntheticEvent, useState } from "react";
 import urStyles from '../../styles/userRegister.module.css';
 import prStyles from '../../styles/postReview.module.css';
@@ -16,6 +15,21 @@ type postReviews = {
     date: string;
 }
 
+type History = {
+    id: number;
+    item_id: number;
+    user_id: number;
+    name: string;
+    description: string;
+    genre: string;
+    category: string;
+    price: number;
+    imgurl: string;
+    date: string;
+    quantity: number;
+    delete: boolean;
+};
+
 // 今日の日付をyyyy-mm-dd形式で出力する関数
 function getToday() {
     const dt = new Date();
@@ -25,21 +39,32 @@ function getToday() {
     return (y + '-' + m + '-' + d);
 }
 
-export const getServerSideProps: GetServerSideProps = async(context) => {
+export const getServerSideProps: GetServerSideProps = async({ query }) => {
+    // order_historiesのidを受け取る
+    const id = query.id;
+    // idがundefinedなら空のpropsを渡す
+    if (id === undefined) {
+        return {
+            props: {}
+        }
+    }
+
+    // 取得したidと一致するhistoryデータを取得し、propsに渡す
+    const res = await fetch(`/api/order_histories?id=eq.${id}`);
+    const data: History[] = await res.json();
+    const hisotry_data = data[0];
     return {
-        props:{}
+        props:{
+            history_data: hisotry_data,
+        }
     }
 }
 
-export default function Review({ itemId, userId, setPostReview } : { 
-    itemId: number; 
-    userId: number; 
-    setPostReview: Dispatch<SetStateAction<boolean>>;
-}) {
+export default function Review({ history_data } : { history_data: History }) {
     // reviewの初期値
     const initReview = {
-        item_id: Number(itemId),
-        user_id: Number(userId),
+        item_id: Number(history_data.item_id),
+        user_id: Number(history_data.user_id),
         nickname: "",
         anonymous: false,
         evaluation: 4,
@@ -169,9 +194,6 @@ export default function Review({ itemId, userId, setPostReview } : {
                         </div>
                         <div className={prStyles.prButton}>
                             <button type="button"  onClick={(e) => handleSubmit(e)}>レビューを投稿</button>
-                        </div>
-                        <div className={prStyles.cancel}>
-                            <button type="button" onClick={() => setPostReview(false)}>キャンセル</button>
                         </div>
                     </form>
                 </div>
