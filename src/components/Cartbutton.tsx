@@ -1,6 +1,7 @@
-import React, {useState, useEffect, ChangeEvent} from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import istyles from '../styles/item.module.css';
 import addCart from '@/lib/addCart';
+import Link from 'next/link';
 
 // valueをカートに付与して送信
 // valueのcountがマイナスになってしまう場合もあるので条件追記必要
@@ -9,8 +10,8 @@ const CartCounter = ({ itemId }: { itemId: number }) => {
 
   const handleChange = (ev: ChangeEvent<HTMLSelectElement>) => {
     const value = ev.target.value;
-    setQuantity(Number(value))
-  }
+    setQuantity(Number(value));
+  };
 
   return (
     <div className={istyles.carts}>
@@ -34,15 +35,18 @@ const CartCounter = ({ itemId }: { itemId: number }) => {
           <option value={10}>10</option>
         </select>
       </div>
-    {/* イベント実行後、ローカルストレージに付与するのみ。カートページでgetしている。 */}
-    <div className={istyles.cart_right}>
-      <button
-        type="button"
-        onClick={() => addCart(itemId, quantity)}
-      >カートに追加</button>
+      {/* イベント実行後、ローカルストレージに付与するのみ。カートページでgetしている。 */}
+      <Link href="/cart">
+          <button
+            type="button"
+            onClick={() => addCart(itemId, quantity)}
+            className={istyles.buttonStyle}
+          >
+            カートに追加
+          </button>
+      </Link>
     </div>
-    </div>
-  )
-}
+  );
+};
 
 export default CartCounter;
