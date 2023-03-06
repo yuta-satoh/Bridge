@@ -7,6 +7,7 @@
 .main{
     height: 2100px;
     width: 100%;
+    min-width: 1280px;
 }
 .content{
     margin-top: 75px;
