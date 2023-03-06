@@ -273,5 +273,29 @@
 }
 
 .page{
-    margin: 25px;
+    margin: 15px;
+    text-align: center;
+    transition: 1s all;
 }
+
+.page:hover{
+    color: #FF7C8A;
+    font-weight: bold;
+    
+    
+    transform:translateY(-5px) ;
+   
+    transition: 0.25s ease-out;
+}
+
+.currentPage{
+    margin: 15px;
+    border-bottom: 1px solid #574142;
+    border-bottom-width: thin;
+}
+
+.button{
+    width: 25px;
+}
+  
+  

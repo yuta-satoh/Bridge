@@ -86,8 +86,9 @@ export default function ItemList(): JSX.Element {
       <div className={lstyles.paging}>
         <ul className={lstyles.pages}>
           {pageArr.map((num) => (
-            <li key={`page_${num}`} className={lstyles.page}>
+            <li key={`page_${num}`} className={ num === page ? lstyles.currentPage : lstyles.page }>
               <button
+                className={lstyles.button}
                 type='button'
                 onClick={() => {
                   setPage(num)

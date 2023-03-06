@@ -209,11 +209,12 @@ export default function Search({
         })}
       </div>
       {/* ページング用 */}
-      <div>
-        <ul>
+      <div className={lstyles.paging}>
+        <ul className={lstyles.pages}>
           {pageArr.map((num) => (
-            <li key={`page_${num}`}>
+            <li key={`page_${num}`} className={ num === Number(nowOrder.page) ? lstyles.currentPage : lstyles.page }>
               <button
+                className={lstyles.button}
                 type="button"
                 onClick={() => handleClickPaging(String(num))}
               >
