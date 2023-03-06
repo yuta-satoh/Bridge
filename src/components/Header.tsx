@@ -70,7 +70,7 @@ export default function Header({auth}:{auth:boolean|undefined}) {
             />
           </div>
         </Link>
-        <ul className="flex gap-10 mr-60 ml-30">
+        <ul className="flex gap-10 mr-60 ml-30 whitespace-nowrap">
           <li>商品</li>
           <li>お知らせ</li>
           <li>ヘルプ</li>
@@ -117,7 +117,7 @@ export default function Header({auth}:{auth:boolean|undefined}) {
               />
               <div>
                 <span
-                  className={`${headModule.menuLabel} inline-block mt-1`}
+                  className={`${headModule.menuLabel} inline-block mt-1 whitespace-nowrap`}
                 >
                   ログイン
                 </span>
@@ -132,7 +132,7 @@ export default function Header({auth}:{auth:boolean|undefined}) {
               height={25}
             />
             <span
-              className={`${headModule.menuLabel} inline-block mt-1`}
+              className={`${headModule.menuLabel} inline-block mt-1 whitespace-nowrap`}
             >
               カート
             </span>
