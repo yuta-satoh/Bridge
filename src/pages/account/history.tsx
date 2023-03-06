@@ -7,9 +7,7 @@ import useSWR from 'swr';
 import { type } from 'os';
 import hModule from '../../styles/history.module.css';
 import urStyles from '../../styles/userRegister.module.css';
-import PostReview from '@/components/PostReview';
-import { SyntheticEvent, useState } from 'react';
-import prStyles from '../../styles/postReview.module.css';
+import { useRouter } from 'next/router';
 
 type Item = {
   id: number;
@@ -40,9 +38,12 @@ export default function History({
 }: {
   cookie: string | undefined;
 }) {
-  // レビュー投稿画面の表示の切替を管理するstate
-  const [postReview, setPostReview] = useState<boolean>(false);
-
+  const router = useRouter();
+  const userId = Number(cookie);
+  const fetcher = (url: string) =>
+    fetch(url).then((res) => res.json());
+  const { data, error } = useSWR<Item[], Error>(
+    `/api/order_histories?user_id=eq.${userId}`,
   const [order, setOrder] = useState('id.desc');
 
   const userId = Number(cookie);
@@ -55,6 +56,12 @@ export default function History({
   if (error) return <p>エラー</p>;
   if (!data) return <p>ロード中...</p>;
 
+  function handlePathTransition(item: Item) {
+    router.push({
+      pathname: '/account/review',
+      query: { id: item.id },
+    });
+    
   function selectOrder(e: React.ChangeEvent<HTMLSelectElement>) {
     setOrder(e.target.value);
   }
@@ -88,7 +95,7 @@ export default function History({
                 <th className={hModule.tableCell}>小計</th>
               </tr>
             </thead>
-            {data.map((item: Item) => (
+            {data.map((item) => (
               <>
                 <tbody key={item.item_id}>
                   <tr
@@ -128,7 +135,7 @@ export default function History({
                       <button
                         type="button"
                         className={hModule.buttonStyle}
-                        onClick={() => setPostReview(true)}
+                        onClick={() => handlePathTransition(item)}
                       >
                         レビューする
                       </button>
@@ -138,19 +145,6 @@ export default function History({
                     <td colSpan={5}></td>
                     <td className={hModule.tableCellCenterSub}>
                       購入日：{item.date}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className={prStyles.completeArea} colSpan={6}>
-                      {postReview ? (
-                        <PostReview
-                          itemId={item.item_id}
-                          userId={item.user_id}
-                          setPostReview={setPostReview}
-                        />
-                      ) : (
-                        <></>
-                      )}
                     </td>
                   </tr>
                 </tbody>
