@@ -15,7 +15,6 @@ type Reviews = {
   users: { lastname: string; firstname: string };
 };
 
-
 // フェッチャー
 const fetcher: Fetcher<Reviews[], string> = (args: string) =>
   fetch(args).then((res) => res.json());
@@ -27,13 +26,34 @@ export default function Stars({ itemId }: { itemId: number }) {
     fetcher
   );
 
-  if (error) <></>;
+  if (error) return <></>;
+  if (!data) return <></>;
+  if (data?.length === 0) return <p></p>;
 
-  if (!data) <></>;
+  // 平均評価
+  const totalEvaluation = data
+    .map((data: Reviews) => data.evaluation)
+    .reduce((a, b) => a + b);
+  const averageEvaluation = totalEvaluation / data.length;
+  const roundAverageEvaluation = averageEvaluation.toFixed(1);
 
-  if (data?.length === 0) <></>;
+  // 星の黄色部分の幅を算出
+  const yStarWidth = Number(roundAverageEvaluation) * 20 + '%';
 
-
-
-  return <></>;
+  return (
+    <p className="evaluation">
+      <span className={rlStyles.stars_gray}>
+        ★★★★★
+        <span
+          className={rlStyles.stars_yellow}
+          style={{ width: yStarWidth }}
+        >
+          ★★★★★
+        </span>
+      </span>
+      <span className="averageEvaluation">
+        {roundAverageEvaluation}
+      </span>
+    </p>
+  );
 }
