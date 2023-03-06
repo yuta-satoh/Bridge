@@ -80,10 +80,11 @@ export default function ReviewList({ itemId }: { itemId: string }) {
   }
 
   // 平均評価(小数点第2位で四捨五入)
-  const averageEvaluation = data
+  const totalEvaluation = data
     .map((data: Reviews) => data.evaluation)
-    .reduce((a, b) => (a + b) / data.length)
-    .toFixed(1);
+    .reduce((a, b) => a + b);
+  const averageEvaluation = totalEvaluation / data.length;
+  const roundAverageEvaluation = averageEvaluation.toFixed(1);
 
   // descriptionを正しく改行して返す関数(CSSで出来るので削除予定)
   function shapingDescription(description: string) {
@@ -99,6 +100,9 @@ export default function ReviewList({ itemId }: { itemId: string }) {
     }
   }
 
+  // 星の黄色部分の幅を算出
+  const yStarWidth = Number(roundAverageEvaluation) * 20 + '%';
+
   return (
     <>
       <div className="reviwsArea">
@@ -108,29 +112,50 @@ export default function ReviewList({ itemId }: { itemId: string }) {
         <div>
           <p className="evaluation">
             平均評価:&nbsp;
+            <span className={rlStyles.stars_gray}>
+              ★★★★★
+              <span
+                className={rlStyles.stars_yellow}
+                style={{ width: yStarWidth }}
+              >
+                ★★★★★
+              </span>
+            </span>
             <span className="averageEvaluation">
-              {averageEvaluation}
+              {roundAverageEvaluation}
             </span>
           </p>
         </div>
         <div className={rlStyles.scroll}>
-          {data.map((review) => {
+          {data.map((review, index) => {
             return (
               <>
-                <div className={rlStyles.review}>
-                <div className={rlStyles.review_head}>
-                  <h3>
-                    {review.anonymous ? '非公開' : review.nickname}
-                  </h3>
-                  <p>評価:&nbsp;{review.evaluation}</p>
-                  <p>{shapingDate(review.date)}</p>
-                </div>
-                <hr/>
-                <div className={rlStyles.review_container}>
-                  <h4>{review.title}</h4>
-                  <p>{shapingDescription(review.description)}</p>
-                </div>
-                <hr className={rlStyles.black_hr}/>
+                <div className={rlStyles.review} key={index}>
+                  <div className={rlStyles.review_head} key={index}>
+                    <h3>
+                      {review.anonymous ? '非公開' : review.nickname}
+                    </h3>
+                    <p>
+                      評価:&nbsp;
+                      <span className={rlStyles.stars_gray}>
+                        ★★★★★
+                        <span
+                          className={rlStyles.stars_yellow}
+                          style={{ width: `${review.evaluation * 20}%` }}
+                        >
+                          ★★★★★
+                        </span>
+                      </span>
+                      {review.evaluation}
+                    </p>
+                    <p>{shapingDate(review.date)}</p>
+                  </div>
+                  <hr />
+                  <div className={rlStyles.review_container}>
+                    <h4>{review.title}</h4>
+                    <p>{shapingDescription(review.description)}</p>
+                  </div>
+                  <hr className={rlStyles.black_hr} />
                 </div>
               </>
             );

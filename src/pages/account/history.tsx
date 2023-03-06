@@ -7,9 +7,6 @@ import useSWR from 'swr';
 import { type } from 'os';
 import hModule from '../../styles/history.module.css';
 import urStyles from '../../styles/userRegister.module.css';
-import PostReview from '@/components/PostReview';
-import { SyntheticEvent, useState } from 'react';
-import prStyles from '../../styles/postReview.module.css';
 
 type Item = {
   id: number;
@@ -40,19 +37,16 @@ export default function History({
 }: {
   cookie: string | undefined;
 }) {
-  // レビュー投稿画面の表示の切替を管理するstate
-  const [postReview, setPostReview] = useState<boolean>(false);
 
   const userId = Number(cookie);
   const fetcher = (url: string) =>
     fetch(url).then((res) => res.json());
-  const { data, error } = useSWR(
+  const { data, error } = useSWR<Item[], Error>(
     `/api/order_histories?user_id=eq.${userId}`,
     fetcher
   );
   if (error) return <p>エラー</p>;
   if (!data) return <p>ロード中...</p>;
-  console.log(data);
 
   return (
     <>
@@ -72,7 +66,7 @@ export default function History({
                 <th className={hModule.tableCell}>小計</th>
               </tr>
             </thead>
-            {data.map((item: Item) => (
+            {data.map((item) => (
               <>
                 <tbody key={item.item_id}>
                   <tr
@@ -114,7 +108,6 @@ export default function History({
                       <button
                         type="button"
                         className={hModule.buttonStyle}
-                        onClick={() => setPostReview(true)}
                       >
                         レビューする
                       </button>
@@ -124,19 +117,6 @@ export default function History({
                     <td colSpan={5}></td>
                     <td className={hModule.tableCellCenterSub}>
                       購入日：{item.date}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td  className={prStyles.completeArea} colSpan={6}>
-                      {postReview ? (
-                        <PostReview
-                          itemId={item.item_id}
-                          userId={item.user_id}
-                          setPostReview={setPostReview}
-                        />
-                      ) : (
-                        <></>
-                      )}
                     </td>
                   </tr>
                 </tbody>

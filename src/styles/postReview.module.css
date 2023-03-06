@@ -1,25 +1,49 @@
-.completeArea {
-    text-align: center;
+/* 全体のスタイル */
+.main {
+    width: 100%;
+}
+
+.body {
     width: 80%;
-    padding: 10px;
+    margin: auto;
 }
 
-.complete {
-    font-weight: bold;
-    font-size: 20px;
+.nickname {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.button {
-    text-decoration: underline;
-    font-size: 15px;
+.review_title {
+    display: flex;
+    justify-content: center;
 }
 
 .prButton {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.prButton button {
     padding-left: 8px;
     padding-right: 8px;
     border: 1px solid gray;
     border-radius: 2px;
     font-size: 20px;
+}
+
+.cancel {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.cancel button {
+    text-decoration: underline;
+    font-size: 15px;
 }
 
 .inputBorder {
@@ -67,4 +91,16 @@
 .stars label:hover ~ label,
 .stars input:checked ~ label{
     color: #F8C601;
+}
+
+/* 完了画面 */
+.completeArea {
+    text-align: center;
+    width: 80%;
+    padding: 10px;
+}
+
+.complete {
+    font-weight: bold;
+    font-size: 20px;
 }
