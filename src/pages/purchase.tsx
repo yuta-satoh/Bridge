@@ -7,6 +7,8 @@ import { useState } from 'react';
 import { procedure } from '@/lib/purchaseFn';
 import Link from 'next/link';
 import urStyles from '../styles/userRegister.module.css';
+import { useRouter } from 'next/router';
+import Auth from './auth/auth';
 
 type items = {
   id: number;
@@ -52,6 +54,13 @@ export const getServerSideProps: GetServerSideProps = async (
   context
 ) => {
   const cookie = context.req.cookies['id'];
+  if (cookie === undefined) {
+    const user = null
+    const cookie = null
+    return {
+      props: { cookie, user },
+    };
+  }
   const TOKEN =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
   const user = await fetch(
@@ -77,7 +86,7 @@ export default function purchase({
   cookie,
   user,
 }: {
-  cookie: string | undefined;
+  cookie: string | null;
   user: User;
 }) {
   const price: price = [];
@@ -92,7 +101,7 @@ export default function purchase({
   if (error) return <p>エラー</p>;
   if (!data) return <p>ロード中...</p>;
   if (data.length === 0) {
-    location.href = '/cart';
+    location.href = ('/cart');
   }
   data.map((item) => {
     price.push({
@@ -110,6 +119,7 @@ export default function purchase({
       <Head>
         <title>購入確認</title>
       </Head>
+      <Auth>
       <div className={pModule.body}>
         <h1 className={pModule.title}>購入確認</h1>
         <table className={pModule.itemTable}>
@@ -180,13 +190,15 @@ export default function purchase({
           </button>
         </div>
         <div className={urStyles.loginLink}>
-            <Link href="/cart">
-              <button type="button" className={urStyles.linkButton}>
-                カートに戻る<span className={urStyles.buttonSpan}>→</span>
-              </button>
-            </Link>
-            </div>
+          <Link href="/cart">
+            <button type="button" className={urStyles.linkButton}>
+              カートに戻る
+              <span className={urStyles.buttonSpan}>→</span>
+            </button>
+          </Link>
+        </div>
       </div>
+      </Auth>
     </>
   );
 }
