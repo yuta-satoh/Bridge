@@ -5,12 +5,13 @@ import { useRouter } from 'next/router';
 
 // valueをカートに付与して送信
 // valueのcountがマイナスになってしまう場合もあるので条件追記必要
-const CartCounter = ({ itemId }: { itemId: number }) => {
+const CartCounter = ({ itemId, handleChangeQuantityItem }: { itemId: number, handleChangeQuantityItem: (quantity: string) => void }) => {
   const [quantity, setQuantity] = useState(1);
   const router = useRouter();
 
   const handleChange = (ev: ChangeEvent<HTMLSelectElement>) => {
     const value = ev.target.value;
+    handleChangeQuantityItem(value)
     setQuantity(Number(value));
   };
 
