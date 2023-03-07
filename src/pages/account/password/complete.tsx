@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import cModule from '../../../styles/coordination.module.css';
+import Auth from '@/pages/auth/auth';
 
 export default function PasswordComplete() {
   return (
@@ -34,33 +35,39 @@ export default function PasswordComplete() {
           text-decoration: underline;
         }
       `}</style>
-      <main>
-        <div className="container">
-          <nav>
-            <ol className={cModule.links} id="top">
-              <li className={cModule.pageLink}>
-                <Link href="/">Bridge</Link>
-                <span className={cModule.greaterThan}>&gt;</span>
-              </li>
-              <li className={cModule.pageLink}>
-                <Link href="/mypage">マイページ</Link>
-                <span className={cModule.greaterThan}>&gt;</span>
-              </li>
-              <li className={cModule.pageLink}>
-                <Link href="/account/password">パスワードの変更</Link>
-                <span className={cModule.greaterThan}>&gt;</span>
-              </li>
-              <li className={cModule.pageLink}>パスワード変更完了</li>
-            </ol>
-          </nav>
-          <section>
-            <p>パスワードの変更が完了しました</p>
-            <span className="link">
-              <Link href="/mypage">マイページに戻る</Link>
-            </span>
-          </section>
-        </div>
-      </main>
+      <Auth>
+        <main>
+          <div className="container">
+            <nav>
+              <ol className={cModule.links} id="top">
+                <li className={cModule.pageLink}>
+                  <Link href="/">Bridge</Link>
+                  <span className={cModule.greaterThan}>&gt;</span>
+                </li>
+                <li className={cModule.pageLink}>
+                  <Link href="/mypage">マイページ</Link>
+                  <span className={cModule.greaterThan}>&gt;</span>
+                </li>
+                <li className={cModule.pageLink}>
+                  <Link href="/account/password">
+                    パスワードの変更
+                  </Link>
+                  <span className={cModule.greaterThan}>&gt;</span>
+                </li>
+                <li className={cModule.pageLink}>
+                  パスワード変更完了
+                </li>
+              </ol>
+            </nav>
+            <section>
+              <p>パスワードの変更が完了しました</p>
+              <span className="link">
+                <Link href="/mypage">マイページに戻る</Link>
+              </span>
+            </section>
+          </div>
+        </main>
+      </Auth>
     </>
   );
 }
