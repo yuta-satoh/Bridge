@@ -192,13 +192,13 @@ export default function Review({
                   <td className={hModule.tableCell}>
                     ¥{' '}
                     {(
-                      history_data.quantity * history_data.price
+                      history_data.price * 1.1
                     ).toLocaleString()}
                   </td>
                   <td className={hModule.tableCell}>
                     ¥{' '}
                     {(
-                      history_data.quantity * history_data.price
+                      history_data.quantity * history_data.price * 1.1
                     ).toLocaleString()}
                   </td>
                 </tr>
