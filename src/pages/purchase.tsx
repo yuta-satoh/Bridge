@@ -116,7 +116,6 @@ export default function purchase({
           <tbody>
             <tr className={pModule.tableTLine}>
               <th className={pModule.nameTag}>品名</th>
-              <th className={pModule.nameTag}></th>
               <th className={pModule.item}>個数</th>
               <th className={pModule.itemTag}>単価</th>
               <th className={pModule.itemTag}>小計</th>
@@ -125,9 +124,6 @@ export default function purchase({
               <tr key={item.item_id} className={pModule.tableLine}>
                 <td className={pModule.itemName}>
                   {item.items.name}
-                </td>
-                <td className={pModule.itemName}>
-                  {item.items.imgurl}
                 </td>
                 <td className={pModule.item}>{item.quantity}</td>
                 <td className={pModule.item}>
