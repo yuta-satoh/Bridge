@@ -183,11 +183,6 @@ export default function coordination(
           </div>
           <Generator list={list} />
           <div className={cModule.linkItems}>
-            <Link href="#top">
-              <button type="button" className={cModule.linkButton}>
-                トップへ<span className={cModule.buttonSpan}>↑</span>
-              </button>
-            </Link>
             <div className={cModule.categoriesItems}>
               <p className={cModule.subTitle}>
                 関連カテゴリの商品を見る
