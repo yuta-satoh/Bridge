@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Auth from '../auth/auth';
 
 export default function Withdraw() {
   return (
@@ -6,11 +7,13 @@ export default function Withdraw() {
       <Head>
         <title>退会手続き</title>
       </Head>
-      <main>
-        <section>
-            <div className='title'>退会手続き</div>
-        </section>
-      </main>
+      <Auth>
+        <main>
+          <section>
+            <div className="title">退会手続き</div>
+          </section>
+        </main>
+      </Auth>
     </>
   );
 }
