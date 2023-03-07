@@ -53,13 +53,9 @@
   padding: 10px 30px;
   font-size: 10px;
 }
-/* .card{
-    display: flex;
-    height: 100px;
+.historyOrder{
+  text-align: end;
+  width: 90%;
+  margin: 15px 0;
+  font-size: 15px;
 }
-.cardContents{
-    display: flex;
-    flex-direction: column;
-}
-
- */

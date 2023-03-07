@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import cModule from '../../styles/coordination.module.css';
+import cModule from '../../../styles/coordination.module.css';
 
 export default function PasswordComplete() {
   return (

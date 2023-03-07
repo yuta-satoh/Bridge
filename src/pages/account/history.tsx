@@ -7,9 +7,8 @@ import useSWR from 'swr';
 import { type } from 'os';
 import hModule from '../../styles/history.module.css';
 import urStyles from '../../styles/userRegister.module.css';
-import PostReview from '@/components/PostReview';
-import { SyntheticEvent, useState } from 'react';
-import prStyles from '../../styles/postReview.module.css';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 type Item = {
   id: number;
@@ -40,19 +39,29 @@ export default function History({
 }: {
   cookie: string | undefined;
 }) {
-  // レビュー投稿画面の表示の切替を管理するstate
-  const [postReview, setPostReview] = useState<boolean>(false);
+  const router = useRouter();
+  const [order, setOrder] = useState('id.desc');
 
   const userId = Number(cookie);
   const fetcher = (url: string) =>
     fetch(url).then((res) => res.json());
-  const { data, error } = useSWR(
-    `/api/order_histories?user_id=eq.${userId}`,
+  const { data, error } = useSWR<Item[], Error>(
+    `/api/order_histories?user_id=eq.${userId}&order=${order}`,
     fetcher
   );
   if (error) return <p>エラー</p>;
   if (!data) return <p>ロード中...</p>;
-  console.log(data);
+
+  function handlePathTransition(item: Item) {
+    router.push({
+      pathname: '/account/review',
+      query: { id: item.id },
+    });
+  }
+    
+  function selectOrder(e: React.ChangeEvent<HTMLSelectElement>) {
+    setOrder(e.target.value);
+  }
 
   return (
     <>
@@ -62,6 +71,17 @@ export default function History({
       {data.length !== 0 ? (
         <div className={hModule.body}>
           <h1 className={hModule.title}>購入履歴</h1>
+          <div className={hModule.historyOrder}>
+            <label htmlFor="historyOrder">並び替える:</label>
+            <select
+              name="historyOrder"
+              id="historyOrder"
+              onChange={selectOrder}
+            >
+              <option value="id.desc">新しい順</option>
+              <option value="id.asc">古い順</option>
+            </select>
+          </div>
           <table className={hModule.tableBody}>
             <thead>
               <tr>
@@ -72,7 +92,7 @@ export default function History({
                 <th className={hModule.tableCell}>小計</th>
               </tr>
             </thead>
-            {data.map((item: Item) => (
+            {data.map((item) => (
               <>
                 <tbody key={item.item_id}>
                   <tr
@@ -103,18 +123,16 @@ export default function History({
                       {item.quantity}個
                     </td>
                     <td className={hModule.tableCell}>
-                      ¥{' '}
-                      {(item.quantity * item.price).toLocaleString()}
+                      ¥ {(item.price * 1.1).toLocaleString()}
                     </td>
                     <td className={hModule.tableCell}>
-                      ¥{' '}
-                      {(item.quantity * item.price).toLocaleString()}
+                      ¥ {(item.quantity * (item.price * 1.1)).toLocaleString()}
                     </td>
                     <td className={hModule.tableCellCenter}>
                       <button
                         type="button"
                         className={hModule.buttonStyle}
-                        onClick={() => setPostReview(true)}
+                        onClick={() => handlePathTransition(item)}
                       >
                         レビューする
                       </button>
@@ -124,19 +142,6 @@ export default function History({
                     <td colSpan={5}></td>
                     <td className={hModule.tableCellCenterSub}>
                       購入日：{item.date}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td  className={prStyles.completeArea} colSpan={6}>
-                      {postReview ? (
-                        <PostReview
-                          itemId={item.item_id}
-                          userId={item.user_id}
-                          setPostReview={setPostReview}
-                        />
-                      ) : (
-                        <></>
-                      )}
                     </td>
                   </tr>
                 </tbody>

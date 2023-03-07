@@ -4,7 +4,7 @@ import Link from 'next/link';
 import lstyles from '../../../styles/itemList.module.css';
 import istyles from '../../../styles/item.module.css';
 import useSWR from 'swr';
-import { useRouter } from 'next/router';
+import { useState } from 'react';
 import ItemdetailReccomend from '@/components/ItemdetailReccomend';
 import CartCounter from '@/components/Cartbutton';
 import ReviewList from '@/components/ReviewList';
@@ -32,6 +32,30 @@ export default function ItemPage({
   const items = item[0];
   const genre = items.genre;
   const category = items.category;
+
+  const [multiItemPrice, setMultiItemPrice] = useState(items.price)
+
+  const handleChangeQuantityItem = (quantity: string) => {
+    const multi = items.price * Number(quantity);
+    setMultiItemPrice(multi);
+  }
+
+  const showMultiPrice = () => {
+    if (multiItemPrice === items.price) {
+      return (
+        <div className={istyles.content_itemprice}>
+        </div>
+      )
+    } else {
+      return (
+        <div className={istyles.content_itemprice}>
+          <span>合計：</span>
+          <span>¥ {(multiItemPrice * 1.1).toLocaleString()}</span>
+          <span className={istyles.inTax}>(税込)</span>
+        </div>
+      )
+    }
+  }
 
   return (
     <>
@@ -109,11 +133,13 @@ export default function ItemPage({
               <span>{items.name}</span>
             </div>
             <div className={istyles.content_itemprice}>
-              <span>{items.price}円</span>
+              <span>¥ {(items.price * 1.1).toLocaleString()}</span><span className={istyles.inTax}>(税込)</span>
             </div>
+              {/* 合計金額 */}
+              {showMultiPrice()}
 
             {/* カートボタン機能 */}
-            <CartCounter itemId={items.id} />
+            <CartCounter itemId={items.id} handleChangeQuantityItem={handleChangeQuantityItem} />
 
             {/* 商品詳細説明 */}
             <div className={istyles.content_description}>

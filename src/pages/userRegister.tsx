@@ -36,7 +36,7 @@ export default function UserRegister() {
   }
 
   const [userInfo, setUserInfo] = useState<User>(initUserInfo);
-  const [errorText, setErrorText] = useState<User>(initUserInfo)
+  const [errorText, setErrorText] = useState<User>(initUserInfo);
   const router = useRouter();
 
   const searchAddress = (e: React.FormEvent) => {
@@ -62,7 +62,7 @@ export default function UserRegister() {
   }
 
   const genderValidation = (gender: string) => {
-    if (!gender) return "※性別を選択して下さい"
+    if (!gender) return "※性別を選択して下さい";
   }
 
   const emailValidation = (email: string) => {
@@ -76,10 +76,10 @@ export default function UserRegister() {
   const zipcodeValidation = (key: string, zipcode: string) => {
     switch (key) {
       case 'zipcode1':
-        if (zipcode.length !== 3) return '※郵便番号はXXX-XXXXの形式で入力してください';
+        if (zipcode.length !== 3) return '※郵便番号はXXX-XXXXの形式で入力して下さい';
         return '';
       case 'zipcode2':
-        if (zipcode.length !== 4) return '※郵便番号はXXX-XXXXの形式で入力してください';
+        if (zipcode.length !== 4) return '※郵便番号はXXX-XXXXの形式で入力して下さい';
         return '';
     }
   }
@@ -89,8 +89,8 @@ export default function UserRegister() {
     return '';
   }
 
-  const telValidation = (tel: string) => {
-    if (!tel) return '※電話番号はXXXX-XXXX-XXXXの形式で入力してください';
+  const telValidation = (tell: string) => {
+    if (!tell) return '※電話番号はXXXX-XXXX-XXXXの形式で入力してください';
     return '';
   }
 
@@ -120,9 +120,9 @@ export default function UserRegister() {
         return zipcodeValidation(key, value);
       case 'address':
         return addressValidation(value);
-      case 'tel1':
-      case 'tel2':
-      case 'tel3':
+      case 'tell1':
+      case 'tell2':
+      case 'tell3':
         return telValidation(value);
       case 'password':
         return passwordValidation(value);
@@ -130,7 +130,6 @@ export default function UserRegister() {
         return samePasswordValidation(value);
     }
   }
-
 
   const handleChange = (e: ChangeEvent) => {
     if (!(e.target instanceof HTMLInputElement)) {
@@ -140,22 +139,6 @@ export default function UserRegister() {
     const value = e.target.value;
     setUserInfo({...userInfo, [key]: value});
     setErrorText({...errorText, [key]: formValidate(key, value)})
-  }
-
-  const handleChangeGender = (e: ChangeEvent) => {
-    if (!(e.target instanceof HTMLInputElement)) {
-      return;
-    }
-    if (e.target.value === "female") {
-      setUserInfo({...userInfo, gender: "女"})
-      setErrorText({...errorText, gender: ""})
-    } else if (e.target.value === "male") {
-      setUserInfo({...userInfo, gender: "男"})
-      setErrorText({...errorText, gender: ""})
-    } else {
-      setUserInfo({...userInfo, gender: "その他"})
-      setErrorText({...errorText, gender: ""})
-    }
   }
 
   const canSubmit = (): boolean => {
@@ -168,37 +151,64 @@ export default function UserRegister() {
     return validInfo && validError
   };
 
+  const checkInput = () => {
+    const keys = Object.keys(userInfo);
+    const values = Object.values(userInfo);
+    const valueIndex = values.flatMap((value, index) => !value ? index : [])
+    const filterKeys = keys.flatMap((key, index) => valueIndex.includes(index) ? key : [])
+    const newObj = initUserInfo
+    filterKeys.forEach((key) => {
+      switch (key) {
+        case 'lastName':
+        case 'firstName':
+          newObj.lastName = '※名前を入力して下さい'
+          break
+        case 'gender':
+          newObj.gender = '※性別を選択して下さい'
+          break
+        case 'email':
+          newObj.email = '※メールアドレスを入力して下さい'
+          break
+        case 'zipcode1':
+        case 'zipcode2':
+          newObj.zipcode1 = '※郵便番号を入力して下さい'
+          break
+        case 'address':
+          newObj.address = '※住所を入力して下さい'
+          break
+        case 'tell1':
+        case 'tell2':
+        case 'tell3':
+          newObj.tell1 = '※電話番号を入力して下さい'
+          break
+        case 'password':
+          newObj.password = '※パスワードを入力して下さい'
+          break
+        case 'confirmationPassword':
+          newObj.confirmationPassword = '※確認用パスワードを入力して下さい'
+          break
+      }
+    })
+    setErrorText(newObj);
+  }
+
   const submitHandler = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
+    checkInput();
+
     if (!canSubmit()) {
-      if (!userInfo.lastName || !userInfo.firstName) {
-        setErrorText({...errorText, lastName: "※名前を入力して下さい"})
-      }
-      if (!userInfo.gender) {
-        setErrorText({...errorText, gender: "※性別を選択して下さい"})
-      }
-      if (!userInfo.email) {
-        setErrorText({...errorText, email: "※メールアドレスを入力して下さい"})
-      }
-      if (!userInfo.tell1 || !userInfo.tell2 || !userInfo.tell3) {
-        setErrorText({...errorText, tell1: "※電話番号を入力して下さい"})
-      }
-      if (!userInfo.zipcode1 || !userInfo.zipcode2) {
-        setErrorText({...errorText, zipcode1: "※郵便番号を入力して下さい"})
-      }
-      if (!userInfo.address) {
-        setErrorText({...errorText, address: "※住所を入力して下さい"})
-      }
-      if (!userInfo.password) {
-        setErrorText({...errorText, password: "※パスワードを入力して下さい"})
-      }
-      if (!userInfo.confirmationPassword) {
-        setErrorText({...errorText, confirmationPassword: "※確認用パスワードを入力して下さい"})
-      }
       return
     }
 
-    const searchResult: {email: string, password: string} = await fetch("/api/register/search", {
+    if (
+      userInfo.tell1.length + userInfo.tell2.length + userInfo.tell3.length < 10
+      || userInfo.tell1.length + userInfo.tell2.length + userInfo.tell3.length >= 12
+    ) {
+      setErrorText({...errorText, tell1: "電話番号はXXXX-XXXX-XXXXの形式で入力して下さい"})
+      return
+    }
+
+    const searchResult: {email: string, password: string} = await fetch("/api/userResister/search", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -231,7 +241,7 @@ export default function UserRegister() {
       }
       
       try {
-        await fetch("/api/register", {
+        await fetch("/api/userResister", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -300,7 +310,7 @@ export default function UserRegister() {
                     id="female"
                     value="female"
                     className={urStyles.radioButton}
-                    onChange={handleChangeGender}
+                    onChange={handleChange}
                   />
                   <label
                     htmlFor="female"
@@ -318,7 +328,7 @@ export default function UserRegister() {
                     id="male"
                     value="male"
                     className={urStyles.radioButton}
-                    onChange={handleChangeGender}
+                    onChange={handleChange}
                   />
                   <label
                     htmlFor="male"
@@ -336,7 +346,7 @@ export default function UserRegister() {
                     id="other"
                     value="other"
                     className={urStyles.radioButton}
-                    onChange={handleChangeGender}
+                    onChange={handleChange}
                   />
                   <label
                     htmlFor="other"
@@ -505,7 +515,7 @@ export default function UserRegister() {
               </button>
             </div>
             <div className={urStyles.buttonArea}>
-              <button type="button" className={urStyles.clearButton}>
+              <button type="button" className={urStyles.clearButton} onClick={() => setUserInfo(initUserInfo)}>
                 入力クリア
               </button>
             </div>

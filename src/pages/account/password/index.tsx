@@ -2,11 +2,10 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { root } from 'postcss';
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
-import cModule from '../../styles/coordination.module.css';
-import urStyles from '../../styles/userRegister.module.css';
-import Auth from '../auth/auth';
+import cModule from '../../../styles/coordination.module.css';
+import urStyles from '../../../styles/userRegister.module.css';
+import Auth from '../../auth/auth';
 
 // userデータの型を定義
 type User = {
@@ -212,7 +211,7 @@ export default function Password({
       })
       if (res.ok) {
         setCompleteText("変更が完了しました");
-        rooter.replace('/account/passwordComplete');
+        rooter.replace('/account/password/complete');
       };
     }
   }

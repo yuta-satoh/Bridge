@@ -3,6 +3,7 @@ import Link from 'next/link';
 import lstyles from '../styles/itemList.module.css';
 import useSWR, { Fetcher } from 'swr';
 import { useState } from 'react';
+import Stars from './Stars';
 
 type Item = {
   id: number;
@@ -74,7 +75,8 @@ export default function ItemList(): JSX.Element {
                 </div>
                 <div className={lstyles.detail}>
                   <p className={lstyles.itemname}>{item.name}</p>
-                  <p>{item.price}円</p>
+                  <Stars itemId={item.id}/>
+                  <p>¥ {(item.price * 1.1).toLocaleString()}</p>
                   <p>{item.description}</p>
                 </div>
               </Link>

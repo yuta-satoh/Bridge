@@ -25,22 +25,22 @@ export default function ItemdetailReccomend(props:{
     fetch(resource).then((res) => res.json());
 
   // propsで持ってきた内容
-  console.log(props);
+  // console.log(props);
   
-  const { data, error } = useSWR(`/api/items?genre=eq.${props.genre}&category=eq.${props.category}`, fetcher);
+  const { data, error } = useSWR<Item[], Error>(`/api/items?genre=eq.${props.genre}&category=eq.${props.category}`, fetcher);
     
   if (error) return <p>エラー</p>;
   // ロード中のcss入れたい・画面中央に表示したい
   if (!data) return <p>ロード中...</p>;
 
-  console.log(data);
+  // console.log(data);
   
    return (
     <>
       <div>
         <h2 className={istyles.recommend_title}>この商品のシリーズ</h2>
         <div className={istyles.recommend}>
-          {data.map((item: Item) => {
+          {data.map((item) => {
             return (
               <div key={item.id}>
                 <Link href={`/items/itemlist/${item.id}`}>
