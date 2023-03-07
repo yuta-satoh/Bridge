@@ -88,14 +88,14 @@ export default function Home({ data }: { data: Item[] }) {
           {/* 背景イメージは後から変えてください（３枚だけ用意してます） */}
           <div className={`${topStyle.container}`}>
             <Image
-              src={'/images/background/top_image_4.jpeg'}
+              src={'/images/background/top_image_2.jpeg'}
               alt={'top-image'}
               width={1920}
               height={1000}
               className={`${topStyle.topImage}`}
             />
             <Image
-              src={'/images/background/top_image_2.jpeg'}
+              src={'/images/background/top_image_4.jpeg'}
               alt={'top-image'}
               width={1920}
               height={1000}
@@ -197,7 +197,7 @@ export default function Home({ data }: { data: Item[] }) {
                 <Link
                   href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=${item.name}&input=&order=id.desc&page=0`}
                 >
-                  <div className="relative block h-16 border-2 border-neutral-500">
+                  <div className="relative block h-16 border rounded hover:border-2 border-neutral-400">
                     <div className="absolute flex ml-2 top-1/2 -translate-y-1/2">
                       <Image
                         src={item.src}
@@ -222,7 +222,7 @@ export default function Home({ data }: { data: Item[] }) {
                 <Link
                   href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=${item.name}&input=&order=id.desc&page=0`}
                 >
-                  <div className="relative block h-16 border-2 border-neutral-500">
+                  <div className="relative block h-16 border rounded hover:border-2 border-neutral-400">
                     <div className="absolute ml-2 flex top-1/2 -translate-y-1/2">
                       <Image
                         src={item.src}
