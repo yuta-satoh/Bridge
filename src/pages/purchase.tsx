@@ -3,11 +3,13 @@ import { GetServerSideProps } from 'next';
 import useSWR from 'swr';
 import Head from 'next/head';
 import { type } from 'os';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { procedure } from '@/lib/purchaseFn';
 import Link from 'next/link';
 import urStyles from '../styles/userRegister.module.css';
 import Auth from './auth/auth';
+import { Router } from 'next/router';
+import { useRouter } from 'next/router';
 
 type items = {
   id: number;
@@ -54,8 +56,8 @@ export const getServerSideProps: GetServerSideProps = async (
 ) => {
   const cookie = context.req.cookies['id'];
   if (cookie === undefined) {
-    const user = null
-    const cookie = null
+    const user = null;
+    const cookie = '0';
     return {
       props: { cookie, user },
     };
@@ -88,6 +90,15 @@ export default function Purchase({
   cookie: string | null;
   user: User;
 }) {
+  const router = useRouter();
+  useEffect(() => {
+    if (cookie === '0' || null) {
+      router.replace('/cart')
+    }
+  }, []);
+  if (cookie === '0' || null) {
+    return;
+  }
   const price: price = [];
   const userId = Number(cookie);
   const fetcher = (url: string) =>
@@ -100,7 +111,7 @@ export default function Purchase({
   if (error) return <p>エラー</p>;
   if (!data) return <p>ロード中...</p>;
   if (data.length === 0) {
-    location.href = ('/cart');
+    location.href = '/cart';
   }
   data.map((item) => {
     price.push({
