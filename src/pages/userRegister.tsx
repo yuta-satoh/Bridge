@@ -35,8 +35,24 @@ export default function UserRegister() {
     confirmationPassword: "",
   }
 
+  const initBorderError = {
+    lastName: false,
+    firstName: false,
+    gender: false,
+    tell1: false,
+    tell2: false,
+    tell3: false,
+    email: false,
+    zipcode1: false,
+    zipcode2: false,
+    address: false,
+    password: false,
+    confirmationPassword: false,
+  }
+
   const [userInfo, setUserInfo] = useState<User>(initUserInfo);
   const [errorText, setErrorText] = useState<User>(initUserInfo);
+  const [borderError, setBorderError] = useState(initBorderError)
   const router = useRouter();
 
   const searchAddress = (e: React.FormEvent) => {
@@ -139,6 +155,7 @@ export default function UserRegister() {
     const value = e.target.value;
     setUserInfo({...userInfo, [key]: value});
     setErrorText({...errorText, [key]: formValidate(key, value)})
+    setBorderError({...borderError, [key]: false})
   }
 
   const canSubmit = (): boolean => {
@@ -156,40 +173,58 @@ export default function UserRegister() {
     const values = Object.values(userInfo);
     const valueIndex = values.flatMap((value, index) => !value ? index : [])
     const filterKeys = keys.flatMap((key, index) => valueIndex.includes(index) ? key : [])
-    const newObj = initUserInfo
+    const newObjText = initUserInfo
+    const newObjIsError = initBorderError
     filterKeys.forEach((key) => {
       switch (key) {
         case 'lastName':
+          newObjText.lastName = '※名前を入力して下さい'
+          newObjIsError.lastName = true;
         case 'firstName':
-          newObj.lastName = '※名前を入力して下さい'
+          newObjText.firstName = '※名前を入力して下さい'
+          newObjIsError.firstName = true;
           break
         case 'gender':
-          newObj.gender = '※性別を選択して下さい'
+          newObjText.gender = '※性別を選択して下さい'
+          newObjIsError.gender = true;
           break
         case 'email':
-          newObj.email = '※メールアドレスを入力して下さい'
+          newObjText.email = '※メールアドレスを入力して下さい'
+          newObjIsError.email = true;
           break
         case 'zipcode1':
+          newObjText.zipcode1 = '※郵便番号を入力して下さい'
+          newObjIsError.zipcode1 = true;
         case 'zipcode2':
-          newObj.zipcode1 = '※郵便番号を入力して下さい'
+          newObjText.zipcode2 = '※郵便番号を入力して下さい'
+          newObjIsError.zipcode2 = true;
           break
         case 'address':
-          newObj.address = '※住所を入力して下さい'
+          newObjText.address = '※住所を入力して下さい'
+          newObjIsError.address = true;
           break
         case 'tell1':
+          newObjText.tell1 = '※電話番号を入力して下さい'
+          newObjIsError.tell1 = true;
         case 'tell2':
+          newObjText.tell2 = '※電話番号を入力して下さい'
+          newObjIsError.tell2 = true;
         case 'tell3':
-          newObj.tell1 = '※電話番号を入力して下さい'
+          newObjText.tell3 = '※電話番号を入力して下さい'
+          newObjIsError.tell3 = true;
           break
         case 'password':
-          newObj.password = '※パスワードを入力して下さい'
+          newObjText.password = '※パスワードを入力して下さい'
+          newObjIsError.password = true;
           break
         case 'confirmationPassword':
-          newObj.confirmationPassword = '※確認用パスワードを入力して下さい'
+          newObjText.confirmationPassword = '※確認用パスワードを入力して下さい'
+          newObjIsError.confirmationPassword = true;
           break
       }
     })
-    setErrorText(newObj);
+    setErrorText(newObjText);
+    setBorderError(newObjIsError);
   }
 
   const submitHandler = async (e: SyntheticEvent<HTMLFormElement>) => {
@@ -259,7 +294,6 @@ export default function UserRegister() {
         console.log(e);
       }
     }
-
   };
 
   return (
@@ -285,7 +319,7 @@ export default function UserRegister() {
                 name="lastName"
                 id="lastName"
                 placeholder="例：山田"
-                className={`${urStyles.input} border border-neutral-500 rounded pl-2.5`}
+                className={`${urStyles.input} border ${borderError.lastName ? urStyles.inputError : 'border-neutral-500'} rounded pl-2.5`}
                 value={userInfo.lastName}
                 onChange={handleChange}
               />
@@ -294,7 +328,7 @@ export default function UserRegister() {
                 name="firstName"
                 id="firstName"
                 placeholder="例：花子"
-                className={`${urStyles.input} border border-neutral-500 rounded pl-2.5`}
+                className={`${urStyles.input} border ${borderError.firstName ? urStyles.inputError : 'border-neutral-500'} rounded pl-2.5`}
                 value={userInfo.firstName}
                 onChange={handleChange}
               />
@@ -308,7 +342,7 @@ export default function UserRegister() {
               <br />
               <div className={urStyles.radioField}>
                 <div
-                  className={`${urStyles.radioForm} border border-neutral-500 rounded pl-2.5`}
+                  className={`${urStyles.radioForm} border ${borderError.gender ? urStyles.inputError : 'border-neutral-500'} rounded pl-2.5`}
                 >
                   <input
                     type="radio"
@@ -326,7 +360,7 @@ export default function UserRegister() {
                   </label>
                 </div>
                 <div
-                  className={`${urStyles.radioForm} border border-neutral-500 rounded pl-2.5`}
+                  className={`${urStyles.radioForm} border ${borderError.gender ? urStyles.inputError : 'border-neutral-500'} rounded pl-2.5`}
                 >
                   <input
                     type="radio"
@@ -344,7 +378,7 @@ export default function UserRegister() {
                   </label>
                 </div>
                 <div
-                  className={`${urStyles.radioForm} border border-neutral-500 rounded pl-2.5`}
+                  className={`${urStyles.radioForm} border ${borderError.gender ? urStyles.inputError : 'border-neutral-500'} rounded pl-2.5`}
                 >
                   <input
                     type="radio"
@@ -374,7 +408,7 @@ export default function UserRegister() {
                 type="email"
                 name="email"
                 id="email"
-                className={`${urStyles.inputParts} border border-neutral-500 rounded pl-2.5`}
+                className={`${urStyles.inputParts} border ${borderError.email ? urStyles.inputError : 'border-neutral-500'} rounded pl-2.5`}
                 placeholder="例：bridge@example.com"
                 value={userInfo.email}
                 onChange={handleChange}
@@ -391,7 +425,7 @@ export default function UserRegister() {
                 type="text"
                 name="tell1"
                 id="tell1"
-                className={`${urStyles.number} border border-neutral-500 rounded pl-2.5`}
+                className={`${urStyles.number} border ${borderError.tell1 ? urStyles.inputError : 'border-neutral-500'} rounded pl-2.5`}
                 placeholder="xxx"
                 value={userInfo.tell1}
                 onChange={handleChange}
@@ -401,7 +435,7 @@ export default function UserRegister() {
                 type="text"
                 name="tell2"
                 id="tell2"
-                className={`${urStyles.number} border border-neutral-500 rounded pl-2.5`}
+                className={`${urStyles.number} border ${borderError.tell2 ? urStyles.inputError : 'border-neutral-500'} rounded pl-2.5`}
                 placeholder="xxxx"
                 value={userInfo.tell2}
                 onChange={handleChange}
@@ -411,7 +445,7 @@ export default function UserRegister() {
                 type="text"
                 name="tell3"
                 id="tell3"
-                className={`${urStyles.number} border border-neutral-500 rounded pl-2.5`}
+                className={`${urStyles.number} border ${borderError.tell3 ? urStyles.inputError : 'border-neutral-500'} rounded pl-2.5`}
                 placeholder="xxxx"
                 value={userInfo.tell3}
                 onChange={handleChange}
@@ -429,7 +463,7 @@ export default function UserRegister() {
                 pattern="^[0-9]+$"
                 name="zipcode1"
                 id="zipcode1"
-                className={`${urStyles.number} border border-neutral-500 rounded pl-2.5`}
+                className={`${urStyles.number} border ${borderError.zipcode1 ? urStyles.inputError : 'border-neutral-500'} rounded pl-2.5`}
                 placeholder="xxx"
                 value={userInfo.zipcode1}
                 onChange={handleChange}
@@ -440,7 +474,7 @@ export default function UserRegister() {
                 pattern="^[0-9]+$"
                 name="zipcode2"
                 id="zipcode2"
-                className={`${urStyles.number} border border-neutral-500 rounded pl-2.5`}
+                className={`${urStyles.number} border ${borderError.zipcode2 ? urStyles.inputError : 'border-neutral-500'} rounded pl-2.5`}
                 placeholder="xxxx"
                 value={userInfo.zipcode2}
                 onChange={handleChange}
@@ -466,7 +500,7 @@ export default function UserRegister() {
                 type="text"
                 name="address"
                 id="address"
-                className={`${urStyles.inputParts} border border-neutral-500 rounded pl-2.5`}
+                className={`${urStyles.inputParts} border ${borderError.address ? urStyles.inputError : 'border-neutral-500'} rounded pl-2.5`}
                 placeholder="例：東京都新宿区新宿2丁目x-x-x"
                 value={userInfo.address}
                 onChange={handleChange}
@@ -483,7 +517,7 @@ export default function UserRegister() {
                 type="password"
                 name="password"
                 id="password"
-                className={`${urStyles.inputParts} border border-neutral-500 rounded pl-2.5`}
+                className={`${urStyles.inputParts} border ${borderError.password ? urStyles.inputError : 'border-neutral-500'} rounded pl-2.5`}
                 placeholder="例：abcdef123456"
                 value={userInfo.password}
                 onChange={handleChange}
@@ -503,7 +537,7 @@ export default function UserRegister() {
                 type="password"
                 name="confirmationPassword"
                 id="confirmationPassword"
-                className={`${urStyles.inputParts} border border-neutral-500 rounded pl-2.5`}
+                className={`${urStyles.inputParts} border ${borderError.confirmationPassword ? urStyles.inputError : 'border-neutral-500'} rounded pl-2.5`}
                 placeholder="例：abcdef123456"
                 value={userInfo.confirmationPassword}
                 onChange={handleChange}
