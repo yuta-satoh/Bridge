@@ -6,6 +6,8 @@ import { GetServerSideProps } from 'next';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
+import UserCart from './CartForUser';
+import GuestCart from './CartForGuest';
 
 type items = {
   id: number;
@@ -55,21 +57,21 @@ export default function Header({
     'フェミニン',
   ];
 
-  const userId = Cookies.get('id');
-  const fetcher = (url: string) =>
-    fetch(url).then((res) => res.json());
+  // const userId = Cookies.get('id');
+  // const fetcher = (url: string) =>
+  //   fetch(url).then((res) => res.json());
 
-  const { data, error }: { data: cart; error: any } = useSWR(
-    `/api/cart_items?select=*,items(*),carts(*)&cart_id=eq.${userId}`,
-    fetcher,
-    { refreshInterval: 0.1 }
-  );
-  if (error) return <p>エラー</p>;
-  if (!data) return <p>ロード中...</p>;
+  // const { data, error }: { data: cart; error: any } = useSWR(
+  //   `/api/cart_items?select=*,items(*),carts(*)&cart_id=eq.${userId}`,
+  //   fetcher,
+  //   { refreshInterval: 0.1 }
+  // );
+  // if (error) return <p>エラー</p>;
+  // if (!data) return <p>ロード中...</p>;
 
-  const total = data.reduce(function (sum, element) {
-    return sum + element.quantity;
-  }, 0);
+  // const total = data.reduce(function (sum, element) {
+  //   return sum + element.quantity;
+  // }, 0);
 
   const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
     const value = ev.target.value;
@@ -111,8 +113,14 @@ export default function Header({
           </div>
         </Link>
         <ul className="flex gap-10 mr-60 ml-30 whitespace-nowrap">
-          <li><Link href="/items/itemlist">商品</Link></li>
-          <li><Link href="/#remind" className={headModule.toRemind}>お知らせ</Link></li>
+          <li>
+            <Link href="/items/itemlist">商品</Link>
+          </li>
+          <li>
+            <Link href="/#remind" className={headModule.toRemind}>
+              お知らせ
+            </Link>
+          </li>
           <li>ヘルプ</li>
         </ul>
         <div className="flex gap-10">
@@ -168,24 +176,7 @@ export default function Header({
               </div>
             </Link>
           )}
-          <Link href={'/cart'} className={headModule.iconModule}>
-            {total === 0 ? (
-              <></>
-            ) : (
-              <div className={headModule.cartCounter}>{total}</div>
-            )}
-            <Image
-              src="/images/icon/cart.png"
-              alt=""
-              width={25}
-              height={25}
-            />
-            <span
-              className={`${headModule.menuLabel} inline-block mt-1 whitespace-nowrap`}
-            >
-              カート
-            </span>
-          </Link>
+          {auth ? <UserCart /> : <GuestCart />}
         </div>
       </div>
     </header>
