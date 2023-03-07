@@ -208,6 +208,16 @@ export default function Review({
           <div>
             <form>
               <div className={prStyles.nickname}>
+                {/* anonymousがtrueかつnicknameが空欄ならエラーを表示 */}
+                {isNicknameError ? (
+                  <p className={urStyles.error}>
+                    ニックネームを入力してください
+                  </p>
+                ) : (
+                  <></>
+                )}
+              </div>
+              <div className={prStyles.nickname}>
                 <label htmlFor="nickname">ニックネーム</label>
                 {/* anonymousがtrueならreadOnly、falseなら入力欄を表示する */}
                 {review.anonymous ? (
@@ -229,14 +239,6 @@ export default function Review({
                     onChange={(e) => handleChange(e)}
                     placeholder="ニックネームを記入"
                   />
-                )}
-                {/* anonymousがtrueかつnicknameが空欄ならエラーを表示 */}
-                {isNicknameError ? (
-                  <p className={urStyles.error}>
-                    ニックネームを入力してください
-                  </p>
-                ) : (
-                  <></>
                 )}
                 <span>
                   <label htmlFor="anonymous">匿名</label>
