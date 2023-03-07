@@ -11,6 +11,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Auth from '../auth/auth';
 import cModule from '../../styles/coordination.module.css';
+import { useEffect } from 'react';
 
 type Item = {
   id: number;
@@ -31,6 +32,13 @@ export const getServerSideProps: GetServerSideProps = async (
   context
 ) => {
   const cookie = context.req.cookies['id'];
+  if (cookie === undefined) {
+    const user = null;
+    const cookie = '0';
+    return {
+      props: { cookie },
+    };
+  }
   return {
     props: { cookie },
   };
@@ -43,6 +51,12 @@ export default function History({
 }) {
   const router = useRouter();
   const [order, setOrder] = useState('id.desc');
+
+  useEffect(() => {
+    if (cookie === '0' || null) {
+      router.replace('/login')
+    }
+  }, []);
 
   const userId = Number(cookie);
   const fetcher = (url: string) =>
