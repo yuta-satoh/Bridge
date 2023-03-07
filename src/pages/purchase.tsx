@@ -53,6 +53,13 @@ export const getServerSideProps: GetServerSideProps = async (
   context
 ) => {
   const cookie = context.req.cookies['id'];
+  if (cookie === undefined) {
+    const user = null
+    const cookie = null
+    return {
+      props: { cookie, user },
+    };
+  }
   const TOKEN =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
   const user = await fetch(
@@ -78,7 +85,7 @@ export default function Purchase({
   cookie,
   user,
 }: {
-  cookie: string | undefined;
+  cookie: string | null;
   user: User;
 }) {
   const price: price = [];
@@ -93,7 +100,7 @@ export default function Purchase({
   if (error) return <p>エラー</p>;
   if (!data) return <p>ロード中...</p>;
   if (data.length === 0) {
-    location.href = '/cart';
+    location.href = ('/cart');
   }
   data.map((item) => {
     price.push({
