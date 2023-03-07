@@ -89,11 +89,11 @@ export default function GuestCart({ guestCart, reloadStrage }: { guestCart: Gues
         {filteredItemData.map((item, index) => (
           <div key={index} className="border border-neutral-900 my-2 py-3 px-8 h-52">
             <div className="flex gap-5">
-              <Link href={'/'}>
+              <Link href={`/items/itemlist/${item.id}`}>
                 <Image src={item.imgurl} alt={item.name} width={150} height={150} className="rounded"/>
               </Link>
               <div className="px-3 py-4">
-                <Link href={'/'}>
+                <Link href={`/items/itemlist/${item.id}`}>
                   <p className="underline mb-1 text-xl">{item.name}</p>
                 </Link>
                 <p className="text-sm mt-1">{item.description}</p>
