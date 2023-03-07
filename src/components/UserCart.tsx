@@ -57,6 +57,7 @@ export default function UserCart({ userId }: { userId: string }) {
       genre: cart.items.genre
     }
   })
+  console.log(recommend);
 
   // 合計金額
   const sumPrice = filtercartItems.reduce((current, cart) => current + (cart.items.price * cart.quantity), 0)
