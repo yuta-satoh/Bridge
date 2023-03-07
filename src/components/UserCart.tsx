@@ -96,11 +96,11 @@ export default function UserCart({ userId }: { userId: string }) {
             {filtercartItems.map((cart, index) => (
               <div key={index} className="border border-neutral-900 my-2 py-3 px-8 h-52">
                 <div className="flex gap-5">
-                  <Link href={'/'}>
+                  <Link href={`/items/itemlist/${cart.items.id}`}>
                     <Image src={cart.items.imgurl} alt={cart.items.name} width={150} height={150} className="rounded"/>
                   </Link>
                   <div className="px-3 py-4">
-                    <Link href={'/'}>
+                    <Link href={`/items/itemlist/${cart.items.id}`}>
                       <p className="underline mb-1 text-xl">{cart.items.name}</p>
                     </Link>
                     <p className="text-sm mt-1">{cart.items.description}</p>

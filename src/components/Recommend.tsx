@@ -58,11 +58,11 @@ export default function Recommend({ recommend, reloadStrage }: { recommend: Reco
         {recommendItem.slice(0, 2).map((item, index) => (
           <div key={index} className="border border-neutral-900 w-1/2 rounded p-3 mx-auto">
             <div className="flex gap-5">
-              <Link href={'/'}>
+              <Link href={`/items/itemlist/${item.id}`}>
                 <Image src={item.imgurl} alt={item.name} width={100} height={100} className="rounded"/>
               </Link>
               <div className="px-2 py-2">
-                <Link href={'/'}>
+                <Link href={`/items/itemlist/${item.id}`}>
                   <p className="underline mb-1 text-sm">{item.name}</p>
                   <p className="mt-1">¥ {item.price.toLocaleString()}</p>
                 </Link>
