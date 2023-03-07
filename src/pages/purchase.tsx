@@ -91,14 +91,6 @@ export default function Purchase({
   user: User;
 }) {
   const router = useRouter();
-  useEffect(() => {
-    if (cookie === '0' || null) {
-      router.replace('/cart')
-    }
-  }, []);
-  if (cookie === '0' || null) {
-    return;
-  }
   const price: price = [];
   const userId = Number(cookie);
   const fetcher = (url: string) =>
@@ -108,6 +100,16 @@ export default function Purchase({
     `/api/cart_items?select=*,items(*),carts(*)&cart_id=eq.${userId}`,
     fetcher
   );
+
+  useEffect(() => {
+    if (cookie === '0' || null) {
+      router.replace('/cart')
+    }
+  }, []);
+  if (cookie === '0' || null) {
+    return;
+  }
+
   if (error) return <p>エラー</p>;
   if (!data) return <p>ロード中...</p>;
   if (data.length === 0) {
