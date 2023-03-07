@@ -210,7 +210,7 @@ export default function Password({
         }),
       })
       if (res.ok) {
-        setCompleteText("変更が完了しました");
+        setCompleteText("");
         rooter.replace('/account/password/complete');
       };
     }

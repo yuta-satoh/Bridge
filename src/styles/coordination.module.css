@@ -11,6 +11,9 @@
   font-size: 15px;
   margin-right: 5px;
 }
+.pageLink a:hover {
+  color: #FF7C8A;
+}
 .greaterThan {
   margin-left: 5px;
 }
