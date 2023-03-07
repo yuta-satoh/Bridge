@@ -30,7 +30,7 @@ export default function ReviewList({ itemId }: { itemId: string }) {
   if (error) {
     return (
       <>
-        <div>
+        <div className={rlStyles.reviwsArea}>
           <div className={rlStyles.title}>
             <h2>みんなのレビュー</h2>
           </div>
@@ -45,7 +45,7 @@ export default function ReviewList({ itemId }: { itemId: string }) {
   if (!data) {
     return (
       <>
-        <div>
+        <div className={rlStyles.reviwsArea}>
           <div className={rlStyles.title}>
             <h2>みんなのレビュー</h2>
           </div>
@@ -60,7 +60,7 @@ export default function ReviewList({ itemId }: { itemId: string }) {
   if (data.length === 0) {
     return (
       <>
-        <div>
+        <div className={rlStyles.reviwsArea}>
           <div className={rlStyles.title}>
             <h2>みんなのレビュー</h2>
           </div>
@@ -101,12 +101,12 @@ export default function ReviewList({ itemId }: { itemId: string }) {
 
   return (
     <>
-      <div className="reviwsArea">
+      <div className={rlStyles.reviwsArea}>
         <div className={rlStyles.title}>
           <h2>みんなのレビュー</h2>
         </div>
         <div>
-          <p className="evaluation">
+          <p className={rlStyles.evaluation}>
             平均評価:&nbsp;
             <span className="averageEvaluation">
               {averageEvaluation}

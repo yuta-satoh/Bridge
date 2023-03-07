@@ -2,6 +2,7 @@
 .title h2 {
     font-size: 20px;
     font-weight: bold;
+    padding: 10px;
 }
 
 /* エラー、ロード中、レビュー未投稿時のスタイル */
@@ -12,6 +13,7 @@
     background-color: #f5f5f5;
     text-align: center;
     display: table;
+    margin: 10px;
 }
 .background p {
     vertical-align: middle;
@@ -24,7 +26,8 @@
     height: 250px;
     border: 1px solid #f5f5f5;
     overflow-y: scroll;
-    margin: auto;
+    margin: 10px;
+    padding: 10px;
 }
 
 .review {
@@ -59,4 +62,12 @@
 .review_container p {
     margin: 10px auto;
     font-size: 15px;
+}
+
+.reviwsArea{
+    padding: 25px;
+}
+
+.evaluation{
+    padding: 10px;
 }

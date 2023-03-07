@@ -47,8 +47,9 @@
 .recommend{
     display: grid;
     overflow: hidden;
-    align-items: center;
+    align-items:flex-start;
     justify-content: space-around;
+    padding: 0  0 0 20px ;
 
     box-sizing: border-box;
 
@@ -194,10 +195,19 @@
 
 .buttonStyle {
     background-color: #F8C6BD;
-    padding: 20px;
+    padding: 18px;
+    border-radius: 0.7rem;
   }
 
-.cart_lclick:hover,.cart_rclick:hover,.buttonStyle:hover,.detail:hover,.category_detailname:hover{
+  .buttonStyle:hover {
+    background-color: #f6b0a4;
+    padding: 18px;
+    border-radius: 0.7rem;
+    transition: 0.1s ease-out;
+  }
+
+
+.cart_lclick:hover,.cart_rclick:hover,.detail:hover,.category_detailname:hover{
     color: #FF7C8A;
 }
 

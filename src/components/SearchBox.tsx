@@ -115,7 +115,7 @@ export default function SearchBoxTest() {
             htmlFor="serch_checkbox"
             className={lstyles.serch_menu}
           >
-            クリックで開く（後ほどアイコン挿入）
+            クリックで開く
           </label>
 
           {/* ここから検索ボックス */}

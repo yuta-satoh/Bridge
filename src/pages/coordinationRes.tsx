@@ -194,7 +194,7 @@ export default function coordination(
               </p>
               <div className={cModule.categoriesList}>
                 <Link
-                  href={`/items/itemlist/search?genre=${listItem.genre}&category=テーブル&input=&order=id.desc`}
+                  href={`/items/itemlist/search?genre=${listItem.genre}&category=テーブル&input=&order=id.desc&page=0`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -209,7 +209,7 @@ export default function coordination(
                   </div>
                 </Link>
                 <Link
-                  href={`/items/itemlist/search?genre=${listItem.genre}&category=椅子&input=&order=id.desc`}
+                  href={`/items/itemlist/search?genre=${listItem.genre}&category=椅子&input=&order=id.desc&page=0`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -224,7 +224,7 @@ export default function coordination(
                   </div>
                 </Link>
                 <Link
-                  href={`/items/itemlist/search?genre=${listItem.genre}&category=ソファ&input=&order=id.desc`}
+                  href={`/items/itemlist/search?genre=${listItem.genre}&category=ソファ&input=&order=id.desc&page=0`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -239,7 +239,7 @@ export default function coordination(
                   </div>
                 </Link>
                 <Link
-                  href={`/items/itemlist/search?genre=${listItem.genre}&category=ベッド%2F寝具&input=&order=id.desc`}
+                  href={`/items/itemlist/search?genre=${listItem.genre}&category=ベッド%2F寝具&input=&order=id.desc&page=0`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -254,7 +254,7 @@ export default function coordination(
                   </div>
                 </Link>
                 <Link
-                  href={`/items/itemlist/search?genre=${listItem.genre}&category=収納棚&input=&order=id.desc`}
+                  href={`/items/itemlist/search?genre=${listItem.genre}&category=収納棚&input=&order=id.desc&page=0`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -271,7 +271,7 @@ export default function coordination(
               </div>
               <div className={cModule.categoriesList}>
                 <Link
-                  href={`/items/itemlist/search?genre=${listItem.genre}&category=小物%2F雑貨&input=&order=id.desc`}
+                  href={`/items/itemlist/search?genre=${listItem.genre}&category=小物%2F雑貨&input=&order=id.desc&page=0`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -286,7 +286,7 @@ export default function coordination(
                   </div>
                 </Link>
                 <Link
-                  href={`/items/itemlist/search?genre=${listItem.genre}&category=照明&input=&order=id.desc`}
+                  href={`/items/itemlist/search?genre=${listItem.genre}&category=照明&input=&order=id.desc&page=0`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -301,7 +301,7 @@ export default function coordination(
                   </div>
                 </Link>
                 <Link
-                  href={`/items/itemlist/search?genre=${listItem.genre}&category=カーテン&input=&order=id.desc`}
+                  href={`/items/itemlist/search?genre=${listItem.genre}&category=カーテン&input=&order=id.desc&page=0`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -316,7 +316,7 @@ export default function coordination(
                   </div>
                 </Link>
                 <Link
-                  href={`/items/itemlist/search?genre=${listItem.genre}&category=小物%2F雑貨&input=&order=id.desc`}
+                  href={`/items/itemlist/search?genre=${listItem.genre}&category=小物%2F雑貨&input=&order=id.desc&page=0`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
