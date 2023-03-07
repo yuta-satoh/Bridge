@@ -248,6 +248,12 @@ export default function UserRegister() {
           },
           body: JSON.stringify(postUser),
         })
+        await fetch(`/api/userResister/createCart?email=${postUser.email}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+        })
         router.push("/completeRegister")
       } catch(e) {
         console.log(e);
