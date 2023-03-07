@@ -30,26 +30,26 @@ export default function SearchBoxTest() {
   // チェンジイベントの関数はシンプルに配列に追加するタイプ
   const handleGenreChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    const isChecked = e.target.checked;
     setGenres((prevGenres) => {
-      if (isChecked) {
-        return [...prevGenres, value];
-      } else {
+      if (genres.includes(value)) {
         return prevGenres.filter((genre) => genre !== value);
+
+      } else {
+        return [...prevGenres, value];
       }
     });
   }
   const handleCategoryChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    const isChecked = e.target.checked;
     setCategories((prevCategories) => {
-      if (isChecked) {
-        return [...prevCategories, value];
-      } else {
+      if (categories.includes(value)) {
         return prevCategories.filter((category) => category !== value);
+      } else {
+        return [...prevCategories, value];
       }
     });
   }
+
 
   // 絞り込みクリア
   const handleClearClick = () => {
@@ -165,6 +165,7 @@ export default function SearchBoxTest() {
                               name='categorydatas'
                               value={genreData}
                               onChange={(e)=>handleGenreChange(e)}
+                              checked={genres.includes(genreData)}
                             />
                             {genreData}
                           </label>
@@ -191,6 +192,7 @@ export default function SearchBoxTest() {
                               name='categorydata'
                               value={categoryData}
                               onChange={handleCategoryChange}
+                              checked={categories.includes(categoryData)}
                             />
                             {categoryData}
                           </label>
