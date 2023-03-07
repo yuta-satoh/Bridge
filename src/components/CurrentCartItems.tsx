@@ -47,7 +47,7 @@ export default function CurrentCartItems({
   >(`/api/getCart/items?id=${cookie}`, fetcher);
 
   // エラー文
-  if (error)
+  if (error) {
     return (
       <>
         <style jsx>{`
@@ -77,6 +77,8 @@ export default function CurrentCartItems({
         </div>
       </>
     );
+  }
+
   if (!cartItemData) {
     return (
       <>
@@ -103,6 +105,38 @@ export default function CurrentCartItems({
         <div className="container">
           <div className="background">
             <p>ロード中...</p>
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  if (cartItemData.length === 0) {
+    return (
+      <>
+        <style jsx>{`
+          .container {
+            width: 100%;
+            height: 100px;
+            margin: 10px auto;
+            text-align: center;
+          }
+          .background {
+            width: 80%;
+            height: 80%;
+            margin: auto;
+            background-color: #f5f5f5;
+            display: table;
+          }
+          p {
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+          }
+        `}</style>
+        <div className="container">
+          <div className="background">
+            <p>カートに商品がありません</p>
           </div>
         </div>
       </>
@@ -158,7 +192,11 @@ export default function CurrentCartItems({
             </div>
           );
         })}
-        {otherLength === 0 ? <></> : <p className={myStyles.other}>他{otherLength}件</p>}
+        {otherLength === 0 ? (
+          <></>
+        ) : (
+          <p className={myStyles.other}>他{otherLength}件</p>
+        )}
       </div>
     </>
   );
