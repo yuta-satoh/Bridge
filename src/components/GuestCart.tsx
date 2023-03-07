@@ -51,6 +51,12 @@ export default function GuestCart({ guestCart, reloadStrage }: { guestCart: Gues
   
   // deleteフラグの立っているアイテムを除去
   const filteredItemData = cartItemData.filter((item) => !item.delete)
+  const recommend = filteredItemData.map((item) => {
+    return {
+      id: item.id,
+      genre: item.genre
+    }
+  })
   
   // 合計金額
   const sumPrice = filteredItemData.reduce((current, item) =>
@@ -129,7 +135,7 @@ export default function GuestCart({ guestCart, reloadStrage }: { guestCart: Gues
             </div>
           </div>  
         ))}
-        <Recommend recommend={filteredItemData} reloadStrage={reloadStrage} />
+        <Recommend recommend={recommend} reloadStrage={reloadStrage} />
       </div>
       <div className="w-1/4 h-80 mt-10 p-10 border-2 border-neutral-900 rounded bg-gray-100">
         <p>
