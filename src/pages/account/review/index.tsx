@@ -202,6 +202,12 @@ export default function Review({
                     ).toLocaleString()}
                   </td>
                 </tr>
+                <tr>
+                    <td colSpan={4}></td>
+                    <td className={hModule.tableCellCenterSub}>
+                      購入日：{history_data.date}
+                    </td>
+                  </tr>
               </tbody>
             </table>
           </div>
