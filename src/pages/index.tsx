@@ -86,12 +86,29 @@ export default function Home({ data }: { data: Item[] }) {
       <main className={`${topStyle.main} mx-auto`}>
         <div className="relative">
           {/* 背景イメージは後から変えてください（３枚だけ用意してます） */}
-          <Image
-            src={'/images/background/top_image_2.jpeg'}
-            alt={'top-image'}
-            width={1920}
-            height={1000}
-          />
+          <div className={`${topStyle.container}`}>
+            <Image
+              src={'/images/background/top_image_4.jpeg'}
+              alt={'top-image'}
+              width={1920}
+              height={1000}
+              className={`${topStyle.topImage}`}
+            />
+            <Image
+              src={'/images/background/top_image_2.jpeg'}
+              alt={'top-image'}
+              width={1920}
+              height={1000}
+              className={`${topStyle.topImage}`}
+            />
+            <Image
+              src={'/images/background/top_image_3.jpeg'}
+              alt={'top-image'}
+              width={1920}
+              height={1000}
+              className={`${topStyle.topImage}`}
+            />
+          </div>
           {/* ロゴは後で作成予定 */}
           <Image
             src={'/images/logo/top_logo.png'}
@@ -113,7 +130,7 @@ export default function Home({ data }: { data: Item[] }) {
             </button>
           </div>
         </div>
-        <div className={`${topStyle.content} mt-10`}>
+        <div className={`${topStyle.content} mt-20`}>
           <h2 className="text-center text-xl font-bold">新着商品</h2>
           <div
             className={`${topStyle.categoryList} container mx-auto p-2 flex gap-5 justify-center`}
