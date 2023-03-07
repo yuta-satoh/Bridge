@@ -54,7 +54,7 @@ export default function ItemdetailReccomend(props:{
                   </div>
                   <div className={istyles.detail}>
                     <p className={istyles.itemname}>{item.name}</p>
-                    <p className={istyles.itemname}>{item.price}円</p>
+                    <p className={istyles.itemname}>¥ {(item.price * 1.1).toLocaleString()}</p>
                   </div>
                 </Link>
               </div>
