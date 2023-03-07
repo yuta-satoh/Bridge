@@ -106,6 +106,7 @@ export default function ItemPage({
               />
             </div>
 
+            {/* レビュー機能 */}
             <ReviewList itemId={items.id.toString()} />
 
             {/* 以下はこんなのもどうですか、ジャンル・カテゴリに合致したものを持ってくる */}
