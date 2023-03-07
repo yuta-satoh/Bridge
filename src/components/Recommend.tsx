@@ -24,10 +24,12 @@ type Recommend = {
 export default function Recommend({ recommend, reloadStrage }: { recommend: Recommend[], reloadStrage?: () => void }) {
   const fetcher: Fetcher<Item[], string> = (...args) => fetch(...args).then((res) => res.json());
   const router = useRouter()
-  
+
+  console.log("rec", recommend)
+
   const itemQuery = recommend.reduce((query, item) => query + `,id.eq.${item.id}`, "").replace(",", "")
   const queryParams = `not.or=(${itemQuery})`
-  const { data: recommendItem, error } = useSWR(`/api/getItems?genre=eq.${recommend[0].genre}&id=${queryParams}`, fetcher)
+  const { data: recommendItem, error } = useSWR(`/api/getItems?genre=${recommend[0].genre}&id=${queryParams}`, fetcher)
 
   if (error) return (
     <div className="w-4/5 mx-auto">

@@ -1,17 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-type User = {
-    lastName: string,
-    firstName: string,
-    gender: string,
-    tell: string,
-    email: string,
-    zipcode: string,
-    address: string,
-    password: string,
-    deleted: boolean,
-  }
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
