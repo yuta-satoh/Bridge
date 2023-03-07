@@ -166,7 +166,7 @@ export default function Generator(props: {
                           className={cModule.cardContents}
                           key={item.id}
                         >
-                          <p>¥{item.price.toLocaleString()}</p>
+                          <p>¥{(item.price * 1.1).toLocaleString()}</p>
                           <p className={cModule.priceFree}>
                             送料無料
                           </p>

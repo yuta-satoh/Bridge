@@ -2,6 +2,11 @@
   max-width: 85%;
   margin: auto;
 }
+.selectbody {
+  max-width: 85%;
+  margin: auto;
+  height: auto
+}
 .links {
   display: flex;
   margin-top: 20px;
@@ -12,7 +17,7 @@
   margin-right: 5px;
 }
 .pageLink a:hover {
-  color: #FF7C8A;
+  color: #ff7c8a;
 }
 .greaterThan {
   margin-left: 5px;
@@ -92,11 +97,11 @@
   height: 240px;
 }
 .images_b {
-    width: 25%;
-    height: 240px;
-    text-align: -webkit-center;
-    animation: fade .4s ease-in-out .2s 1 normal forwards;
-  }
+  width: 25%;
+  height: 240px;
+  text-align: -webkit-center;
+  animation: fade 0.4s ease-in-out 0.2s 1 normal forwards;
+}
 .images_c {
   width: 25%;
   height: 240px;
@@ -147,7 +152,7 @@
   justify-content: space-between;
   margin-top: 10px;
 }
-.cardStyle{
+.cardStyle {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -159,7 +164,7 @@
   padding: 3px;
   margin-left: 15px;
 }
-.button{
+.button {
   margin-left: 20px;
   margin-bottom: 20px;
 }
@@ -171,15 +176,15 @@
   font-size: 17px;
   width: 230px;
 }
-.image{
+.image {
   width: 150px;
   height: 150px;
 }
-.display{
+.display {
   width: 240px;
   height: 240px;
 }
-.resForm{
+.resForm {
   margin-top: 20px;
   margin-bottom: 30px;
 }
@@ -195,12 +200,146 @@
 .fadein {
   animation: fadeIn 1s cubic-bezier(0.33, 1, 0.68, 1) 1 forwards;
 }
- 
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
   }
   100% {
     opacity: 1;
+  }
+}
+
+.articleImageA {
+  animation: fadeInA 3s ease 0s 1 normal backwards;
+
+}
+.articleImageB {
+  animation: fadeInB 3s ease 1s 1 normal backwards;
+
+}
+.articleImageC {
+  margin: auto;
+  animation: fadeInC 3s ease 2s 1 normal backwards;
+}
+.articleImageD {
+  animation: fadeInD 3s ease 3s 1 normal backwards;
+
+}
+.imageBox {
+  width: 600px;
+  height: 600px;
+}
+
+.imageBoxUpper {
+  display: flex;
+  justify-content: space-between;
+}
+.imageBoxBottom {
+  display: flex;
+  justify-content: flex-end;
+}
+.article{
+  display: flex;
+  justify-content: space-between;
+  margin: 100px 0;
+}
+.articleTitle{
+  font-size: 30px;
+  font-weight: bold;
+  animation: fadeInE 3s ease 0s 1 normal backwards;
+}
+
+.articleContent{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.articleSentence{
+  font-size: 25px;
+  animation: fadeInF 3s ease 1s 1 normal backwards;
+}
+.buttonArea{
+  text-align: center;
+  animation: fadeInF 3s ease 1s 1 normal backwards;
+}
+.tryButton {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  border: 2.3px black solid;
+  padding: 10px 0px;
+  font-size: 14px;
+  width: 200px;
+  transition: background-color 0.5s;
+}
+.tryButton:hover {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  border: 2.3px white solid;
+  padding: 10px 0px;
+  font-size: 14px;
+  width: 200px;
+}
+@keyframes fadeInA {
+  from {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeInB {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes fadeInC {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes fadeInD {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeInE {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes fadeInF {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
