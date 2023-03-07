@@ -164,8 +164,9 @@
   background-color: black;
   color: white;
   font-weight: bold;
-  padding: 10px 80px;
+  padding: 10px 0px;
   font-size: 17px;
+  width: 230px;
 }
 .image{
   width: 150px;
