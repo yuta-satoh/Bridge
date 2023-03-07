@@ -7,7 +7,6 @@ import { useState } from 'react';
 import { procedure } from '@/lib/purchaseFn';
 import Link from 'next/link';
 import urStyles from '../styles/userRegister.module.css';
-import { useRouter } from 'next/router';
 import Auth from './auth/auth';
 
 type items = {
@@ -82,7 +81,7 @@ export const getServerSideProps: GetServerSideProps = async (
   };
 };
 
-export default function purchase({
+export default function Purchase({
   cookie,
   user,
 }: {
@@ -120,7 +119,7 @@ export default function purchase({
         <title>購入確認</title>
       </Head>
       <Auth>
-      <div className={pModule.body}>
+        <div className={pModule.body}>
           <h1 className={pModule.title}>購入確認</h1>
           <table className={pModule.itemTable}>
             <tbody>

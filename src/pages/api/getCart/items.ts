@@ -36,7 +36,7 @@ export default async function handler(
 	const userId = req.query.id as string
 	const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
   const responce= await fetch(
-    `http://127.0.0.1:8000/cart_items?select=*,items(*),carts(*)&carts.user_id=eq.${userId}&order=id.desc`,
+    `http://127.0.0.1:8000/cart_items?select=*,items(*),carts(*)&cart_id=eq.${userId}&order=id.desc`,
     {
       method: 'GET',
       headers: {
