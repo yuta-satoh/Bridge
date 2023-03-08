@@ -111,8 +111,10 @@ export default function UserRegister() {
   }
 
   const passwordValidation = (password: string) => {
-    const regax = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9.?/-]{0,100}$/;
+    const regax = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9!"#$%]{0,100}$/;
+    const regaxInput = /^[a-zA-Z0-9!"#$%]{0,100}$/;
     if (!password) return '※パスワードを入力して下さい';
+    if (!regaxInput.test(password)) return '※半角英数字の大文字と小文字、数字、記号(!"#$%)のみ使用可能です'
     if (!regax.test(password)) return "※英数字を組み合わせたパスワードにして下さい"
     if (password.length < 8 || password.length > 20) return "※８文字以上２０文字以内で設定してください"
     return '';
