@@ -259,45 +259,33 @@ export default function Home({ data }: { data: Item[] }) {
               </p>
             </div>
             <div className={topStyle.announce}>
-              <p className={topStyle.date}>2022-XX-XX</p>
+              <p className={topStyle.date}>2022-10-31</p>
               <p className={topStyle.announceData}>
-                テキストテキストテキストテキストテキストテキストテキストテキスト
+                偽サイトにご注意ください
               </p>
             </div>
             <div className={topStyle.announce}>
-              <p className={topStyle.date}>2022-XX-XX</p>
+              <p className={topStyle.date}>2020-2-3</p>
               <p className={topStyle.announceData}>
-                テキストテキストテキストテキストテキストテキストテキストテキスト
+                新型コロナウイルス感染症による配送への影響について
               </p>
             </div>
             <div className={topStyle.announce}>
-              <p className={topStyle.date}>2022-XX-XX</p>
+              <p className={topStyle.date}>2019-4-1</p>
               <p className={topStyle.announceData}>
-                テキストテキストテキストテキストテキストテキストテキストテキスト
+                消費税改定およびサイトメンテナンスに関するお知らせ
               </p>
             </div>
             <div className={topStyle.announce}>
-              <p className={topStyle.date}>2022-XX-XX</p>
+              <p className={topStyle.date}>2019-3-31</p>
               <p className={topStyle.announceData}>
-                テキストテキストテキストテキストテキストテキストテキストテキスト
+                サイトリニューアルのお知らせ
               </p>
             </div>
             <div className={topStyle.announce}>
-              <p className={topStyle.date}>2022-XX-XX</p>
+              <p className={topStyle.date}>2018-4-9</p>
               <p className={topStyle.announceData}>
-                テキストテキストテキストテキストテキストテキストテキストテキスト
-              </p>
-            </div>
-            <div className={topStyle.announce}>
-              <p className={topStyle.date}>2022-XX-XX</p>
-              <p className={topStyle.announceData}>
-                テキストテキストテキストテキストテキストテキストテキストテキスト
-              </p>
-            </div>
-            <div className={topStyle.announce}>
-              <p className={topStyle.date}>2022-XX-XX</p>
-              <p className={topStyle.announceData}>
-                テキストテキストテキストテキストテキストテキストテキストテキスト
+                送料改定に関するお知らせ
               </p>
             </div>
           </div>
