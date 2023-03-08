@@ -298,4 +298,27 @@
     width: 25px;
 }
   
-  
+
+/* 検索結果がない場合 */
+.result_none {
+    width: 80%;
+    height: 300px;
+    margin: auto;
+    text-align: center;
+}
+
+.result_none p {
+    font-size: 30px;
+    padding-top: 80px;
+}
+
+.result_none a {
+    font-size: 20px;
+    display: inline-block;
+    padding-top: 10px;
+    text-decoration: underline;
+}
+
+.result_none a:hover {
+    color: #FF7C8A;
+}
