@@ -121,11 +121,11 @@ export default function Home({ data }: { data: Item[] }) {
             className={`${topStyle.logo} absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
           />
           <div
-            className={`${topStyle.buttonArea} absolute left-1/2 top-3/4 -translate-x-1/2 -translate-y-1/2`}
+            className={`${topStyle.cordbutton} absolute left-1/2 top-3/4 -translate-x-1/2 -translate-y-1/2`}
           >
-            <button className={`${topStyle.cord} bg-white`}>
+            <button className={`${topStyle.cord}`}>
               <Link href="/coordination">
-                <div className={`${topStyle.cordtitle} mx-auto pt-1.5 text-center w-96 h-10 border-2 border-neutral-900`}>
+                <div className={`${topStyle.cordtitle} mx-auto pt-1.5 text-center w-96 h-10`}>
                   <span className={topStyle.cordtext}>コーディネートをランダム生成する　→</span>
                   {/* <span className={`${topStyle.cordtextarrow} float-right mr-1`}>→</span> */}
                 </div>
