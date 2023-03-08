@@ -41,6 +41,7 @@ export default function GuestCart() {
           <div className={headModule.cartCounter}>{sum}</div>
         )}
         <Image
+          className={headModule.iconimg}
           src="/images/icon/cart.png"
           alt=""
           width={25}

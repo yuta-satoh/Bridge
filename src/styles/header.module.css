@@ -1,3 +1,4 @@
+@media (600px <= width) {
 .menu{
     display: flex;
     justify-content: space-evenly;
@@ -23,6 +24,13 @@
     display: flex;
     align-items: center;
 }
+.search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    height: 1.9rem;
+}
 .cartCounter{
     position: absolute;
     background-color: aqua;
@@ -36,3 +44,94 @@
 .toRemind{
     scroll-behavior: smooth;
 }
+}
+
+@media (width <= 599px) {
+    .menu{
+        display: flex;
+        justify-content:space-between;
+        align-items: center;
+        min-width: 599px;
+        box-sizing: border-box;
+        width: 100%;
+        height: 3.5rem;
+        border-bottom: 1.5px solid #f5f5f5;
+        position: absolute;
+        top: 1rem;
+        right: 0px;
+        left: 0px;
+        padding:0 30px 0 10px;
+    }
+    .body{
+        max-width: 100%;
+        width: 100%;
+        min-width: 599px;
+        height: 4.5rem;
+    }
+    .titleiconimg{
+        width: 110px;
+        height: 50px;
+    }
+    .menuLabel{
+        /* font-size: 13px; */
+        white-space: nowrap;
+        font-size: 10px;
+        transform: scale(0.8);
+    }
+    .iconModule{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .iconimg{
+        width: 16px;
+        height: 16px;
+    }
+    .left{
+        font-size: 10px;
+        margin-right: 10px;
+        grid-gap: 20px;
+        /* transform: scale(0.8); */
+    }
+    .right{
+        grid-gap: 12px;
+        display: flex;
+        align-items: center;
+    }
+    .formtitle{
+        height: 25px;
+        font-size: x-small;
+        width: 120px;
+    }
+    .form{
+        display: flex;
+        align-items: center;
+    }
+    .searchs{
+        height: 27px;
+        white-space: nowrap;
+    }
+    .search{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 9px;
+        transform: scale(0.9);
+        white-space: nowrap;
+        height: 24px;
+    }
+    .cartCounter{
+        position: absolute;
+        background-color: aqua;
+        border-radius: 50%;
+        width: 15px;
+        height:15px;
+        text-align: center;
+        /* font-size: 10px; */
+        margin-left: 25px;
+    }
+    .toRemind{
+        scroll-behavior: smooth;
+    }
+    }
+    

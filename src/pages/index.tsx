@@ -112,6 +112,7 @@ export default function Home({ data }: { data: Item[] }) {
             />
           </div>
           {/* ロゴは後で作成予定 */}
+
           <Image
             src={'/images/logo/top_logo.png'}
             alt={'top-logo'}
@@ -122,18 +123,18 @@ export default function Home({ data }: { data: Item[] }) {
           <div
             className={`${topStyle.buttonArea} absolute left-1/2 top-3/4 -translate-x-1/2 -translate-y-1/2`}
           >
-            <button className="bg-white">
+            <button className={`${topStyle.cord} bg-white`}>
               <Link href="/coordination">
-                <div className="mx-auto pt-1.5 text-center w-96 h-10 border-2 border-neutral-900">
-                  <span>コーディネートをランダム生成する</span>
-                  <span className="float-right mr-1">→</span>
+                <div className={`${topStyle.cordtitle} mx-auto pt-1.5 text-center w-96 h-10 border-2 border-neutral-900`}>
+                  <span className={topStyle.cordtext}>コーディネートをランダム生成する　→</span>
+                  {/* <span className={`${topStyle.cordtextarrow} float-right mr-1`}>→</span> */}
                 </div>
               </Link>
             </button>
           </div>
         </div>
         <div className={`${topStyle.content} mt-20`}>
-          <h2 className="text-center text-xl font-bold">新着商品</h2>
+          <h2 className={`${topStyle.font} text-center text-xl font-bold`}>新着商品</h2>
           <div
             className={`${topStyle.categoryList} container mx-auto p-2 flex gap-5 justify-center`}
           >
@@ -152,7 +153,7 @@ export default function Home({ data }: { data: Item[] }) {
                 </p>
               </div>
             </Link>
-            <ul className="grid grid-cols-4 gap-4">
+            <ul className={`${topStyle.itemlist} grid grid-cols-4 gap-4`}>
               {newItems.map((item, index) => (
                 <Link href={`/items/itemlist/${item.id}`} key={index}>
                   <li>
@@ -176,9 +177,9 @@ export default function Home({ data }: { data: Item[] }) {
           <div className={topStyle.buttonContent}>
             <Link href="/items/itemlist">
               <button className={`${topStyle.buttonArea}`}>
-                <div className="mx-auto pt-1.5 text-center w-96 h-10 border-2 border-neutral-900">
-                  <span>商品一覧へ</span>
-                  <span className="float-right mr-1">→</span>
+                <div className={`${topStyle.itemtitle} mx-auto pt-1.5 text-center w-96 h-10 border-2 border-neutral-900`}>
+                  <span className={topStyle.itemtext}>商品一覧へ　→</span>
+                  {/* <span className="float-right mr-1">→</span> */}
                 </div>
               </button>
             </Link>
@@ -188,26 +189,27 @@ export default function Home({ data }: { data: Item[] }) {
           className={`${topStyle.content} mx-auto mt-20 justify-center`}
         >
           {/* カテゴリの表示は２段で別々にmap()を使っています */}
-          <h2 className="text-center text-xl font-bold">
+          <h2 className={`${topStyle.font} text-center text-xl font-bold`}>
             商品カテゴリから探す
           </h2>
           <ul
-            className={`${topStyle.categoryList} grid grid-cols-5 gap-8 w-4/5 mx-auto mt-5`}
+            className={`${topStyle.cateLists} grid grid-cols-5 gap-8 w-4/5 mx-auto mt-5`}
           >
             {category.slice(0, 5).map((item) => (
-              <li key={item.alt}>
+              <li key={item.alt} >
                 <Link
                   href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=${item.name}&input=&order=id.desc&page=0`}
                 >
-                  <div className="relative block h-16 border rounded hover:border-2 border-neutral-400">
-                    <div className="absolute flex ml-2 top-1/2 -translate-y-1/2">
+                  <div className={`${topStyle.cateList} relative block h-16 border rounded hover:border-2 border-neutral-400`}>
+                    <div className={`${topStyle.cateLis} absolute flex ml-2 top-1/2 -translate-y-1/2`}>
                       <Image
+                        className={topStyle.cateimg}
                         src={item.src}
                         alt={item.alt}
                         width={50}
                         height={50}
                       />
-                      <span className="my-auto mx-2">
+                      <span className={`${topStyle.catename} my-auto mx-2`}>
                         {item.name}
                       </span>
                     </div>
@@ -217,22 +219,23 @@ export default function Home({ data }: { data: Item[] }) {
             ))}
           </ul>
           <ul
-            className={`${topStyle.categoryList} grid grid-cols-4 gap-7 w-3/5 mx-auto mt-5`}
+            className={`${topStyle.cateLists2} grid grid-cols-4 gap-7 w-3/5 mx-auto mt-5`}
           >
             {category.slice(5, 9).map((item) => (
               <li key={item.alt}>
                 <Link
                   href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=${item.name}&input=&order=id.desc&page=0`}
                 >
-                  <div className="relative block h-16 border rounded hover:border-2 border-neutral-400">
-                    <div className="absolute ml-2 flex top-1/2 -translate-y-1/2">
+                  <div className={`${topStyle.cateList} relative block h-16 border rounded hover:border-2 border-neutral-400`}>
+                    <div className={`${topStyle.cateLis} absolute ml-2 flex top-1/2 -translate-y-1/2`}>
                       <Image
+                        className={topStyle.cateimg}
                         src={item.src}
                         alt={item.alt}
                         width={50}
                         height={50}
                       />
-                      <span className="my-auto ml-2">
+                      <span className={`${topStyle.catename} my-auto mx-2`}>
                         {item.name}
                       </span>
                     </div>
@@ -243,7 +246,7 @@ export default function Home({ data }: { data: Item[] }) {
           </ul>
         </div>
         <div className={topStyle.scrollArea} id="remind">
-          <h2 className="text-center text-xl font-bold">お知らせ</h2>
+          <h2 className={`${topStyle.font} text-center text-xl font-bold`}>お知らせ</h2>
           <div className={topStyle.scroll}>
             <div className={topStyle.announce}>
               <p className={topStyle.date}>2023-1-4</p>

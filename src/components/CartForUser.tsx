@@ -55,6 +55,7 @@ export default function UserCart() {
           <div className={headModule.cartCounter}>{total}</div>
         )}
         <Image
+          className={headModule.iconimg}
           src="/images/icon/cart.png"
           alt=""
           width={25}

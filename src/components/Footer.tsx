@@ -15,6 +15,7 @@ export default function Footer() {
     <footer className={fstyles.menu}>
       <p className={fstyles.menu_title}>MENU</p>
 
+      {/* パソコン用 */}
       <div className={fstyles.menu_contents}>
         <div>
           <div className={fstyles.category}>
@@ -109,8 +110,8 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        {/* ガイドとその他はテキストのみとしてます（余裕があればページママコピペ？） */}
-        <div className={fstyles.category}>
+        {/* パソコンのみ */}
+        <div className={fstyles.categoryguide}>
           <p className={fstyles.menu_contents_title}>ご利用ガイド</p>
           <div className={fstyles.category_lists}>
             <ul className={fstyles.guide_lists}>
@@ -132,7 +133,7 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-
+        {/* パソコンのみ */}
         <div className={fstyles.message}>
           <form>
             <button type="button">お問い合わせ　→</button>
@@ -140,6 +141,108 @@ export default function Footer() {
         </div>
       </div>
 
+      {/* スマホ用 */}
+      <div className={fstyles.menu_contentssp}>
+        <div>
+          <div className={fstyles.categorysp}>
+            {/* <p className={fstyles.menu_contents_titlesp}>
+              商材カテゴリから探す
+            </p> */}
+            <label htmlFor="category" className={fstyles.menu_contents_onoffsp}>商材カテゴリから探す</label>
+              <input type="checkbox" id="category" className={fstyles.menu_contents_titlesp} />
+            <div className={fstyles.category_listssp}>
+              <ul className={fstyles.category_listsp}>
+                <li className={fstyles.category_listItemnamesp}>
+                  {/* SSRで再レンダリングした、カテゴリ検索結果リンクが入る想定です */}
+                  <Link href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=椅子&input=&order=id.desc&page=0`} className={fstyles.category_listItemsp}>
+                    椅子
+                  </Link>
+                </li>
+                <li className={fstyles.category_listItemnamesp}>
+                  <Link href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=テーブル&input=&order=id.desc&page=0`} className={fstyles.category_listItemsp}>
+                    テーブル
+                  </Link>
+                </li>
+                <li className={fstyles.category_listItemnamesp}>
+                  <Link href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=カーテン&input=&order=id.desc&page=0`} className={fstyles.category_listItemsp}>
+                    カーテン
+                  </Link>
+                </li>
+                </ul>
+              <ul className={fstyles.category_listsp}>
+                <li className={fstyles.category_listItemnamesp}>
+                  <Link href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=カーペット/ラグ&input=&order=id.desc&page=0`} className={fstyles.category_listItemsp}>
+                    カーペット/ラグ
+                  </Link>
+                </li>
+                <li className={fstyles.category_listItemnamesp}>
+                  <Link href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=ソファ&input=&order=id.desc&page=0`} className={fstyles.category_listItemsp}>
+                    ソファ
+                  </Link>
+                </li>
+                <li className={fstyles.category_listItemnamesp}>
+                  <Link href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=収納棚&input=&order=id.desc&page=0`} className={fstyles.category_listItemsp}>
+                    収納棚
+                  </Link>
+                </li>
+              </ul>
+              <ul className={fstyles.category_listsp}>
+                <li className={fstyles.category_listItemnamesp}>
+                  <Link href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=照明&input=&order=id.desc&page=0`} className={fstyles.category_listItemsp}>
+                    照明
+                  </Link>
+                </li>
+                <li className={fstyles.category_listItemnamesp}>
+                  <Link href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=ベッド/寝具&input=&order=id.desc&page=0`} className={fstyles.category_listItemsp}>
+                    ベッド/寝具
+                  </Link>
+                </li>
+                <li className={fstyles.category_listItemnamesp}>
+                  <Link href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=小物/雑貨&input=&order=id.desc&page=0`} className={fstyles.category_listItemsp}>
+                    小物/雑貨
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className={fstyles.categorysp}>
+            {/* <p className={fstyles.menu_contents_titlesp}>
+              インテリアジャンルから探す
+            </p> */}
+            <label htmlFor="genre" className={fstyles.menu_contents_onoffsp}>インテリアジャンルから探す</label>
+              <input type="checkbox" id="genre" className={fstyles.menu_contents_titlesp} />
+              <div className={fstyles.category_listssp}>
+              <ul className={fstyles.category_listsp}>
+                <li className={fstyles.category_listItemnamesp}>
+                  <Link href={`/items/itemlist/search?genre=北欧風&category=椅子&category=テーブル&category=カーテン&category=照明&category=カーペット%2Fラグ&category=ソファ&category=収納棚&category=ベッド%2F寝具&category=小物%2F雑貨&input=&order=id.desc&page=0`} className={fstyles.category_listItemsp}>
+                    北欧風
+                  </Link>
+                </li>
+                <li className={fstyles.category_listItemnamesp}>
+                  <Link href={`/items/itemlist/search?genre=ナチュラル&category=椅子&category=テーブル&category=カーテン&category=照明&category=カーペット%2Fラグ&category=ソファ&category=収納棚&category=ベッド%2F寝具&category=小物%2F雑貨&input=&order=id.desc&page=0`} className={fstyles.category_listItemsp}>
+                    ナチュラル
+                  </Link>
+                </li>
+              </ul>
+              <ul className={fstyles.category_listsp}>
+                <li className={fstyles.category_listItemnamesp}>
+                  <Link href={`/items/itemlist/search?genre=和モダン&category=椅子&category=テーブル&category=カーテン&category=照明&category=カーペット%2Fラグ&category=ソファ&category=収納棚&category=ベッド%2F寝具&category=小物%2F雑貨&input=&order=id.desc&page=0`}  className={fstyles.category_listItemsp}>
+                    和モダン
+                  </Link>
+                </li>
+                <li className={fstyles.category_listItemnamesp}>
+                  <Link href={`/items/itemlist/search?genre=フェミニン&category=椅子&category=テーブル&category=カーテン&category=照明&category=カーペット%2Fラグ&category=ソファ&category=収納棚&category=ベッド%2F寝具&category=小物%2F雑貨&input=&order=id.desc&page=0`}  className={fstyles.category_listItemsp}>
+                    フェミニン
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* パソコンのみ */}
       <div className={fstyles.copybox}>
         <small>
           サイト内の文章、画像などの著作物は株式会社brigeに属します。複製、無断転載を禁止します。

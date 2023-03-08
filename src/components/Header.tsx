@@ -105,6 +105,7 @@ export default function Header({
         <Link href={'/'}>
           <div>
             <Image
+              className={headModule.titleiconimg}
               src="/images/logo/header_logo.png"
               alt="bridge-logo"
               width={150}
@@ -112,7 +113,7 @@ export default function Header({
             />
           </div>
         </Link>
-        <ul className="flex gap-10 mr-60 ml-30 whitespace-nowrap">
+        <ul className={`${headModule.left} flex gap-10 mr-60 ml-30 whitespace-nowrap`}>
           <li>
             <Link href="/items/itemlist">商品</Link>
           </li>
@@ -123,10 +124,10 @@ export default function Header({
           </li>
           <li>ヘルプ</li>
         </ul>
-        <div className="flex gap-10">
+        <div className={`${headModule.right} flex gap-10`}>
           <form className={headModule.form} onSubmit={handleSubmit}>
             <input
-              className="h-8 border border-neutral-500 rounded-l pl-2.5"
+              className={`${headModule.formtitle} h-8 border border-neutral-500 rounded-l pl-2.5`}
               type="text"
               placeholder="何をお探しですか？"
               value={input}
@@ -136,16 +137,17 @@ export default function Header({
               href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=椅子&category=テーブル&category=カーテン&category=照明&category=カーペット%2Fラグ&category=ソファ&category=収納棚&category=ベッド%2F寝具&category=小物%2F雑貨&input=${input}&order=id.desc&page=0`}
             >
               <button
-                className="h-8 text-white bg-neutral-900 border border-neutral-900 rounded-r px-1"
+                className={`${headModule.searchs}h-8 text-white bg-neutral-900 border border-neutral-900 rounded-r px-1`}
                 type="submit"
               >
-                検索
+                <span className={headModule.search}>検索</span>
               </button>
             </Link>
           </form>
           {auth ? (
             <Link href={'/mypage'} className={headModule.iconModule}>
               <Image
+                className={headModule.iconimg}
                 src="/images/icon/login.png"
                 alt=""
                 width={25}
@@ -162,6 +164,7 @@ export default function Header({
           ) : (
             <Link href={'/login'} className={headModule.iconModule}>
               <Image
+                className={headModule.iconimg}
                 src="/images/icon/login.png"
                 alt=""
                 width={25}
