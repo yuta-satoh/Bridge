@@ -7,6 +7,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import hModule from '../../../styles/history.module.css';
 import { useRouter } from 'next/router';
+import cModule from '../../../styles/coordination.module.css';
 
 type postReviews = {
   item_id: number;
@@ -149,6 +150,25 @@ export default function Review({
         <title>レビュー投稿</title>
       </Head>
       <main className={prStyles.main}>
+      <div className={hModule.breadList}>
+            <ol className={cModule.links} id="top">
+              <li className={cModule.pageLink}>
+                <Link href="/">Bridge</Link>
+                <span className={cModule.greaterThan}>&gt;</span>
+              </li>
+              <li className={cModule.pageLink}>
+                <Link href="/mypage">マイページ</Link>
+                <span className={cModule.greaterThan}>&gt;</span>
+              </li>
+              <li className={cModule.pageLink}>
+              <Link href="/account/history">購入履歴</Link>
+                <span className={cModule.greaterThan}>&gt;</span>
+              </li>
+              <li className={cModule.pageLink}>
+                レビュー投稿
+              </li>
+            </ol>
+          </div>
         <div className={prStyles.body}>
           <div className={prStyles.itemInfo}>
             <table className={hModule.tableBody}>
@@ -192,13 +212,13 @@ export default function Review({
                   <td className={hModule.tableCell}>
                     ¥{' '}
                     {(
-                      history_data.quantity * history_data.price
+                      history_data.price * 1.1
                     ).toLocaleString()}
                   </td>
                   <td className={hModule.tableCell}>
                     ¥{' '}
                     {(
-                      history_data.quantity * history_data.price
+                      history_data.quantity * history_data.price * 1.1
                     ).toLocaleString()}
                   </td>
                 </tr>

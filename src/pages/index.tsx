@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';
 import topStyle from '../styles/top.module.css';
+import Cookies from 'js-cookie';
 import { GetServerSideProps } from 'next';
 
 type Item = {
@@ -29,6 +30,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
 export default function Home({ data }: { data: Item[] }) {
   const newItems = data.slice(1);
+  Cookies.set('genre', 'ナチュラル');
   // カテゴリ用配列
   const category = [
     {
@@ -86,12 +88,29 @@ export default function Home({ data }: { data: Item[] }) {
       <main className={`${topStyle.main} mx-auto`}>
         <div className="relative">
           {/* 背景イメージは後から変えてください（３枚だけ用意してます） */}
-          <Image
-            src={'/images/background/top_image_2.jpeg'}
-            alt={'top-image'}
-            width={1920}
-            height={1000}
-          />
+          <div className={`${topStyle.container}`}>
+            <Image
+              src={'/images/background/top_image_2.jpeg'}
+              alt={'top-image'}
+              width={1920}
+              height={1000}
+              className={`${topStyle.topImage}`}
+            />
+            <Image
+              src={'/images/background/top_image_4.jpeg'}
+              alt={'top-image'}
+              width={1920}
+              height={1000}
+              className={`${topStyle.topImage}`}
+            />
+            <Image
+              src={'/images/background/top_image_3.jpeg'}
+              alt={'top-image'}
+              width={1920}
+              height={1000}
+              className={`${topStyle.topImage}`}
+            />
+          </div>
           {/* ロゴは後で作成予定 */}
 
           <Image
@@ -114,7 +133,7 @@ export default function Home({ data }: { data: Item[] }) {
             </button>
           </div>
         </div>
-        <div className={`${topStyle.content} mt-10`}>
+        <div className={`${topStyle.content} mt-20`}>
           <h2 className={`${topStyle.font} text-center text-xl font-bold`}>新着商品</h2>
           <div
             className={`${topStyle.categoryList} container mx-auto p-2 flex gap-5 justify-center`}
@@ -181,7 +200,7 @@ export default function Home({ data }: { data: Item[] }) {
                 <Link
                   href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=${item.name}&input=&order=id.desc&page=0`}
                 >
-                  <div className={`${topStyle.cateList} relative block h-16 border-2 border-neutral-500`}>
+                  <div className={`${topStyle.cateList} relative block h-16 border rounded hover:border-2 border-neutral-400`}>
                     <div className={`${topStyle.cateLis} absolute flex ml-2 top-1/2 -translate-y-1/2`}>
                       <Image
                         className={topStyle.cateimg}
@@ -207,7 +226,7 @@ export default function Home({ data }: { data: Item[] }) {
                 <Link
                   href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=${item.name}&input=&order=id.desc&page=0`}
                 >
-                  <div className={`${topStyle.cateList} relative block h-16 border-2 border-neutral-500`}>
+                  <div className={`${topStyle.cateList} relative block h-16 border rounded hover:border-2 border-neutral-400`}>
                     <div className={`${topStyle.cateLis} absolute ml-2 flex top-1/2 -translate-y-1/2`}>
                       <Image
                         className={topStyle.cateimg}

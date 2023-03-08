@@ -63,7 +63,6 @@ export default function UserCart({ userId }: { userId: string }) {
   const sumPrice = filtercartItems.reduce((current, cart) => current + (cart.items.price * cart.quantity), 0)
 
   const handleDelete = async (itemId: number, cartId: number) => {
-    console.log(itemId, cartId);
     await deleteCart(itemId, cartId);
     mutate(filtercartItems);
   }

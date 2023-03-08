@@ -1,0 +1,23 @@
+.main {
+    background-size: cover;
+    width: 100%;
+    max-height: 100%;
+    display: flex;
+}
+.container {
+    background-color: rgba(255, 255, 255, 0.9);
+    margin: 50px auto;
+    width: 70%;
+}
+.section {
+    text-align: center;
+    margin: 70px auto;
+}
+.complete {
+    font-size: 30px;
+    padding-bottom: 10px;
+}
+.section span {
+    color: rgb(29, 198, 245);
+    text-decoration: underline;
+}

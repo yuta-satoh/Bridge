@@ -3,10 +3,13 @@ import { GetServerSideProps } from 'next';
 import useSWR from 'swr';
 import Head from 'next/head';
 import { type } from 'os';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { procedure } from '@/lib/purchaseFn';
 import Link from 'next/link';
 import urStyles from '../styles/userRegister.module.css';
+import Auth from './auth/auth';
+import { Router } from 'next/router';
+import { useRouter } from 'next/router';
 
 type items = {
   id: number;
@@ -52,6 +55,13 @@ export const getServerSideProps: GetServerSideProps = async (
   context
 ) => {
   const cookie = context.req.cookies['id'];
+  if (cookie === undefined) {
+    const user = null;
+    const cookie = '0';
+    return {
+      props: { cookie, user },
+    };
+  }
   const TOKEN =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
   const user = await fetch(
@@ -73,13 +83,14 @@ export const getServerSideProps: GetServerSideProps = async (
   };
 };
 
-export default function purchase({
+export default function Purchase({
   cookie,
   user,
 }: {
-  cookie: string | undefined;
+  cookie: string | null;
   user: User;
 }) {
+  const router = useRouter();
   const price: price = [];
   const userId = Number(cookie);
   const fetcher = (url: string) =>
@@ -89,6 +100,16 @@ export default function purchase({
     `/api/cart_items?select=*,items(*),carts(*)&cart_id=eq.${userId}`,
     fetcher
   );
+
+  useEffect(() => {
+    if (cookie === '0' || null) {
+      router.replace('/cart')
+    }
+  }, []);
+  if (cookie === '0' || null) {
+    return;
+  }
+
   if (error) return <p>エラー</p>;
   if (!data) return <p>ロード中...</p>;
   if (data.length === 0) {
@@ -110,79 +131,82 @@ export default function purchase({
       <Head>
         <title>購入確認</title>
       </Head>
-      <div className={pModule.body}>
-        <h1 className={pModule.title}>購入確認</h1>
-        <table className={pModule.itemTable}>
-          <tbody>
-            <tr className={pModule.tableTLine}>
-              <th className={pModule.nameTag}>品名</th>
-              <th className={pModule.item}>個数</th>
-              <th className={pModule.itemTag}>単価</th>
-              <th className={pModule.itemTag}>小計</th>
-            </tr>
-            {data.map((item) => (
-              <tr key={item.item_id} className={pModule.tableLine}>
-                <td className={pModule.itemName}>
-                  {item.items.name}
-                </td>
-                <td className={pModule.item}>{item.quantity}</td>
-                <td className={pModule.item}>
-                  ¥ {item.items.price.toLocaleString()}
-                </td>
-                <td className={pModule.item}>
-                  ¥{' '}
-                  {(
-                    item.quantity * item.items.price
-                  ).toLocaleString()}
+      <Auth>
+        <div className={pModule.body}>
+          <h1 className={pModule.title}>購入確認</h1>
+          <table className={pModule.itemTable}>
+            <tbody>
+              <tr className={pModule.tableTLine}>
+                <th className={pModule.nameTag}>品名</th>
+                <th className={pModule.item}>個数</th>
+                <th className={pModule.itemTag}>単価</th>
+                <th className={pModule.itemTag}>小計</th>
+              </tr>
+              {data.map((item) => (
+                <tr key={item.item_id} className={pModule.tableLine}>
+                  <td className={pModule.itemName}>
+                    {item.items.name}
+                  </td>
+                  <td className={pModule.item}>{item.quantity}</td>
+                  <td className={pModule.item}>
+                    ¥ {item.items.price.toLocaleString()}
+                  </td>
+                  <td className={pModule.item}>
+                    ¥{' '}
+                    {(
+                      item.quantity * item.items.price
+                    ).toLocaleString()}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+            <tbody>
+              <tr className={pModule.content}>
+                <td colSpan={2}></td>
+                <td className={pModule.subTTotal}>本体合計</td>
+                <td className={pModule.topText}>
+                  ¥&nbsp;{total.toLocaleString()}
                 </td>
               </tr>
-            ))}
-          </tbody>
-          <tbody>
-            <tr className={pModule.content}>
-              <td colSpan={2}></td>
-              <td className={pModule.subTTotal}>本体合計</td>
-              <td className={pModule.topText}>
-                ¥&nbsp;{total.toLocaleString()}
-              </td>
-            </tr>
-            <tr className={pModule.content}>
-              <td colSpan={2}></td>
-              <td className={pModule.subTotal}>消費税</td>
-              <td className={pModule.text}>
-                ¥&nbsp;{tax.toLocaleString()}
-              </td>
-            </tr>
-            <tr className={pModule.totalContent}>
-              <td colSpan={2}></td>
-              <td className={pModule.total}>合計</td>
-              <td className={pModule.total}>
-                ¥&nbsp;{(total + tax).toLocaleString()}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <div className={pModule.addressArea}>
-          <p className={pModule.total}>お届け先住所</p>
-          <p>{user[0].address}</p>
-        </div>
-        <div className={pModule.buttonArea}>
-          <button
-            type="button"
-            onClick={() => procedure(data)}
-            className={pModule.buttonStyle}
-          >
-            購入する
-          </button>
-        </div>
-        <div className={urStyles.loginLink}>
+              <tr className={pModule.content}>
+                <td colSpan={2}></td>
+                <td className={pModule.subTotal}>消費税</td>
+                <td className={pModule.text}>
+                  ¥&nbsp;{tax.toLocaleString()}
+                </td>
+              </tr>
+              <tr className={pModule.totalContent}>
+                <td colSpan={2}></td>
+                <td className={pModule.total}>合計</td>
+                <td className={pModule.total}>
+                  ¥&nbsp;{(total + tax).toLocaleString()}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div className={pModule.addressArea}>
+            <p className={pModule.total}>お届け先住所</p>
+            <p>{user[0].address}</p>
+          </div>
+          <div className={pModule.buttonArea}>
+            <button
+              type="button"
+              onClick={() => procedure(data)}
+              className={pModule.buttonStyle}
+            >
+              購入する
+            </button>
+          </div>
+          <div className={urStyles.loginLink}>
             <Link href="/cart">
               <button type="button" className={urStyles.linkButton}>
-                カートに戻る<span className={urStyles.buttonSpan}>→</span>
+                カートに戻る
+                <span className={urStyles.buttonSpan}>→</span>
               </button>
             </Link>
-            </div>
-      </div>
+          </div>
+        </div>
+      </Auth>
     </>
   );
 }

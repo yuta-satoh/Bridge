@@ -17,7 +17,8 @@ export default async function handler(
   res: NextApiResponse<ItemData[]>
 ) {
 	const queryId = req.query.id as string;
-  const queryGenre = req.query.genre as string;
+  const queryGenre = typeof req.query.genre === 'string' ? `genre=eq.${req.query.genre}` : ""
+  console.log(queryId, queryGenre)
 	const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
   const responseItems = await fetch(
     `http://127.0.0.1:8000/items?${queryGenre}&${queryId}`,
