@@ -40,9 +40,9 @@
     margin: auto;
   }
 .cardImage {
-  height: 100%;
-  width: auto;
-  padding-left: 40px;
+  height: 100px;
+  width: 100px;
+  margin: auto;
 }
 .noData {
   font-size: 30px;
