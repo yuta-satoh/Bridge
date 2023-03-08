@@ -358,7 +358,7 @@ export default function Purchase({
             </div>
           </div>
           <div className={pModule.dateArea}>
-            <p className={pModule.addressTitle}>お届け日時</p>
+            <p className={pModule.addressTitle}>お届け希望日</p>
             <input
               type="date"
               name="date"
