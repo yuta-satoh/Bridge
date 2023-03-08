@@ -52,7 +52,7 @@ async function addHistory(cart: cart) {
     const date = new Date();
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
-    const day = date.getDate();
+    const day = date.getDate() +7;
     if (month < 10 && day < 10) {
       return `${year}-0${month}-0${day}`;
     } else if (month < 10) {
