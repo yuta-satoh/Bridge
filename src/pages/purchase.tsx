@@ -178,6 +178,23 @@ export default function Purchase({
     return sum + element.price;
   }, 0);
   const tax = total * 0.1;
+  const oneWeekAgo = () => {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate() + 7;
+    if (month < 10 && day < 10) {
+      return `${year}-0${month}-0${day}`;
+    } else if (month < 10) {
+      return `${year}-0${month}-${day}`;
+    } else if (day < 10) {
+      return `${year}-${month}-0${day}`;
+    } else {
+      return `${year}-${month}-${day}`;
+    }
+  };
+
+  console.log(oneWeekAgo());
   return (
     <>
       <Head>
@@ -339,6 +356,15 @@ export default function Purchase({
                 onChange={handleChange}
               />
             </div>
+          </div>
+          <div className={pModule.dateArea}>
+            <p className={pModule.addressTitle}>お届け日時</p>
+            <input
+              type="date"
+              name="date"
+              id="date"
+              min={oneWeekAgo()}
+            />
           </div>
           <div className={pModule.buttonArea}>
             <button
