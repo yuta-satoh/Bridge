@@ -138,16 +138,14 @@
     height: 20px;
     margin-top: 10px;
   }
-  .cordbutton {
-    position: absolute;
-    top: 70%;
-  }
   .cordtitle {
     width: 100%;
     padding: 0 0.5rem;
     text-align: center;
     height: 100%;
-    border: 1px solid #1c1917;
+    background-color: rgb(246, 246, 246);
+    border: 1px solid rgb(206, 206, 206);
+    border-radius: 20px;
   }
 
   .cordtext {
