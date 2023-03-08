@@ -262,6 +262,7 @@ export default function UserRegister() {
       setErrorText({...errorText, email: searchResult.email, password: searchResult.password});
     } else if (searchResult.email !== "") {
       setErrorText({...errorText, email: searchResult.email})
+      setBorderError({...borderError, email: true})
     } else if (searchResult.password !== "") {
       setErrorText({...errorText, password: searchResult.password})
     } else {
@@ -551,7 +552,7 @@ export default function UserRegister() {
               <br />
             </div>
             <div className={urStyles.buttonArea}>
-              <button type="submit" className={urStyles.submitButton}>
+              <button type="submit" disabled={!canSubmit()} className={urStyles.submitButton}>
                 会員登録をする
                 <span className={urStyles.buttonSpan}>→</span>
               </button>
