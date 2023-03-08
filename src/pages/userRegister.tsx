@@ -111,7 +111,11 @@ export default function UserRegister() {
   }
 
   const passwordValidation = (password: string) => {
+    const regax = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9!"#$%]{0,100}$/;
+    const regaxInput = /^[a-zA-Z0-9!"#$%]{0,100}$/;
     if (!password) return '※パスワードを入力して下さい';
+    if (!regaxInput.test(password)) return '※半角英数字の大文字と小文字、数字、記号(!"#$%)のみ使用可能です'
+    if (!regax.test(password)) return "※英数字を組み合わせたパスワードにして下さい"
     if (password.length < 8 || password.length > 20) return "※８文字以上２０文字以内で設定してください"
     return '';
   }
@@ -260,6 +264,7 @@ export default function UserRegister() {
       setErrorText({...errorText, email: searchResult.email, password: searchResult.password});
     } else if (searchResult.email !== "") {
       setErrorText({...errorText, email: searchResult.email})
+      setBorderError({...borderError, email: true})
     } else if (searchResult.password !== "") {
       setErrorText({...errorText, password: searchResult.password})
     } else {
@@ -549,7 +554,7 @@ export default function UserRegister() {
               <br />
             </div>
             <div className={urStyles.buttonArea}>
-              <button type="submit" className={urStyles.submitButton}>
+              <button type="submit" disabled={!canSubmit()} className={urStyles.submitButton}>
                 会員登録をする
                 <span className={urStyles.buttonSpan}>→</span>
               </button>
