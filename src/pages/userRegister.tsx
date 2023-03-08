@@ -111,7 +111,9 @@ export default function UserRegister() {
   }
 
   const passwordValidation = (password: string) => {
+    const regax = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9.?/-]{0,100}$/;
     if (!password) return '※パスワードを入力して下さい';
+    if (!regax.test(password)) return "※英数字を組み合わせたパスワードにして下さい"
     if (password.length < 8 || password.length > 20) return "※８文字以上２０文字以内で設定してください"
     return '';
   }
