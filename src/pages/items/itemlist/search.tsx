@@ -116,7 +116,28 @@ export default function Search({
   };
 
   if (!filter || filter.length === 0) {
-    return <div>検索結果がありません</div>;
+    return (
+      <div className={lstyles.main}>
+        {/* パンくずリスト */}
+        <div className={lstyles.Breadcrumb}>
+          <nav>
+            <ol>
+              <li className={lstyles.breadlist}>
+                <Link href="/">TOPページ</Link>
+              </li>
+              <li className={lstyles.breadlist}>
+                <Link href="/items/itemlist">商品一覧ページ</Link>
+              </li>
+              <li className={lstyles.breadlist}>検索結果</li>
+            </ol>
+          </nav>
+        </div>
+        <div className={lstyles.result_none}>
+          <p>検索結果がありません</p>
+          <Link href="/items/itemlist">商品一覧に戻る</Link>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -126,104 +147,87 @@ export default function Search({
       </Head>
       <div className={lstyles.main}>
         {/* パンくずリスト */}
-      <div className={lstyles.Breadcrumb}>
-        <nav>
-          <ol>
-            <li className={lstyles.breadlist}>
-              <Link href="/">TOPページ</Link>
-            </li>
-            <li className={lstyles.breadlist}>
-              <Link href="/items/itemlist">商品一覧ページ</Link>
-            </li>
+        <div className={lstyles.Breadcrumb}>
+          <nav>
+            <ol>
+              <li className={lstyles.breadlist}>
+                <Link href="/">TOPページ</Link>
+              </li>
+              <li className={lstyles.breadlist}>
+                <Link href="/items/itemlist">商品一覧ページ</Link>
+              </li>
+              <li className={lstyles.breadlist}>検索結果</li>
+            </ol>
+          </nav>
+        </div>
+        <div className="text-right w-full">
+          <label htmlFor="itemOrder">表示順：</label>
+          <select
+            name="itemOrder"
+            id="itemOrder"
+            className="mx-2 border rounded border-gray-500"
+            value={order}
+            onChange={(e) => setOrder(e.target.value)}
+          >
+            <option value="id.desc">新着順</option>
+            <option value="price.asc">安い順</option>
+            <option value="price.desc">高い順</option>
+          </select>
+          <button
+            type="button"
+            className="mr-5 px-2 border rounded border-gray-500"
+            onClick={handleClick}
+          >
+            並び替える
+          </button>
+        </div>
 
-            {/* ジャンル絞り込み */}
-            <li className={lstyles.breadlist}>
-              {nowOrder.input === '' ? (
-                <Link
-                  href={`/items/itemlist/search?genre=${nowOrder.genres}&category=椅子&category=テーブル&category=カーテン&category=照明&category=カーペット%2Fラグ&category=ソファ&category=収納棚&category=ベッド%2F寝具&category=小物%2F雑貨&input=&order=id.desc&page=0`}
-                >
-                  {nowOrder.genres}
+        <div className={lstyles.list_outer}>
+          {filter.map((fil: Item) => {
+            return (
+              <div key={fil.id}>
+                <Link href={`/items/itemlist/${fil.id}`}>
+                  <div className={lstyles.image}>
+                    <Image
+                      src={fil.imgurl}
+                      alt={fil.name}
+                      width={280}
+                      height={250}
+                    />
+                  </div>
+                  <div className={lstyles.detail}>
+                    <p className={lstyles.itemname}>{fil.name}</p>
+                    <p>¥ {(fil.price * 1.1).toLocaleString()}</p>
+                    <p>{fil.description}</p>
+                  </div>
                 </Link>
-              ) : (
-                <>{nowOrder.input}</>
-              )}
-            </li>
-            {/* ジャンルとカテゴリ絞り込み */}
-            <li className={lstyles.breadlist}>
-              {nowOrder.input === '' ? (
-                <Link
-                  href={`/items/itemlist/search?genre=${nowOrder.genres}&category=${nowOrder.categories}&input=&order=id.desc&page=0`}
-                >
-                  {nowOrder.categories}
-                </Link>
-              ) : (
-                ''
-              )}
-            </li>
-          </ol>
-        </nav>
-      </div>
-      <div className="text-right w-full">
-        <label htmlFor="itemOrder">表示順：</label>
-        <select
-          name="itemOrder"
-          id="itemOrder"
-          className="mx-2 border rounded border-gray-500"
-          value={order}
-          onChange={(e) => setOrder(e.target.value)}
-        >
-          <option value="id.desc">新着順</option>
-          <option value="price.asc">安い順</option>
-          <option value="price.desc">高い順</option>
-        </select>
-        <button
-          type="button"
-          className="mr-5 px-2 border rounded border-gray-500"
-          onClick={handleClick}
-        >
-          並び替える
-        </button>
-      </div>
-
-      <div className={lstyles.list_outer}>
-        {filter.map((fil: Item) => {
-          return (
-            <div key={fil.id}>
-              <Link href={`/items/itemlist/${fil.id}`}>
-                <div className={lstyles.image}>
-                  <Image
-                    src={fil.imgurl}
-                    alt={fil.name}
-                    width={280}
-                    height={250}
-                  />
-                </div>
-                <div className={lstyles.detail}>
-                  <p className={lstyles.itemname}>{fil.name}</p>
-                  <p>¥ {(fil.price * 1.1).toLocaleString()}</p>
-                  <p>{fil.description}</p>
-                </div>
-              </Link>
-            </div>
-          );
-        })}
-      </div>
-      {/* ページング用 */}
-      <div className={lstyles.paging}>
-        <ul className={lstyles.pages}>
-          {pageArr.map((num) => (
-            <li key={`page_${num}`} className={ num === Number(nowOrder.page) ? lstyles.currentPage : lstyles.page }>
-              <button
-                className={lstyles.button}
-                type="button"
-                onClick={() => handleClickPaging(String(num))}
+              </div>
+            );
+          })}
+        </div>
+        {/* ページング用 */}
+        <div className={lstyles.paging}>
+          <ul className={lstyles.pages}>
+            {pageArr.map((num) => (
+              <li
+                key={`page_${num}`}
+                className={
+                  num === Number(nowOrder.page)
+                    ? lstyles.currentPage
+                    : lstyles.page
+                }
               >
-                {num + 1}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
+                <button
+                  className={lstyles.button}
+                  type="button"
+                  onClick={() => handleClickPaging(String(num))}
+                >
+                  {num + 1}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </>
   );
