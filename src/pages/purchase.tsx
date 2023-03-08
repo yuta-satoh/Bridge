@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next';
 import useSWR from 'swr';
 import Head from 'next/head';
 import { type } from 'os';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, ChangeEvent } from 'react';
 import { procedure } from '@/lib/purchaseFn';
 import Link from 'next/link';
 import urStyles from '../styles/userRegister.module.css';
@@ -51,6 +51,13 @@ type price = {
   price: number;
 }[];
 
+type address = {
+  zipcode1: string;
+  zipcode2: string;
+  address: string;
+  addressSelect: string;
+};
+
 export const getServerSideProps: GetServerSideProps = async (
   context
 ) => {
@@ -90,6 +97,19 @@ export default function Purchase({
   cookie: string | null;
   user: User;
 }) {
+  const initUserInfo = {
+    zipcode1: '',
+    zipcode2: '',
+    address: user[0].address,
+    addressSelect: 'false',
+  };
+  const initBorderError = {
+    zipcode1: false,
+    zipcode2: false,
+    address: false,
+  };
+  const [userInfo, setUserInfo] = useState<address>(initUserInfo);
+  const [borderError, setBorderError] = useState(initBorderError);
   const router = useRouter();
   const price: price = [];
   const userId = Number(cookie);
@@ -103,7 +123,7 @@ export default function Purchase({
 
   useEffect(() => {
     if (cookie === '0' || null) {
-      router.replace('/cart')
+      router.replace('/cart');
     }
   }, []);
   if (cookie === '0' || null) {
@@ -122,6 +142,38 @@ export default function Purchase({
       price: item.items.price * item.quantity,
     });
   });
+  // 郵便番号検索
+  const searchAddress = (e: React.FormEvent) => {
+    const url = 'https://zipcoda.net/api?';
+    if (userInfo.zipcode1 && userInfo.zipcode2) {
+      const params = new URLSearchParams({
+        zipcode: `${userInfo.zipcode1}${userInfo.zipcode2}`,
+      });
+      fetch(url + params)
+        .then((response) => response.json())
+        .then((data) => {
+          const stateName: string = data.items[0].state_name;
+          const townName: string = data.items[0].address;
+          setUserInfo({
+            ...userInfo,
+            address: `${stateName + townName}`,
+          });
+        })
+        .catch((err: ErrorEvent) => {
+          console.log(err);
+        });
+    }
+  };
+
+  const handleChange = (e: ChangeEvent) => {
+    if (!(e.target instanceof HTMLInputElement)) {
+      return;
+    }
+    const key = e.target.name;
+    const value = e.target.value;
+    setUserInfo({ ...userInfo, [key]: value });
+    setBorderError({ ...borderError, [key]: false });
+  };
   const total = price.reduce(function (sum, element) {
     return sum + element.price;
   }, 0);
@@ -185,8 +237,108 @@ export default function Purchase({
             </tbody>
           </table>
           <div className={pModule.addressArea}>
-            <p className={pModule.total}>お届け先住所</p>
-            <p>{user[0].address}</p>
+            <p className={pModule.addressTitle}>お届け先住所</p>
+            <div className={pModule.radio}>
+              {userInfo.addressSelect === 'true' ? (
+                <input
+                  type="radio"
+                  name="addressSelect"
+                  id="now"
+                  value="false"
+                  onChange={handleChange}
+                />
+              ) : (
+                <input
+                  type="radio"
+                  name="addressSelect"
+                  id="now"
+                  value="false"
+                  onChange={handleChange}
+                  checked
+                />
+              )}
+              <label htmlFor="now">現在の住所にお届け</label>
+            </div>
+            <p className={pModule.nAddress}>{user[0].address}</p>
+            <div className={pModule.radio}>
+              {userInfo.addressSelect === 'true' ? (
+                <input
+                  type="radio"
+                  name="addressSelect"
+                  id="new"
+                  value="true"
+                  onChange={handleChange}
+                  checked
+                />
+              ) : (
+                <input
+                  type="radio"
+                  name="addressSelect"
+                  id="new"
+                  value="true"
+                  onChange={handleChange}
+                />
+              )}
+              <label htmlFor="new">別の住所にお届け</label>
+            </div>
+            <div
+              className={
+                userInfo.addressSelect === 'true'
+                  ? pModule.inputItems
+                  : pModule.nonItems
+              }
+            >
+              <label htmlFor="zipcode" className={urStyles.label}>
+                郵便番号
+              </label>
+              <br />
+              <input
+                type="text"
+                pattern="^[0-9]+$"
+                name="zipcode1"
+                id="zipcode1"
+                value={userInfo.zipcode1}
+                className={`${pModule.zipcode} border 'border-neutral-500' rounded pl-2.5`}
+                onChange={handleChange}
+              />
+              <span>-</span>
+              <input
+                type="text"
+                pattern="^[0-9]+$"
+                name="zipcode2"
+                id="zipcode2"
+                value={userInfo.zipcode2}
+                className={`${pModule.zipcode} border 'border-neutral-500' rounded pl-2.5`}
+                onChange={handleChange}
+              />
+              <button
+                type="button"
+                className={`${urStyles.zipButton} text-white bg-neutral-900 border border-neutral-900 rounded px-1`}
+                onClick={searchAddress}
+              >
+                住所検索
+              </button>
+            </div>
+            <div
+              className={
+                userInfo.addressSelect === 'true'
+                  ? pModule.inputItems
+                  : pModule.nonItems
+              }
+            >
+              <label htmlFor="address" className={urStyles.label}>
+                住所
+              </label>
+              <br />
+              <input
+                type="text"
+                name="address"
+                id="address"
+                value={userInfo.address}
+                className={`${pModule.address} border 'border-neutral-500' rounded pl-2.5`}
+                onChange={handleChange}
+              />
+            </div>
           </div>
           <div className={pModule.buttonArea}>
             <button
