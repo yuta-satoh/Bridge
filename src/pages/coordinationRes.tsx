@@ -169,7 +169,7 @@ export default function coordination(
               </div>
               <div className={cModule.button}>
                 <button className={cModule.buttonStyle}>
-                  再生成する
+                  生成する
                 </button>
               </div>
             </form>

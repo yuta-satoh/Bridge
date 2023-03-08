@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';
 import topStyle from '../styles/top.module.css';
+import Cookies from 'js-cookie';
 import { GetServerSideProps } from 'next';
 
 type Item = {
@@ -29,6 +30,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
 export default function Home({ data }: { data: Item[] }) {
   const newItems = data.slice(1);
+  Cookies.set('genre', 'ナチュラル');
   // カテゴリ用配列
   const category = [
     {
