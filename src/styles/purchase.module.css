@@ -107,7 +107,7 @@
   margin-top: 5px;
   margin-bottom: 5px;
 }
-.radio{
+.radio {
   display: flex;
   margin-top: 10px;
 }
@@ -122,7 +122,7 @@
   padding-left: 15px;
   display: none;
 }
-.nAddress{
+.nAddress {
   margin: 5px 0;
   padding-left: 15px;
   font-size: 18px;
@@ -134,9 +134,24 @@
   flex-direction: column;
   align-items: flex-start;
 }
-.label{
+.label {
   margin-left: 5px;
 }
-.date{
+.date {
   margin-left: 15px;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+.timeArea {
+  width: 80%;
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.time_zone {
+  margin-left: 15px;
+  margin-top: 8px;
+  border: 1px solid gray;
+  border-radius: 5px;
 }

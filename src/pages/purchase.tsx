@@ -274,7 +274,9 @@ export default function Purchase({
                   checked
                 />
               )}
-              <label htmlFor="now" className={pModule.label}>現在の住所にお届け</label>
+              <label htmlFor="now" className={pModule.label}>
+                現在の住所にお届け
+              </label>
             </div>
             <p className={pModule.nAddress}>{user[0].address}</p>
             <div className={pModule.radio}>
@@ -296,7 +298,9 @@ export default function Purchase({
                   onChange={handleChange}
                 />
               )}
-              <label htmlFor="new" className={pModule.label}>別の住所にお届け</label>
+              <label htmlFor="new" className={pModule.label}>
+                別の住所にお届け
+              </label>
             </div>
             <div
               className={
@@ -366,6 +370,19 @@ export default function Purchase({
               min={oneWeekAgo()}
               className={pModule.date}
             />
+          </div>
+          <div className={pModule.timeArea}>
+          <p className={pModule.addressTitle}>お届け時間</p>
+            <select
+              name="time_zone"
+              id="time_zone"
+              className={pModule.time_zone}
+            >
+              <option value="none">希望無し</option>
+              <option value="morning">午前</option>
+              <option value="noon">12時~18時</option>
+              <option value="evening">18時以降</option>
+            </select>
           </div>
           <div className={pModule.buttonArea}>
             <button
