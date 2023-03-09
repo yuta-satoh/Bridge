@@ -67,6 +67,7 @@ export default function ItemList(): JSX.Element {
               <Link href={`/items/itemlist/${item.id}`}>
                 <div className={lstyles.image}>
                   <Image
+                    className={lstyles.images}
                     src={item.imgurl}
                     alt={item.name}
                     width={280}
