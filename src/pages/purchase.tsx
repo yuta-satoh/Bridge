@@ -372,7 +372,7 @@ export default function Purchase({
             />
           </div>
           <div className={pModule.timeArea}>
-          <p className={pModule.addressTitle}>お届け時間</p>
+          <p className={pModule.addressTitle}>希望時間</p>
             <select
               name="time_zone"
               id="time_zone"
