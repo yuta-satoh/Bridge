@@ -152,8 +152,8 @@ export default function Generator(props: {
                     >
                       <Image
                         src={item.imgurl}
-                        width={150}
-                        height={150}
+                        width={250}
+                        height={250}
                         alt=""
                         className={cModule.image}
                       />

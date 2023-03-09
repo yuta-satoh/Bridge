@@ -274,7 +274,7 @@ export default function Purchase({
                   checked
                 />
               )}
-              <label htmlFor="now">現在の住所にお届け</label>
+              <label htmlFor="now" className={pModule.label}>現在の住所にお届け</label>
             </div>
             <p className={pModule.nAddress}>{user[0].address}</p>
             <div className={pModule.radio}>
@@ -296,7 +296,7 @@ export default function Purchase({
                   onChange={handleChange}
                 />
               )}
-              <label htmlFor="new">別の住所にお届け</label>
+              <label htmlFor="new" className={pModule.label}>別の住所にお届け</label>
             </div>
             <div
               className={
@@ -364,6 +364,7 @@ export default function Purchase({
               name="date"
               id="date"
               min={oneWeekAgo()}
+              className={pModule.date}
             />
           </div>
           <div className={pModule.buttonArea}>
