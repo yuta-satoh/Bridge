@@ -109,10 +109,12 @@
 }
 .radio{
   display: flex;
+  margin-top: 10px;
 }
 .inputItems {
   padding-bottom: 10px;
   padding-left: 15px;
+  margin-top: 5px;
 }
 
 .nonItems {
@@ -123,6 +125,7 @@
 .nAddress{
   margin: 5px 0;
   padding-left: 15px;
+  font-size: 18px;
 }
 .dateArea {
   width: 80%;
@@ -130,4 +133,10 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+.label{
+  margin-left: 5px;
+}
+.date{
+  margin-left: 15px;
 }
