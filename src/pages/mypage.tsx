@@ -46,7 +46,7 @@ export default function Mypage({
       <Head>
         <title>マイページ</title>
       </Head>
-      <Auth>
+      {/* <Auth> */}
         <main className={myStyles.main}>
           <section className={myStyles.section}>
             <div className={myStyles.head}>
@@ -119,7 +119,7 @@ export default function Mypage({
             </div>
           </section>
         </main>
-      </Auth>
+      {/* </Auth> */}
     </>
   );
 }
