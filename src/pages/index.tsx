@@ -5,6 +5,7 @@ import topStyle from '../styles/top.module.css';
 import Cookies from 'js-cookie';
 import { GetServerSideProps } from 'next';
 import useSWR, { Fetcher } from 'swr';
+import NewItems from '@/components/NewItems';
 
 type Item = {
   id: number;
@@ -142,45 +143,7 @@ export default function Home({data}: {data: Item[]}) {
         </div>
         <div className={`${topStyle.content} mt-20`}>
           <h2 className={`${topStyle.font} text-center text-xl font-bold`}>新着商品</h2>
-          <div
-            className={`${topStyle.categoryList} container mx-auto p-2 flex gap-5 justify-center`}
-          >
-            {/* 大きく表示する商品 */}
-            <Link href={`/items/itemlist/${data[0].id}`}>
-              <div>
-                <Image
-                  src={data[0].imgurl}
-                  alt={data[0].name}
-                  width={285}
-                  height={285}
-                  className={`${topStyle.bigImage} rounded`}
-                />
-                <p className={`${topStyle.price} text-lg`}>
-                  ¥{(data[0].price * 1.1).toLocaleString()}
-                </p>
-              </div>
-            </Link>
-            <ul className={`${topStyle.itemlist} grid grid-cols-4 gap-4`}>
-              {newItems.map((item, index) => (
-                <Link href={`/items/itemlist/${item.id}`} key={index}>
-                  <li>
-                    <Image
-                      src={item.imgurl}
-                      alt={item.name}
-                      width={120}
-                      height={120}
-                      className={`${topStyle.smallImage} rounded`}
-                    />
-                    <div className={topStyle.smallImagePrice}> 
-                      <p className={`${topStyle.price} text-lg`}>
-                        ¥{(item.price * 1.1).toLocaleString()}
-                      </p>
-                    </div>
-                  </li>
-                </Link>
-              ))}
-            </ul>
-          </div>
+          <NewItems />
           <div className={topStyle.buttonContent}>
             <Link href="/items/itemlist">
               <button className={`${topStyle.buttonArea}`}>
