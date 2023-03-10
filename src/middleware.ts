@@ -8,21 +8,28 @@ export const middleware = async (req: NextRequest) => {
   const url = req.nextUrl;
   const res = NextResponse.next()
 
-  if (cookie) {
-    return res
-  }
+  // if (cookie) {
+  //   return res
+  // }
 
   if (authorizationHeader) {
     const basicAuth = authorizationHeader.split(' ')[1];
-    const [email, password] = atob(basicAuth).split(':');
-    const judge = await midLogin(email, password);
-    console.log(judge);
+    const [user, password] = atob(basicAuth).split(':');
 
-    if (judge !== 'false') {
-      res.cookies.set('status', 'true');
-      res.cookies.set('id', `${judge}`);
-      return res;
+    if (
+      user === process.env.BASIC_AUTH_USER &&
+      password === process.env.BASIC_AUTH_PASSWORD
+    ) {
+      return NextResponse.next()
     }
+    // const judge = await midLogin(email, password);
+    // console.log(judge);
+
+    // if (judge !== 'false') {
+    //   res.cookies.set('status', 'true');
+    //   res.cookies.set('id', `${judge}`);
+    //   return res;
+    // }
   }
 
   url.pathname = '/api/auth';
@@ -31,5 +38,5 @@ export const middleware = async (req: NextRequest) => {
 };
 
 export const config = {
-  matcher: ['/mypage', '/index','/account/review'],
+  matcher: [ '/:path*'],
 };
