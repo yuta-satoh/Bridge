@@ -6,27 +6,17 @@ import { GetServerSideProps } from 'next';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
-
-type items = {
-  id: number;
-  name: string;
-  description: string;
-  genre: string;
-  category: string;
-  price: number;
-  imgurl: string;
-  stock: number;
-  delete: boolean;
-};
+import { Items } from '@/types/types';
 
 type cart = {
   id: number;
   item_id: number;
-  items: items;
   cart_id: number;
   date: string;
   quantity: number;
   delete: boolean;
+  // item_idと同じidのitemsデータを格納するitemsプロパティ(type: Items)
+  items: Items;
 }[];
 
 export default function UserCart() {
