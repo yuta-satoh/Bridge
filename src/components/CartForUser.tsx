@@ -2,31 +2,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 import headModule from '../styles/header.module.css';
 import Cookies from 'js-cookie';
-import { GetServerSideProps } from 'next';
-import { ChangeEvent, FormEvent, useState } from 'react';
-import { useRouter } from 'next/router';
 import useSWR from 'swr';
-
-type items = {
-  id: number;
-  name: string;
-  description: string;
-  genre: string;
-  category: string;
-  price: number;
-  imgurl: string;
-  stock: number;
-  delete: boolean;
-};
+import { Items } from '@/types/types';
 
 type cart = {
   id: number;
   item_id: number;
-  items: items;
   cart_id: number;
   date: string;
   quantity: number;
   delete: boolean;
+  // item_idと同じidのitemsデータを格納するitemsプロパティ(type: Items)
+  items: Items;
 }[];
 
 export default function UserCart() {
@@ -37,7 +24,7 @@ export default function UserCart() {
   const { data, error }: { data: cart; error: any } = useSWR(
     `/api/cart_items?select=*,items(*),carts(*)&cart_id=eq.${userId}`,
     fetcher,
-    { refreshInterval: 10 }
+    { refreshInterval: 1000 }
   );
   if (error) return <p>エラー</p>;
   if (!data) return <p>ロード中...</p>;

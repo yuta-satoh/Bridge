@@ -2,13 +2,11 @@ import pModule from '../styles/purchase.module.css';
 import { GetServerSideProps } from 'next';
 import useSWR from 'swr';
 import Head from 'next/head';
-import { type } from 'os';
 import { useEffect, useState, ChangeEvent } from 'react';
 import { procedure } from '@/lib/purchaseFn';
 import Link from 'next/link';
 import urStyles from '../styles/userRegister.module.css';
 import Auth from './auth/auth';
-import { Router } from 'next/router';
 import { useRouter } from 'next/router';
 
 type items = {
@@ -178,6 +176,7 @@ export default function Purchase({
     return sum + element.price;
   }, 0);
   const tax = total * 0.1;
+
   const oneWeekAgo = () => {
     const date = new Date();
     const year = date.getFullYear();
@@ -193,6 +192,11 @@ export default function Purchase({
       return `${year}-${month}-${day}`;
     }
   };
+
+  function test(data: cart) {
+    procedure(data);
+    router.replace('/purchaseComp');
+  }
 
   console.log(oneWeekAgo());
   return (
@@ -372,7 +376,7 @@ export default function Purchase({
             />
           </div>
           <div className={pModule.timeArea}>
-          <p className={pModule.addressTitle}>希望時間</p>
+            <p className={pModule.addressTitle}>希望時間</p>
             <select
               name="time_zone"
               id="time_zone"
@@ -387,7 +391,7 @@ export default function Purchase({
           <div className={pModule.buttonArea}>
             <button
               type="button"
-              onClick={() => procedure(data)}
+              onClick={() => test(data)}
               className={pModule.buttonStyle}
             >
               購入する

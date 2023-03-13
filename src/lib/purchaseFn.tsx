@@ -1,4 +1,4 @@
-export default function purchaseFn() {}
+export function purchaseFn() {}
 
 type carts = {
   id: number;
@@ -35,7 +35,7 @@ const TOKEN =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
 
 async function deleteCart(id: number) {
-  await fetch(`/api/cart_items?item_id=eq.${id}`, {
+  await fetch(`http://127.0.0.1:8000/cart_items?item_id=eq.${id}`, {
     method: 'DELETE',
     headers: {
       Authorization: `Bearer ${TOKEN}`,
@@ -52,7 +52,7 @@ async function addHistory(cart: cart) {
     const date = new Date();
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
-    const day = date.getDate() +7;
+    const day = date.getDate();
     if (month < 10 && day < 10) {
       return `${year}-0${month}-0${day}`;
     } else if (month < 10) {
@@ -63,7 +63,7 @@ async function addHistory(cart: cart) {
       return `${year}-${month}-${day}`;
     }
   };
-  await fetch(`/api/order_histories`, {
+  await fetch(`http://127.0.0.1:8000/order_histories`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${TOKEN}`,
@@ -88,12 +88,14 @@ async function addHistory(cart: cart) {
     .catch((err) => console.error(err));
 }
 
-async function procedure(carts: carts) {
+export default async function procedure(carts: carts) {
+  // const router = useRouter()
   carts.map((cart) => {
     addHistory(cart);
     deleteCart(cart.item_id);
   });
-  location.href='/purchaseComp'
+  // location.href = '/purchaseComp';
+  // router.replace('/purchaseComp')
 }
 
 export { deleteCart, addHistory, procedure };
