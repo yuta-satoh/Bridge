@@ -3,11 +3,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Cookies from 'js-cookie';
 import Auth from './auth/auth';
-import Logout from '@/components/Logout';
+import Logout from '../components/Logout';
 import cModule from '../styles/coordination.module.css';
 import myStyles from '../styles/mypage.module.css';
 import { GetServerSideProps } from 'next';
-import CurrentCartItems from '@/components/CurrentCartItems';
+import CurrentCartItems from '../components/CurrentCartItems';
 
 export const getServerSideProps: GetServerSideProps = async (
   context
@@ -46,80 +46,74 @@ export default function Mypage({
       <Head>
         <title>マイページ</title>
       </Head>
-      <Auth>
-        <main className={myStyles.main}>
-          <section className={myStyles.section}>
-            <div className={myStyles.head}>
-              <nav>
-                <ol className={cModule.links} id="top">
-                  <li className={cModule.pageLink}>
-                    <Link href="/">Bridge</Link>
-                    <span className={cModule.greaterThan}>&gt;</span>
-                  </li>
-                  <li className={cModule.pageLink}>マイページ</li>
-                </ol>
-              </nav>
-              <h1 className={myStyles.title}>マイページ</h1>
-            </div>
-            <div className={myStyles.body}>
-              <div className={myStyles.container}>
-                <div className={myStyles.cartTitle}>
-                  <div>
-                    <h2>カートの商品</h2>
-                  </div>
-                </div>
-                <div className={myStyles.cartList}>
-                  <CurrentCartItems cookie={cookieValue} />
-                </div>
-                <div className={myStyles.cartLink}>
-                  <Link href="/cart">&gt;&gt;カート一覧</Link>
+      <main className={myStyles.main}>
+        <section className={myStyles.section}>
+          <div className={myStyles.head}>
+            <nav>
+              <ol className={cModule.links} id="top">
+                <li className={cModule.pageLink}>
+                  <Link href="/">Bridge</Link>
+                  <span className={cModule.greaterThan}>&gt;</span>
+                </li>
+                <li className={cModule.pageLink}>マイページ</li>
+              </ol>
+            </nav>
+            <h1 className={myStyles.title}>マイページ</h1>
+          </div>
+          <div className={myStyles.body}>
+            <div className={myStyles.container}>
+              <div className={myStyles.cartTitle}>
+                <div>
+                  <h2>カートの商品</h2>
                 </div>
               </div>
-              <div className={myStyles.container}>
-                <div className={myStyles.subtitle}>
-                  <h2>会員メニュー</h2>
-                </div>
-                <div className={myStyles.updateProfArea}>
-                  <button
-                    type="button"
-                    className={myStyles.updateProfButton}
-                    onClick={() =>
-                      (location.href = '/account/profile')
-                    }
-                  >
-                    会員情報の確認/変更
-                  </button>
-                  <button
-                    type="button"
-                    className={myStyles.updateProfButton}
-                    onClick={() =>
-                      (location.href = '/account/password')
-                    }
-                  >
-                    パスワードの変更
-                  </button>
-                  <button
-                    type="button"
-                    className={myStyles.updateProfButton}
-                    onClick={() =>
-                      (location.href = '/account/history')
-                    }
-                  >
-                    購入履歴
-                  </button>
-                </div>
-                <div className={myStyles.logout}>
-                  &gt;&gt;
-                  <Logout />
-                  {/* <div>
+              <div className={myStyles.cartList}>
+                <CurrentCartItems cookie={cookieValue} />
+              </div>
+              <div className={myStyles.cartLink}>
+                <Link href="/cart">&gt;&gt;カート一覧</Link>
+              </div>
+            </div>
+            <div className={myStyles.container}>
+              <div className={myStyles.subtitle}>
+                <h2>会員メニュー</h2>
+              </div>
+              <div className={myStyles.updateProfArea}>
+                <button
+                  type="button"
+                  className={myStyles.updateProfButton}
+                  onClick={() => (location.href = '/account/profile')}
+                >
+                  会員情報の確認/変更
+                </button>
+                <button
+                  type="button"
+                  className={myStyles.updateProfButton}
+                  onClick={() =>
+                    (location.href = '/account/password')
+                  }
+                >
+                  パスワードの変更
+                </button>
+                <button
+                  type="button"
+                  className={myStyles.updateProfButton}
+                  onClick={() => (location.href = '/account/history')}
+                >
+                  購入履歴
+                </button>
+              </div>
+              <div className={myStyles.logout}>
+                &gt;&gt;
+                <Logout />
+                {/* <div>
                     <Link href="#">退会手続き</Link>
                   </div> */}
-                </div>
               </div>
             </div>
-          </section>
-        </main>
-      </Auth>
+          </div>
+        </section>
+      </main>
     </>
   );
 }
