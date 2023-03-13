@@ -19,25 +19,8 @@ type Item = {
   delete: boolean;
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const response = await fetch('http://localhost:3000/api/newItems');
-  const data: Item[] = await response.json();
-
-  return {
-    props: {
-      data: data,
-    },
-  };
-};
-
-// const fetcher: Fetcher<Item[], string> = (...args) => fetch(...args).then((res) => res.json());
 
 export default function Home({data}: {data: Item[]}) {
-  // const { data, error } = useSWR('/api/newItems', fetcher)
-  // if (!data) return <div>ローディング</div>
-  // if (error) return <div>エラー</div> 
-  
-  const newItems = data.slice(1);
   Cookies.set('genre', 'ナチュラル');
   // カテゴリ用配列
   const category = [

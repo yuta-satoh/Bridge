@@ -2,9 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import headModule from '../styles/header.module.css';
 import Cookies from 'js-cookie';
-import { GetServerSideProps } from 'next';
-import { ChangeEvent, FormEvent, useState } from 'react';
-import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import { Items } from '@/types/types';
 
@@ -27,7 +24,7 @@ export default function UserCart() {
   const { data, error }: { data: cart; error: any } = useSWR(
     `/api/cart_items?select=*,items(*),carts(*)&cart_id=eq.${userId}`,
     fetcher,
-    { refreshInterval: 10 }
+    { refreshInterval: 1000 }
   );
   if (error) return <p>エラー</p>;
   if (!data) return <p>ロード中...</p>;
