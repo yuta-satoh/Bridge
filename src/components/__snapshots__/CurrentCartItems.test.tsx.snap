@@ -1,0 +1,209 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CarrentCartItemsモジュールのテスト エラー 1`] = `
+<div
+  className="container"
+>
+  <div
+    className="background"
+  >
+    <p>
+      カートに商品がありません
+    </p>
+  </div>
+</div>
+`;
+
+exports[`CarrentCartItemsモジュールのテスト カートに商品がありません(data.length === 0) 1`] = `
+<div
+  className="container"
+>
+  <div
+    className="background"
+  >
+    <p>
+      カートに商品がありません
+    </p>
+  </div>
+</div>
+`;
+
+exports[`CarrentCartItemsモジュールのテスト ロード中 1`] = `
+<div
+  className="container"
+>
+  <div
+    className="background"
+  >
+    <p>
+      ロード中...
+    </p>
+  </div>
+</div>
+`;
+
+exports[`CarrentCartItemsモジュールのテスト 最新の商品4つが表示される 1`] = `
+<div
+  className="cartItemsArea"
+>
+  <div
+    className="cartItems"
+  >
+    <img
+      alt="kagu"
+      className="picture"
+      data-nimg="1"
+      decoding="async"
+      height={150}
+      loading="lazy"
+      onError={[Function]}
+      onLoad={[Function]}
+      src="/_next/image?url=%2Fhoge1&w=384&q=75"
+      srcSet="/_next/image?url=%2Fhoge1&w=256&q=75 1x, /_next/image?url=%2Fhoge1&w=384&q=75 2x"
+      style={
+        {
+          "color": "transparent",
+        }
+      }
+      width={150}
+    />
+    <p
+      className="cartName"
+    >
+      ダミー1
+    </p>
+    <div
+      className="cartPrice"
+    >
+      <p>
+        ¥ 
+        11,000
+      </p>
+      <p>
+        1個
+      </p>
+    </div>
+  </div>
+  <div
+    className="cartItems"
+  >
+    <img
+      alt="kagu"
+      className="picture"
+      data-nimg="1"
+      decoding="async"
+      height={150}
+      loading="lazy"
+      onError={[Function]}
+      onLoad={[Function]}
+      src="/_next/image?url=%2Fhoge2&w=384&q=75"
+      srcSet="/_next/image?url=%2Fhoge2&w=256&q=75 1x, /_next/image?url=%2Fhoge2&w=384&q=75 2x"
+      style={
+        {
+          "color": "transparent",
+        }
+      }
+      width={150}
+    />
+    <p
+      className="cartName"
+    >
+      ダミー2
+    </p>
+    <div
+      className="cartPrice"
+    >
+      <p>
+        ¥ 
+        22,000
+      </p>
+      <p>
+        2個
+      </p>
+    </div>
+  </div>
+  <div
+    className="cartItems"
+  >
+    <img
+      alt="kagu"
+      className="picture"
+      data-nimg="1"
+      decoding="async"
+      height={150}
+      loading="lazy"
+      onError={[Function]}
+      onLoad={[Function]}
+      src="/_next/image?url=%2Fhoge3&w=384&q=75"
+      srcSet="/_next/image?url=%2Fhoge3&w=256&q=75 1x, /_next/image?url=%2Fhoge3&w=384&q=75 2x"
+      style={
+        {
+          "color": "transparent",
+        }
+      }
+      width={150}
+    />
+    <p
+      className="cartName"
+    >
+      ダミー3
+    </p>
+    <div
+      className="cartPrice"
+    >
+      <p>
+        ¥ 
+        33,000
+      </p>
+      <p>
+        3個
+      </p>
+    </div>
+  </div>
+  <div
+    className="cartItems"
+  >
+    <img
+      alt="kagu"
+      className="picture"
+      data-nimg="1"
+      decoding="async"
+      height={150}
+      loading="lazy"
+      onError={[Function]}
+      onLoad={[Function]}
+      src="/_next/image?url=%2Fhoge4&w=384&q=75"
+      srcSet="/_next/image?url=%2Fhoge4&w=256&q=75 1x, /_next/image?url=%2Fhoge4&w=384&q=75 2x"
+      style={
+        {
+          "color": "transparent",
+        }
+      }
+      width={150}
+    />
+    <p
+      className="cartName"
+    >
+      ダミー4
+    </p>
+    <div
+      className="cartPrice"
+    >
+      <p>
+        ¥ 
+        44,000
+      </p>
+      <p>
+        4個
+      </p>
+    </div>
+  </div>
+  <p
+    className="other"
+  >
+    他
+    1
+    件
+  </p>
+</div>
+`;
