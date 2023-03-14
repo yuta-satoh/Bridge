@@ -33,7 +33,6 @@ export const getServerSideProps: GetServerSideProps = async (
 ) => {
   const cookie = context.req.cookies['id'];
   if (cookie === undefined) {
-    const user = null;
     const cookie = '0';
     return {
       props: { cookie },
@@ -52,11 +51,11 @@ export default function History({
   const router = useRouter();
   const [order, setOrder] = useState('id.desc');
 
-  useEffect(() => {
-    if (cookie === '0' || null) {
-      router.replace('/login')
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (cookie === '0' || null) {
+  //     router.replace('/login');
+  //   }
+  // }, []);
 
   const userId = Number(cookie);
   const fetcher = (url: string) =>
@@ -84,7 +83,7 @@ export default function History({
       <Head>
         <title>購入履歴</title>
       </Head>
-      <Auth>
+      {/* <Auth> */}
         <>
           <div className={hModule.breadList}>
             <ol className={cModule.links} id="top">
@@ -96,9 +95,7 @@ export default function History({
                 <Link href="/mypage">マイページ</Link>
                 <span className={cModule.greaterThan}>&gt;</span>
               </li>
-              <li className={cModule.pageLink}>
-                購入履歴
-              </li>
+              <li className={cModule.pageLink}>購入履歴</li>
             </ol>
           </div>
           {data.length !== 0 ? (
@@ -125,13 +122,10 @@ export default function History({
                     <th className={hModule.tableCell}>小計</th>
                   </tr>
                 </thead>
-                {data.map((item) => (
-                  <>
-                    <tbody key={item.item_id}>
-                      <tr
-                        key={item.item_id}
-                        className={hModule.tableLine}
-                      >
+                <tbody>
+                  {data.map((item) => (
+                    <>
+                      <tr key={item.id} className={hModule.tableLine}>
                         <td className={hModule.tableCellCenter}>
                           <Link
                             href={`../items/itemlist/${item.item_id}`}
@@ -175,15 +169,15 @@ export default function History({
                           </button>
                         </td>
                       </tr>
-                      <tr>
+                      <tr key={item.user_id}>
                         <td colSpan={5}></td>
                         <td className={hModule.tableCellCenterSub}>
                           購入日：{item.date}
                         </td>
                       </tr>
-                    </tbody>
-                  </>
-                ))}
+                    </>
+                  ))}
+                </tbody>
               </table>
             </div>
           ) : (
@@ -203,7 +197,7 @@ export default function History({
             </div>
           )}
         </>
-      </Auth>
+      {/* </Auth> */}
     </>
   );
 }

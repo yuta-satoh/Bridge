@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next';
 import useSWR from 'swr';
 import Head from 'next/head';
 import { useEffect, useState, ChangeEvent } from 'react';
-import { procedure } from '@/lib/purchaseFn';
+import { procedure } from '../lib/purchaseFn';
 import Link from 'next/link';
 import urStyles from '../styles/userRegister.module.css';
 import Auth from './auth/auth';
@@ -33,15 +33,11 @@ type User = {
   lastName: string;
   firstName: string;
   gender: string;
-  tell1: string;
-  tell2: string;
-  tell3: string;
+  tell: string;
   email: string;
-  zipcode1: string;
-  zipcode2: string;
+  zipcode: string;
   address: string;
   password: string;
-  confirmationPassword: string;
 }[];
 type price = {
   id: number;
@@ -124,9 +120,6 @@ export default function Purchase({
       router.replace('/cart');
     }
   }, []);
-  if (cookie === '0' || null) {
-    return;
-  }
 
   if (error) return <p>エラー</p>;
   if (!data) return <p>ロード中...</p>;
@@ -195,16 +188,14 @@ export default function Purchase({
 
   function test(data: cart) {
     procedure(data);
-    router.replace('/purchaseComp');
+    router.push('/purchaseComp');
   }
-
-  console.log(oneWeekAgo());
   return (
     <>
       <Head>
         <title>購入確認</title>
       </Head>
-      <Auth>
+      {/* <Auth> */}
         <div className={pModule.body}>
           <h1 className={pModule.title}>購入確認</h1>
           <table className={pModule.itemTable}>
@@ -406,7 +397,6 @@ export default function Purchase({
             </Link>
           </div>
         </div>
-      </Auth>
     </>
   );
 }

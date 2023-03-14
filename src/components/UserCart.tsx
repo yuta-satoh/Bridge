@@ -57,7 +57,6 @@ export default function UserCart({ userId }: { userId: string }) {
       genre: cart.items.genre
     }
   })
-  console.log(recommend);
 
   // 合計金額
   const sumPrice = filtercartItems.reduce((current, cart) => current + (cart.items.price * cart.quantity), 0)
@@ -69,7 +68,6 @@ export default function UserCart({ userId }: { userId: string }) {
 
   const handleChange = async (ev: ChangeEvent<HTMLSelectElement>, itemId: number, cartId: number) => {
     const value = ev.target.value
-    console.log(value)
     await fetch("/api/selectQuantity", {
       method: "POST",
       headers: {
@@ -80,7 +78,7 @@ export default function UserCart({ userId }: { userId: string }) {
         cart_id: cartId,
         quantity: Number(value),
       })
-    }).then((res) => console.log("ステータス:", res.status))
+    }).then((res) => res.status)
     mutate(filtercartItems)
   }
 
@@ -118,6 +116,7 @@ export default function UserCart({ userId }: { userId: string }) {
                   <select
                     name="quantity"
                     id="cart_quantity"
+                    data-testid="select-option"
                     className="ml-5 border border-neutral-900 rounded p-1"
                     defaultValue={cart.quantity}
                     onChange={(ev) => handleChange(ev, cart.items.id, cart.cart_id)}

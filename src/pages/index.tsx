@@ -20,7 +20,7 @@ type Item = {
 };
 
 
-export default function Home({data}: {data: Item[]}) {
+export default function Home() {
   Cookies.set('genre', 'ナチュラル');
   // カテゴリ用配列
   const category = [
