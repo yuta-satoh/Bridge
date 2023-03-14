@@ -240,7 +240,7 @@ exports[`描画される 1`] = `
     <input
       className="date"
       id="date"
-      min="2023-03-20"
+      min="2023-03-21"
       name="date"
       type="date"
     />
@@ -314,13 +314,4 @@ exports[`描画される 1`] = `
     </a>
   </div>
 </div>
-`;
-
-exports[`送信される 1`] = `
-<button
-  class="buttonStyle"
-  type="button"
->
-  購入する
-</button>
 `;
