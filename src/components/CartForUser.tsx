@@ -22,7 +22,7 @@ export default function UserCart() {
     fetch(url).then((res) => res.json());
 
   const { data, error }: { data: cart; error: any } = useSWR(
-    `/api/cart_items?select=*,items(*),carts(*)&cart_id=eq.${userId}`,
+    `/api/getCart/items?id=${userId}`,
     fetcher,
     { refreshInterval: 1000 }
   );

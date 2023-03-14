@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next';
 import useSWR from 'swr';
 import Head from 'next/head';
 import { useEffect, useState, ChangeEvent } from 'react';
-import { procedure } from '../lib/purchaseFn';
+import { procedure } from '@/lib/purchaseFn';
 import Link from 'next/link';
 import urStyles from '../styles/userRegister.module.css';
 import Auth from './auth/auth';
@@ -33,11 +33,15 @@ type User = {
   lastName: string;
   firstName: string;
   gender: string;
-  tell: string;
+  tell1: string;
+  tell2: string;
+  tell3: string;
   email: string;
-  zipcode: string;
+  zipcode1: string;
+  zipcode2: string;
   address: string;
   password: string;
+  confirmationPassword: string;
 }[];
 type price = {
   id: number;
@@ -111,7 +115,7 @@ export default function Purchase({
     fetch(url).then((res) => res.json());
 
   const { data, error }: { data: cart; error: any } = useSWR(
-    `/api/cart_items?select=*,items(*),carts(*)&cart_id=eq.${userId}`,
+    `/api/getCart/items?id=${userId}`,
     fetcher
   );
 
@@ -120,6 +124,9 @@ export default function Purchase({
       router.replace('/cart');
     }
   }, []);
+  if (cookie === '0' || null) {
+    return;
+  }
 
   if (error) return <p>エラー</p>;
   if (!data) return <p>ロード中...</p>;
@@ -188,14 +195,16 @@ export default function Purchase({
 
   function test(data: cart) {
     procedure(data);
-    router.push('/purchaseComp');
+    router.replace('/purchaseComp');
   }
+
+  console.log(oneWeekAgo());
   return (
     <>
       <Head>
         <title>購入確認</title>
       </Head>
-      {/* <Auth> */}
+      <Auth>
         <div className={pModule.body}>
           <h1 className={pModule.title}>購入確認</h1>
           <table className={pModule.itemTable}>
@@ -397,6 +406,7 @@ export default function Purchase({
             </Link>
           </div>
         </div>
+      </Auth>
     </>
   );
 }
