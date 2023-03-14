@@ -79,7 +79,6 @@ export default function GuestCart({ guestCart, reloadStrage }: { guestCart: Gues
       changeStrageData.quantity = Number(value);
       const nextStrageData = parseStrageData.filter((gitem) => gitem.itemId !== itemId);
       nextStrageData.push(changeStrageData);
-      console.log(nextStrageData);
       localStorage.setItem("GuestCart", JSON.stringify(nextStrageData));
       reloadStrage()
     }
@@ -117,6 +116,7 @@ export default function GuestCart({ guestCart, reloadStrage }: { guestCart: Gues
               <select
                 name="quantity"
                 id="cart_quantity"
+                data-testid="select-option"
                 className="ml-5 border border-neutral-900 rounded p-1"
                 defaultValue={guestCart.filter((gitem) => gitem.itemId === item.id)[0].quantity}
                 onChange={(ev) => handleChange(ev, item.id)}
