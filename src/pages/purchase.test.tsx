@@ -54,7 +54,7 @@ const user: User = [
 jest.mock('next/router', () => ({
   useRouter() {
     return {
-      push: jest.fn(),
+      replace: jest.fn(),
     };
   },
 }));
