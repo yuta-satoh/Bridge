@@ -5,7 +5,6 @@ import { SWRConfig } from 'swr';
 import Purchase from './purchase';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import purchaseComp from './purchaseComp';
 
 type User = {
   lastName: string;
@@ -132,7 +131,7 @@ test('描画されない', async () => {
       };
     };
   };
-  const tree = renderer.create(
+  renderer.create(
     <SWRConfig value={{ use: [testMiddleware] }}>
       <Purchase cookie={'1'} user={user} />
     </SWRConfig>
