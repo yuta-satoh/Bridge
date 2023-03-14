@@ -78,7 +78,7 @@ export default function UserCart({ userId }: { userId: string }) {
         cart_id: cartId,
         quantity: Number(value),
       })
-    }).then((res) => console.log("ステータス:", res.status))
+    }).then((res) => res.status)
     mutate(filtercartItems)
   }
 

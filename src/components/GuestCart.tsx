@@ -69,7 +69,6 @@ export default function GuestCart({ guestCart, reloadStrage }: { guestCart: Gues
 
   const handleChange = async (ev: ChangeEvent<HTMLSelectElement>, itemId: number) => {
     const value = ev.target.value
-    console.log(value);
     const strageData = localStorage.getItem("GuestCart");
     if (strageData === null) {
       return

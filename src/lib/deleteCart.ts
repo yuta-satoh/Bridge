@@ -3,7 +3,6 @@ import getCookieValue from "./getCookieValue"
 export default async function deleteCart(itemId: number, cartId?: number) {
     // cookieがあるか確認
     const userId = getCookieValue();
-    console.log(itemId, cartId)
 
     if (userId) {
         try {

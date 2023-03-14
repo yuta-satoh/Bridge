@@ -3,7 +3,7 @@ import fstyles from '../styles/Footer.module.css';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 
-export default function SearchBoxTest() {
+export default function SearchBox() {
   const router = useRouter();
   const [genres, setGenres] = useState<string[]>([]);
   const [categories, setCategories] = useState<string[]>([]);

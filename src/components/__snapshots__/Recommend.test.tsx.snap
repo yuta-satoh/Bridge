@@ -1,0 +1,204 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recommendコンポーネント おすすめ商品のローディング中 1`] = `
+<DocumentFragment>
+  <div>
+    loading...
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Recommendコンポーネント カートにおすすめ商品を追加する 1`] = `
+<DocumentFragment>
+  <div
+    class="mt-16 mb-5"
+  >
+    <h2
+      class="text-3xl font-bold"
+    >
+      こちらもいかがですか？
+    </h2>
+  </div>
+  <div
+    class="flex gap-3 mb-10"
+  >
+    <div
+      class="border border-neutral-900 w-1/2 rounded p-3 mx-auto"
+    >
+      <div
+        class="flex gap-5"
+      >
+        <a
+          href="/items/itemlist/1"
+        >
+          <img
+            alt="ベルベットアームチェア"
+            class="rounded"
+            data-nimg="1"
+            decoding="async"
+            height="100"
+            loading="lazy"
+            src="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=256&q=75"
+            srcset="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=128&q=75 1x, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=256&q=75 2x"
+            style="color: transparent;"
+            width="100"
+          />
+        </a>
+        <div
+          class="px-2 py-2"
+        >
+          <a
+            href="/items/itemlist/1"
+          >
+            <p
+              class="underline mb-1 text-sm"
+            >
+              ベルベットアームチェア
+            </p>
+            <p
+              class="mt-1"
+            >
+              ¥ 16,000
+            </p>
+          </a>
+          <button
+            class="p-1.5 text-center text-white h-10 mt-3 rounded bg-blue-500 hover:bg-blue-700"
+          >
+            カートに入れる
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Recommendコンポーネント ユーザーカートのおすすめ商品が正常に描画される 1`] = `
+<DocumentFragment>
+  <div
+    class="mt-16 mb-5"
+  >
+    <h2
+      class="text-3xl font-bold"
+    >
+      こちらもいかがですか？
+    </h2>
+  </div>
+  <div
+    class="flex gap-3 mb-10"
+  >
+    <div
+      class="border border-neutral-900 w-1/2 rounded p-3 mx-auto"
+    >
+      <div
+        class="flex gap-5"
+      >
+        <a
+          href="/items/itemlist/1"
+        >
+          <img
+            alt="ベルベットアームチェア"
+            class="rounded"
+            data-nimg="1"
+            decoding="async"
+            height="100"
+            loading="lazy"
+            src="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=256&q=75"
+            srcset="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=128&q=75 1x, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=256&q=75 2x"
+            style="color: transparent;"
+            width="100"
+          />
+        </a>
+        <div
+          class="px-2 py-2"
+        >
+          <a
+            href="/items/itemlist/1"
+          >
+            <p
+              class="underline mb-1 text-sm"
+            >
+              ベルベットアームチェア
+            </p>
+            <p
+              class="mt-1"
+            >
+              ¥ 16,000
+            </p>
+          </a>
+          <button
+            class="p-1.5 text-center text-white h-10 mt-3 rounded bg-blue-500 hover:bg-blue-700"
+          >
+            カートに入れる
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="border border-neutral-900 w-1/2 rounded p-3 mx-auto"
+    >
+      <div
+        class="flex gap-5"
+      >
+        <a
+          href="/items/itemlist/2"
+        >
+          <img
+            alt="丸椅子スツール"
+            class="rounded"
+            data-nimg="1"
+            decoding="async"
+            height="100"
+            loading="lazy"
+            src="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_2.jpg&w=256&q=75"
+            srcset="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_2.jpg&w=128&q=75 1x, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_2.jpg&w=256&q=75 2x"
+            style="color: transparent;"
+            width="100"
+          />
+        </a>
+        <div
+          class="px-2 py-2"
+        >
+          <a
+            href="/items/itemlist/2"
+          >
+            <p
+              class="underline mb-1 text-sm"
+            >
+              丸椅子スツール
+            </p>
+            <p
+              class="mt-1"
+            >
+              ¥ 10,000
+            </p>
+          </a>
+          <button
+            class="p-1.5 text-center text-white h-10 mt-3 rounded bg-blue-500 hover:bg-blue-700"
+          >
+            カートに入れる
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Recommendコンポーネント ユーザーカートのおすすめ商品が無い場合 1`] = `
+<DocumentFragment>
+  <div
+    class="w-4/5 mx-auto"
+  >
+    <div
+      class="block py-40 mx-auto my-10 bg-neutral-100 rounded"
+    >
+      <h2
+        class="text-center text-3xl font-bold mb-10"
+      >
+        おすすめ商品がありません
+      </h2>
+    </div>
+  </div>
+</DocumentFragment>
+`;
