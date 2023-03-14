@@ -3,9 +3,9 @@ import { Middleware } from 'swr';
 import { SWRResponse } from 'swr';
 import { SWRConfig } from 'swr';
 import Purchase from './purchase';
-import Cart from './cart';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import purchaseComp from './purchaseComp';
 
 type User = {
   lastName: string;
@@ -52,7 +52,21 @@ const user: User = [
   },
 ];
 
-jest.mock('next/router', () => ({ useRouter: jest.fn() })); // モック関数を作成
+jest.mock('next/router', () => ({
+  useRouter() {
+    return {
+      push: jest.fn(),
+    };
+  },
+}));
+
+const fetchMock = () => {
+  return new Promise((resolve) => {
+    resolve({
+      status: 200,
+    });
+  });
+};
 
 test('描画される', async () => {
   const cartItem: cart = [
@@ -130,6 +144,7 @@ test('送信される', async () => {
   const mockRouter = {
     push: jest.fn(),
   };
+  global.fetch = jest.fn().mockImplementation(fetchMock);
   const cartItem: cart = [
     {
       id: 1,
@@ -169,6 +184,6 @@ test('送信される', async () => {
   );
   const submitButton = screen.getByText('購入する');
   //   expect(submitButton).toMatchSnapshot()
-  userEvent.click(submitButton);
-//   expect(mockRouter.push).toHaveBeenCalledWith('/purchaseComp');
+  await userEvent.click(submitButton);
+  //   expect(mockRouter.push).toEqual('/purchaseComp');
 });
