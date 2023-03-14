@@ -165,6 +165,7 @@ export default function Search({
           <select
             name="itemOrder"
             id="itemOrder"
+            data-testid="search-select"
             className="mx-2 border rounded border-gray-500"
             value={order}
             onChange={(e) => setOrder(e.target.value)}

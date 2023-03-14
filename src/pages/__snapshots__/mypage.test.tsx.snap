@@ -64,14 +64,12 @@ exports[`mypage.tsxのスナップショットテスト ロード中 1`] = `
           className="cartList"
         >
           <div
-            className="jsx-b45827dc8e75e02d container"
+            className="container"
           >
             <div
-              className="jsx-b45827dc8e75e02d background"
+              className="background"
             >
-              <p
-                className="jsx-b45827dc8e75e02d"
-              >
+              <p>
                 ロード中...
               </p>
             </div>
