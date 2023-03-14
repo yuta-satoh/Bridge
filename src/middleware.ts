@@ -4,6 +4,17 @@ import type { NextRequest } from 'next/server';
 export const middleware = async (req: NextRequest) => {
 
   const res = NextResponse.next();
+  if (req.nextUrl.pathname.startsWith('/mypage')) {
+    // クッキー取得
+    const cookie = req.cookies.get('id')?.value;
+    // クッキーがあればそのまま進む
+    if (cookie) {
+      return res;
+    }
+    // クッキーがなければログイン画面へ遷移
+    return NextResponse.redirect(new URL('/login', req.url))
+  }
+
   if (req.nextUrl.pathname.startsWith('/account')) {
     // クッキー取得
     const cookie = req.cookies.get('id')?.value;

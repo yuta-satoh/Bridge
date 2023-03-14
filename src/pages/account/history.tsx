@@ -61,7 +61,7 @@ export default function History({
   const fetcher = (url: string) =>
     fetch(url).then((res) => res.json());
   const { data, error } = useSWR<Item[], Error>(
-    `/api/order_histories?user_id=eq.${userId}&order=${order}`,
+    `/api/getHistory?id=${userId}&order=${order}`,
     fetcher
   );
   if (error) return <p>エラー</p>;
