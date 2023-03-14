@@ -13,7 +13,6 @@ type GuestCartType = {
 
 export default function GuestCart() {
   const [sum, setSum] = useState(0);
-  const router = useRouter();
 
   useEffect(() => {
     const storageData = localStorage.getItem('GuestCart');
