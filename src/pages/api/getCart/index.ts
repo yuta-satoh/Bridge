@@ -28,6 +28,6 @@ export default async function handler(
   if (responceCart.ok) {
     res.status(200).json(cartData);
   } else {
-    res.status(401).end();
+    res.status(400).end();
   }
 }

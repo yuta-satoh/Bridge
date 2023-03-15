@@ -18,15 +18,15 @@ export default async function handler(
 ) {
 	const queryId = req.query.id as string;
   const queryGenre = typeof req.query.genre === 'string' ? `genre=eq.${req.query.genre}` : ""
-  console.log(queryId, queryGenre)
-	const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
+	// const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
   const responseItems = await fetch(
-    `http://127.0.0.1:8000/items?${queryGenre}&${queryId}`,
+    `${process.env.SUPABASE_URL}/items?${queryGenre}&${queryId}`,
     {
       method: 'GET',
       headers: {
-        "Authorization": `Bearer ${TOKEN}`,
-        'Content-Type': 'application/json',
+        "apikey": `${process.env.SUPABASE_API_KEY}`,
+        "Authorization": `Bearer ${process.env.SUPABASE_API_KEY}`,
+        "Content-Type": "application/json",
       },
     }
   );
@@ -36,6 +36,6 @@ export default async function handler(
 	if (responseItems.ok) {
     res.status(200).json(guestItems);
   } else {
-    res.status(401).end();
+    res.status(400).end();
   }
 }
