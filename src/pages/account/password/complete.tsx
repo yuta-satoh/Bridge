@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import cModule from '../../../styles/coordination.module.css';
 import Auth from '@/pages/auth/auth';
-import cpStyles from '../../../styles/password/complete.module.css';
+import cpStyles from '../../../styles/account/password/complete.module.css';
 
 export default function PasswordComplete() {
   return (
