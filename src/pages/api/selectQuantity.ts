@@ -14,10 +14,19 @@ export default async function handler(
 
     const body: ReqBody = req.body
     console.log(body)
-    const response = await fetch(`http://127.0.0.1:8000/cart_items?cart_id=eq.${body.cart_id}&item_id=eq.${body.item_id}`, {
+    // supabase変更前
+    // const response = await fetch(`http://127.0.0.1:8000/cart_items?cart_id=eq.${body.cart_id}&item_id=eq.${body.item_id}`, {
+    // supabase変更
+    const response = await fetch(`${process.env.SUPABASE_URL}/cart_items?cart_id=eq.${body.cart_id}&item_id=eq.${body.item_id}`, {
         method: "PATCH",
         headers: {
-            "Authorization": `Bearer ${TOKEN}`,
+            // supabase変更前
+            // "Authorization": `Bearer ${TOKEN}`,
+
+            // supabase変更、追加
+            "Authorization": `Bearer ${process.env.SUPABASE_API_KEY}`,
+            "apikey": `${process.env.SUPABASE_API_KEY}`,
+
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -26,8 +35,8 @@ export default async function handler(
     })
     
 	if (response.ok) {
-		res.status(201).end();
+		res.status(200).end();
 	} else {
-		res.status(401).end();
+		res.status(response.status).end();
 	}
 }
