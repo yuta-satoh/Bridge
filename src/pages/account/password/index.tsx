@@ -48,16 +48,14 @@ export const getServerSideProps: GetServerSideProps = async (
     // 上記の処理で何もリターンされなければ空文字を返す
     return '';
   })(cookie);
-  // TOKEN定義
-  const TOKEN =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
   // クッキーの値を元にuserデータを取得
   const res = await fetch(
-    `http://127.0.0.1:8000/users?id=eq.${cookieValue}`,
+    `${process.env.SUPABASE_URL}/users?id=eq.${cookieValue}`,
     {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${TOKEN}`,
+        apikey: `${process.env.SUPABASE_API_KEY}`,
+        Authorization: `Bearer ${process.env.SUPABASE_API_KEY}`,
         'Content-Type': 'application/json',
       },
     }
@@ -196,12 +194,9 @@ export default function Password({
       setCompleteText("不正な項目があります");
       return;
     } else {
-      const TOKEN =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
-      const res = await fetch(`http://127.0.0.1:8000/users?id=eq.${cookieValue}`, {
-        method: 'PUT',
+      const res = await fetch('/api/account/profile', {
+        method: 'POST',
         headers: {
-          Authorization: `Bearer ${TOKEN}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
