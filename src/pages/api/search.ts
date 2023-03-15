@@ -42,12 +42,22 @@ export default async function handler(
         const orderQuery = `&order=${order}`
 
         // orとandを組み合わせてfetch
-        const response = await fetch(`http://127.0.0.1:8000/items?and=(or(${genreQuery}),or(${categoryQuery})${inputQuery})${orderQuery}`);
+        const response = await fetch(
+            // `${process.env.SUPABASE_URL}/items?and=(or(${genreQuery}),or(${categoryQuery})${inputQuery})${orderQuery}`, {
+            `${process.env.SUPABASE_URL}/items`, {
+                method: "GET",
+                headers: {
+                    "apikey": `${process.env.SUPABASE_API_KEY}`,
+                    "Authorization": `Bearer ${process.env.SUPABASE_API_KEY}`,
+                    "Content-Type": "application/json",
+                }
+            });
+        console.log(response);
         const filter = await response.json();
         if (response.ok) {
             res.status(200).json(filter);
         } else {
-            res.status(401).end();
+            res.status(400).end();
         }
     }
 }

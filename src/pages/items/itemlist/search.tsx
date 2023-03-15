@@ -44,7 +44,9 @@ export const getServerSideProps: GetServerSideProps = async ({
   const response = await fetch(
     `http://localhost:3000/api/search?genre=${genre}&category=${category}&input=${input}&order=${order}`
   );
+  console.log(response);
   const data: Item[] = await response.json();
+  console.log(data)
 
   // ページ数表示用にページの最大数を確認
   const maxPage =
