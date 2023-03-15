@@ -169,7 +169,7 @@ export default function History({
                           </button>
                         </td>
                       </tr>
-                      <tr key={item.user_id}>
+                      <tr>
                         <td colSpan={5}></td>
                         <td className={hModule.tableCellCenterSub}>
                           購入日：{item.date}
