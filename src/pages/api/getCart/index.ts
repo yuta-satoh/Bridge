@@ -11,13 +11,13 @@ export default async function handler(
   res: NextApiResponse<Cart[]>
 ) {
 	const userId = req.query.id as string
-	const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
   const responceCart = await fetch(
-    `http://127.0.0.1:8000/carts?user_id=eq.${userId}`,
+    `${process.env.SUPABASE_URL}/carts?user_id=eq.${userId}`,
     {
       method: 'GET',
       headers: {
-        "Authorization": `Bearer ${TOKEN}`,
+        "apikey": `${process.env.SUPABASE_API_KEY}`,
+        "Authorization": `Bearer ${process.env.SUPABASE_API_KEY}`,
         'Content-Type': 'application/json',
       },
     }
