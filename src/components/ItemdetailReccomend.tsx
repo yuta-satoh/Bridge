@@ -27,7 +27,7 @@ export default function ItemdetailReccomend(props:{
   // propsで持ってきた内容
   // console.log(props);
   
-  const { data, error } = useSWR<Item[], Error>(`/api/getItemData?genre${props.genre}&category=${props.category}`, fetcher);
+  const { data, error } = useSWR<Item[], Error>(`/api/getItemListData?genre=${props.genre}&category=${props.category}`, fetcher);
     
   if (error) return <p>エラー</p>;
   // ロード中のcss入れたい・画面中央に表示したい
