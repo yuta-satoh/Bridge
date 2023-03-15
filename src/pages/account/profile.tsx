@@ -5,7 +5,6 @@ import urStyles from '../../styles/userRegister.module.css';
 import Link from 'next/link';
 import cModule from '../../styles/coordination.module.css';
 import Auth from '../auth/auth';
-import { spbaseKey, spbaseUrl } from '@/lib/supabase';
 
 // userデータの型を定義
 type User = {
@@ -57,12 +56,12 @@ export const getServerSideProps: GetServerSideProps = async (
 
   // クッキーの値を元にuserデータを取得
   const res = await fetch(
-    `${spbaseUrl}/users?id=eq.${cookieValue}`,
+    `${process.env.SUPABASE_URL}/users?id=eq.${cookieValue}`,
     {
       method: 'GET',
       headers: {
-        apikey: spbaseKey,
-        Authorization: `Bearer ${spbaseKey}`,
+        apikey: `${process.env.SUPABASE_API_KEY}`,
+        Authorization: `Bearer ${process.env.SUPABASE_API_KEY}`,
         'Content-Type': 'application/json',
       },
     }
@@ -93,6 +92,8 @@ export default function Profile({ data, cookieValue }: { data: User; cookieValue
     address: "",
   });
   const [completeText, setCompleteText] = useState<string>("");
+
+  console.log('profile', profile);
 
     // エラー検証
     const nameValidation = (name: string) => {
@@ -294,11 +295,9 @@ export default function Profile({ data, cookieValue }: { data: User; cookieValue
       setCompleteText("不正な項目があります");
       return;
     } else {
-      const res = await fetch(`${spbaseUrl}/users?id=eq.${cookieValue}`, {
-        method: 'PUT',
+      const res = await fetch('/api/account/profile', {
+        method: 'POST',
         headers: {
-          apikey: spbaseKey,
-          Authorization: `Bearer ${spbaseKey}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(profile),
