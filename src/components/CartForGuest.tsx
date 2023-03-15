@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import headModule from '../styles/header.module.css';
 import { useRouter } from 'next/router';
-
+import useSWR from 'swr';
 import { useEffect, useState } from 'react';
 import { rule } from 'postcss';
 
@@ -13,7 +13,6 @@ type GuestCartType = {
 
 export default function GuestCart() {
   const [sum, setSum] = useState(0);
-  const router = useRouter();
 
   useEffect(() => {
     const storageData = localStorage.getItem('GuestCart');
@@ -30,7 +29,7 @@ export default function GuestCart() {
     }
   });
 
-//   console.log("合計", sum);
+  //   console.log("合計", sum);
 
   return (
     <>

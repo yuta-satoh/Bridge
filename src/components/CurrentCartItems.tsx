@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import useSWR, { Fetcher } from 'swr';
 import myStyles from '../styles/mypage.module.css';
+import cciStyles from '../styles/currentCartItems.module.css'
 
 // 型定義
 type Items = {
@@ -50,28 +51,8 @@ export default function CurrentCartItems({
   if (error) {
     return (
       <>
-        <style jsx>{`
-          .container {
-            width: 100%;
-            height: 100px;
-            margin: 10px auto;
-            text-align: center;
-          }
-          .background {
-            width: 80%;
-            height: 80%;
-            margin: auto;
-            background-color: #f5f5f5;
-            display: table;
-          }
-          p {
-            display: table-cell;
-            vertical-align: middle;
-            text-align: center;
-          }
-        `}</style>
-        <div className="container">
-          <div className="background">
+        <div className={cciStyles.container}>
+          <div className={cciStyles.background}>
             <p>カートに商品がありません</p>
           </div>
         </div>
@@ -82,26 +63,6 @@ export default function CurrentCartItems({
   if (!cartItemData) {
     return (
       <>
-        <style jsx>{`
-          .container {
-            width: 100%;
-            height: 100px;
-            margin: 10px auto;
-            text-align: center;
-          }
-          .background {
-            width: 80%;
-            height: 80%;
-            margin: auto;
-            background-color: #f5f5f5;
-            display: table;
-          }
-          p {
-            display: table-cell;
-            vertical-align: middle;
-            text-align: center;
-          }
-        `}</style>
         <div className="container">
           <div className="background">
             <p>ロード中...</p>
@@ -114,26 +75,6 @@ export default function CurrentCartItems({
   if (cartItemData.length === 0) {
     return (
       <>
-        <style jsx>{`
-          .container {
-            width: 100%;
-            height: 100px;
-            margin: 10px auto;
-            text-align: center;
-          }
-          .background {
-            width: 80%;
-            height: 80%;
-            margin: auto;
-            background-color: #f5f5f5;
-            display: table;
-          }
-          p {
-            display: table-cell;
-            vertical-align: middle;
-            text-align: center;
-          }
-        `}</style>
         <div className="container">
           <div className="background">
             <p>カートに商品がありません</p>
@@ -156,23 +97,10 @@ export default function CurrentCartItems({
 
   return (
     <>
-      <style jsx>{`
-        .cartItemsArea {
-          margin: 0px auto;
-        }
-        .cartItems {
-          margin: 8px 30px;
-          float: left;
-        }
-        .picture {
-          width: 150px;
-          height: 150px;
-        }
-      `}</style>
-      <div className="cartItemsArea">
+      <div className={cciStyles.cartItemsArea}>
         {currentCartItems.map((cartItem) => {
           return (
-            <div className="cartItems" key={cartItem.id}>
+            <div className={cciStyles.cartItems} key={cartItem.id}>
               <Image
                 src={cartItem.items.imgurl}
                 alt={'kagu'}

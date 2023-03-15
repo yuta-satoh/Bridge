@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`カート内のアイテムがあった場合(1) 1`] = `
+<a
+  className="iconModule"
+  href="/cart"
+  onClick={[Function]}
+  onMouseEnter={[Function]}
+  onTouchStart={[Function]}
+>
+  <div
+    className="cartCounter"
+  >
+    1
+  </div>
+  <img
+    alt=""
+    className="iconimg"
+    data-nimg="1"
+    decoding="async"
+    height={25}
+    loading="lazy"
+    onError={[Function]}
+    onLoad={[Function]}
+    src="/_next/image?url=%2Fimages%2Ficon%2Fcart.png&w=64&q=75"
+    srcSet="/_next/image?url=%2Fimages%2Ficon%2Fcart.png&w=32&q=75 1x, /_next/image?url=%2Fimages%2Ficon%2Fcart.png&w=64&q=75 2x"
+    style={
+      {
+        "color": "transparent",
+      }
+    }
+    width={25}
+  />
+  <span
+    className="menuLabel inline-block mt-1 whitespace-nowrap"
+  >
+    カート
+  </span>
+</a>
+`;
+
+exports[`カート内のアイテムがあった場合(2) 1`] = `
+<a
+  className="iconModule"
+  href="/cart"
+  onClick={[Function]}
+  onMouseEnter={[Function]}
+  onTouchStart={[Function]}
+>
+  <div
+    className="cartCounter"
+  >
+    2
+  </div>
+  <img
+    alt=""
+    className="iconimg"
+    data-nimg="1"
+    decoding="async"
+    height={25}
+    loading="lazy"
+    onError={[Function]}
+    onLoad={[Function]}
+    src="/_next/image?url=%2Fimages%2Ficon%2Fcart.png&w=64&q=75"
+    srcSet="/_next/image?url=%2Fimages%2Ficon%2Fcart.png&w=32&q=75 1x, /_next/image?url=%2Fimages%2Ficon%2Fcart.png&w=64&q=75 2x"
+    style={
+      {
+        "color": "transparent",
+      }
+    }
+    width={25}
+  />
+  <span
+    className="menuLabel inline-block mt-1 whitespace-nowrap"
+  >
+    カート
+  </span>
+</a>
+`;
+
+exports[`カート内のアイテムが無かった場合 1`] = `
+<a
+  className="iconModule"
+  href="/cart"
+  onClick={[Function]}
+  onMouseEnter={[Function]}
+  onTouchStart={[Function]}
+>
+  <img
+    alt=""
+    className="iconimg"
+    data-nimg="1"
+    decoding="async"
+    height={25}
+    loading="lazy"
+    onError={[Function]}
+    onLoad={[Function]}
+    src="/_next/image?url=%2Fimages%2Ficon%2Fcart.png&w=64&q=75"
+    srcSet="/_next/image?url=%2Fimages%2Ficon%2Fcart.png&w=32&q=75 1x, /_next/image?url=%2Fimages%2Ficon%2Fcart.png&w=64&q=75 2x"
+    style={
+      {
+        "color": "transparent",
+      }
+    }
+    width={25}
+  />
+  <span
+    className="menuLabel inline-block mt-1 whitespace-nowrap"
+  >
+    カート
+  </span>
+</a>
+`;

@@ -72,7 +72,7 @@ export default function UserRegister() {
     }
   }
 
-  const nameValidation = (name: string) => {
+   const nameValidation = (name: string) => {
     if (!name) return '※名前を入力して下さい';
     return '';
   }
@@ -522,6 +522,7 @@ export default function UserRegister() {
                 type="password"
                 name="password"
                 id="password"
+                data-testid="password"
                 className={`${urStyles.inputParts} border ${borderError.password ? urStyles.inputError : 'border-neutral-500'} rounded pl-2.5`}
                 placeholder="例：abcdef123456"
                 value={userInfo.password}
@@ -542,6 +543,7 @@ export default function UserRegister() {
                 type="password"
                 name="confirmationPassword"
                 id="confirmationPassword"
+                data-testid="confirmationPassword"
                 className={`${urStyles.inputParts} border ${borderError.confirmationPassword ? urStyles.inputError : 'border-neutral-500'} rounded pl-2.5`}
                 placeholder="例：abcdef123456"
                 value={userInfo.confirmationPassword}

@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`新着商品 データがない場合 1`] = `
+<DocumentFragment>
+  <div>
+    ローディング
+  </div>
+</DocumentFragment>
+`;
+
+exports[`新着商品 フェッチエラーの場合 1`] = `
+<DocumentFragment>
+  <div>
+    エラー
+  </div>
+</DocumentFragment>
+`;
+
+exports[`新着商品 正常に描画されました 1`] = `
+<DocumentFragment>
+  <div
+    class="categoryList container mx-auto p-2 flex gap-5 justify-center"
+  >
+    <a
+      href="/items/itemlist/1"
+    >
+      <div>
+        <img
+          alt="ベルベットアームチェア"
+          class="bigImage rounded"
+          data-nimg="1"
+          decoding="async"
+          height="285"
+          loading="lazy"
+          src="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=640&q=75"
+          srcset="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=384&q=75 1x, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=640&q=75 2x"
+          style="color: transparent;"
+          width="285"
+        />
+        <p
+          class="price text-lg"
+        >
+          ¥17,600
+        </p>
+      </div>
+    </a>
+    <ul
+      class="itemlist grid grid-cols-4 gap-4"
+    >
+      <a
+        href="/items/itemlist/2"
+      >
+        <li>
+          <img
+            alt="丸椅子スツール"
+            class="smallImage rounded"
+            data-nimg="1"
+            decoding="async"
+            height="120"
+            loading="lazy"
+            src="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_2.jpg&w=256&q=75"
+            srcset="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_2.jpg&w=128&q=75 1x, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_2.jpg&w=256&q=75 2x"
+            style="color: transparent;"
+            width="120"
+          />
+          <div
+            class="smallImagePrice"
+          >
+            <p
+              class="price text-lg"
+            >
+              ¥11,000
+            </p>
+          </div>
+        </li>
+      </a>
+      <a
+        href="/items/itemlist/3"
+      >
+        <li>
+          <img
+            alt="ブルーアームチェア"
+            class="smallImage rounded"
+            data-nimg="1"
+            decoding="async"
+            height="120"
+            loading="lazy"
+            src="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_3.jpg&w=256&q=75"
+            srcset="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_3.jpg&w=128&q=75 1x, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_3.jpg&w=256&q=75 2x"
+            style="color: transparent;"
+            width="120"
+          />
+          <div
+            class="smallImagePrice"
+          >
+            <p
+              class="price text-lg"
+            >
+              ¥22,000
+            </p>
+          </div>
+        </li>
+      </a>
+    </ul>
+  </div>
+</DocumentFragment>
+`;

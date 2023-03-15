@@ -1,0 +1,528 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`トップページ トップページが正常に描画されました 1`] = `
+<DocumentFragment>
+  <main
+    class="main mx-auto"
+  >
+    <div
+      class="relative"
+    >
+      <div
+        class="container"
+      >
+        <img
+          alt="top-image"
+          class="topImage"
+          data-nimg="1"
+          decoding="async"
+          height="1000"
+          loading="lazy"
+          src="/_next/image?url=%2Fimages%2Fbackground%2Ftop_image_2.jpeg&w=3840&q=75"
+          srcset="/_next/image?url=%2Fimages%2Fbackground%2Ftop_image_2.jpeg&w=1920&q=75 1x, /_next/image?url=%2Fimages%2Fbackground%2Ftop_image_2.jpeg&w=3840&q=75 2x"
+          style="color: transparent;"
+          width="1920"
+        />
+        <img
+          alt="top-image"
+          class="topImage"
+          data-nimg="1"
+          decoding="async"
+          height="1000"
+          loading="lazy"
+          src="/_next/image?url=%2Fimages%2Fbackground%2Ftop_image_4.jpeg&w=3840&q=75"
+          srcset="/_next/image?url=%2Fimages%2Fbackground%2Ftop_image_4.jpeg&w=1920&q=75 1x, /_next/image?url=%2Fimages%2Fbackground%2Ftop_image_4.jpeg&w=3840&q=75 2x"
+          style="color: transparent;"
+          width="1920"
+        />
+        <img
+          alt="top-image"
+          class="topImage"
+          data-nimg="1"
+          decoding="async"
+          height="1000"
+          loading="lazy"
+          src="/_next/image?url=%2Fimages%2Fbackground%2Ftop_image_3.jpeg&w=3840&q=75"
+          srcset="/_next/image?url=%2Fimages%2Fbackground%2Ftop_image_3.jpeg&w=1920&q=75 1x, /_next/image?url=%2Fimages%2Fbackground%2Ftop_image_3.jpeg&w=3840&q=75 2x"
+          style="color: transparent;"
+          width="1920"
+        />
+      </div>
+      <img
+        alt="top-logo"
+        class="logo absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+        data-nimg="1"
+        decoding="async"
+        height="350"
+        loading="lazy"
+        src="/_next/image?url=%2Fimages%2Flogo%2Ftop_logo.png&w=750&q=75"
+        srcset="/_next/image?url=%2Fimages%2Flogo%2Ftop_logo.png&w=384&q=75 1x, /_next/image?url=%2Fimages%2Flogo%2Ftop_logo.png&w=750&q=75 2x"
+        style="color: transparent;"
+        width="350"
+      />
+      <div
+        class="cordbutton absolute left-1/2 top-3/4 -translate-x-1/2 -translate-y-1/2"
+      >
+        <button
+          class="cord"
+        >
+          <a
+            href="/coordination"
+          >
+            <div
+              class="cordtitle mx-auto pt-1.5 text-center w-96 h-10"
+            >
+              <span
+                class="cordtext"
+              >
+                コーディネートをランダム生成する　→
+              </span>
+            </div>
+          </a>
+        </button>
+      </div>
+    </div>
+    <div
+      class="content mt-20"
+    >
+      <h2
+        class="font text-center text-xl font-bold"
+      >
+        新着商品
+      </h2>
+      <div>
+        ローディング
+      </div>
+      <div
+        class="buttonContent"
+      >
+        <a
+          href="/items/itemlist"
+        >
+          <button
+            class="buttonArea"
+          >
+            <div
+              class="itemtitle mx-auto pt-1.5 text-center w-96 h-10 border-2 border-neutral-900"
+            >
+              <span
+                class="itemtext"
+              >
+                商品一覧へ　→
+              </span>
+            </div>
+          </button>
+        </a>
+      </div>
+    </div>
+    <div
+      class="content mx-auto mt-20 justify-center"
+    >
+      <h2
+        class="font text-center text-xl font-bold"
+      >
+        商品カテゴリから探す
+      </h2>
+      <ul
+        class="cateLists grid grid-cols-5 gap-8 w-4/5 mx-auto mt-5"
+      >
+        <li>
+          <a
+            href="/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=テーブル&input=&order=id.desc&page=0"
+          >
+            <div
+              class="cateList relative block h-16 border rounded hover:border-2 border-neutral-400"
+            >
+              <div
+                class="cateLis absolute flex ml-2 top-1/2 -translate-y-1/2"
+              >
+                <img
+                  alt="table"
+                  class="cateimg"
+                  data-nimg="1"
+                  decoding="async"
+                  height="50"
+                  loading="lazy"
+                  src="/_next/image?url=%2Fimages%2Ftable%2Ftable_natural_1.jpg&w=128&q=75"
+                  srcset="/_next/image?url=%2Fimages%2Ftable%2Ftable_natural_1.jpg&w=64&q=75 1x, /_next/image?url=%2Fimages%2Ftable%2Ftable_natural_1.jpg&w=128&q=75 2x"
+                  style="color: transparent;"
+                  width="50"
+                />
+                <span
+                  class="catename my-auto mx-2"
+                >
+                  テーブル
+                </span>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=椅子&input=&order=id.desc&page=0"
+          >
+            <div
+              class="cateList relative block h-16 border rounded hover:border-2 border-neutral-400"
+            >
+              <div
+                class="cateLis absolute flex ml-2 top-1/2 -translate-y-1/2"
+              >
+                <img
+                  alt="chair"
+                  class="cateimg"
+                  data-nimg="1"
+                  decoding="async"
+                  height="50"
+                  loading="lazy"
+                  src="/_next/image?url=%2Fimages%2Fchair%2Fchair_natural_3.jpg&w=128&q=75"
+                  srcset="/_next/image?url=%2Fimages%2Fchair%2Fchair_natural_3.jpg&w=64&q=75 1x, /_next/image?url=%2Fimages%2Fchair%2Fchair_natural_3.jpg&w=128&q=75 2x"
+                  style="color: transparent;"
+                  width="50"
+                />
+                <span
+                  class="catename my-auto mx-2"
+                >
+                  椅子
+                </span>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=ソファ&input=&order=id.desc&page=0"
+          >
+            <div
+              class="cateList relative block h-16 border rounded hover:border-2 border-neutral-400"
+            >
+              <div
+                class="cateLis absolute flex ml-2 top-1/2 -translate-y-1/2"
+              >
+                <img
+                  alt="sofa"
+                  class="cateimg"
+                  data-nimg="1"
+                  decoding="async"
+                  height="50"
+                  loading="lazy"
+                  src="/_next/image?url=%2Fimages%2Fsofa%2Fsofa_natural_2.jpg&w=128&q=75"
+                  srcset="/_next/image?url=%2Fimages%2Fsofa%2Fsofa_natural_2.jpg&w=64&q=75 1x, /_next/image?url=%2Fimages%2Fsofa%2Fsofa_natural_2.jpg&w=128&q=75 2x"
+                  style="color: transparent;"
+                  width="50"
+                />
+                <span
+                  class="catename my-auto mx-2"
+                >
+                  ソファ
+                </span>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=ベッド/寝具&input=&order=id.desc&page=0"
+          >
+            <div
+              class="cateList relative block h-16 border rounded hover:border-2 border-neutral-400"
+            >
+              <div
+                class="cateLis absolute flex ml-2 top-1/2 -translate-y-1/2"
+              >
+                <img
+                  alt="bed"
+                  class="cateimg"
+                  data-nimg="1"
+                  decoding="async"
+                  height="50"
+                  loading="lazy"
+                  src="/_next/image?url=%2Fimages%2Fbed%2Fbed_natural_3.jpg&w=128&q=75"
+                  srcset="/_next/image?url=%2Fimages%2Fbed%2Fbed_natural_3.jpg&w=64&q=75 1x, /_next/image?url=%2Fimages%2Fbed%2Fbed_natural_3.jpg&w=128&q=75 2x"
+                  style="color: transparent;"
+                  width="50"
+                />
+                <span
+                  class="catename my-auto mx-2"
+                >
+                  ベッド/寝具
+                </span>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=収納棚&input=&order=id.desc&page=0"
+          >
+            <div
+              class="cateList relative block h-16 border rounded hover:border-2 border-neutral-400"
+            >
+              <div
+                class="cateLis absolute flex ml-2 top-1/2 -translate-y-1/2"
+              >
+                <img
+                  alt="chest"
+                  class="cateimg"
+                  data-nimg="1"
+                  decoding="async"
+                  height="50"
+                  loading="lazy"
+                  src="/_next/image?url=%2Fimages%2Fchest%2Fchest_nordic_3.jpeg&w=128&q=75"
+                  srcset="/_next/image?url=%2Fimages%2Fchest%2Fchest_nordic_3.jpeg&w=64&q=75 1x, /_next/image?url=%2Fimages%2Fchest%2Fchest_nordic_3.jpeg&w=128&q=75 2x"
+                  style="color: transparent;"
+                  width="50"
+                />
+                <span
+                  class="catename my-auto mx-2"
+                >
+                  収納棚
+                </span>
+              </div>
+            </div>
+          </a>
+        </li>
+      </ul>
+      <ul
+        class="cateLists2 grid grid-cols-4 gap-7 w-3/5 mx-auto mt-5"
+      >
+        <li>
+          <a
+            href="/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=カーペット/ラグ&input=&order=id.desc&page=0"
+          >
+            <div
+              class="cateList relative block h-16 border rounded hover:border-2 border-neutral-400"
+            >
+              <div
+                class="cateLis absolute ml-2 flex top-1/2 -translate-y-1/2"
+              >
+                <img
+                  alt="rug"
+                  class="cateimg"
+                  data-nimg="1"
+                  decoding="async"
+                  height="50"
+                  loading="lazy"
+                  src="/_next/image?url=%2Fimages%2Frug%2Frug_nordic_2.jpeg&w=128&q=75"
+                  srcset="/_next/image?url=%2Fimages%2Frug%2Frug_nordic_2.jpeg&w=64&q=75 1x, /_next/image?url=%2Fimages%2Frug%2Frug_nordic_2.jpeg&w=128&q=75 2x"
+                  style="color: transparent;"
+                  width="50"
+                />
+                <span
+                  class="catename my-auto mx-2"
+                >
+                  カーペット/ラグ
+                </span>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=照明&input=&order=id.desc&page=0"
+          >
+            <div
+              class="cateList relative block h-16 border rounded hover:border-2 border-neutral-400"
+            >
+              <div
+                class="cateLis absolute ml-2 flex top-1/2 -translate-y-1/2"
+              >
+                <img
+                  alt="light"
+                  class="cateimg"
+                  data-nimg="1"
+                  decoding="async"
+                  height="50"
+                  loading="lazy"
+                  src="/_next/image?url=%2Fimages%2Flight%2Flight_natural_3.jpg&w=128&q=75"
+                  srcset="/_next/image?url=%2Fimages%2Flight%2Flight_natural_3.jpg&w=64&q=75 1x, /_next/image?url=%2Fimages%2Flight%2Flight_natural_3.jpg&w=128&q=75 2x"
+                  style="color: transparent;"
+                  width="50"
+                />
+                <span
+                  class="catename my-auto mx-2"
+                >
+                  照明
+                </span>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=カーテン&input=&order=id.desc&page=0"
+          >
+            <div
+              class="cateList relative block h-16 border rounded hover:border-2 border-neutral-400"
+            >
+              <div
+                class="cateLis absolute ml-2 flex top-1/2 -translate-y-1/2"
+              >
+                <img
+                  alt="curtain"
+                  class="cateimg"
+                  data-nimg="1"
+                  decoding="async"
+                  height="50"
+                  loading="lazy"
+                  src="/_next/image?url=%2Fimages%2Fcurtain%2Fcurtain_natural_3.jpg&w=128&q=75"
+                  srcset="/_next/image?url=%2Fimages%2Fcurtain%2Fcurtain_natural_3.jpg&w=64&q=75 1x, /_next/image?url=%2Fimages%2Fcurtain%2Fcurtain_natural_3.jpg&w=128&q=75 2x"
+                  style="color: transparent;"
+                  width="50"
+                />
+                <span
+                  class="catename my-auto mx-2"
+                >
+                  カーテン
+                </span>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=小物/雑貨&input=&order=id.desc&page=0"
+          >
+            <div
+              class="cateList relative block h-16 border rounded hover:border-2 border-neutral-400"
+            >
+              <div
+                class="cateLis absolute ml-2 flex top-1/2 -translate-y-1/2"
+              >
+                <img
+                  alt="accessory"
+                  class="cateimg"
+                  data-nimg="1"
+                  decoding="async"
+                  height="50"
+                  loading="lazy"
+                  src="/_next/image?url=%2Fimages%2Faccessory%2Faccessory_jmodern_3.jpeg&w=128&q=75"
+                  srcset="/_next/image?url=%2Fimages%2Faccessory%2Faccessory_jmodern_3.jpeg&w=64&q=75 1x, /_next/image?url=%2Fimages%2Faccessory%2Faccessory_jmodern_3.jpeg&w=128&q=75 2x"
+                  style="color: transparent;"
+                  width="50"
+                />
+                <span
+                  class="catename my-auto mx-2"
+                >
+                  小物/雑貨
+                </span>
+              </div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div
+      class="scrollArea"
+      id="remind"
+    >
+      <h2
+        class="font text-center text-xl font-bold"
+      >
+        お知らせ
+      </h2>
+      <div
+        class="scroll"
+      >
+        <div
+          class="announce"
+        >
+          <p
+            class="date"
+          >
+            2023-1-4
+          </p>
+          <p
+            class="announceData"
+          >
+            新年のご挨拶
+          </p>
+        </div>
+        <div
+          class="announce"
+        >
+          <p
+            class="date"
+          >
+            2022-12-28
+          </p>
+          <p
+            class="announceData"
+          >
+            年末年始の営業のお知らせ
+          </p>
+        </div>
+        <div
+          class="announce"
+        >
+          <p
+            class="date"
+          >
+            2022-10-31
+          </p>
+          <p
+            class="announceData"
+          >
+            偽サイトにご注意ください
+          </p>
+        </div>
+        <div
+          class="announce"
+        >
+          <p
+            class="date"
+          >
+            2020-2-3
+          </p>
+          <p
+            class="announceData"
+          >
+            新型コロナウイルス感染症による配送への影響について
+          </p>
+        </div>
+        <div
+          class="announce"
+        >
+          <p
+            class="date"
+          >
+            2019-4-1
+          </p>
+          <p
+            class="announceData"
+          >
+            消費税改定およびサイトメンテナンスに関するお知らせ
+          </p>
+        </div>
+        <div
+          class="announce"
+        >
+          <p
+            class="date"
+          >
+            2019-3-31
+          </p>
+          <p
+            class="announceData"
+          >
+            サイトリニューアルのお知らせ
+          </p>
+        </div>
+        <div
+          class="announce"
+        >
+          <p
+            class="date"
+          >
+            2018-4-9
+          </p>
+          <p
+            class="announceData"
+          >
+            送料改定に関するお知らせ
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+</DocumentFragment>
+`;

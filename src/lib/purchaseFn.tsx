@@ -42,8 +42,7 @@ async function deleteCart(id: number) {
       'Content-Type': 'application/json',
     },
   })
-    .then((res) => res.json)
-    .then((data) => console.log(data))
+    .then((res) => console.log('OK'))
     .catch((err) => console.error(err));
 }
 
@@ -83,8 +82,7 @@ async function addHistory(cart: cart) {
       delete: false,
     }),
   })
-    .then((res) => res.json)
-    .then((data) => console.log(data))
+    .then((res) => console.log('OK'))
     .catch((err) => console.error(err));
 }
 
