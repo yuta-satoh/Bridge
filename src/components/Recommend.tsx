@@ -3,6 +3,7 @@ import Image from "next/image";
 import useSWR, { Fetcher } from 'swr';
 import addCart from "@/lib/addCart";
 import { useRouter } from "next/router";
+import Button from "./utils/Button";
 
 type Item = {
   id: number,
@@ -66,14 +67,15 @@ export default function Recommend({ recommend, reloadStrage }: { recommend: Reco
                   <p className="underline mb-1 text-sm">{item.name}</p>
                   <p className="mt-1">¥ {item.price.toLocaleString()}</p>
                 </Link>
-                <button
-                  className="p-1.5 text-center text-white h-10 mt-3 rounded bg-blue-500 hover:bg-blue-700"
+                <Button
+                  type="button"
+                  color="pink"
                   onClick={() => {
                     addCartReload(item.id)
                   }}
                 >
                   カートに入れる
-                </button>
+                </Button>
               </div>
             </div>
           </div>  
