@@ -10,15 +10,14 @@ export default async function handler(
 ) {
   // レスポンスのボディの受け取り
   const { email, password }: { email: string; password: string } = req.body;
-  // postgRESTのAPIと通信するためのTOKENを設定
-  const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
   // 以下、JSONデータの受け取り
   const responce = await fetch(
-    `http://127.0.0.1:8000/users?email=eq.${email}&password=eq.${password}`,
+    `${process.env.SUPABASE_URL}/users?email=eq.${email}&password=eq.${password}`,
     {
       method: 'GET',
       headers: {
-        "Authorization": `Bearer ${TOKEN}`,
+        apikey: `${process.env.SUPABASE_API_KEY}`,
+        "Authorization": `Bearer ${process.env.SUPABASE_API_KEY}`,
         'Content-Type': 'application/json',
       },
     }
