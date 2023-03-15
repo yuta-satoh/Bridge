@@ -21,14 +21,13 @@ export default async function handler(
 ) {
   const userId = req.query.id as string;
   const order = req.query.order as string;
-  const TOKEN =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
   const responseItems = await fetch(
-    `http://127.0.0.1:8000/order_histories?user_id=eq.${userId}&order=${order}`,
+    `${process.env.SUPABASE_URL}/order_histories?user_id=eq.${userId}&order=${order}`,
     {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${TOKEN}`,
+        "apikey": `${process.env.SUPABASE_API_KEY}`,
+        "Authorization": `Bearer ${process.env.SUPABASE_API_KEY}`,
         'Content-Type': 'application/json',
       },
     }
