@@ -85,7 +85,7 @@ export default function Password({
   // エラー文を格納
   const [errorText, setErrorText] = useState<Password>(initPassword);
   // 送信完了可否のメッセージを格納
-  const [completeText, setCompleteText] = useState<string>("");
+  const [completeText, setCompleteText] = useState<string>('');
 
   const rooter = useRouter();
 
@@ -153,15 +153,6 @@ export default function Password({
   // onSubmitハンドラ
   async function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
-    // 重複チェック
-    const res = await fetch('/api/account/re_search_password', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ password: passwords.newPassword, cookie: cookieValue })
-    });
-    const data: { password: string } = await res.json();
     if (!canSubmit()) {
       if (!passwords.password) {
         setErrorText({
@@ -181,17 +172,7 @@ export default function Password({
           confirmationPassword: '確認用パスワードを入力してください',
         });
       }
-      setCompleteText("不正な項目があります");
-      return;
-    } else if (data.password) {
-      setErrorText({
-        ...errorText,
-        newPassword: data.password,
-      });
-      setPasswords({
-        ...passwords,
-      });
-      setCompleteText("不正な項目があります");
+      setCompleteText('不正な項目があります');
       return;
     } else {
       const res = await fetch('/api/account/profile', {
@@ -201,13 +182,13 @@ export default function Password({
         },
         body: JSON.stringify({
           ...Data,
-          password: passwords.newPassword
+          password: passwords.newPassword,
         }),
-      })
+      });
       if (res.ok) {
-        setCompleteText("");
+        setCompleteText('');
         rooter.replace('/account/password/complete');
-      };
+      }
     }
   }
 
@@ -347,84 +328,86 @@ export default function Password({
         }
       `}</style>
       <Auth>
-      <main>
-        <section>
-          <div>
-            <ol className={cModule.links} id="top">
-              <li className={cModule.pageLink}>
-                <Link href="/">Bridge</Link>
-                <span className={cModule.greaterThan}>&gt;</span>
-              </li>
-              <li className={cModule.pageLink}>
-                <Link href="/mypage">マイページ</Link>
-                <span className={cModule.greaterThan}>&gt;</span>
-              </li>
-              <li className={cModule.pageLink}>パスワードの変更</li>
-            </ol>
-          </div>
-          <div className="title">
-            <h1>パスワードの変更</h1>
-          </div>
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <div className="inputItems">
-              <label htmlFor="password">現在のパスワード</label>
-              <span className="primary">必須</span>
-              <br />
-              <input
-                type="password"
-                name="password"
-                id="password"
-                className="inputParts border border-neutral-500 rounded pl-2.5"
-                onChange={(e) => handleChange(e)}
-              />
-              <p className={urStyles.error}>{errorText.password}</p>
+        <main>
+          <section>
+            <div>
+              <ol className={cModule.links} id="top">
+                <li className={cModule.pageLink}>
+                  <Link href="/">Bridge</Link>
+                  <span className={cModule.greaterThan}>&gt;</span>
+                </li>
+                <li className={cModule.pageLink}>
+                  <Link href="/mypage">マイページ</Link>
+                  <span className={cModule.greaterThan}>&gt;</span>
+                </li>
+                <li className={cModule.pageLink}>パスワードの変更</li>
+              </ol>
             </div>
-            <div className="inputItems">
-              <label htmlFor="newPassword">新しいパスワード</label>
-              <span className="primary">必須</span>
-              <br />
-              <input
-                type="password"
-                name="newPassword"
-                id="newPassword"
-                className="inputParts border border-neutral-500 rounded pl-2.5"
-                placeholder="例：abcdef123456"
-                onChange={(e) => handleChange(e)}
-              />
-              <p className={urStyles.error}>
-                {errorText.newPassword}
-              </p>
-              <p>※8〜20文字で入力してください</p>
+            <div className="title">
+              <h1>パスワードの変更</h1>
             </div>
-            <div className="inputItems">
-              <label htmlFor="confirmationPassword">
-                パスワード確認用
-              </label>
-              <span className="primary">必須</span>
-              <br />
-              <input
-                type="password"
-                name="confirmationPassword"
-                id="confirmationPassword"
-                className="inputParts border border-neutral-500 rounded pl-2.5"
-                placeholder="例：abcdef123456"
-                onChange={(e) => handleChange(e)}
-              />
-              <p className={urStyles.error}>
-                {errorText.confirmationPassword}
-              </p>
-              <p>※確認のためパスワードを再入力して下さい</p>
-              <br />
-            </div>
-            <div className="buttonArea">
-              <button type="submit" className="submitButton">
-                パスワードを変更
-              </button>
-              { completeText && <p className="completeText">{completeText}</p>}
-            </div>
-          </form>
-        </section>
-      </main>
+            <form onSubmit={(e) => handleSubmit(e)}>
+              <div className="inputItems">
+                <label htmlFor="password">現在のパスワード</label>
+                <span className="primary">必須</span>
+                <br />
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  className="inputParts border border-neutral-500 rounded pl-2.5"
+                  onChange={(e) => handleChange(e)}
+                />
+                <p className={urStyles.error}>{errorText.password}</p>
+              </div>
+              <div className="inputItems">
+                <label htmlFor="newPassword">新しいパスワード</label>
+                <span className="primary">必須</span>
+                <br />
+                <input
+                  type="password"
+                  name="newPassword"
+                  id="newPassword"
+                  className="inputParts border border-neutral-500 rounded pl-2.5"
+                  placeholder="例：abcdef123456"
+                  onChange={(e) => handleChange(e)}
+                />
+                <p className={urStyles.error}>
+                  {errorText.newPassword}
+                </p>
+                <p>※8〜20文字で入力してください</p>
+              </div>
+              <div className="inputItems">
+                <label htmlFor="confirmationPassword">
+                  パスワード確認用
+                </label>
+                <span className="primary">必須</span>
+                <br />
+                <input
+                  type="password"
+                  name="confirmationPassword"
+                  id="confirmationPassword"
+                  className="inputParts border border-neutral-500 rounded pl-2.5"
+                  placeholder="例：abcdef123456"
+                  onChange={(e) => handleChange(e)}
+                />
+                <p className={urStyles.error}>
+                  {errorText.confirmationPassword}
+                </p>
+                <p>※確認のためパスワードを再入力して下さい</p>
+                <br />
+              </div>
+              <div className="buttonArea">
+                <button type="submit" className="submitButton">
+                  パスワードを変更
+                </button>
+                {completeText && (
+                  <p className="completeText">{completeText}</p>
+                )}
+              </div>
+            </form>
+          </section>
+        </main>
       </Auth>
     </>
   );
