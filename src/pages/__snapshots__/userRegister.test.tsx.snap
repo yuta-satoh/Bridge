@@ -302,6 +302,7 @@ exports[`会員登録ページ 正常に描画 1`] = `
           <br />
           <input
             class="inputParts border border-neutral-500 rounded pl-2.5"
+            data-testid="password"
             id="password"
             name="password"
             placeholder="例：abcdef123456"
@@ -329,6 +330,7 @@ exports[`会員登録ページ 正常に描画 1`] = `
           <br />
           <input
             class="inputParts border border-neutral-500 rounded pl-2.5"
+            data-testid="confirmationPassword"
             id="confirmationPassword"
             name="confirmationPassword"
             placeholder="例：abcdef123456"
