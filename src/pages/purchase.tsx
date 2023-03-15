@@ -63,14 +63,13 @@ export const getServerSideProps: GetServerSideProps = async (
       props: { cookie, user },
     };
   }
-  const TOKEN =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
   const user = await fetch(
-    `http://127.0.0.1:8000/users?id=eq.${cookie}`,
+    `${process.env.SUPABASE_URL}/users?id=eq.${cookie}`,
     {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${TOKEN}`,
+        "apikey": `${process.env.SUPABASE_API_KEY}`,
+        "Authorization": `Bearer ${process.env.SUPABASE_API_KEY}`,
         'Content-Type': 'application/json',
       },
     }

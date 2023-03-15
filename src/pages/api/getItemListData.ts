@@ -19,7 +19,7 @@ export default async function handler(
   const genre = req.query.genre as string;
   const category = req.query.category as string;
   const responseItems = await fetch(
-    `items?genre=eq.${genre}&category=eq.${category}`,
+    `${process.env.SUPABASE_URL}/items?genre=eq.${genre}&category=eq.${category}`,
     {
       method: 'GET',
       headers: {

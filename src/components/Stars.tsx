@@ -22,7 +22,7 @@ const fetcher: Fetcher<Reviews[], string> = (args: string) =>
 export default function Stars({ itemId }: { itemId: number }) {
   const { data, error } = useSWR<Reviews[], Error>(
     // id=itemIdのreviewsを取得
-    `http://127.0.0.1:8000/reviews?item_id=eq.${itemId}`,
+    `/api/getReview?itemId=${itemId}`,
     fetcher
   );
 

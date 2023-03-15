@@ -22,7 +22,7 @@ const fetcher: Fetcher<Reviews[], string> = (args: string) =>
 export default function ReviewList({ itemId }: { itemId: string }) {
   const { data, error } = useSWR<Reviews[], Error>(
     // id=itemIdのreviewsとusers(lastname, firstname)を取得し、投稿日の降順にソート
-    `http://127.0.0.1:8000/reviews?select=*,users(lastname,firstname)&item_id=eq.${itemId}&order=date.desc`,
+    `/api/getReview?itemId=${itemId}`,
     fetcher
   );
 
