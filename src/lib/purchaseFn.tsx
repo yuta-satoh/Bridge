@@ -1,3 +1,4 @@
+import useSWR from 'swr';
 export function purchaseFn() {}
 
 type carts = {
@@ -31,14 +32,12 @@ type cart = {
   quantity: number;
   delete: boolean;
 };
-const TOKEN =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
+
 
 async function deleteCart(id: number) {
-  await fetch(`http://127.0.0.1:8000/cart_items?item_id=eq.${id}`, {
+  await fetch(`/api/purchase/deleteCart?id=${id}`, {
     method: 'DELETE',
     headers: {
-      Authorization: `Bearer ${TOKEN}`,
       'Content-Type': 'application/json',
     },
   })
@@ -62,10 +61,9 @@ async function addHistory(cart: cart) {
       return `${year}-${month}-${day}`;
     }
   };
-  await fetch(`http://127.0.0.1:8000/order_histories`, {
+  await fetch(`/api/purchase/addHistory`, {
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${TOKEN}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
