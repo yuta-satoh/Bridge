@@ -28,7 +28,6 @@ export default async function addCart(itemId: number, quantity: number) {
   if (userId) {
 		// ユーザーのカート情報を取得
 		const cart = await fetch(`/api/getCart?id=${userId}`).then((res) => res.json());
-
 		const cartId: number = cart[0].id
 		// カートに追加した時の日付を取得
 		const nowDate = getDate(new Date());
