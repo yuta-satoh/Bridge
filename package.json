@@ -7,12 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --watch",
+    "test": "jest --watch --verbose",
     "lint:fix": "next lint --fix",
     "format": "prettier --write --ignore-path .gitignore './**/*.{ts,tsx,json}'"
   },
   "dependencies": {
     "@next/font": "13.1.6",
+    "@supabase/supabase-js": "^2.10.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/node": "18.14.0",
     "@types/react": "18.0.28",
