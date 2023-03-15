@@ -58,7 +58,15 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   // 取得したidと一致するhistoryデータを取得し、propsに渡す
   const res = await fetch(
-    `http://127.0.0.1:8000/order_histories?id=eq.${id}`
+    `${process.env.SUPABASE_URL}/order_histories?id=eq.${id}`,
+    {
+      method: 'GET',
+      headers: {
+        apikey: `${process.env.SUPABASE_API_KEY}`,
+        Authorization: `Bearer ${process.env.SUPABASE_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+    }
   );
   const data: History[] = await res.json();
   const hisotry_data = data[0];
@@ -130,17 +138,20 @@ export default function Review({
       setIsNicknameError(true);
     } else {
       setIsNicknameError(false);
-      const TOKEN =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
-      const res = await fetch(`http://127.0.0.1:8000/reviews`, {
+      const res = await fetch(`/api/account/review`, {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${TOKEN}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(review),
       });
-      rooter.replace('/account/review/complete');
+      if (res.ok) {
+        rooter.replace('/account/review/complete');
+      } else {
+        setIsNicknameError(true);
+        console.log('error');
+      }
+
     }
   };
 
@@ -150,25 +161,23 @@ export default function Review({
         <title>レビュー投稿</title>
       </Head>
       <main className={prStyles.main}>
-      <div className={hModule.breadList}>
-            <ol className={cModule.links} id="top">
-              <li className={cModule.pageLink}>
-                <Link href="/">Bridge</Link>
-                <span className={cModule.greaterThan}>&gt;</span>
-              </li>
-              <li className={cModule.pageLink}>
-                <Link href="/mypage">マイページ</Link>
-                <span className={cModule.greaterThan}>&gt;</span>
-              </li>
-              <li className={cModule.pageLink}>
+        <div className={hModule.breadList}>
+          <ol className={cModule.links} id="top">
+            <li className={cModule.pageLink}>
+              <Link href="/">Bridge</Link>
+              <span className={cModule.greaterThan}>&gt;</span>
+            </li>
+            <li className={cModule.pageLink}>
+              <Link href="/mypage">マイページ</Link>
+              <span className={cModule.greaterThan}>&gt;</span>
+            </li>
+            <li className={cModule.pageLink}>
               <Link href="/account/history">購入履歴</Link>
-                <span className={cModule.greaterThan}>&gt;</span>
-              </li>
-              <li className={cModule.pageLink}>
-                レビュー投稿
-              </li>
-            </ol>
-          </div>
+              <span className={cModule.greaterThan}>&gt;</span>
+            </li>
+            <li className={cModule.pageLink}>レビュー投稿</li>
+          </ol>
+        </div>
         <div className={prStyles.body}>
           <div className={prStyles.itemInfo}>
             <table className={hModule.tableBody}>
@@ -210,24 +219,23 @@ export default function Review({
                     {history_data.quantity}個
                   </td>
                   <td className={hModule.tableCell}>
-                    ¥{' '}
-                    {(
-                      history_data.price * 1.1
-                    ).toLocaleString()}
+                    ¥ {(history_data.price * 1.1).toLocaleString()}
                   </td>
                   <td className={hModule.tableCell}>
                     ¥{' '}
                     {(
-                      history_data.quantity * history_data.price * 1.1
+                      history_data.quantity *
+                      history_data.price *
+                      1.1
                     ).toLocaleString()}
                   </td>
                 </tr>
                 <tr>
-                    <td colSpan={4}></td>
-                    <td className={hModule.tableCellCenterSub}>
-                      購入日：{history_data.date}
-                    </td>
-                  </tr>
+                  <td colSpan={4}></td>
+                  <td className={hModule.tableCellCenterSub}>
+                    購入日：{history_data.date}
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
