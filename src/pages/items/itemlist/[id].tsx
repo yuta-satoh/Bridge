@@ -186,7 +186,13 @@ export default function ItemPage({
 // パス・データ取得
 
 export async function getStaticPaths() {
-  const res = await fetch('http://127.0.0.1:8000/items');
+  const res = await fetch(`${process.env.SUPABASE_URL}/items`,{
+    headers: {
+      "apikey": `${process.env.SUPABASE_API_KEY}`,
+      "Authorization": `Bearer ${process.env.SUPABASE_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+  });
   const items = await res.json();
 
   const paths = items.map((item: { id: number }) => ({
@@ -209,7 +215,13 @@ type Params = {
 
 export async function getStaticProps({ params }: Params) {
   const res = await fetch(
-    `http://127.0.0.1:8000/items?id=eq.${params.id}`
+    `${process.env.SUPABASE_URL}/items?id=eq.${params.id}`,{
+      headers: {
+				"apikey": `${process.env.SUPABASE_API_KEY}`,
+				"Authorization": `Bearer ${process.env.SUPABASE_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+    }
   );
   const item = await res.json();
 
