@@ -3,8 +3,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import cModule from '../styles/coordination.module.css';
 import Generator from '@/components/Generator';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { GetServerSideProps } from 'next';
 import { journal } from '../lib/generatorFn';
@@ -17,14 +15,13 @@ export const getServerSideProps: GetServerSideProps = async (
   context
 ) => {
   const theme = context.req.cookies['genre'];
-  const TOKEN =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
   const request = await fetch(
-    `http://127.0.0.1:8000/items?genre=eq.${theme}`,
+    `${process.env.SUPABASE_URL}/items?genre=eq.${theme}`,
     {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${TOKEN}`,
+				"apikey": `${process.env.SUPABASE_API_KEY}`,
+				"Authorization": `Bearer ${process.env.SUPABASE_API_KEY}`,
         'Content-Type': 'application/json',
       },
     }
