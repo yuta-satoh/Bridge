@@ -41,7 +41,6 @@ export const getServerSideProps: GetServerSideProps = async (
   const cookieValue = ((cookie: string | undefined) => {
     if (typeof cookie !== 'undefined') {
       const cookies = cookie.split(';');
-
       // 配列cookiesを=で分割して代入し、
       // 0番目の要素が"id"なら1番目の要素(cookieの値)を返す
       for (let cookie of cookies) {
@@ -51,22 +50,18 @@ export const getServerSideProps: GetServerSideProps = async (
         }
       }
     }
-
     // 上記の処理で何もリターンされなければ空文字を返す
     return '';
   })(cookie);
-  
-  // TOKEN定義
-  const TOKEN =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
 
   // クッキーの値を元にuserデータを取得
   const res = await fetch(
-    `http://127.0.0.1:8000/users?id=eq.${cookieValue}`,
+    `${process.env.SUPABASE_URL}/users?id=eq.${cookieValue}`,
     {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${TOKEN}`,
+        apikey: `${process.env.SUPABASE_API_KEY}`,
+        Authorization: `Bearer ${process.env.SUPABASE_API_KEY}`,
         'Content-Type': 'application/json',
       },
     }
@@ -74,7 +69,7 @@ export const getServerSideProps: GetServerSideProps = async (
   const rawData: User[] = await res.json();
   const data: User = rawData[0]
 
-  // ユーザーをpropsに渡す
+  // data = usersテーブルデータ, cookieValue = cookie
   return {
     props: { data, cookieValue },
   };
@@ -97,6 +92,8 @@ export default function Profile({ data, cookieValue }: { data: User; cookieValue
     address: "",
   });
   const [completeText, setCompleteText] = useState<string>("");
+
+  console.log('profile', profile);
 
     // エラー検証
     const nameValidation = (name: string) => {
@@ -298,17 +295,18 @@ export default function Profile({ data, cookieValue }: { data: User; cookieValue
       setCompleteText("不正な項目があります");
       return;
     } else {
-      setCompleteText("変更が完了しました");
-      const TOKEN =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
-      const res = await fetch(`http://127.0.0.1:8000/users?id=eq.${cookieValue}`, {
-        method: 'PUT',
+      const res = await fetch('/api/account/profile', {
+        method: 'POST',
         headers: {
-          Authorization: `Bearer ${TOKEN}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(profile),
       })
+      if (res.ok) {
+        setCompleteText("変更が完了しました");
+      } else {
+        setCompleteText("エラーが発生しました");
+      }
     }
     
   }
