@@ -67,7 +67,6 @@ export const getServerSideProps: GetServerSideProps = async ({
 		}
 	}
 	const inputQuery = inputTranslate(input)
-	console.log(input, inputQuery)
 	const orderQuery = `&order=${order}`
 
   // ジャンルとカテゴリを/api/searchに渡す
@@ -80,9 +79,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 			"Content-Type": "application/json",
 		}
 	});
-	// console.log(response);
 	const data: Item[] = await response.json();
-	// console.log(data)
 
   // ページ数表示用にページの最大数を確認
   const maxPage =
