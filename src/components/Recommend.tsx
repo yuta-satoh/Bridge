@@ -65,11 +65,12 @@ export default function Recommend({ recommend, reloadStrage }: { recommend: Reco
               <div className="px-2 py-2">
                 <Link href={`/items/itemlist/${item.id}`}>
                   <p className="underline mb-1 text-sm">{item.name}</p>
-                  <p className="mt-1">¥ {item.price.toLocaleString()}</p>
+                  <p className="mt-1 mb-5">¥ {item.price.toLocaleString()}</p>
                 </Link>
                 <Button
                   type="button"
                   color="pink"
+                  shadow
                   onClick={() => {
                     addCartReload(item.id)
                   }}

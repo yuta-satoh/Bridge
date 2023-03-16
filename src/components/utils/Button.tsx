@@ -3,11 +3,12 @@ import { ReactNode } from "react";
 type Button = {
     children: ReactNode;
     type: "button" | "submit";
-    color: 'pink' | 'white' | 'black'
+    color: 'pink' | 'white' | 'black';
+    shadow?: boolean
     onClick?: () => void;
 }
 
-const Button = ({ children, type, color, onClick }: Button) => {
+const Button = ({ children, type, color, shadow, onClick }: Button) => {
     if (color === 'pink') {
         return (
             <>
@@ -20,7 +21,7 @@ const Button = ({ children, type, color, onClick }: Button) => {
                 <style jsx>{`
                     button {
                         background-color: #F8C6BD;
-                        box-shadow: 1px 1px 3px;
+                        box-shadow: ${shadow ? '1px 1px 3px' : 'none'};
                         padding: 5px 18px;
                         border-radius: 0.7rem;
                     }
@@ -47,10 +48,11 @@ const Button = ({ children, type, color, onClick }: Button) => {
                 <style jsx>{`
                     button {
                         background-color: #FFFFFF;
-                        box-shadow: 1px 1px 3px;
+                        box-shadow: ${shadow ? '1px 1px 3px' : 'none'};
                         padding: 5px 5px;
                         border: 1px solid #000000;
                         width: 90%;
+                        max-width: 400px;
                     }
                     button:hover {
                         background-color: #F2F2F2;
@@ -76,7 +78,7 @@ const Button = ({ children, type, color, onClick }: Button) => {
                     button {
                         background-color: #000000;
                         color: #ffffff;
-                        box-shadow: 1px 1px 3px;
+                        box-shadow: ${shadow ? '1px 1px 3px' : 'none'};
                         padding: 5px 10px;
                         border-radius: 0.2rem;
                     }
