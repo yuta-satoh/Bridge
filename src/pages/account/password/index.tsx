@@ -198,7 +198,6 @@ export default function Password({
       <Head>
         <title>パスワードの変更</title>
       </Head>
-      <Auth>
         <main className={passModule.main}>
           <section className={passModule.section}>
             <div>
@@ -279,7 +278,6 @@ export default function Password({
             </form>
           </section>
         </main>
-      </Auth>
     </>
   );
 }

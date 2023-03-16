@@ -1,15 +1,10 @@
 import Head from 'next/head';
-import {
-  ChangeEvent,
-  SyntheticEvent,
-  useEffect,
-  useState,
-} from 'react';
+import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import urStyles from '../../styles/userRegister.module.css';
 import Link from 'next/link';
 import cModule from '../../styles/coordination.module.css';
-import Auth from '../auth/auth';
+import profModule from '../../styles/account/profile.module.css';
 
 // userデータの型を定義
 type User = {
@@ -373,341 +368,206 @@ export default function Profile({
       <Head>
         <title>会員情報の確認/変更</title>
       </Head>
-      <style jsx>{`
-        main {
-          background-color: ;
-          background-size: cover;
-          width: 100%;
-          max-height: 100%;
-          display: flex;
-        }
-        section {
-          background-color: rgba(255, 255, 255, 0.9);
-          margin: 50px auto;
-          height: 1000px;
-          width: 70%;
-        }
-        .title {
-          text-align: center;
-          border-bottom: 2px black solid;
-          max-width: 425px;
-          margin: 50px auto;
-        }
-        form {
-          padding: 5px 100px;
-          margin: auto;
-          border: 1px solod black;
-        }
-        h1 {
-          font-size: 30px;
-        }
-        p {
-          font-size: 12px;
-          padding-bottom: 15px;
-        }
-        input {
-          border: 1px grey solid;
-          height: 40px;
-          margin: 5px 5px;
-          padding: 0 10px;
-        }
-        .inputItems {
-          padding-bottom: 10px;
-          padding-left: 25px;
-        }
-        .number {
-          width: 110px;
-        }
-        label {
-          font-size: 13px;
-          margin-bottom: 5px;
-        }
-        .genderLabel {
-          font-size: 17px;
-          margin: 0px;
-        }
-        .inputParts {
-          width: 100%;
-        }
-        .zipButton {
-          border: 1px black solid;
-          font-size: 11px;
-          background-color: black;
-          padding: 8px 20px;
-          color: white;
-          font-weight: bold;
-        }
-        .buttonArea {
-          text-align: center;
-          margin-top: 30px;
-        }
-        .primary {
-          font-size: 7px;
-          margin-left: 5px;
-          padding: 3px 9px;
-          color: red;
-          border: 1px red solid;
-        }
-        .loginLink {
-          margin-top: 40px;
-          text-align: center;
-          margin: auto;
-        }
-        .subTitle {
-          font-size: 25px;
-          padding-bottom: 15px;
-        }
-        .submitButton {
-          background-color: black;
-          color: white;
-          font-weight: bold;
-          padding: 20px 60px;
-          font-size: 17px;
-        }
-        .buttonSpan {
-          padding-left: 15px;
-        }
-        .linkButton {
-          border: 2.3px black solid;
-          padding: 8px 60px;
-          background-color: white;
-          font-size: 13px;
-          font-weight: bold;
-        }
-        .radioField {
-          display: flex;
-          justify-content: space-around;
-          margin-top: 10px;
-        }
-        .radioForm {
-          display: flex;
-          align-items: center;
-          border: 1px grey solid;
-          padding: 5px 20px;
-          background-color: white;
-        }
-        .radioButton {
-          width: 17px;
-        }
-        .clearButton {
-          background-color: white;
-          color: black;
-          font-weight: bold;
-          border: 2.3px black solid;
-          padding: 10px 40px;
-          font-size: 14px;
-        }
-        .completeText {
-          color: red;
-          margin-top: 10px;
-          font-size: 15px;
-          font-weight: bold;
-        }
-      `}</style>
-      <Auth>
-        <main>
-          <section>
-            <div>
-              <ol className={cModule.links} id="top">
-                <li className={cModule.pageLink}>
-                  <Link href="/">Bridge</Link>
-                  <span className={cModule.greaterThan}>&gt;</span>
-                </li>
-                <li className={cModule.pageLink}>
-                  <Link href="/mypage">マイページ</Link>
-                  <span className={cModule.greaterThan}>&gt;</span>
-                </li>
-                <li className={cModule.pageLink}>
-                  会員情報の確認/変更
-                </li>
-              </ol>
-            </div>
-            <div className="title">
-              <h1>会員情報の確認/変更</h1>
-            </div>
-            <div className="body">
-              <form method="put" onSubmit={(e) => handleSubmit(e)}>
-                <div className="inputItems">
-                  <label htmlFor="lastname">お名前</label>
-                  <br />
-                  <input
-                    type="text"
-                    name="lastname"
-                    id="lastname"
-                    value={profile.lastname}
-                    className="border border-neutral-500 rounded pl-2.5"
-                    onChange={(e) => handleChange(e)}
-                  />
-                  <input
-                    type="text"
-                    name="firstname"
-                    id="firstname"
-                    value={profile.firstname}
-                    className="border border-neutral-500 rounded pl-2.5"
-                    onChange={(e) => handleChange(e)}
-                  />
-                  <p className={urStyles.error}>
-                    {errorText.lastname || errorText.firstname}
-                  </p>
-                </div>
-                <div className="inputItems">
-                  <label htmlFor="female">性別</label>
-                  <br />
-                  <div className="radioField">
-                    <div className="radioForm border-neutral-500 rounded pl-2.5">
-                      <input
-                        type="radio"
-                        name="gender"
-                        id="female"
-                        value="female"
-                        className="radioButton"
-                        checked={profile.gender === 'female'}
-                        onChange={(e) => handleChange(e)}
-                      />
-                      <label htmlFor="female" className="genderLabel">
-                        女性&emsp;
-                      </label>
-                    </div>
-                    <div className="radioForm border-neutral-500 rounded pl-2.5">
-                      <input
-                        type="radio"
-                        name="gender"
-                        id="male"
-                        value="male"
-                        className="radioButton"
-                        checked={profile.gender === 'male'}
-                        onChange={(e) => handleChange(e)}
-                      />
-                      <label htmlFor="male" className="genderLabel">
-                        男性&emsp;
-                      </label>
-                    </div>
-                    <div className="radioForm border-neutral-500 rounded pl-2.5">
-                      <input
-                        type="radio"
-                        name="gender"
-                        id="other"
-                        value="other"
-                        className="radioButton"
-                        checked={profile.gender === 'other'}
-                        onChange={(e) => handleChange(e)}
-                      />
-                      <label htmlFor="other" className="genderLabel">
-                        その他
-                      </label>
-                    </div>
+      <main className={profModule.main}>
+        <section className={profModule.section}>
+          <div>
+            <ol className={cModule.links} id="top">
+              <li className={cModule.pageLink}>
+                <Link href="/">Bridge</Link>
+                <span className={cModule.greaterThan}>&gt;</span>
+              </li>
+              <li className={cModule.pageLink}>
+                <Link href="/mypage">マイページ</Link>
+                <span className={cModule.greaterThan}>&gt;</span>
+              </li>
+              <li className={cModule.pageLink}>
+                会員情報の確認/変更
+              </li>
+            </ol>
+          </div>
+          <div className={profModule.title}>
+            <h1>会員情報の確認/変更</h1>
+          </div>
+          <div className="body">
+            <form method="put" onSubmit={(e) => handleSubmit(e)}>
+              <div className={profModule.inputItems}>
+                <label htmlFor="lastname">お名前</label>
+                <br />
+                <input
+                  type="text"
+                  name="lastname"
+                  id="lastname"
+                  value={profile.lastname}
+                  className="border border-neutral-500 rounded pl-2.5"
+                  onChange={(e) => handleChange(e)}
+                />
+                <input
+                  type="text"
+                  name="firstname"
+                  id="firstname"
+                  value={profile.firstname}
+                  className="border border-neutral-500 rounded pl-2.5"
+                  onChange={(e) => handleChange(e)}
+                />
+                <p className={urStyles.error}>
+                  {errorText.lastname || errorText.firstname}
+                </p>
+              </div>
+              <div className={profModule.inputItems}>
+                <label htmlFor="female">性別</label>
+                <br />
+                <div className={profModule.radioField}>
+                  <div className={`${profModule.radioForm} border-neutral-500 rounded pl-2.5`}>
+                    <input
+                      type="radio"
+                      name="gender"
+                      id="female"
+                      value="female"
+                      className={profModule.radioButton}
+                      checked={profile.gender === 'female'}
+                      onChange={(e) => handleChange(e)}
+                    />
+                    <label htmlFor="female" className={profModule.genderLabel}>
+                      女性&emsp;
+                    </label>
                   </div>
-                  <p className={urStyles.error}>{errorText.gender}</p>
+                  <div className={`${profModule.radioForm} border-neutral-500 rounded pl-2.5`}>
+                    <input
+                      type="radio"
+                      name="gender"
+                      id="male"
+                      value="male"
+                      className={profModule.radioButton}
+                      checked={profile.gender === 'male'}
+                      onChange={(e) => handleChange(e)}
+                    />
+                    <label htmlFor="male" className={profModule.genderLabel}>
+                      男性&emsp;
+                    </label>
+                  </div>
+                  <div className={`${profModule.radioForm} border-neutral-500 rounded pl-2.5`}>
+                    <input
+                      type="radio"
+                      name="gender"
+                      id="other"
+                      value="other"
+                      className={profModule.radioButton}
+                      checked={profile.gender === 'other'}
+                      onChange={(e) => handleChange(e)}
+                    />
+                    <label htmlFor="other" className={profModule.genderLabel}>
+                      その他
+                    </label>
+                  </div>
                 </div>
-                <div className="inputItems">
-                  <label htmlFor="email">メールアドレス</label>
-                  <br />
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    className="inputParts border border-neutral-500 rounded pl-2.5"
-                    value={profile.email}
-                    onChange={(e) => handleChange(e)}
-                  />
-                  <p className={urStyles.error}>{errorText.email}</p>
-                </div>
-                <div className="inputItems">
-                  <label htmlFor="tell">電話番号</label>
-                  <br />
-                  <input
-                    type="tell"
-                    name="tell"
-                    id="tell"
-                    className="number border border-neutral-500 rounded pl-2.5"
-                    value={tell[0]}
-                    onChange={(e) => handleTellChange(e)}
-                  />
-                  <span>-</span>
-                  <input
-                    type="tell"
-                    name="tell2"
-                    id="tell2"
-                    className="number border border-neutral-500 rounded pl-2.5"
-                    value={tell[1]}
-                    onChange={(e) => handleTellChange(e)}
-                  />
-                  <span>-</span>
-                  <input
-                    type="tell"
-                    name="tell3"
-                    id="tell3"
-                    className="number border border-neutral-500 rounded pl-2.5"
-                    value={tell[2]}
-                    onChange={(e) => handleTellChange(e)}
-                  />
-                  <p className={urStyles.error}>
-                    {errorText.tell ||
-                      errorText.tell2 ||
-                      errorText.tell3}
-                  </p>
-                </div>
-                <div className="inputItems">
-                  <label htmlFor="zipcode">郵便番号</label>
-                  <br />
-                  <input
-                    type="text"
-                    pattern="^[0-9]+$"
-                    name="zipcode"
-                    id="zipcode"
-                    className="number border border-neutral-500 rounded pl-2.5"
-                    value={zipcode[0]}
-                    onChange={(e) => handleZipcodeChange(e)}
-                  />
-                  <span>-</span>
-                  <input
-                    type="text"
-                    pattern="^[0-9]+$"
-                    name="zipcode2"
-                    id="zipcode2"
-                    className="number border border-neutral-500 rounded pl-2.5"
-                    value={zipcode[1]}
-                    onChange={(e) => handleZipcodeChange(e)}
-                  />
-                  <button
-                    type="button"
-                    className="zipButton text-white bg-neutral-900 border border-neutral-900 rounded px-1"
-                    onClick={() => searchAddress()}
-                  >
-                    住所検索
-                  </button>
-                  <p className={urStyles.error}>
-                    {errorText.zipcode || errorText.zipcode2}
-                  </p>
-                </div>
-                <div className="inputItems">
-                  <label htmlFor="address">住所</label>
-                  <br />
-                  <input
-                    type="text"
-                    name="address"
-                    id="address"
-                    className="inputParts border border-neutral-500 rounded pl-2.5"
-                    value={profile.address}
-                    onChange={(e) => handleChange(e)}
-                  />
-                  <p className={urStyles.error}>
-                    {errorText.address}
-                  </p>
-                </div>
-                <div className="buttonArea">
-                  <button type="submit" className="submitButton">
-                    会員情報を変更
-                  </button>
-                  {completeText && (
-                    <p className="completeText">{completeText}</p>
-                  )}
-                </div>
-              </form>
-            </div>
-          </section>
-        </main>
-      </Auth>
+                <p className={urStyles.error}>{errorText.gender}</p>
+              </div>
+              <div className={profModule.inputItems}>
+                <label htmlFor="email">メールアドレス</label>
+                <br />
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  className={`${profModule.inputParts} border border-neutral-500 rounded pl-2.5`}
+                  value={profile.email}
+                  onChange={(e) => handleChange(e)}
+                />
+                <p className={urStyles.error}>{errorText.email}</p>
+              </div>
+              <div className={profModule.inputItems}>
+                <label htmlFor="tell">電話番号</label>
+                <br />
+                <input
+                  type="tell"
+                  name="tell"
+                  id="tell"
+                  className={`${profModule.number} border border-neutral-500 rounded pl-2.5`}
+                  value={tell[0]}
+                  onChange={(e) => handleTellChange(e)}
+                />
+                <span>-</span>
+                <input
+                  type="tell"
+                  name="tell2"
+                  id="tell2"
+                  className={`${profModule.number} border border-neutral-500 rounded pl-2.5`}
+                  value={tell[1]}
+                  onChange={(e) => handleTellChange(e)}
+                />
+                <span>-</span>
+                <input
+                  type="tell"
+                  name="tell3"
+                  id="tell3"
+                  className={`${profModule.number} border border-neutral-500 rounded pl-2.5`}
+                  value={tell[2]}
+                  onChange={(e) => handleTellChange(e)}
+                />
+                <p className={urStyles.error}>
+                  {errorText.tell ||
+                    errorText.tell2 ||
+                    errorText.tell3}
+                </p>
+              </div>
+              <div className={profModule.inputItems}>
+                <label htmlFor="zipcode">郵便番号</label>
+                <br />
+                <input
+                  type="text"
+                  pattern="^[0-9]+$"
+                  name="zipcode"
+                  id="zipcode"
+                  className={`${profModule.number} border border-neutral-500 rounded pl-2.5`}
+                  value={zipcode[0]}
+                  onChange={(e) => handleZipcodeChange(e)}
+                />
+                <span>-</span>
+                <input
+                  type="text"
+                  pattern="^[0-9]+$"
+                  name="zipcode2"
+                  id="zipcode2"
+                  className={`${profModule.number} border border-neutral-500 rounded pl-2.5`}
+                  value={zipcode[1]}
+                  onChange={(e) => handleZipcodeChange(e)}
+                />
+                <button
+                  type="button"
+                  className={`${profModule.zipButton} text-white bg-neutral-900 border border-neutral-900 rounded px-1`}
+                  onClick={() => searchAddress()}
+                >
+                  住所検索
+                </button>
+                <p className={urStyles.error}>
+                  {errorText.zipcode || errorText.zipcode2}
+                </p>
+              </div>
+              <div className={profModule.inputItems}>
+                <label htmlFor="address">住所</label>
+                <br />
+                <input
+                  type="text"
+                  name="address"
+                  id="address"
+                  className={`${profModule.inputParts} border border-neutral-500 rounded pl-2.5`}
+                  value={profile.address}
+                  onChange={(e) => handleChange(e)}
+                />
+                <p className={urStyles.error}>{errorText.address}</p>
+              </div>
+              <div className={profModule.buttonArea}>
+                <button type="submit" className={profModule.submitButton}>
+                  会員情報を変更
+                </button>
+                {completeText && (
+                  <p className={profModule.completeText}>{completeText}</p>
+                )}
+              </div>
+            </form>
+          </div>
+        </section>
+      </main>
     </>
   );
 }
