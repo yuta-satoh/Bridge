@@ -213,7 +213,7 @@ exports[`商品詳細テスト 商品詳細を正常に描画 1`] = `
             </select>
           </div>
           <button
-            class="buttonStyle"
+            class="jsx-88e2e8c6dc2677c1"
             type="button"
           >
             カートに追加

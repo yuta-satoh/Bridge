@@ -62,7 +62,8 @@ exports[`Recommendコンポーネント カートにおすすめ商品を追加�
             </p>
           </a>
           <button
-            class="p-1.5 text-center text-white h-10 mt-3 rounded bg-blue-500 hover:bg-blue-700"
+            class="jsx-88e2e8c6dc2677c1"
+            type="button"
           >
             カートに入れる
           </button>
@@ -127,7 +128,8 @@ exports[`Recommendコンポーネント ユーザーカートのおすすめ商�
             </p>
           </a>
           <button
-            class="p-1.5 text-center text-white h-10 mt-3 rounded bg-blue-500 hover:bg-blue-700"
+            class="jsx-88e2e8c6dc2677c1"
+            type="button"
           >
             カートに入れる
           </button>
@@ -174,7 +176,8 @@ exports[`Recommendコンポーネント ユーザーカートのおすすめ商�
             </p>
           </a>
           <button
-            class="p-1.5 text-center text-white h-10 mt-3 rounded bg-blue-500 hover:bg-blue-700"
+            class="jsx-88e2e8c6dc2677c1"
+            type="button"
           >
             カートに入れる
           </button>
