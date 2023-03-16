@@ -5,6 +5,7 @@ import Recommend from "./Recommend";
 import deleteCart from "@/lib/deleteCart";
 import { ChangeEvent } from "react";
 import Button from "./utils/Button";
+import SelectBox from "./utils/SelectBox";
 import { useRouter } from "next/router";
 
 type Item = {
@@ -108,7 +109,7 @@ export default function UserCart({ userId }: { userId: string }) {
                     <p className="mt-1 text-lg">¥ {cart.items.price.toLocaleString()}</p>
                   </div>
                 </div>
-                <div className="text-right">
+                <div className="flex justify-end gap-4">
                   <Button
                     type="button"
                     color="black"
@@ -116,26 +117,13 @@ export default function UserCart({ userId }: { userId: string }) {
                   >
                     削除
                   </Button>
-                  {/* 個数を変えたら金額も変更したい（CSRで） */}
-                  <select
+                  <SelectBox
+                    arr={Array(10).fill(0).map((arr, index) => arr + index + 1 )}
                     name="quantity"
                     id="cart_quantity"
-                    data-testid="select-option"
-                    className="ml-5 border border-neutral-900 rounded p-1"
                     defaultValue={cart.quantity}
                     onChange={(ev) => handleChange(ev, cart.items.id, cart.cart_id)}
-                  >
-                    <option value={1}>1</option>
-                    <option value={2}>2</option>
-                    <option value={3}>3</option>
-                    <option value={4}>4</option>
-                    <option value={5}>5</option>
-                    <option value={6}>6</option>
-                    <option value={7}>7</option>
-                    <option value={8}>8</option>
-                    <option value={9}>9</option>
-                    <option value={10}>10</option>
-                  </select>
+                  />
                 </div>
               </div>  
             ))}
@@ -172,16 +160,6 @@ export default function UserCart({ userId }: { userId: string }) {
                 お買い物を続ける
               </Button>
             </div>
-            {/* <Link href="/purchase">
-              <div className="container pt-1.5 text-center h-10 border-2 border-neutral-900 bg-white mt-8">
-                <span>ご注文手続き</span>
-              </div>
-            </Link>
-            <Link href="/">
-              <div className="container pt-1.5 text-center h-10 border-2 border-neutral-900 bg-white mt-4">
-                <span>お買い物を続ける</span>
-              </div>
-            </Link> */}
           </div>
         </div>
       ) : (
