@@ -1,4 +1,3 @@
-import Cookies from "js-cookie";
 import addCart from "./addCart";
 
 type GuestCartType = {
@@ -12,10 +11,6 @@ export default async function strageToCart() {
         return
     } else {
         const parseStrageData: GuestCartType[] = JSON.parse(strageData);
-        const uid = Cookies.get("id");
-        localStorage.clear();
-        const ucart = await fetch(`/api/carts?user_id=eq.${uid}`).then((res) => res.json());
-        console.log(parseStrageData, uid, ucart);
 
         parseStrageData.forEach((item) => {
             addCart(item.itemId, item.quantity)

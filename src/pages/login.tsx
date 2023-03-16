@@ -42,6 +42,7 @@ export default function Login() {
     });
     if (responce.status === 200) {
       setErrorText("");
+      const strageData = localStorage.getItem('GuestCart');
       await strageToCart()
       rooter.replace('/');
       Cookies.set('status', 'true');
