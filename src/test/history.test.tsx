@@ -2,7 +2,7 @@ import renderer from 'react-test-renderer';
 import { Middleware } from 'swr';
 import { SWRResponse } from 'swr';
 import { SWRConfig } from 'swr';
-import History from './history';
+import History from '@/pages/account/history';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
