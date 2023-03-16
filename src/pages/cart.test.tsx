@@ -3,6 +3,16 @@ import { render } from "@testing-library/react";
 import Cart from "./cart";
 import Cookies from 'js-cookie';
 
+jest.mock('next/router', () => ({
+    useRouter() {
+      return {
+        replace: jest.fn(),
+        push: jest.fn(),
+        reload: jest.fn(),
+      };
+    },
+}));
+
 describe('カートページ', () => {
     test('正常に表示（空のユーザーカート）', () => {
         Cookies.get = jest.fn().mockImplementation(() => '1');
