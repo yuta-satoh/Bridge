@@ -4,6 +4,8 @@ import Image from "next/image";
 import Recommend from "./Recommend";
 import deleteCart from "@/lib/deleteCart";
 import { ChangeEvent } from "react";
+import Button from "./utils/Button";
+import { useRouter } from "next/router";
 
 type Item = {
   id: number,
@@ -29,6 +31,7 @@ type Cart = {
 const fetcher: Fetcher<Cart[], string> = (...args) => fetch(...args).then((res) => res.json());
 
 export default function UserCart({ userId }: { userId: string }) {
+  const router = useRouter();
   // SWRでアイテムを取得
   const { data: cartItemData, error, mutate } = useSWR(`/api/getCart/items?id=${userId}`, fetcher)
 
@@ -106,12 +109,13 @@ export default function UserCart({ userId }: { userId: string }) {
                   </div>
                 </div>
                 <div className="text-right">
-                  <button
-                    className="text-white bg-neutral-900 border border-neutral-900 rounded px-1"
+                  <Button
+                    type="button"
+                    color="black"
                     onClick={() => handleDelete(cart.items.id, cart.cart_id)}  
                   >
                     削除
-                  </button>
+                  </Button>
                   {/* 個数を変えたら金額も変更したい（CSRで） */}
                   <select
                     name="quantity"
@@ -152,7 +156,23 @@ export default function UserCart({ userId }: { userId: string }) {
                 <span className="float-right">¥ {(sumPrice + (sumPrice * 0.1)).toLocaleString()}</span>
               </p>
             </div>
-            <Link href="/purchase">
+            <div className="flex flex-col items-center gap-5 mt-5">
+              <Button
+                type="button"
+                color="white"
+                onClick={() => router.push("/purchase")}
+              >
+                ご注文手続き
+              </Button>
+              <Button
+                type="button"
+                color="white"
+                onClick={() => router.push("/")}
+              >
+                お買い物を続ける
+              </Button>
+            </div>
+            {/* <Link href="/purchase">
               <div className="container pt-1.5 text-center h-10 border-2 border-neutral-900 bg-white mt-8">
                 <span>ご注文手続き</span>
               </div>
@@ -161,7 +181,7 @@ export default function UserCart({ userId }: { userId: string }) {
               <div className="container pt-1.5 text-center h-10 border-2 border-neutral-900 bg-white mt-4">
                 <span>お買い物を続ける</span>
               </div>
-            </Link>
+            </Link> */}
           </div>
         </div>
       ) : (
