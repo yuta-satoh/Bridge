@@ -27,26 +27,62 @@ type Order = {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({
-  query,
+	query,
 }) => {
-  if (query.genre === undefined || query.category === undefined) {
-    return {
-      props: {},
-    };
-  }
-  const genre = query.genre;
-  const category = query.category;
-  const input = query.input;
-  const order = query.order;
-  const page = query.page;
+	if (query.genre === undefined || query.category === undefined) {
+		return {
+			props: {},
+		};
+	}
+	const genre = query.genre;
+	const category = query.category;
+	const input = query.input;
+	const order = query.order;
+	const page = query.page;
+	console.log(genre, category, input, order, page)
+
+  	const genreQuery = typeof genre === "string"
+		? `genre.eq.${genre}`
+		: genre
+			.reduce((current, query) => current + `,genre.eq.${query}`, '')
+			.replace(',', '')
+	const categoryQuery = typeof category === "string"
+  		? `category.eq.${category}`
+  		: category
+			.reduce((current, query) => current + `,category.eq.${query}`, '')
+			.replace(',', '');
+
+	const inputTranslate = (input: string | string[] | undefined) => {
+		if (typeof input === "string") {
+			if (input.length === 0) {
+				return ""
+			} else {
+				const inputQuery = input
+					.split(/\s+/)
+					.reduce((current, query) => current + `&or=(name.like.*${query}*,genre.like.*${query}*,description.like.*${query}*,category.like.*${query}*)`, '')
+				return inputQuery
+			}
+		} else {
+			return ""
+		}
+	}
+	const inputQuery = inputTranslate(input)
+	console.log(input, inputQuery)
+	const orderQuery = `&order=${order}`
 
   // ジャンルとカテゴリを/api/searchに渡す
-  const response = await fetch(
-    `http://localhost:3000/api/search?genre=${genre}&category=${category}&input=${input}&order=${order}`
-  );
-  console.log(response);
-  const data: Item[] = await response.json();
-  console.log(data)
+  	const response = await fetch(
+	`${process.env.SUPABASE_URL}/items?or=(${genreQuery})&or=(${categoryQuery})${inputQuery}${orderQuery}`, {
+		method: "GET",
+		headers: {
+			"apikey": `${process.env.SUPABASE_API_KEY}`,
+			"Authorization": `Bearer ${process.env.SUPABASE_API_KEY}`,
+			"Content-Type": "application/json",
+		}
+	});
+	// console.log(response);
+	const data: Item[] = await response.json();
+	// console.log(data)
 
   // ページ数表示用にページの最大数を確認
   const maxPage =

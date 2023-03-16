@@ -26,6 +26,7 @@ export default async function handler(
         // 型ガード
         res.status(400).end()
     } else {
+        console.log(req);
         // カンマ区切りでクエリが渡されてきます
         // 分解して配列にし、クエリパラメータ作成
         const genreQuery = genre
