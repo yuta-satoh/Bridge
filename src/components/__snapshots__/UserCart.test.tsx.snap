@@ -65,7 +65,7 @@ exports[`ユーザーカートコンポーネント ユーザーカートに中�
           >
             <img
               alt="ベルベットアームチェア"
-              class="rounded"
+              class="rounded w-36 h-36"
               data-nimg="1"
               decoding="async"
               height="150"
@@ -194,7 +194,7 @@ exports[`ユーザーカートコンポーネント ユーザーカートに中�
           >
             <img
               alt="丸椅子スツール"
-              class="rounded"
+              class="rounded w-36 h-36"
               data-nimg="1"
               decoding="async"
               height="150"
@@ -409,7 +409,7 @@ exports[`ユーザーカートコンポーネント ユーザーカートの商�
           >
             <img
               alt="ベルベットアームチェア"
-              class="rounded"
+              class="rounded w-36 h-36"
               data-nimg="1"
               decoding="async"
               height="150"
@@ -624,7 +624,7 @@ exports[`ユーザーカートコンポーネント ユーザーカートの商�
           >
             <img
               alt="ベルベットアームチェア"
-              class="rounded"
+              class="rounded w-36 h-36"
               data-nimg="1"
               decoding="async"
               height="150"
@@ -808,8 +808,44 @@ exports[`ユーザーカートコンポーネント ユーザーカートの商�
 
 exports[`ユーザーカートコンポーネント ユーザーカートをローディング中 1`] = `
 <DocumentFragment>
-  <div>
-    loading...
+  <div
+    class="jsx-1008565373 spinner mx-auto"
+  >
+    <span
+      class="jsx-1008565373"
+    >
+      L
+    </span>
+    <span
+      class="jsx-1008565373"
+    >
+      O
+    </span>
+    <span
+      class="jsx-1008565373"
+    >
+      A
+    </span>
+    <span
+      class="jsx-1008565373"
+    >
+      D
+    </span>
+    <span
+      class="jsx-1008565373"
+    >
+      I
+    </span>
+    <span
+      class="jsx-1008565373"
+    >
+      N
+    </span>
+    <span
+      class="jsx-1008565373"
+    >
+      G
+    </span>
   </div>
 </DocumentFragment>
 `;
