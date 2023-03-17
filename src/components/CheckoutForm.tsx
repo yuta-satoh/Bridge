@@ -49,11 +49,6 @@ export default function CheckoutForm() {
       });
   }, [stripe]);
 
-  const paymentElementOptions: stripeJs.StripePaymentElementOptions =
-    {
-      layout: 'tabs',
-    };
-
   const handleSubmit = async (e: SyntheticEvent) => {
     if (!stripe || !elements) {
       return;
@@ -76,18 +71,40 @@ export default function CheckoutForm() {
     } else {
       setMessage('予期せぬエラーが発生しました');
     }
+
+    setIsLoading(false);
   };
+
+  const paymentElementOptions: stripeJs.StripePaymentElementOptions =
+    {
+      layout: 'tabs',
+    };
 
   return (
     <>
-      <form id="payment-form">
+      <form id="payment-form" onSubmit={handleSubmit}>
         <LinkAuthenticationElement
-          id="link-authentication-element" /*onChangeイベントが必要?(targetがないといわれた)*/
+          id="link-authentication-element"
+          onChange={(e) => setEmail(e.value.email)}
         />
         <PaymentElement
           id="payment-element"
           options={paymentElementOptions}
         />
+        <button
+          disabled={isLoading || !stripe || !elements}
+          id="submit"
+        >
+          <span id="button-text">
+            {isLoading ? (
+              <div className="spinner" id="spinner"></div>
+            ) : (
+              'Pay now'
+            )}
+          </span>
+        </button>
+        {/* ステータスメッセージを表示 */}
+        {message && <div id="payment-message">{message}</div>}
       </form>
     </>
   );

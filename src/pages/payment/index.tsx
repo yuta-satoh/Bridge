@@ -1,7 +1,8 @@
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import { GetServerSideProps } from "next";
 import { useEffect, useState } from "react";
+import * as stripeJs from '@stripe/stripe-js';
+import CheckoutForm from "@/components/CheckoutForm";
 
 // Stripeライブラリの設定
 // loadStripe(Stripeの公開可能キー)
@@ -13,35 +14,46 @@ export default function Payment() {
     // ページ読み込み完了後にPaymentIntentを作成
     useEffect(() => {
         async function createPaymentIntent() {
-            const res = await fetch("/api/stripe.ts", {
+            const res = await fetch("/api/stripe", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 // bodyに商品IDを設定するっぽいので、一先ず適当に書きます
-                body: JSON.stringify({ items: [{ id: "hoge" }]}),
+                body: JSON.stringify({ items: [{ id: "hoge" }] }),
             });
             // 後でdataに型定義
             const data = await res.json();
-            setClientSecret(data.clientSecret)
+
+            // 以下確認用(要修正)
+            console.log('data', data);
+            if (res.ok) {
+                setClientSecret(data.clientSecret);
+                console.log('正常に動作しています');
+            } else {
+                console.log('エラーが発生しています');
+            }
+            // ここまで
         }
         createPaymentIntent();
-    });
+    }, []);
+    // console.log('clientSecret', clientSecret);
 
-    // stripeの見た目の設定
-    const appearance = {
-        theme: 'stripe',
-    };
     // stripeのオプション
-    const options = {
+    const options: stripeJs.StripeElementsOptions = {
         clientSecret,
-        appearance,
+        // 見た目の設定
+        appearance: {
+            theme: 'stripe',
+        },
     }
 
     return (
         <>
             <div className="App">
-                
+                    <Elements options={options} stripe={stripePromise}>
+                        <CheckoutForm />
+                    </Elements>
             </div>
         </>
     );
