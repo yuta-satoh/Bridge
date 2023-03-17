@@ -6,8 +6,8 @@ import { useEffect, useState, ChangeEvent } from 'react';
 import { procedure } from '@/lib/purchaseFn';
 import Link from 'next/link';
 import urStyles from '../styles/userRegister.module.css';
-import Auth from './auth/auth';
 import { useRouter } from 'next/router';
+import Payment from '@/components/payments/Payment';
 
 type items = {
   id: number;
@@ -378,6 +378,7 @@ export default function Purchase({
               <option value="evening">18時以降</option>
             </select>
           </div>
+          <Payment />
           <div className={pModule.buttonArea}>
             <button
               type="button"

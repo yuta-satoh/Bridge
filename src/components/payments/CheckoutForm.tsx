@@ -75,6 +75,7 @@ export default function CheckoutForm() {
     setIsLoading(false);
   };
 
+
   const paymentElementOptions: stripeJs.StripePaymentElementOptions =
     {
       layout: 'tabs',
@@ -83,10 +84,6 @@ export default function CheckoutForm() {
   return (
     <>
       <form id="payment-form" onSubmit={handleSubmit}>
-        <LinkAuthenticationElement
-          id="link-authentication-element"
-          onChange={(e) => setEmail(e.value.email)}
-        />
         <PaymentElement
           id="payment-element"
           options={paymentElementOptions}
@@ -99,7 +96,7 @@ export default function CheckoutForm() {
             {isLoading ? (
               <div className="spinner" id="spinner"></div>
             ) : (
-              'Pay now'
+              '購入'
             )}
           </span>
         </button>
