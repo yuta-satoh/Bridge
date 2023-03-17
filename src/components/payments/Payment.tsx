@@ -11,7 +11,7 @@ const stripePromise = loadStripe(
   `${process.env.NEXT_PUBLIC_STRIPE_TEST_PUBLISHABLE_KEY}`
 );
 
-export default function Payment( {amount}: { amount: number } ) {
+export default function Payment( {amount, test }: { amount: number; test: () => void } ) {
   const [clientSecret, setClientSecret] = useState<string>('');
 
   // ページ読み込み完了後にPaymentIntentを作成
@@ -50,7 +50,7 @@ export default function Payment( {amount}: { amount: number } ) {
         <p className={pModule.addressTitle}>決済方法</p>
         {clientSecret && (
           <Elements options={options} stripe={stripePromise}>
-            <CheckoutForm />
+            <CheckoutForm test={test}/>
           </Elements>
         )}
       </div>

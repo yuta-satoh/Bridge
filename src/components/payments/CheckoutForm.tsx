@@ -7,8 +7,9 @@ import {
 import { useEffect, useState } from 'react';
 import * as stripeJs from '@stripe/stripe-js';
 import { SyntheticEvent } from 'react';
+import pModule from '../../styles/purchase.module.css';
 
-export default function CheckoutForm() {
+export default function CheckoutForm({ test }: { test: () => void }) {
   // stripeライブラリへアクセス
   const stripe = useStripe();
   const elements = useElements();
@@ -71,6 +72,7 @@ export default function CheckoutForm() {
       setMessage('予期せぬエラーが発生しました');
     }
 
+    test();
     setIsLoading(false);
   };
 
@@ -88,6 +90,8 @@ export default function CheckoutForm() {
           options={paymentElementOptions}
         />
         <button
+          type='submit'
+          className={pModule.buttonStyle}
           disabled={isLoading || !stripe || !elements}
           id="submit"
         >
@@ -95,7 +99,7 @@ export default function CheckoutForm() {
             {isLoading ? (
               <div className="spinner" id="spinner"></div>
             ) : (
-              '購入'
+              '購入する'
             )}
           </span>
         </button>

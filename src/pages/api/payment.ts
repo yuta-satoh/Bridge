@@ -18,7 +18,8 @@ export default async function handler(
         currency: "jpy",
         automatic_payment_methods: {
             enabled: true,
-        }
+        },
+        confirm: false,
     })
 
     res.send({

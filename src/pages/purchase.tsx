@@ -7,6 +7,7 @@ import { procedure } from '@/lib/purchaseFn';
 import Link from 'next/link';
 import urStyles from '../styles/userRegister.module.css';
 import { useRouter } from 'next/router';
+import Payment from '@/components/payments/Payment';
 
 type items = {
   id: number;
@@ -184,7 +185,7 @@ export default function Purchase({
     }
   };
 
-  function test(data: cart) {
+  function test() {
     procedure(data);
     router.replace('/purchaseComp');
   }
@@ -377,10 +378,11 @@ export default function Purchase({
               <option value="evening">18時以降</option>
             </select>
           </div>
+          <Payment amount={total + tax} test={test}/>
           <div className={pModule.buttonArea}>
             <button
               type="button"
-              onClick={() => test(data)}
+              onClick={() => test()}
               className={pModule.buttonStyle}
             >
               購入する
