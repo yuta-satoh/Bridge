@@ -11,5 +11,12 @@ export async function handler(
     res: NextApiResponse
 ){
     // 一旦決済機能だけ先に実装
-
+    const paymentIntent = await stripe.paymentIntents.create({
+        // 金額は後で実装
+        amount: 1000,
+        currency: "jpy",
+        automatic_payment_methods: {
+            enabled: true,
+        }
+    })
 };
