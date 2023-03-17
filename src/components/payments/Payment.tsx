@@ -11,7 +11,7 @@ const stripePromise = loadStripe(
   `${process.env.NEXT_PUBLIC_STRIPE_TEST_PUBLISHABLE_KEY}`
 );
 
-export default function Payment() {
+export default function Payment( {amount}: { amount: number } ) {
   const [clientSecret, setClientSecret] = useState<string>('');
 
   // ページ読み込み完了後にPaymentIntentを作成
@@ -22,8 +22,7 @@ export default function Payment() {
         headers: {
           'Content-Type': 'application/json',
         },
-        // bodyに商品IDを設定するっぽいので、一先ず適当に書きます
-        body: JSON.stringify({ items: [{ id: 'hoge' }] }),
+        body: JSON.stringify({ amount: amount }),
       });
       // 後でdataに型定義
       const data = await res.json();
