@@ -37,7 +37,7 @@ export default function Recommend({ recommend, reloadStrage }: { recommend: Reco
       </div>
     </div>
   )
-  if (!recommendItem) return <div>loading...</div>
+  if (!recommendItem) return <div></div>
 
   const addCartReload = async (itemId: number) => {
     await addCart(itemId, 1);
