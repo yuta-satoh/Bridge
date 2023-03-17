@@ -104,7 +104,7 @@ exports[`ゲストカートコンポーネント ゲストカートに中身あ�
           class="text-right"
         >
           <button
-            class="jsx-316a30cc26a8acfd"
+            class="jsx-3340056729"
             type="button"
           >
             削除
@@ -219,7 +219,7 @@ exports[`ゲストカートコンポーネント ゲストカートに中身あ�
           class="text-right"
         >
           <button
-            class="jsx-316a30cc26a8acfd"
+            class="jsx-3340056729"
             type="button"
           >
             削除
@@ -330,13 +330,13 @@ exports[`ゲストカートコンポーネント ゲストカートに中身あ�
                   ベルベットアームチェア
                 </p>
                 <p
-                  class="mt-1"
+                  class="mt-1 mb-5"
                 >
                   ¥ 16,000
                 </p>
               </a>
               <button
-                class="jsx-88e2e8c6dc2677c1"
+                class="jsx-896052889"
                 type="button"
               >
                 カートに入れる
@@ -378,13 +378,13 @@ exports[`ゲストカートコンポーネント ゲストカートに中身あ�
                   丸椅子スツール
                 </p>
                 <p
-                  class="mt-1"
+                  class="mt-1 mb-5"
                 >
                   ¥ 10,000
                 </p>
               </a>
               <button
-                class="jsx-88e2e8c6dc2677c1"
+                class="jsx-896052889"
                 type="button"
               >
                 カートに入れる
@@ -437,13 +437,13 @@ exports[`ゲストカートコンポーネント ゲストカートに中身あ�
         class="flex flex-col items-center gap-5 mt-5"
       >
         <button
-          class="jsx-150a97f7fd29ca86"
+          class="jsx-1912866866"
           type="button"
         >
           ログイン
         </button>
         <button
-          class="jsx-150a97f7fd29ca86"
+          class="jsx-1912866866"
           type="button"
         >
           お買い物を続ける
@@ -526,7 +526,7 @@ exports[`ゲストカートコンポーネント ゲストカートの商品の�
           class="text-right"
         >
           <button
-            class="jsx-316a30cc26a8acfd"
+            class="jsx-3340056729"
             type="button"
           >
             削除
@@ -637,13 +637,13 @@ exports[`ゲストカートコンポーネント ゲストカートの商品の�
                   ベルベットアームチェア
                 </p>
                 <p
-                  class="mt-1"
+                  class="mt-1 mb-5"
                 >
                   ¥ 16,000
                 </p>
               </a>
               <button
-                class="jsx-88e2e8c6dc2677c1"
+                class="jsx-896052889"
                 type="button"
               >
                 カートに入れる
@@ -696,13 +696,13 @@ exports[`ゲストカートコンポーネント ゲストカートの商品の�
         class="flex flex-col items-center gap-5 mt-5"
       >
         <button
-          class="jsx-150a97f7fd29ca86"
+          class="jsx-1912866866"
           type="button"
         >
           ログイン
         </button>
         <button
-          class="jsx-150a97f7fd29ca86"
+          class="jsx-1912866866"
           type="button"
         >
           お買い物を続ける
@@ -785,7 +785,7 @@ exports[`ゲストカートコンポーネント ゲストカートの商品を�
           class="text-right"
         >
           <button
-            class="jsx-316a30cc26a8acfd"
+            class="jsx-3340056729"
             type="button"
           >
             削除
@@ -896,13 +896,13 @@ exports[`ゲストカートコンポーネント ゲストカートの商品を�
                   ベルベットアームチェア
                 </p>
                 <p
-                  class="mt-1"
+                  class="mt-1 mb-5"
                 >
                   ¥ 16,000
                 </p>
               </a>
               <button
-                class="jsx-88e2e8c6dc2677c1"
+                class="jsx-896052889"
                 type="button"
               >
                 カートに入れる
@@ -955,13 +955,13 @@ exports[`ゲストカートコンポーネント ゲストカートの商品を�
         class="flex flex-col items-center gap-5 mt-5"
       >
         <button
-          class="jsx-150a97f7fd29ca86"
+          class="jsx-1912866866"
           type="button"
         >
           ログイン
         </button>
         <button
-          class="jsx-150a97f7fd29ca86"
+          class="jsx-1912866866"
           type="button"
         >
           お買い物を続ける

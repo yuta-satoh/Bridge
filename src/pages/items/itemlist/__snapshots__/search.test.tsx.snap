@@ -96,34 +96,35 @@ exports[`検索ページ 正常に描画される 1`] = `
       >
         表示順：
       </label>
-      <select
-        class="mx-2 border rounded border-gray-500"
-        data-testid="search-select"
-        id="itemOrder"
-        name="itemOrder"
+      <label
+        class="jsx-2217467650 selectbox"
       >
-        <option
-          value="id.desc"
+        <select
+          class="jsx-2217467650"
+          data-testid="select-option"
+          id="itemOrder"
+          name="itemOrder"
         >
-          新着順
-        </option>
-        <option
-          value="price.asc"
-        >
-          安い順
-        </option>
-        <option
-          value="price.desc"
-        >
-          高い順
-        </option>
-      </select>
-      <button
-        class="mr-5 px-2 border rounded border-gray-500"
-        type="button"
-      >
-        並び替える
-      </button>
+          <option
+            class="jsx-2217467650"
+            value="新着順"
+          >
+            新着順
+          </option>
+          <option
+            class="jsx-2217467650"
+            value="安い順"
+          >
+            安い順
+          </option>
+          <option
+            class="jsx-2217467650"
+            value="高い順"
+          >
+            高い順
+          </option>
+        </select>
+      </label>
     </div>
     <div
       class="list_outer"
