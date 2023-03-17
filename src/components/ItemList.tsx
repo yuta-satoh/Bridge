@@ -5,6 +5,7 @@ import useSWR, { Fetcher } from 'swr';
 import { SyntheticEvent, useState } from 'react';
 import Stars from './Stars';
 import SelectBox from './utils/SelectBox';
+import Loading from './utils/Loading';
 
 type Item = {
   id: number;
@@ -31,7 +32,7 @@ export default function ItemList(): JSX.Element {
   const { data, error, mutate } = useSWR(`/api/items${(orderQuery)}`, fetcher);
   if (error) return <p>エラー</p>;
   // ロード中のcss入れたい・画面中央に表示したい
-  if (!data) return <p>ロード中...</p>;
+  if (!data) return <Loading height={400}/>;
 
   // ページ数の確認
   const pageAmount = data.length % 18 === 0 ? data.length / 18 : Math.floor(data.length / 18) + 1;

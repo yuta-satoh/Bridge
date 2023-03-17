@@ -7,6 +7,7 @@ import { ChangeEvent } from "react";
 import Button from "./utils/Button";
 import SelectBox from "./utils/SelectBox";
 import { useRouter } from "next/router";
+import Loading from "./utils/Loading";
 
 type Item = {
   id: number,
@@ -51,7 +52,7 @@ export default function UserCart({ userId }: { userId: string }) {
     </div>
   )
 
-	if (!cartItemData) return <div>loading...</div>
+	if (!cartItemData) return <Loading height={500} />
 
   const filtercartItems = cartItemData.filter((cart) => cart.delete === false)
 
@@ -99,7 +100,7 @@ export default function UserCart({ userId }: { userId: string }) {
               <div key={index} className="border border-neutral-900 my-2 py-3 px-8 h-52">
                 <div className="flex gap-5">
                   <Link href={`/items/itemlist/${cart.items.id}`}>
-                    <Image src={cart.items.imgurl} alt={cart.items.name} width={150} height={150} className="rounded"/>
+                    <Image src={cart.items.imgurl} alt={cart.items.name} width={150} height={150} className="rounded w-36 h-36"/>
                   </Link>
                   <div className="px-3 py-4">
                     <Link href={`/items/itemlist/${cart.items.id}`}>
