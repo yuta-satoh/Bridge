@@ -96,23 +96,12 @@ exports[`トップページ トップページが正常に描画されました 
       <div
         class="buttonContent"
       >
-        <a
-          href="/items/itemlist"
+        <button
+          class="jsx-1912866866"
+          type="button"
         >
-          <button
-            class="buttonArea"
-          >
-            <div
-              class="itemtitle mx-auto pt-1.5 text-center w-96 h-10 border-2 border-neutral-900"
-            >
-              <span
-                class="itemtext"
-              >
-                商品一覧へ　→
-              </span>
-            </div>
-          </button>
-        </a>
+          商品一覧へ　→
+        </button>
       </div>
     </div>
     <div
@@ -131,7 +120,7 @@ exports[`トップページ トップページが正常に描画されました 
             href="/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=テーブル&input=&order=id.desc&page=0"
           >
             <div
-              class="cateList relative block h-16 border rounded hover:border-2 border-neutral-400"
+              class="cateList relative block h-16 border rounded hover:shadow-md border-neutral-400"
             >
               <div
                 class="cateLis absolute flex ml-2 top-1/2 -translate-y-1/2"
@@ -162,7 +151,7 @@ exports[`トップページ トップページが正常に描画されました 
             href="/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=椅子&input=&order=id.desc&page=0"
           >
             <div
-              class="cateList relative block h-16 border rounded hover:border-2 border-neutral-400"
+              class="cateList relative block h-16 border rounded hover:shadow-md border-neutral-400"
             >
               <div
                 class="cateLis absolute flex ml-2 top-1/2 -translate-y-1/2"
@@ -193,7 +182,7 @@ exports[`トップページ トップページが正常に描画されました 
             href="/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=ソファ&input=&order=id.desc&page=0"
           >
             <div
-              class="cateList relative block h-16 border rounded hover:border-2 border-neutral-400"
+              class="cateList relative block h-16 border rounded hover:shadow-md border-neutral-400"
             >
               <div
                 class="cateLis absolute flex ml-2 top-1/2 -translate-y-1/2"
@@ -224,7 +213,7 @@ exports[`トップページ トップページが正常に描画されました 
             href="/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=ベッド/寝具&input=&order=id.desc&page=0"
           >
             <div
-              class="cateList relative block h-16 border rounded hover:border-2 border-neutral-400"
+              class="cateList relative block h-16 border rounded hover:shadow-md border-neutral-400"
             >
               <div
                 class="cateLis absolute flex ml-2 top-1/2 -translate-y-1/2"
@@ -255,7 +244,7 @@ exports[`トップページ トップページが正常に描画されました 
             href="/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=収納棚&input=&order=id.desc&page=0"
           >
             <div
-              class="cateList relative block h-16 border rounded hover:border-2 border-neutral-400"
+              class="cateList relative block h-16 border rounded hover:shadow-md border-neutral-400"
             >
               <div
                 class="cateLis absolute flex ml-2 top-1/2 -translate-y-1/2"
@@ -290,7 +279,7 @@ exports[`トップページ トップページが正常に描画されました 
             href="/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=カーペット/ラグ&input=&order=id.desc&page=0"
           >
             <div
-              class="cateList relative block h-16 border rounded hover:border-2 border-neutral-400"
+              class="cateList relative block h-16 border rounded hover:shadow border-neutral-400"
             >
               <div
                 class="cateLis absolute ml-2 flex top-1/2 -translate-y-1/2"
@@ -321,7 +310,7 @@ exports[`トップページ トップページが正常に描画されました 
             href="/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=照明&input=&order=id.desc&page=0"
           >
             <div
-              class="cateList relative block h-16 border rounded hover:border-2 border-neutral-400"
+              class="cateList relative block h-16 border rounded hover:shadow border-neutral-400"
             >
               <div
                 class="cateLis absolute ml-2 flex top-1/2 -translate-y-1/2"
@@ -352,7 +341,7 @@ exports[`トップページ トップページが正常に描画されました 
             href="/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=カーテン&input=&order=id.desc&page=0"
           >
             <div
-              class="cateList relative block h-16 border rounded hover:border-2 border-neutral-400"
+              class="cateList relative block h-16 border rounded hover:shadow border-neutral-400"
             >
               <div
                 class="cateLis absolute ml-2 flex top-1/2 -translate-y-1/2"
@@ -383,7 +372,7 @@ exports[`トップページ トップページが正常に描画されました 
             href="/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=小物/雑貨&input=&order=id.desc&page=0"
           >
             <div
-              class="cateList relative block h-16 border rounded hover:border-2 border-neutral-400"
+              class="cateList relative block h-16 border rounded hover:shadow border-neutral-400"
             >
               <div
                 class="cateLis absolute ml-2 flex top-1/2 -translate-y-1/2"

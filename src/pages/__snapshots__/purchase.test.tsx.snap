@@ -240,7 +240,7 @@ exports[`描画される 1`] = `
     <input
       className="date"
       id="date"
-      min="2023-03-23"
+      min="2023-03-24"
       name="date"
       type="date"
     />
@@ -253,32 +253,41 @@ exports[`描画される 1`] = `
     >
       希望時間
     </p>
-    <select
-      className="time_zone"
-      id="time_zone"
-      name="time_zone"
+    <label
+      className="jsx-3448327174 selectbox"
     >
-      <option
-        value="none"
+      <select
+        className="jsx-3448327174"
+        data-testid="select-option"
+        id="time_zone"
+        name="time_zone"
       >
-        希望無し
-      </option>
-      <option
-        value="morning"
-      >
-        午前
-      </option>
-      <option
-        value="noon"
-      >
-        12時~18時
-      </option>
-      <option
-        value="evening"
-      >
-        18時以降
-      </option>
-    </select>
+        <option
+          className="jsx-3448327174"
+          value="希望無し"
+        >
+          希望無し
+        </option>
+        <option
+          className="jsx-3448327174"
+          value="午前"
+        >
+          午前
+        </option>
+        <option
+          className="jsx-3448327174"
+          value="12時~18時"
+        >
+          12時~18時
+        </option>
+        <option
+          className="jsx-3448327174"
+          value="18時以降"
+        >
+          18時以降
+        </option>
+      </select>
+    </label>
   </div>
   <div
     className="buttonArea"
