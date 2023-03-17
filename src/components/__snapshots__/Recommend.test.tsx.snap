@@ -2,9 +2,7 @@
 
 exports[`Recommendコンポーネント おすすめ商品のローディング中 1`] = `
 <DocumentFragment>
-  <div>
-    loading...
-  </div>
+  <div />
 </DocumentFragment>
 `;
 
