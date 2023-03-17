@@ -4,17 +4,23 @@ type SelectBox = {
     arr: string[] | number[]
     name: string;
     id: string;
-    defaultValue: string | number;
-    onChange: (ev: ChangeEvent<HTMLSelectElement>) => void;
+    value?: string
+    defaultValue?: string | number;
+    onChange?: (ev: ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const SelectBox = ({ arr, name, id, defaultValue, onChange }: SelectBox) => {
+const SelectBox = ({ arr, name, id, value, defaultValue, onChange }: SelectBox) => {
+    const strLen = arr.map((str) => str.toString().length)
+    const strLenMax = Math.max(...strLen)
+    const minWidth = strLenMax * 10 + 70;
+    
     return (
         <label className="selectbox">
             <select
                 name={name}
                 id={id}
                 data-testid="select-option"
+                value={value}
                 defaultValue={defaultValue}
                 onChange={onChange}
             >
@@ -67,7 +73,7 @@ const SelectBox = ({ arr, name, id, defaultValue, onChange }: SelectBox) => {
                     appearance: none;
                     -webkit-appearance: none;
                     -moz-appearance: none;
-                    min-width: 100px;
+                    min-width: ${minWidth}px;
                     height: 35px;
                     border: 1px solid #574142;
                     border-radius: 2px;
