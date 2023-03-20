@@ -8,6 +8,7 @@ import Link from 'next/link';
 import urStyles from '../styles/userRegister.module.css';
 import { useRouter } from 'next/router';
 import Payment from '@/components/payments/Payment';
+import SelectBox from '@/components/utils/SelectBox';
 
 type items = {
   id: number;
@@ -367,7 +368,12 @@ export default function Purchase({
           </div>
           <div className={pModule.timeArea}>
             <p className={pModule.addressTitle}>希望時間</p>
-            <select
+            <SelectBox
+              arr={["希望無し", "午前", "12時~18時", "18時以降"]}
+              name="time_zone"
+              id="time_zone"
+            />
+            {/* <select
               name="time_zone"
               id="time_zone"
               className={pModule.time_zone}
@@ -376,7 +382,7 @@ export default function Purchase({
               <option value="morning">午前</option>
               <option value="noon">12時~18時</option>
               <option value="evening">18時以降</option>
-            </select>
+            </select> */}
           </div>
           <Payment amount={total + tax} test={test}/>
           <div className={urStyles.loginLink}>

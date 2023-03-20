@@ -4,6 +4,10 @@ import Image from "next/image";
 import Recommend from "./Recommend";
 import deleteCart from "@/lib/deleteCart";
 import { ChangeEvent } from "react";
+import Button from "./utils/Button";
+import SelectBox from "./utils/SelectBox";
+import { useRouter } from "next/router";
+import Loading from "./utils/Loading";
 
 type Item = {
   id: number,
@@ -29,6 +33,7 @@ type Cart = {
 const fetcher: Fetcher<Cart[], string> = (...args) => fetch(...args).then((res) => res.json());
 
 export default function UserCart({ userId }: { userId: string }) {
+  const router = useRouter();
   // SWRでアイテムを取得
   const { data: cartItemData, error, mutate } = useSWR(`/api/getCart/items?id=${userId}`, fetcher)
 
@@ -47,7 +52,7 @@ export default function UserCart({ userId }: { userId: string }) {
     </div>
   )
 
-	if (!cartItemData) return <div>loading...</div>
+	if (!cartItemData) return <Loading height={500} />
 
   const filtercartItems = cartItemData.filter((cart) => cart.delete === false)
 
@@ -95,7 +100,7 @@ export default function UserCart({ userId }: { userId: string }) {
               <div key={index} className="border border-neutral-900 my-2 py-3 px-8 h-52">
                 <div className="flex gap-5">
                   <Link href={`/items/itemlist/${cart.items.id}`}>
-                    <Image src={cart.items.imgurl} alt={cart.items.name} width={150} height={150} className="rounded"/>
+                    <Image src={cart.items.imgurl} alt={cart.items.name} width={150} height={150} className="rounded w-36 h-36"/>
                   </Link>
                   <div className="px-3 py-4">
                     <Link href={`/items/itemlist/${cart.items.id}`}>
@@ -105,33 +110,21 @@ export default function UserCart({ userId }: { userId: string }) {
                     <p className="mt-1 text-lg">¥ {cart.items.price.toLocaleString()}</p>
                   </div>
                 </div>
-                <div className="text-right">
-                  <button
-                    className="text-white bg-neutral-900 border border-neutral-900 rounded px-1"
+                <div className="flex justify-end gap-4">
+                  <Button
+                    type="button"
+                    color="black"
                     onClick={() => handleDelete(cart.items.id, cart.cart_id)}  
                   >
                     削除
-                  </button>
-                  {/* 個数を変えたら金額も変更したい（CSRで） */}
-                  <select
+                  </Button>
+                  <SelectBox
+                    arr={Array(10).fill(0).map((arr, index) => arr + index + 1 )}
                     name="quantity"
                     id="cart_quantity"
-                    data-testid="select-option"
-                    className="ml-5 border border-neutral-900 rounded p-1"
                     defaultValue={cart.quantity}
                     onChange={(ev) => handleChange(ev, cart.items.id, cart.cart_id)}
-                  >
-                    <option value={1}>1</option>
-                    <option value={2}>2</option>
-                    <option value={3}>3</option>
-                    <option value={4}>4</option>
-                    <option value={5}>5</option>
-                    <option value={6}>6</option>
-                    <option value={7}>7</option>
-                    <option value={8}>8</option>
-                    <option value={9}>9</option>
-                    <option value={10}>10</option>
-                  </select>
+                  />
                 </div>
               </div>  
             ))}
@@ -152,16 +145,22 @@ export default function UserCart({ userId }: { userId: string }) {
                 <span className="float-right">¥ {(sumPrice + (sumPrice * 0.1)).toLocaleString()}</span>
               </p>
             </div>
-            <Link href="/purchase">
-              <div className="container pt-1.5 text-center h-10 border-2 border-neutral-900 bg-white mt-8">
-                <span>ご注文手続き</span>
-              </div>
-            </Link>
-            <Link href="/">
-              <div className="container pt-1.5 text-center h-10 border-2 border-neutral-900 bg-white mt-4">
-                <span>お買い物を続ける</span>
-              </div>
-            </Link>
+            <div className="flex flex-col items-center gap-5 mt-5">
+              <Button
+                type="button"
+                color="white"
+                onClick={() => router.push("/purchase")}
+              >
+                ご注文手続き
+              </Button>
+              <Button
+                type="button"
+                color="white"
+                onClick={() => router.push("/")}
+              >
+                お買い物を続ける
+              </Button>
+            </div>
           </div>
         </div>
       ) : (

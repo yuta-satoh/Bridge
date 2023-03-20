@@ -2,9 +2,10 @@ import lstyles from '../../../styles/itemList.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
 import { GetServerSideProps } from 'next';
-import { ChangeEvent, useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import SelectBox from '@/components/utils/SelectBox';
 
 type Item = {
   id: number;
@@ -27,26 +28,58 @@ type Order = {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({
-  query,
+	query,
 }) => {
-  if (query.genre === undefined || query.category === undefined) {
-    return {
-      props: {},
-    };
-  }
-  const genre = query.genre;
-  const category = query.category;
-  const input = query.input;
-  const order = query.order;
-  const page = query.page;
+	if (query.genre === undefined || query.category === undefined) {
+		return {
+			props: {},
+		};
+	}
+	const genre = query.genre;
+	const category = query.category;
+	const input = query.input;
+	const order = query.order;
+	const page = query.page;
+
+  	const genreQuery = typeof genre === "string"
+		? `genre.eq.${genre}`
+		: genre
+			.reduce((current, query) => current + `,genre.eq.${query}`, '')
+			.replace(',', '')
+	const categoryQuery = typeof category === "string"
+  		? `category.eq.${category}`
+  		: category
+			.reduce((current, query) => current + `,category.eq.${query}`, '')
+			.replace(',', '');
+
+	const inputTranslate = (input: string | string[] | undefined) => {
+		if (typeof input === "string") {
+			if (input.length === 0) {
+				return ""
+			} else {
+				const inputQuery = input
+					.split(/\s+/)
+					.reduce((current, query) => current + `&or=(name.like.*${query}*,genre.like.*${query}*,description.like.*${query}*,category.like.*${query}*)`, '')
+				return inputQuery
+			}
+		} else {
+			return ""
+		}
+	}
+	const inputQuery = inputTranslate(input)
+	const orderQuery = `&order=${order}`
 
   // ジャンルとカテゴリを/api/searchに渡す
-  const response = await fetch(
-    `http://localhost:3000/api/search?genre=${genre}&category=${category}&input=${input}&order=${order}`
-  );
-  console.log(response);
-  const data: Item[] = await response.json();
-  console.log(data)
+  	const response = await fetch(
+	`${process.env.SUPABASE_URL}/items?or=(${genreQuery})&or=(${categoryQuery})${inputQuery}${orderQuery}`, {
+		method: "GET",
+		headers: {
+			"apikey": `${process.env.SUPABASE_API_KEY}`,
+			"Authorization": `Bearer ${process.env.SUPABASE_API_KEY}`,
+			"Content-Type": "application/json",
+		}
+	});
+	const data: Item[] = await response.json();
 
   // ページ数表示用にページの最大数を確認
   const maxPage =
@@ -91,15 +124,14 @@ export default function Search({
     .fill(0)
     .map((num, index) => index);
 
-  const handleClick = () => {
-    // onClick時にorderの値を変更してリダイレクト
-    // なぜかonChangeではリダイレクトできなかった
-    router.push({
+  const handleChange = async (ev: SyntheticEvent<HTMLSelectElement>) => {
+    setOrder(ev.currentTarget.value)
+    await router.push({
       query: {
         genre: nowOrder.genres,
         category: nowOrder.categories,
         input: nowOrder.input,
-        order: order,
+        order: orderChange(ev.currentTarget.value),
         page: '0',
       },
     });
@@ -111,11 +143,23 @@ export default function Search({
         genre: nowOrder.genres,
         category: nowOrder.categories,
         input: nowOrder.input,
-        order: order,
+        order: orderChange(order),
         page: page,
       },
     });
   };
+
+  const orderChange = (order: string) => {
+    if (order === "新着順") {
+      return "id.desc"
+    } else if (order === "安い順") {
+      return "price.asc"
+    } else if (order === "高い順") {
+      return "price.desc"
+    } else {
+      return "id.desc"
+    }
+  }
 
   if (!filter || filter.length === 0) {
     return (
@@ -164,25 +208,13 @@ export default function Search({
         </div>
         <div className="text-right w-full">
           <label htmlFor="itemOrder">表示順：</label>
-          <select
+          <SelectBox
+            arr={[ "新着順", "安い順", "高い順" ]}
             name="itemOrder"
-            id="itemOrder"
-            data-testid="search-select"
-            className="mx-2 border rounded border-gray-500"
+            id='itemOrder'
             value={order}
-            onChange={(e) => setOrder(e.target.value)}
-          >
-            <option value="id.desc">新着順</option>
-            <option value="price.asc">安い順</option>
-            <option value="price.desc">高い順</option>
-          </select>
-          <button
-            type="button"
-            className="mr-5 px-2 border rounded border-gray-500"
-            onClick={handleClick}
-          >
-            並び替える
-          </button>
+            onChange={(ev) => handleChange(ev)}
+          />
         </div>
 
         <div className={lstyles.list_outer}>

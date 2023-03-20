@@ -148,24 +148,33 @@ exports[`描画される 1`] = `
       <label
         htmlFor="historyOrder"
       >
-        並び替える:
+        並び替える: 
       </label>
-      <select
-        id="historyOrder"
-        name="historyOrder"
-        onChange={[Function]}
+      <label
+        className="jsx-2982400643 selectbox"
       >
-        <option
-          value="id.desc"
+        <select
+          className="jsx-2982400643"
+          data-testid="select-option"
+          id="historyOrder"
+          name="historyOrder"
+          onChange={[Function]}
+          value="新しい順"
         >
-          新しい順
-        </option>
-        <option
-          value="id.asc"
-        >
-          古い順
-        </option>
-      </select>
+          <option
+            className="jsx-2982400643"
+            value="新しい順"
+          >
+            新しい順
+          </option>
+          <option
+            className="jsx-2982400643"
+            value="古い順"
+          >
+            古い順
+          </option>
+        </select>
+      </label>
     </div>
     <table
       className="tableBody"
