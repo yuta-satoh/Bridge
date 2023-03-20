@@ -46,7 +46,7 @@ export default function Payment( {amount, test }: { amount: number; test: () => 
 
   return (
     <>
-      <div className={pModule.dateArea}>
+      <div className={pModule.paymentArea}>
         <p className={pModule.addressTitle}>決済方法</p>
         {clientSecret && (
           <Elements options={options} stripe={stripePromise}>

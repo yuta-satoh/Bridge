@@ -68,9 +68,6 @@ export default function CheckoutForm({ test }: { test: () => void }) {
     } else {
       setMessage('エラーが発生しました');
     }
-
-    // カートアイテムを削除して購入履歴にデータを追加する関数
-    setIsLoading(false);
   };
 
   const paymentElementOptions: stripeJs.StripePaymentElementOptions =
@@ -85,22 +82,24 @@ export default function CheckoutForm({ test }: { test: () => void }) {
           id="payment-element"
           options={paymentElementOptions}
         />
-        <button
-          type="submit"
-          className={pModule.buttonStyle}
-          disabled={isLoading || !stripe || !elements}
-          id="submit"
-        >
-          <span id="button-text">
-            {isLoading ? (
-              <div className="spinner" id="spinner"></div>
-            ) : (
-              '購入する'
-            )}
-          </span>
-        </button>
-        {/* ステータスメッセージを表示 */}
-        {message && <div id="payment-message">{message}</div>}
+        <div className={pModule.paymentButtonArea}>
+          <button
+            type="submit"
+            className={pModule.buttonStyle}
+            disabled={isLoading || !stripe || !elements}
+            id="submit"
+          >
+            <p id="button-text">
+              {isLoading ? (
+                <div className="spinner" id="spinner"></div>
+              ) : (
+                '購入する'
+              )}
+            </p>
+          </button>
+          {/* ステータスメッセージを表示 */}
+          {message && <div id="payment-message">{message}</div>}
+        </div>
       </form>
     </>
   );
