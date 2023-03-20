@@ -11,7 +11,7 @@ export default function Cart() {
     fetch('`/api/getCookieValue`')
       .then((res) => res.json())
       .then((data) => {
-        if (data !== undefined) {
+        if (data) {
           setUserId(data);
         } else {
           setUserId('');
