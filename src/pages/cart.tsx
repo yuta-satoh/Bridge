@@ -1,22 +1,36 @@
-import Head from "next/head";
-import UserCart from "@/components/UserCart";
-import GuestCart from "@/components/GuestCart";
-import { useEffect, useState } from "react";
-import Cookies from "js-cookie";
+import Head from 'next/head';
+import UserCart from '@/components/UserCart';
+import GuestCart from '@/components/GuestCart';
+import { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 
 export default function Cart() {
-  const status = () => {
-    const userId = Cookies.get('id');
-    if (userId === undefined) {
-      return userId;
-    } else {
-      return userId;
-    }
-  }
-  const userId = status();
+  const [userId, setUserId] = useState('');
+
+  useEffect(() => {
+    fetch('`/api/getCookieValue`')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data !== undefined) {
+          setUserId(data);
+        } else {
+          setUserId('');
+        }
+      })
+      .catch((error) => console.error(error));
+  }, []);
+  // const status = () => {
+  //   const userId = Cookies.get('id');
+  //   if (userId === undefined) {
+  //     return userId;
+  //   } else {
+  //     return userId;
+  //   }
+  // }
+  // const userId = status();
 
   // ゲスト用カートの状態を保存
-  const [guestCart, setGuestCart] = useState([])
+  const [guestCart, setGuestCart] = useState([]);
 
   // クライアントサイドでlocalstrageを取得
   useEffect(() => {
@@ -32,17 +46,16 @@ export default function Cart() {
 
     // localstrageを取得しstateに格納、nullの場合は何も格納しない
     reloadStrage();
-
-  }, [])
+  }, []);
 
   const reloadStrage = () => {
     const strageData = localStorage.getItem('GuestCart');
     if (strageData === null) {
-      setGuestCart([])
+      setGuestCart([]);
     } else {
       setGuestCart(JSON.parse(strageData));
     }
-  }
+  };
 
   // ユーザーとゲストで表示を切り替え
   if (userId !== undefined) {
@@ -53,15 +66,18 @@ export default function Cart() {
         </Head>
         <UserCart userId={userId} />
       </>
-    )
+    );
   } else {
     return (
       <>
         <Head>
           <title>カート</title>
         </Head>
-        <GuestCart guestCart={guestCart} reloadStrage={reloadStrage} />
+        <GuestCart
+          guestCart={guestCart}
+          reloadStrage={reloadStrage}
+        />
       </>
-    )
+    );
   }
 }

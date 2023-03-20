@@ -8,6 +8,8 @@ import Link from 'next/link';
 import urStyles from '../styles/userRegister.module.css';
 import Auth from './auth/auth';
 import { useRouter } from 'next/router';
+import { withIronSessionSsr } from 'iron-session/next';
+import { sessionOptions } from '@/lib/session';
 
 type items = {
   id: number;
@@ -52,36 +54,35 @@ type address = {
   addressSelect: string;
 };
 
-export const getServerSideProps: GetServerSideProps = async (
-  context
-) => {
-  const cookie = context.req.cookies['id'];
-  if (cookie === undefined) {
-    const user = null;
-    const cookie = '0';
+export const getServerSideProps: GetServerSideProps =
+  withIronSessionSsr(async ({ req }) => {
+    const cookie = req.session.user?.user;
+    if (cookie === undefined) {
+      const user = null;
+      const cookie = '0';
+      return {
+        props: { cookie, user },
+      };
+    }
+    const user = await fetch(
+      `${process.env.SUPABASE_URL}/users?id=eq.${cookie}`,
+      {
+        method: 'GET',
+        headers: {
+          apikey: `${process.env.SUPABASE_API_KEY}`,
+          Authorization: `Bearer ${process.env.SUPABASE_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        return data;
+      });
     return {
       props: { cookie, user },
     };
-  }
-  const user = await fetch(
-    `${process.env.SUPABASE_URL}/users?id=eq.${cookie}`,
-    {
-      method: 'GET',
-      headers: {
-        "apikey": `${process.env.SUPABASE_API_KEY}`,
-        "Authorization": `Bearer ${process.env.SUPABASE_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-    }
-  )
-    .then((res) => res.json())
-    .then((data) => {
-      return data;
-    });
-  return {
-    props: { cookie, user },
-  };
-};
+  }, sessionOptions);
 
 export default function Purchase({
   cookie,
@@ -195,207 +196,207 @@ export default function Purchase({
       <Head>
         <title>購入確認</title>
       </Head>
-        <div className={pModule.body}>
-          <h1 className={pModule.title}>購入確認</h1>
-          <table className={pModule.itemTable}>
-            <tbody>
-              <tr className={pModule.tableTLine}>
-                <th className={pModule.nameTag}>品名</th>
-                <th className={pModule.item}>個数</th>
-                <th className={pModule.itemTag}>単価</th>
-                <th className={pModule.itemTag}>小計</th>
-              </tr>
-              {data.map((item) => (
-                <tr key={item.item_id} className={pModule.tableLine}>
-                  <td className={pModule.itemName}>
-                    {item.items.name}
-                  </td>
-                  <td className={pModule.item}>{item.quantity}</td>
-                  <td className={pModule.item}>
-                    ¥ {item.items.price.toLocaleString()}
-                  </td>
-                  <td className={pModule.item}>
-                    ¥{' '}
-                    {(
-                      item.quantity * item.items.price
-                    ).toLocaleString()}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-            <tbody>
-              <tr className={pModule.content}>
-                <td colSpan={2}></td>
-                <td className={pModule.subTTotal}>本体合計</td>
-                <td className={pModule.topText}>
-                  ¥&nbsp;{total.toLocaleString()}
+      <div className={pModule.body}>
+        <h1 className={pModule.title}>購入確認</h1>
+        <table className={pModule.itemTable}>
+          <tbody>
+            <tr className={pModule.tableTLine}>
+              <th className={pModule.nameTag}>品名</th>
+              <th className={pModule.item}>個数</th>
+              <th className={pModule.itemTag}>単価</th>
+              <th className={pModule.itemTag}>小計</th>
+            </tr>
+            {data.map((item) => (
+              <tr key={item.item_id} className={pModule.tableLine}>
+                <td className={pModule.itemName}>
+                  {item.items.name}
+                </td>
+                <td className={pModule.item}>{item.quantity}</td>
+                <td className={pModule.item}>
+                  ¥ {item.items.price.toLocaleString()}
+                </td>
+                <td className={pModule.item}>
+                  ¥{' '}
+                  {(
+                    item.quantity * item.items.price
+                  ).toLocaleString()}
                 </td>
               </tr>
-              <tr className={pModule.content}>
-                <td colSpan={2}></td>
-                <td className={pModule.subTotal}>消費税</td>
-                <td className={pModule.text}>
-                  ¥&nbsp;{tax.toLocaleString()}
-                </td>
-              </tr>
-              <tr className={pModule.totalContent}>
-                <td colSpan={2}></td>
-                <td className={pModule.total}>合計</td>
-                <td className={pModule.total}>
-                  ¥&nbsp;{(total + tax).toLocaleString()}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div className={pModule.addressArea}>
-            <p className={pModule.addressTitle}>お届け先住所</p>
-            <div className={pModule.radio}>
-              {userInfo.addressSelect === 'true' ? (
-                <input
-                  type="radio"
-                  name="addressSelect"
-                  id="now"
-                  value="false"
-                  onChange={handleChange}
-                />
-              ) : (
-                <input
-                  type="radio"
-                  name="addressSelect"
-                  id="now"
-                  value="false"
-                  onChange={handleChange}
-                  checked
-                />
-              )}
-              <label htmlFor="now" className={pModule.label}>
-                現在の住所にお届け
-              </label>
-            </div>
-            <p className={pModule.nAddress}>{user[0].address}</p>
-            <div className={pModule.radio}>
-              {userInfo.addressSelect === 'true' ? (
-                <input
-                  type="radio"
-                  name="addressSelect"
-                  id="new"
-                  value="true"
-                  onChange={handleChange}
-                  checked
-                />
-              ) : (
-                <input
-                  type="radio"
-                  name="addressSelect"
-                  id="new"
-                  value="true"
-                  onChange={handleChange}
-                />
-              )}
-              <label htmlFor="new" className={pModule.label}>
-                別の住所にお届け
-              </label>
-            </div>
-            <div
-              className={
-                userInfo.addressSelect === 'true'
-                  ? pModule.inputItems
-                  : pModule.nonItems
-              }
-            >
-              <label htmlFor="zipcode" className={urStyles.label}>
-                郵便番号
-              </label>
-              <br />
+            ))}
+          </tbody>
+          <tbody>
+            <tr className={pModule.content}>
+              <td colSpan={2}></td>
+              <td className={pModule.subTTotal}>本体合計</td>
+              <td className={pModule.topText}>
+                ¥&nbsp;{total.toLocaleString()}
+              </td>
+            </tr>
+            <tr className={pModule.content}>
+              <td colSpan={2}></td>
+              <td className={pModule.subTotal}>消費税</td>
+              <td className={pModule.text}>
+                ¥&nbsp;{tax.toLocaleString()}
+              </td>
+            </tr>
+            <tr className={pModule.totalContent}>
+              <td colSpan={2}></td>
+              <td className={pModule.total}>合計</td>
+              <td className={pModule.total}>
+                ¥&nbsp;{(total + tax).toLocaleString()}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div className={pModule.addressArea}>
+          <p className={pModule.addressTitle}>お届け先住所</p>
+          <div className={pModule.radio}>
+            {userInfo.addressSelect === 'true' ? (
               <input
-                type="text"
-                pattern="^[0-9]+$"
-                name="zipcode1"
-                id="zipcode1"
-                value={userInfo.zipcode1}
-                className={`${pModule.zipcode} border 'border-neutral-500' rounded pl-2.5`}
+                type="radio"
+                name="addressSelect"
+                id="now"
+                value="false"
                 onChange={handleChange}
               />
-              <span>-</span>
+            ) : (
               <input
-                type="text"
-                pattern="^[0-9]+$"
-                name="zipcode2"
-                id="zipcode2"
-                value={userInfo.zipcode2}
-                className={`${pModule.zipcode} border 'border-neutral-500' rounded pl-2.5`}
+                type="radio"
+                name="addressSelect"
+                id="now"
+                value="false"
                 onChange={handleChange}
+                checked
               />
-              <button
-                type="button"
-                className={`${urStyles.zipButton} text-white bg-neutral-900 border border-neutral-900 rounded px-1`}
-                onClick={searchAddress}
-              >
-                住所検索
-              </button>
-            </div>
-            <div
-              className={
-                userInfo.addressSelect === 'true'
-                  ? pModule.inputItems
-                  : pModule.nonItems
-              }
-            >
-              <label htmlFor="address" className={urStyles.label}>
-                住所
-              </label>
-              <br />
-              <input
-                type="text"
-                name="address"
-                id="address"
-                value={userInfo.address}
-                className={`${pModule.address} border 'border-neutral-500' rounded pl-2.5`}
-                onChange={handleChange}
-              />
-            </div>
+            )}
+            <label htmlFor="now" className={pModule.label}>
+              現在の住所にお届け
+            </label>
           </div>
-          <div className={pModule.dateArea}>
-            <p className={pModule.addressTitle}>お届け希望日</p>
+          <p className={pModule.nAddress}>{user[0].address}</p>
+          <div className={pModule.radio}>
+            {userInfo.addressSelect === 'true' ? (
+              <input
+                type="radio"
+                name="addressSelect"
+                id="new"
+                value="true"
+                onChange={handleChange}
+                checked
+              />
+            ) : (
+              <input
+                type="radio"
+                name="addressSelect"
+                id="new"
+                value="true"
+                onChange={handleChange}
+              />
+            )}
+            <label htmlFor="new" className={pModule.label}>
+              別の住所にお届け
+            </label>
+          </div>
+          <div
+            className={
+              userInfo.addressSelect === 'true'
+                ? pModule.inputItems
+                : pModule.nonItems
+            }
+          >
+            <label htmlFor="zipcode" className={urStyles.label}>
+              郵便番号
+            </label>
+            <br />
             <input
-              type="date"
-              name="date"
-              id="date"
-              min={oneWeekAgo()}
-              className={pModule.date}
+              type="text"
+              pattern="^[0-9]+$"
+              name="zipcode1"
+              id="zipcode1"
+              value={userInfo.zipcode1}
+              className={`${pModule.zipcode} border 'border-neutral-500' rounded pl-2.5`}
+              onChange={handleChange}
             />
-          </div>
-          <div className={pModule.timeArea}>
-            <p className={pModule.addressTitle}>希望時間</p>
-            <select
-              name="time_zone"
-              id="time_zone"
-              className={pModule.time_zone}
-            >
-              <option value="none">希望無し</option>
-              <option value="morning">午前</option>
-              <option value="noon">12時~18時</option>
-              <option value="evening">18時以降</option>
-            </select>
-          </div>
-          <div className={pModule.buttonArea}>
+            <span>-</span>
+            <input
+              type="text"
+              pattern="^[0-9]+$"
+              name="zipcode2"
+              id="zipcode2"
+              value={userInfo.zipcode2}
+              className={`${pModule.zipcode} border 'border-neutral-500' rounded pl-2.5`}
+              onChange={handleChange}
+            />
             <button
               type="button"
-              onClick={() => test(data)}
-              className={pModule.buttonStyle}
+              className={`${urStyles.zipButton} text-white bg-neutral-900 border border-neutral-900 rounded px-1`}
+              onClick={searchAddress}
             >
-              購入する
+              住所検索
             </button>
           </div>
-          <div className={urStyles.loginLink}>
-            <Link href="/cart">
-              <button type="button" className={urStyles.linkButton}>
-                カートに戻る
-                <span className={urStyles.buttonSpan}>→</span>
-              </button>
-            </Link>
+          <div
+            className={
+              userInfo.addressSelect === 'true'
+                ? pModule.inputItems
+                : pModule.nonItems
+            }
+          >
+            <label htmlFor="address" className={urStyles.label}>
+              住所
+            </label>
+            <br />
+            <input
+              type="text"
+              name="address"
+              id="address"
+              value={userInfo.address}
+              className={`${pModule.address} border 'border-neutral-500' rounded pl-2.5`}
+              onChange={handleChange}
+            />
           </div>
         </div>
+        <div className={pModule.dateArea}>
+          <p className={pModule.addressTitle}>お届け希望日</p>
+          <input
+            type="date"
+            name="date"
+            id="date"
+            min={oneWeekAgo()}
+            className={pModule.date}
+          />
+        </div>
+        <div className={pModule.timeArea}>
+          <p className={pModule.addressTitle}>希望時間</p>
+          <select
+            name="time_zone"
+            id="time_zone"
+            className={pModule.time_zone}
+          >
+            <option value="none">希望無し</option>
+            <option value="morning">午前</option>
+            <option value="noon">12時~18時</option>
+            <option value="evening">18時以降</option>
+          </select>
+        </div>
+        <div className={pModule.buttonArea}>
+          <button
+            type="button"
+            onClick={() => test(data)}
+            className={pModule.buttonStyle}
+          >
+            購入する
+          </button>
+        </div>
+        <div className={urStyles.loginLink}>
+          <Link href="/cart">
+            <button type="button" className={urStyles.linkButton}>
+              カートに戻る
+              <span className={urStyles.buttonSpan}>→</span>
+            </button>
+          </Link>
+        </div>
+      </div>
     </>
   );
 }

@@ -1,4 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { withIronSessionApiRoute } from 'iron-session/next';
+import { sessionOptions } from '@/lib/session';
 
 type Cart = {
   id: number,
@@ -6,13 +8,14 @@ type Cart = {
   delete: boolean,
 }
 
-export default async function handler(
+export async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Cart[]>
 ) {
 	const userId = req.query.id as string
+  const user = req.session.user?.user
   const responceCart = await fetch(
-    `${process.env.SUPABASE_URL}/carts?user_id=eq.${userId}`,
+    `${process.env.SUPABASE_URL}/carts?user_id=eq.${user}`,
     {
       method: 'GET',
       headers: {
@@ -31,3 +34,5 @@ export default async function handler(
     res.status(400).end();
   }
 }
+
+export default withIronSessionApiRoute(handler, sessionOptions);

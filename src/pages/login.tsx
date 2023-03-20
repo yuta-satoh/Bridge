@@ -29,11 +29,12 @@ export default function Login() {
       [`${e.target.name}`]: e.target.value,
     });
   }
+  
 
   // email, passwordの値がデータベースに存在するかを確認するSubmitイベント
   async function handleSubmitLogin(e: SyntheticEvent) {
     e.preventDefault();
-    const responce = await fetch('/api/login', {
+    const responce = await fetch('/api/loginIron', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

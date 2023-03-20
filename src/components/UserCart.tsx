@@ -30,7 +30,7 @@ const fetcher: Fetcher<Cart[], string> = (...args) => fetch(...args).then((res) 
 
 export default function UserCart({ userId }: { userId: string }) {
   // SWRでアイテムを取得
-  const { data: cartItemData, error, mutate } = useSWR(`/api/getCart/items?id=${userId}`, fetcher)
+  const { data: cartItemData, error, mutate } = useSWR(`/api/getCart/items`, fetcher)
 
   // カートにデータがない時の表示
 	if (error) return (
