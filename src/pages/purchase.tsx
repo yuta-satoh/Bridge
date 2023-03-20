@@ -6,8 +6,8 @@ import { useEffect, useState, ChangeEvent } from 'react';
 import { procedure } from '@/lib/purchaseFn';
 import Link from 'next/link';
 import urStyles from '../styles/userRegister.module.css';
-import Auth from './auth/auth';
 import { useRouter } from 'next/router';
+import Payment from '@/components/payments/Payment';
 import SelectBox from '@/components/utils/SelectBox';
 
 type items = {
@@ -186,9 +186,9 @@ export default function Purchase({
     }
   };
 
-  function test(data: cart) {
+  function test() {
     procedure(data);
-    router.replace('/purchaseComp');
+    router.replace('/purchaseComp');        
   }
 
   return (
@@ -384,15 +384,7 @@ export default function Purchase({
               <option value="evening">18時以降</option>
             </select> */}
           </div>
-          <div className={pModule.buttonArea}>
-            <button
-              type="button"
-              onClick={() => test(data)}
-              className={pModule.buttonStyle}
-            >
-              購入する
-            </button>
-          </div>
+          <Payment amount={total + tax} test={test}/>
           <div className={urStyles.loginLink}>
             <Link href="/cart">
               <button type="button" className={urStyles.linkButton}>
