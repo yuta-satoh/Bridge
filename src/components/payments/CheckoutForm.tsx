@@ -1,6 +1,5 @@
 import {
   PaymentElement,
-  LinkAuthenticationElement,
   useElements,
   useStripe,
 } from '@stripe/react-stripe-js';
@@ -32,7 +31,6 @@ export default function CheckoutForm({ test }: { test: () => void }) {
       .then(({ paymentIntent }) => {
         switch (paymentIntent?.status) {
           case 'succeeded':
-            setMessage('支払いが完了しました');
             break;
           case 'processing':
             setMessage('支払い処理中です');
@@ -43,13 +41,15 @@ export default function CheckoutForm({ test }: { test: () => void }) {
             );
             break;
           default:
-            setMessage('予期せぬエラーが発生しました');
+            setMessage('エラーが発生しました');
             break;
         }
       });
   }, [stripe]);
 
   const handleSubmit = async (e: SyntheticEvent) => {
+    e.preventDefault();
+
     if (!stripe || !elements) {
       return;
     }
@@ -58,24 +58,20 @@ export default function CheckoutForm({ test }: { test: () => void }) {
 
     const { error } = await stripe.confirmPayment({
       elements,
-      confirmParams: {
-        return_url: '/purchaseComp',
-      },
+      redirect: 'if_required',
     });
 
-    if (
-      error.type === 'card_error' ||
-      error.type === 'validation_error'
-    ) {
-      setMessage(`${error.message}`);
+    if (!error) {
+      // カート内のアイテムを削除し、購入履歴に情報を追加する関数test
+      test();
+      return;
     } else {
-      setMessage('予期せぬエラーが発生しました');
+      setMessage('エラーが発生しました');
     }
 
-    test();
+    // カートアイテムを削除して購入履歴にデータを追加する関数
     setIsLoading(false);
   };
-
 
   const paymentElementOptions: stripeJs.StripePaymentElementOptions =
     {
@@ -90,7 +86,7 @@ export default function CheckoutForm({ test }: { test: () => void }) {
           options={paymentElementOptions}
         />
         <button
-          type='submit'
+          type="submit"
           className={pModule.buttonStyle}
           disabled={isLoading || !stripe || !elements}
           id="submit"

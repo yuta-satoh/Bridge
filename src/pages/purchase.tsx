@@ -187,7 +187,7 @@ export default function Purchase({
 
   function test() {
     procedure(data);
-    router.replace('/purchaseComp');
+    router.replace('/purchaseComp');        
   }
 
   return (
@@ -379,15 +379,6 @@ export default function Purchase({
             </select>
           </div>
           <Payment amount={total + tax} test={test}/>
-          <div className={pModule.buttonArea}>
-            <button
-              type="button"
-              onClick={() => test()}
-              className={pModule.buttonStyle}
-            >
-              購入する
-            </button>
-          </div>
           <div className={urStyles.loginLink}>
             <Link href="/cart">
               <button type="button" className={urStyles.linkButton}>

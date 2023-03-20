@@ -11,18 +11,21 @@ export default async function handler(
 ){
     const { amount }: { amount: number } = req.body;
 
-    // 一旦決済機能だけ先に実装
-    const paymentIntent = await stripe.paymentIntents.create({
-        // 金額は後で実装
-        amount: amount,
-        currency: "jpy",
-        automatic_payment_methods: {
-            enabled: true,
-        },
-        confirm: false,
-    })
+    try {
+        const paymentIntent = await stripe.paymentIntents.create({
+            // 金額は後で実装
+            amount: amount,
+            currency: "jpy",
+            automatic_payment_methods: {
+                enabled: true,
+            },
+        });
 
-    res.send({
-        clientSecret: paymentIntent.client_secret,
-    });
+        res.send({
+                clientSecret: paymentIntent.client_secret,
+            });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json( { error: 'Internal Server Error' } );
+        }
 };
