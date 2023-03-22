@@ -65,4 +65,9 @@ type Reviews = {
     delete: boolean;
 }
 
-export type { Items, Users, Carts, Cart_items, Order_histories, Reviews }
+// ハンドラ関数レスポンス用型エイリアス
+type resData = {
+    message: string;
+  };
+
+export type { Items, Users, Carts, Cart_items, Order_histories, Reviews, resData }
