@@ -27,7 +27,25 @@ export default function UserCart() {
     { refreshInterval: 1000 }
   );
   if (error) return <p>エラー</p>;
-  if (!data) return <p>ロード中...</p>;
+  if (!data) return (
+    <>
+      <Link href={'/cart'} className={headModule.iconModule}>
+      <div className={`${headModule.loader}`}></div>
+        <Image
+          className={headModule.iconimg}
+          src="/images/icon/cart.png"
+          alt=""
+          width={25}
+          height={25}
+        />
+        <span
+          className={`${headModule.menuLabel} inline-block mt-1 whitespace-nowrap`}
+        >
+          カート
+        </span>
+      </Link>
+    </>
+  );
 
   const total = data.reduce(function (sum, element) {
     return sum + element.quantity;

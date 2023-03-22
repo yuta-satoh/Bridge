@@ -6,6 +6,7 @@ import deleteCart from "@/lib/deleteCart";
 import { ChangeEvent } from "react";
 import { useRouter } from "next/router";
 import Button from "./utils/Button";
+import Loading from "./utils/Loading";
 
 type Item = {
   id: number,
@@ -52,7 +53,7 @@ export default function GuestCart({ guestCart, reloadStrage }: { guestCart: Gues
     </div>
   )
 
-	if (!cartItemData) return <div>loading...</div>
+	if (!cartItemData) return <Loading height={500} />
   
   // deleteフラグの立っているアイテムを除去
   const filteredItemData = cartItemData.filter((item) => !item.delete)
@@ -99,7 +100,7 @@ export default function GuestCart({ guestCart, reloadStrage }: { guestCart: Gues
           <div key={index} className="border border-neutral-900 my-2 py-3 px-8 h-52">
             <div className="flex gap-5">
               <Link href={`/items/itemlist/${item.id}`}>
-                <Image src={item.imgurl} alt={item.name} width={150} height={150} className="rounded"/>
+                <Image src={item.imgurl} alt={item.name} width={150} height={150} className="rounded w-36 h-36"/>
               </Link>
               <div className="px-3 py-4">
                 <Link href={`/items/itemlist/${item.id}`}>

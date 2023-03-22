@@ -6,10 +6,11 @@ import { useEffect, useState, ChangeEvent } from 'react';
 import { procedure } from '@/lib/purchaseFn';
 import Link from 'next/link';
 import urStyles from '../styles/userRegister.module.css';
-import Auth from './auth/auth';
 import { useRouter } from 'next/router';
 import { withIronSessionSsr } from 'iron-session/next';
 import { sessionOptions } from '@/lib/session';
+import Payment from '@/components/payments/Payment';
+import SelectBox from '@/components/utils/SelectBox';
 
 type items = {
   id: number;
@@ -186,9 +187,9 @@ export default function Purchase({
     }
   };
 
-  function test(data: cart) {
+  function test() {
     procedure(data);
-    router.replace('/purchaseComp');
+    router.replace('/purchaseComp');        
   }
 
   return (
@@ -327,33 +328,33 @@ export default function Purchase({
               className={`${pModule.zipcode} border 'border-neutral-500' rounded pl-2.5`}
               onChange={handleChange}
             />
-            <button
-              type="button"
-              className={`${urStyles.zipButton} text-white bg-neutral-900 border border-neutral-900 rounded px-1`}
-              onClick={searchAddress}
-            >
-              住所検索
-            </button>
           </div>
-          <div
-            className={
-              userInfo.addressSelect === 'true'
-                ? pModule.inputItems
-                : pModule.nonItems
-            }
-          >
-            <label htmlFor="address" className={urStyles.label}>
-              住所
-            </label>
-            <br />
-            <input
-              type="text"
-              name="address"
-              id="address"
-              value={userInfo.address}
-              className={`${pModule.address} border 'border-neutral-500' rounded pl-2.5`}
-              onChange={handleChange}
+          <div className={pModule.timeArea}>
+            <p className={pModule.addressTitle}>希望時間</p>
+            <SelectBox
+              arr={["希望無し", "午前", "12時~18時", "18時以降"]}
+              name="time_zone"
+              id="time_zone"
             />
+            {/* <select
+              name="time_zone"
+              id="time_zone"
+              className={pModule.time_zone}
+            >
+              <option value="none">希望無し</option>
+              <option value="morning">午前</option>
+              <option value="noon">12時~18時</option>
+              <option value="evening">18時以降</option>
+            </select> */}
+          </div>
+          <Payment amount={total + tax} test={test}/>
+          <div className={urStyles.loginLink}>
+            <Link href="/cart">
+              <button type="button" className={urStyles.linkButton}>
+                カートに戻る
+                <span className={urStyles.buttonSpan}>→</span>
+              </button>
+            </Link>
           </div>
         </div>
         <div className={pModule.dateArea}>

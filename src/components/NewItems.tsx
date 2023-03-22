@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import fetcher from '@/lib/fetcher';
 import useSWR from 'swr';
+import Loading from './utils/Loading';
 
 type Item = {
   id: number;
@@ -21,7 +22,7 @@ export default function NewItems() {
     '/api/newItems',
     fetcher
   );
-  if (!data) return <div>ローディング</div>;
+  if (!data) return <Loading height={200} />;
   if (error) return <div>エラー</div>;
 
   const newItems = data.slice(1);

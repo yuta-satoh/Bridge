@@ -62,8 +62,8 @@ describe('検索ページ', () => {
     test('並び替えのセレクトボックスが選択可能か', async () => {
         const user = userEvent.setup();
         render(<Search filter={filter} maxPage={maxPage} nowOrder={nowOrder} />);
-        const selectOrder = screen.getByTestId('search-select');
-        await user.selectOptions(selectOrder, 'price.desc')
+        const selectOrder = screen.getByTestId('select-option');
+        await user.selectOptions(selectOrder, '高い順')
         const expensiveSelect = screen.getByRole('option', { name: '高い順' }) as HTMLOptionElement
         expect(expensiveSelect.selected).toBeTruthy()
     })

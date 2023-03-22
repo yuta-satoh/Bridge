@@ -2,8 +2,44 @@
 
 exports[`新着商品 データがない場合 1`] = `
 <DocumentFragment>
-  <div>
-    ローディング
+  <div
+    class="jsx-1768920986 spinner mx-auto"
+  >
+    <span
+      class="jsx-1768920986"
+    >
+      L
+    </span>
+    <span
+      class="jsx-1768920986"
+    >
+      O
+    </span>
+    <span
+      class="jsx-1768920986"
+    >
+      A
+    </span>
+    <span
+      class="jsx-1768920986"
+    >
+      D
+    </span>
+    <span
+      class="jsx-1768920986"
+    >
+      I
+    </span>
+    <span
+      class="jsx-1768920986"
+    >
+      N
+    </span>
+    <span
+      class="jsx-1768920986"
+    >
+      G
+    </span>
   </div>
 </DocumentFragment>
 `;

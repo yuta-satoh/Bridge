@@ -9,9 +9,6 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<Data>
 ) {
-  // const TOKEN =
-  //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoid2ViX2Fub24ifQ.unajLs5sq8vLSVQrpK3_Ei8zHpSTXXEmcPMkPH36UG8';
-
     const order = req.query.order;
     
     const response = await fetch(`${process.env.SUPABASE_URL}/items?order=${order}`, {
