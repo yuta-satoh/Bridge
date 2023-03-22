@@ -137,8 +137,8 @@ export default function History({
                 </thead>
                 <tbody>
                   {data.map((item) => (
-                    <>
-                      <tr key={item.id} className={hModule.tableLine}>
+                    <div key={item.id}>
+                      <tr className={hModule.tableLine}>
                         <td className={hModule.tableCellCenter}>
                           <Link
                             href={`../items/itemlist/${item.item_id}`}
@@ -188,7 +188,7 @@ export default function History({
                           購入日：{item.date}
                         </td>
                       </tr>
-                    </>
+                    </div>
                   ))}
                 </tbody>
               </table>

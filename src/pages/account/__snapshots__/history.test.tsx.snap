@@ -203,92 +203,94 @@ exports[`描画される 1`] = `
         </tr>
       </thead>
       <tbody>
-        <tr
-          className="tableLine"
-        >
-          <td
-            className="tableCellCenter"
+        <div>
+          <tr
+            className="tableLine"
           >
-            <a
-              href="../items/itemlist/4"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onTouchStart={[Function]}
+            <td
+              className="tableCellCenter"
             >
-              <img
-                alt="ガラスローテーブル"
-                className="cardImage"
-                data-nimg="1"
-                decoding="async"
-                height={100}
-                loading="lazy"
-                onError={[Function]}
-                onLoad={[Function]}
-                src="/_next/image?url=%2Fimages%2Ftable%2Ftable_feminine_1.jpg&w=256&q=75"
-                srcSet="/_next/image?url=%2Fimages%2Ftable%2Ftable_feminine_1.jpg&w=128&q=75 1x, /_next/image?url=%2Fimages%2Ftable%2Ftable_feminine_1.jpg&w=256&q=75 2x"
-                style={
-                  {
-                    "color": "transparent",
+              <a
+                href="../items/itemlist/4"
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+                onTouchStart={[Function]}
+              >
+                <img
+                  alt="ガラスローテーブル"
+                  className="cardImage"
+                  data-nimg="1"
+                  decoding="async"
+                  height={100}
+                  loading="lazy"
+                  onError={[Function]}
+                  onLoad={[Function]}
+                  src="/_next/image?url=%2Fimages%2Ftable%2Ftable_feminine_1.jpg&w=256&q=75"
+                  srcSet="/_next/image?url=%2Fimages%2Ftable%2Ftable_feminine_1.jpg&w=128&q=75 1x, /_next/image?url=%2Fimages%2Ftable%2Ftable_feminine_1.jpg&w=256&q=75 2x"
+                  style={
+                    {
+                      "color": "transparent",
+                    }
                   }
-                }
-                width={100}
-              />
-            </a>
-          </td>
-          <td
-            className="tableCellCenter"
-          >
-            <a
-              href="../items/itemlist/4"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onTouchStart={[Function]}
+                  width={100}
+                />
+              </a>
+            </td>
+            <td
+              className="tableCellCenter"
             >
-              ガラスローテーブル
-            </a>
-          </td>
-          <td
-            className="tableCell"
-          >
-            1
-            個
-          </td>
-          <td
-            className="tableCell"
-          >
-            ¥ 
-            31,900
-          </td>
-          <td
-            className="tableCell"
-          >
-            ¥
-             
-            31,900
-          </td>
-          <td
-            className="tableCellCenter"
-          >
-            <button
-              className="buttonStyle"
-              onClick={[Function]}
-              type="button"
+              <a
+                href="../items/itemlist/4"
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+                onTouchStart={[Function]}
+              >
+                ガラスローテーブル
+              </a>
+            </td>
+            <td
+              className="tableCell"
             >
-              レビューする
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td
-            colSpan={5}
-          />
-          <td
-            className="tableCellCenterSub"
-          >
-            購入日：
-            2023-03-01
-          </td>
-        </tr>
+              1
+              個
+            </td>
+            <td
+              className="tableCell"
+            >
+              ¥ 
+              31,900
+            </td>
+            <td
+              className="tableCell"
+            >
+              ¥
+               
+              31,900
+            </td>
+            <td
+              className="tableCellCenter"
+            >
+              <button
+                className="buttonStyle"
+                onClick={[Function]}
+                type="button"
+              >
+                レビューする
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td
+              colSpan={5}
+            />
+            <td
+              className="tableCellCenterSub"
+            >
+              購入日：
+              2023-03-01
+            </td>
+          </tr>
+        </div>
       </tbody>
     </table>
   </div>,
