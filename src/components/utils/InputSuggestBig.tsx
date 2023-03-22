@@ -39,15 +39,12 @@ const InputSuggestBig = ({ value, onChange, onClick }: Input) => {
                         button {
                             display: inline-block;
                             position: absolute;
-                            height: 40px;
+                            height: 36px;
                             width: 40px;
-                            left: 559px;
+                            left: 558px;
+                            top: 2px;
                             background-color: #ffffff;
-                            border-top-width: 1.5px; 
-                            border-bottom-width: 1.5px;
-                            border-top-right-radius: 0.25rem;
-                            border-bottom-right-radius: 0.25rem;
-                            border-color: #574142;
+                            border-radius: 0.25rem;
                         }
                     `}</style>
                 </div>

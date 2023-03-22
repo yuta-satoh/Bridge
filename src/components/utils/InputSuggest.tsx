@@ -39,15 +39,13 @@ const InputSuggest = ({ value, onChange, onClick }: Input) => {
                             padding-left: 10px;
                         }
                         button {
-                            display: inline-block;
                             position: absolute;
-                            height: 32px;
+                            height: 28px;
                             width: 32px;
                             left: 168px;
+                            top: 2px;
                             background-color: #ffffff;
-                            border-top-width: 1px; 
-                            border-bottom-width: 1px;
-                            border-color: rgb(115 115 115);
+                            border-radius: 4px;
                         }
                     `}</style>
                 </div>

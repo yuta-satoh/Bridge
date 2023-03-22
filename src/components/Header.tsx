@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import UserCart from './CartForUser';
 import GuestCart from './CartForGuest';
+import InputSuggest from './utils/InputSuggest';
 
 type items = {
   id: number;
@@ -126,13 +127,18 @@ export default function Header({
         </ul>
         <div className={`${headModule.right} flex gap-10`}>
           <form className={headModule.form} onSubmit={handleSubmit}>
-            <input
+            <InputSuggest
+              value={input}
+              onChange={handleChange}
+              onClick={(value) => setInput(value)}
+            />
+            {/* <input
               className={`${headModule.formtitle} h-8 border border-neutral-500 rounded-l pl-2.5`}
               type="text"
               placeholder="何をお探しですか？"
               value={input}
               onChange={handleChange}
-            />
+            /> */}
             <Link
               href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=椅子&category=テーブル&category=カーテン&category=照明&category=カーペット%2Fラグ&category=ソファ&category=収納棚&category=ベッド%2F寝具&category=小物%2F雑貨&input=${input}&order=id.desc&page=0`}
             >
