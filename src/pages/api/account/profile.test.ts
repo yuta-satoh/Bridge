@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import handler from './profile';
 
 // モックのリクエストとレスポンスを定義
-const req: NextApiRequest = {
+const mockReq: NextApiRequest = {
   body: {
     id: 1,
     lastname: '田中',
@@ -18,7 +18,29 @@ const req: NextApiRequest = {
   },
 } as NextApiRequest;
 
-// const res: NextApiResponse<resData> = {
-//     status: jest.fn(() => res),
-//     json: jest.fn(),
-// }
+const mockRes: NextApiResponse<resData> = {
+  status: jest.fn(() => mockRes),
+  json: jest.fn(),
+} as unknown as NextApiResponse<resData>;
+
+describe('profile.tsのテスト', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test('res.ok = true', async () => {
+    global.fetch = jest.fn().mockResolvedValueOnce({ ok: true });
+    await handler(mockReq, mockRes);
+
+    expect(mockRes.status).toHaveBeenCalledWith(200);
+    expect(mockRes.json).toHaveBeenCalledWith({ message: 'OK' });
+  });
+
+  test('res.ok = false', async () => {
+    global.fetch = jest.fn().mockResolvedValueOnce({ ok: false });
+    await handler(mockReq, mockRes);
+
+    expect(mockRes.status).toHaveBeenCalledWith(401);
+    expect(mockRes.json).toHaveBeenCalledWith({ message: 'Failed' });
+  });
+});
