@@ -8,12 +8,16 @@ exports[`検索ボックスコンポーネント 正常に描画される 1`] = 
     <form
       class="serchbox"
     >
-      <input
-        class="serch"
-        placeholder="何をお探しですか？"
-        type="text"
-        value=""
-      />
+      <div
+        class="jsx-c1272cd81e288a85"
+      >
+        <input
+          class="jsx-c1272cd81e288a85"
+          placeholder="何をお探しですか？"
+          type="text"
+          value=""
+        />
+      </div>
       <button
         class="serch_button"
         type="submit"
