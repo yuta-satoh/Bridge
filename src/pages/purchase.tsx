@@ -7,6 +7,8 @@ import { procedure } from '@/lib/purchaseFn';
 import Link from 'next/link';
 import urStyles from '../styles/userRegister.module.css';
 import { useRouter } from 'next/router';
+import { withIronSessionSsr } from 'iron-session/next';
+import { sessionOptions } from '@/lib/session';
 import Payment from '@/components/payments/Payment';
 import SelectBox from '@/components/utils/SelectBox';
 
@@ -53,36 +55,35 @@ type address = {
   addressSelect: string;
 };
 
-export const getServerSideProps: GetServerSideProps = async (
-  context
-) => {
-  const cookie = context.req.cookies['id'];
-  if (cookie === undefined) {
-    const user = null;
-    const cookie = '0';
+export const getServerSideProps: GetServerSideProps =
+  withIronSessionSsr(async ({ req }) => {
+    const cookie = req.session.user?.user;
+    if (cookie === undefined) {
+      const user = null;
+      const cookie = '0';
+      return {
+        props: { cookie, user },
+      };
+    }
+    const user = await fetch(
+      `${process.env.SUPABASE_URL}/users?id=eq.${cookie}`,
+      {
+        method: 'GET',
+        headers: {
+          apikey: `${process.env.SUPABASE_API_KEY}`,
+          Authorization: `Bearer ${process.env.SUPABASE_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        return data;
+      });
     return {
       props: { cookie, user },
     };
-  }
-  const user = await fetch(
-    `${process.env.SUPABASE_URL}/users?id=eq.${cookie}`,
-    {
-      method: 'GET',
-      headers: {
-        "apikey": `${process.env.SUPABASE_API_KEY}`,
-        "Authorization": `Bearer ${process.env.SUPABASE_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-    }
-  )
-    .then((res) => res.json())
-    .then((data) => {
-      return data;
-    });
-  return {
-    props: { cookie, user },
-  };
-};
+  }, sessionOptions);
 
 export default function Purchase({
   cookie,

@@ -17,12 +17,12 @@ type cart = {
 }[];
 
 export default function UserCart() {
-  const userId = Cookies.get('id');
+  // const userId = Cookies.get('id');
   const fetcher = (url: string) =>
     fetch(url).then((res) => res.json());
 
   const { data, error }: { data: cart; error: any } = useSWR(
-    `/api/getCart/items?id=${userId}`,
+    `/api/getCart/items`,
     fetcher,
     { refreshInterval: 1000 }
   );

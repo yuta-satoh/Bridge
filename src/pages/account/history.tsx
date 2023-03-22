@@ -1,16 +1,15 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
-import Cookies from 'js-cookie';
 import { GetServerSideProps } from 'next';
 import useSWR from 'swr';
-import { type } from 'os';
 import hModule from '../../styles/history.module.css';
 import urStyles from '../../styles/userRegister.module.css';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import Auth from '../auth/auth';
 import cModule from '../../styles/coordination.module.css';
+import { withIronSessionSsr } from 'iron-session/next';
+import { sessionOptions } from '@/lib/session';
 import { useEffect } from 'react';
 import SelectBox from '@/components/utils/SelectBox';
 
@@ -29,20 +28,19 @@ type Item = {
   delete: boolean;
 };
 
-export const getServerSideProps: GetServerSideProps = async (
-  context
-) => {
-  const cookie = context.req.cookies['id'];
-  if (cookie === undefined) {
-    const cookie = '0';
+export const getServerSideProps: GetServerSideProps =
+  withIronSessionSsr(async ({ req }) => {
+    const cookie = req.session.user?.user;
+    if (cookie === undefined) {
+      const cookie = '0';
+      return {
+        props: { cookie },
+      };
+    }
     return {
       props: { cookie },
     };
-  }
-  return {
-    props: { cookie },
-  };
-};
+  }, sessionOptions);
 
 export default function History({
   cookie,
@@ -51,7 +49,7 @@ export default function History({
 }) {
   const router = useRouter();
   const [order, setOrder] = useState('新しい順');
-  const [query, setQuery] = useState("id.desc")
+  const [query, setQuery] = useState('id.desc');
 
   // useEffect(() => {
   //   if (cookie === '0' || null) {
@@ -77,12 +75,12 @@ export default function History({
   }
 
   function selectOrder(e: React.ChangeEvent<HTMLSelectElement>) {
-    if (e.target.value === "新しい順") {
+    if (e.target.value === '新しい順') {
       setOrder(e.target.value);
-      setQuery("id.desc");
-    } else if (e.target.value === "古い順") {
+      setQuery('id.desc');
+    } else if (e.target.value === '古い順') {
       setOrder(e.target.value);
-      setQuery("id.asc");
+      setQuery('id.asc');
     }
   }
 

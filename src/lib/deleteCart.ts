@@ -2,7 +2,7 @@ import getCookieValue from "./getCookieValue"
 
 export default async function deleteCart(itemId: number, cartId?: number) {
     // cookieがあるか確認
-    const userId = getCookieValue();
+    const userId = await fetch(`/api/getCookieValue`).then((res)=>res.json())
 
     if (userId) {
         try {

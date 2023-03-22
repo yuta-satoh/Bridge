@@ -33,6 +33,8 @@ export default function GuestCart({ guestCart, reloadStrage }: { guestCart: Gues
   const itemQuery = guestCart.reduce((query, cartItem) => query + `,id.eq.${cartItem.itemId}`, "").replace(",", "");
   const queryParams = `or=(${itemQuery})`
 
+  console.log(guestCart)
+
 	// SWRでアイテムを取得
   const { data: cartItemData, error } = useSWR(`/api/getItems?id=${queryParams}`, fetcher)
 
