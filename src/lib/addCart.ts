@@ -33,7 +33,7 @@ export default async function addCart(
   const userId = await fetch(`/api/getCookieValue`).then((res) =>
     res.json()
   );
-  console.log(userId);
+  console.log(`addCart` ,userId)
   // cookieがある場合はcart_itemsにPOST
   if (userId) {
     // ユーザーのカート情報を取得

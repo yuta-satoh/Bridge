@@ -8,7 +8,7 @@ export default function Cart() {
   const [userId, setUserId] = useState('');
 
   useEffect(() => {
-    fetch('`/api/getCookieValue`')
+    fetch('/api/getCookieValue')
       .then((res) => res.json())
       .then((data) => {
         if (data) {
@@ -58,7 +58,7 @@ export default function Cart() {
   };
 
   // ユーザーとゲストで表示を切り替え
-  if (userId !== undefined) {
+  if (userId) {
     return (
       <>
         <Head>
