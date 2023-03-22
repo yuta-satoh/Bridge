@@ -2,6 +2,7 @@ import lstyles from '../styles/itemList.module.css';
 import fstyles from '../styles/Footer.module.css';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/router';
+import InputSuggestBig from './utils/InputSuggestBig';
 
 export default function SearchBox() {
   const router = useRouter();
@@ -89,13 +90,18 @@ export default function SearchBox() {
       <div className={lstyles.serch_boxes}>
         {/* 検索欄 */}
         <form className={lstyles.serchbox} onSubmit={handleSubmit} >
-          <input
+          <InputSuggestBig
+            value={input}
+            onChange={(ev) => setInput(ev.target.value)}
+            onClick={(value) => setInput(value)}
+          />
+          {/* <input
             className={lstyles.serch}
             type="text"
             placeholder="何をお探しですか？"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-          />
+          /> */}
           <button
             className={lstyles.serch_button}
             type="submit"
