@@ -13,19 +13,38 @@ jest.mock('next/router', () => ({
     },
 }));
 
+const fetchMockOk = () => {
+    return new Promise((resolve) => {
+        resolve({
+            ok: true,
+            status: 200,
+            statusText: 'OK',
+            json: async () => '1'
+        })
+    })
+}
+
+jest.mock('@/components/UserCart', () => {{
+    return 'div'
+}})
+
+jest.mock('@/components/GuestCart', () => {{
+    return 'div'
+}})
+
 describe('カートページ', () => {
     test('正常に表示（空のユーザーカート）', () => {
-        Cookies.get = jest.fn().mockImplementation(() => '1');
+        global.fetch = jest.fn().mockImplementation(fetchMockOk);
         const { asFragment } = render(<Cart />);
         expect(asFragment()).toMatchSnapshot();
     })
     test('正常に表示（空のゲストカート）', () => {
-        Cookies.get = jest.fn().mockImplementation(() => undefined);
+        global.fetch = jest.fn().mockImplementation(fetchMockOk);
         const { asFragment } = render(<Cart />);
         expect(asFragment()).toMatchSnapshot();
     })
     test('正常に表示（ゲストカートの中身あり）', () => {
-        Cookies.get = jest.fn().mockImplementation(() => undefined);
+        global.fetch = jest.fn().mockImplementation(fetchMockOk);
         localStorage.getItem = jest.fn()
             .mockImplementation(() => {
                 [{"itemId":108,"quantity":1},{"itemId":82,"quantity":1}]

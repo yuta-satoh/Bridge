@@ -18,12 +18,15 @@ jest.mock('./Recommend', () => {{
     return 'div'
 }})
 
+let assignMock = jest.fn();
+
 const fetchMockOk = () => {
     return new Promise((resolve) => {
         resolve({
             ok: true,
             status: 200,
             statusText: 'OK',
+            json: () => '1'
         })
     })
 }

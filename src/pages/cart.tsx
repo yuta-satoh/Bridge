@@ -2,7 +2,6 @@ import Head from 'next/head';
 import UserCart from '@/components/UserCart';
 import GuestCart from '@/components/GuestCart';
 import { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
 
 export default function Cart() {
   const [userId, setUserId] = useState('');
