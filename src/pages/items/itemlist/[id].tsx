@@ -26,9 +26,6 @@ export default function ItemPage({
 }: {
   item: Item[];
 }): JSX.Element {
-  // 確認用
-  console.log(item);
-
   const items = item[0];
   const genre = items.genre;
   const category = items.category;

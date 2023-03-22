@@ -20,6 +20,7 @@ const fetchMockOk = () => {
             ok: true,
             status: 200,
             statusText: 'OK',
+            json: () => '1'
         })
     })
 }

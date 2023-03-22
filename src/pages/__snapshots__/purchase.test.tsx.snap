@@ -240,7 +240,7 @@ exports[`描画される 1`] = `
     <input
       className="date"
       id="date"
-      min="2023-03-24"
+      min="2023-03-29"
       name="date"
       type="date"
     />
@@ -290,15 +290,13 @@ exports[`描画される 1`] = `
     </label>
   </div>
   <div
-    className="buttonArea"
+    className="paymentArea"
   >
-    <button
-      className="buttonStyle"
-      onClick={[Function]}
-      type="button"
+    <p
+      className="addressTitle"
     >
-      購入する
-    </button>
+      決済方法
+    </p>
   </div>
   <div
     className="loginLink"
