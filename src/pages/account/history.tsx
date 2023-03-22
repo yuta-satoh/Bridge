@@ -49,7 +49,7 @@ export default function History({
 }) {
   const router = useRouter();
   const [order, setOrder] = useState('新しい順');
-  const [query, setQuery] = useState("id.desc")
+  const [query, setQuery] = useState('id.desc');
 
   // useEffect(() => {
   //   if (cookie === '0' || null) {
@@ -75,12 +75,12 @@ export default function History({
   }
 
   function selectOrder(e: React.ChangeEvent<HTMLSelectElement>) {
-    if (e.target.value === "新しい順") {
+    if (e.target.value === '新しい順') {
       setOrder(e.target.value);
-      setQuery("id.desc");
-    } else if (e.target.value === "古い順") {
+      setQuery('id.desc');
+    } else if (e.target.value === '古い順') {
       setOrder(e.target.value);
-      setQuery("id.asc");
+      setQuery('id.asc');
     }
   }
 
@@ -193,88 +193,23 @@ export default function History({
                 </tbody>
               </table>
             </div>
-            <table className={hModule.tableBody}>
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>商品名</th>
-                  <th className={hModule.tableCell}>購入数</th>
-                  <th className={hModule.tableCell}>単価</th>
-                  <th className={hModule.tableCell}>小計</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.map((item) => (
-                  <>
-                    <tr key={item.id} className={hModule.tableLine}>
-                      <td className={hModule.tableCellCenter}>
-                        <Link
-                          href={`../items/itemlist/${item.item_id}`}
-                        >
-                          <Image
-                            src={item.imgurl}
-                            alt={item.name}
-                            width={100}
-                            height={100}
-                            className={hModule.cardImage}
-                          />
-                        </Link>
-                      </td>
-                      <td className={hModule.tableCellCenter}>
-                        <Link
-                          href={`../items/itemlist/${item.item_id}`}
-                        >
-                          {item.name}
-                        </Link>
-                      </td>
-                      <td className={hModule.tableCell}>
-                        {item.quantity}個
-                      </td>
-                      <td className={hModule.tableCell}>
-                        ¥ {(item.price * 1.1).toLocaleString()}
-                      </td>
-                      <td className={hModule.tableCell}>
-                        ¥{' '}
-                        {(
-                          item.quantity *
-                          (item.price * 1.1)
-                        ).toLocaleString()}
-                      </td>
-                      <td className={hModule.tableCellCenter}>
-                        <button
-                          type="button"
-                          className={hModule.buttonStyle}
-                          onClick={() => handlePathTransition(item)}
-                        >
-                          レビューする
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colSpan={5}></td>
-                      <td className={hModule.tableCellCenterSub}>
-                        購入日：{item.date}
-                      </td>
-                    </tr>
-                  </>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        ) : (
-          <div className={hModule.body}>
-            <h1 className={hModule.noData}>履歴はありません</h1>
-            <div className={urStyles.loginLink}>
-              <Link href="/mypage">
-                <button type="button" className={urStyles.linkButton}>
-                  マイページ
-                  <span className={urStyles.buttonSpan}>→</span>
-                </button>
-              </Link>
+          ) : (
+            <div className={hModule.body}>
+              <h1 className={hModule.noData}>履歴はありません</h1>
+              <div className={urStyles.loginLink}>
+                <Link href="/mypage">
+                  <button
+                    type="button"
+                    className={urStyles.linkButton}
+                  >
+                    マイページ
+                    <span className={urStyles.buttonSpan}>→</span>
+                  </button>
+                </Link>
+              </div>
             </div>
-          </div>
-        )}
-      </>
+          )}
+        </>
       {/* </Auth> */}
     </>
   );
