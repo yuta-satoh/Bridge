@@ -6,8 +6,11 @@ import { useEffect, useState, ChangeEvent } from 'react';
 import { procedure } from '@/lib/purchaseFn';
 import Link from 'next/link';
 import urStyles from '../styles/userRegister.module.css';
-import Auth from './auth/auth';
 import { useRouter } from 'next/router';
+import { withIronSessionSsr } from 'iron-session/next';
+import { sessionOptions } from '@/lib/session';
+import Payment from '@/components/payments/Payment';
+import SelectBox from '@/components/utils/SelectBox';
 
 type items = {
   id: number;
@@ -52,36 +55,35 @@ type address = {
   addressSelect: string;
 };
 
-export const getServerSideProps: GetServerSideProps = async (
-  context
-) => {
-  const cookie = context.req.cookies['id'];
-  if (cookie === undefined) {
-    const user = null;
-    const cookie = '0';
+export const getServerSideProps: GetServerSideProps =
+  withIronSessionSsr(async ({ req }) => {
+    const cookie = req.session.user?.user;
+    if (cookie === undefined) {
+      const user = null;
+      const cookie = '0';
+      return {
+        props: { cookie, user },
+      };
+    }
+    const user = await fetch(
+      `${process.env.SUPABASE_URL}/users?id=eq.${cookie}`,
+      {
+        method: 'GET',
+        headers: {
+          apikey: `${process.env.SUPABASE_API_KEY}`,
+          Authorization: `Bearer ${process.env.SUPABASE_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        return data;
+      });
     return {
       props: { cookie, user },
     };
-  }
-  const user = await fetch(
-    `${process.env.SUPABASE_URL}/users?id=eq.${cookie}`,
-    {
-      method: 'GET',
-      headers: {
-        "apikey": `${process.env.SUPABASE_API_KEY}`,
-        "Authorization": `Bearer ${process.env.SUPABASE_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-    }
-  )
-    .then((res) => res.json())
-    .then((data) => {
-      return data;
-    });
-  return {
-    props: { cookie, user },
-  };
-};
+  }, sessionOptions);
 
 export default function Purchase({
   cookie,
@@ -185,9 +187,9 @@ export default function Purchase({
     }
   };
 
-  function test(data: cart) {
+  function test() {
     procedure(data);
-    router.replace('/purchaseComp');
+    router.replace('/purchaseComp');        
   }
 
   return (
@@ -367,7 +369,12 @@ export default function Purchase({
           </div>
           <div className={pModule.timeArea}>
             <p className={pModule.addressTitle}>希望時間</p>
-            <select
+            <SelectBox
+              arr={["希望無し", "午前", "12時~18時", "18時以降"]}
+              name="time_zone"
+              id="time_zone"
+            />
+            {/* <select
               name="time_zone"
               id="time_zone"
               className={pModule.time_zone}
@@ -376,17 +383,9 @@ export default function Purchase({
               <option value="morning">午前</option>
               <option value="noon">12時~18時</option>
               <option value="evening">18時以降</option>
-            </select>
+            </select> */}
           </div>
-          <div className={pModule.buttonArea}>
-            <button
-              type="button"
-              onClick={() => test(data)}
-              className={pModule.buttonStyle}
-            >
-              購入する
-            </button>
-          </div>
+          <Payment amount={total + tax} test={test}/>
           <div className={urStyles.loginLink}>
             <Link href="/cart">
               <button type="button" className={urStyles.linkButton}>

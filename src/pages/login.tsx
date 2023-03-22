@@ -29,11 +29,12 @@ export default function Login() {
       [`${e.target.name}`]: e.target.value,
     });
   }
+  
 
   // email, passwordの値がデータベースに存在するかを確認するSubmitイベント
   async function handleSubmitLogin(e: SyntheticEvent) {
     e.preventDefault();
-    const responce = await fetch('/api/login', {
+    const responce = await fetch('/api/loginIron', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -42,6 +43,7 @@ export default function Login() {
     });
     if (responce.status === 200) {
       setErrorText("");
+      const strageData = localStorage.getItem('GuestCart');
       await strageToCart()
       rooter.replace('/');
       Cookies.set('status', 'true');

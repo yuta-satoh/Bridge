@@ -2,9 +2,7 @@
 
 exports[`Recommendコンポーネント おすすめ商品のローディング中 1`] = `
 <DocumentFragment>
-  <div>
-    loading...
-  </div>
+  <div />
 </DocumentFragment>
 `;
 
@@ -56,13 +54,14 @@ exports[`Recommendコンポーネント カートにおすすめ商品を追加�
               ベルベットアームチェア
             </p>
             <p
-              class="mt-1"
+              class="mt-1 mb-5"
             >
               ¥ 16,000
             </p>
           </a>
           <button
-            class="p-1.5 text-center text-white h-10 mt-3 rounded bg-blue-500 hover:bg-blue-700"
+            class="jsx-896052889"
+            type="button"
           >
             カートに入れる
           </button>
@@ -121,13 +120,14 @@ exports[`Recommendコンポーネント ユーザーカートのおすすめ商�
               ベルベットアームチェア
             </p>
             <p
-              class="mt-1"
+              class="mt-1 mb-5"
             >
               ¥ 16,000
             </p>
           </a>
           <button
-            class="p-1.5 text-center text-white h-10 mt-3 rounded bg-blue-500 hover:bg-blue-700"
+            class="jsx-896052889"
+            type="button"
           >
             カートに入れる
           </button>
@@ -168,13 +168,14 @@ exports[`Recommendコンポーネント ユーザーカートのおすすめ商�
               丸椅子スツール
             </p>
             <p
-              class="mt-1"
+              class="mt-1 mb-5"
             >
               ¥ 10,000
             </p>
           </a>
           <button
-            class="p-1.5 text-center text-white h-10 mt-3 rounded bg-blue-500 hover:bg-blue-700"
+            class="jsx-896052889"
+            type="button"
           >
             カートに入れる
           </button>

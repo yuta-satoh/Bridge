@@ -3,24 +3,12 @@ import Link from 'next/link';
 import Head from 'next/head';
 import topStyle from '../styles/top.module.css';
 import Cookies from 'js-cookie';
-import { GetServerSideProps } from 'next';
-import useSWR, { Fetcher } from 'swr';
 import NewItems from '@/components/NewItems';
-
-type Item = {
-  id: number;
-  name: string;
-  description: string;
-  genre: string;
-  category: string;
-  price: number;
-  imgurl: string;
-  stock: number;
-  delete: boolean;
-};
-
+import Button from '@/components/utils/Button';
+import { useRouter } from 'next/router';
 
 export default function Home() {
+  const router = useRouter();
   Cookies.set('genre', 'ナチュラル');
   // カテゴリ用配列
   const category = [
@@ -128,14 +116,13 @@ export default function Home() {
           <h2 className={`${topStyle.font} text-center text-xl font-bold`}>新着商品</h2>
           <NewItems />
           <div className={topStyle.buttonContent}>
-            <Link href="/items/itemlist">
-              <button className={`${topStyle.buttonArea}`}>
-                <div className={`${topStyle.itemtitle} mx-auto pt-1.5 text-center w-96 h-10 border-2 border-neutral-900`}>
-                  <span className={topStyle.itemtext}>商品一覧へ　→</span>
-                  {/* <span className="float-right mr-1">→</span> */}
-                </div>
-              </button>
-            </Link>
+            <Button
+              type='button'
+              color='white'
+              onClick={() => router.push("/items/itemlist")}
+            >
+              商品一覧へ　→
+            </Button>
           </div>
         </div>
         <div
@@ -153,7 +140,7 @@ export default function Home() {
                 <Link
                   href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=${item.name}&input=&order=id.desc&page=0`}
                 >
-                  <div className={`${topStyle.cateList} relative block h-16 border rounded hover:border-2 border-neutral-400`}>
+                  <div className={`${topStyle.cateList} relative block h-16 border rounded hover:shadow-md border-neutral-400`}>
                     <div className={`${topStyle.cateLis} absolute flex ml-2 top-1/2 -translate-y-1/2`}>
                       <Image
                         className={topStyle.cateimg}
@@ -179,7 +166,7 @@ export default function Home() {
                 <Link
                   href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=${item.name}&input=&order=id.desc&page=0`}
                 >
-                  <div className={`${topStyle.cateList} relative block h-16 border rounded hover:border-2 border-neutral-400`}>
+                  <div className={`${topStyle.cateList} relative block h-16 border rounded hover:shadow border-neutral-400`}>
                     <div className={`${topStyle.cateLis} absolute ml-2 flex top-1/2 -translate-y-1/2`}>
                       <Image
                         className={topStyle.cateimg}

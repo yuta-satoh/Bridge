@@ -1,17 +1,17 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
-import Cookies from 'js-cookie';
 import { GetServerSideProps } from 'next';
 import useSWR from 'swr';
-import { type } from 'os';
 import hModule from '../../styles/history.module.css';
 import urStyles from '../../styles/userRegister.module.css';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import Auth from '../auth/auth';
 import cModule from '../../styles/coordination.module.css';
+import { withIronSessionSsr } from 'iron-session/next';
+import { sessionOptions } from '@/lib/session';
 import { useEffect } from 'react';
+import SelectBox from '@/components/utils/SelectBox';
 
 type Item = {
   id: number;
@@ -28,20 +28,19 @@ type Item = {
   delete: boolean;
 };
 
-export const getServerSideProps: GetServerSideProps = async (
-  context
-) => {
-  const cookie = context.req.cookies['id'];
-  if (cookie === undefined) {
-    const cookie = '0';
+export const getServerSideProps: GetServerSideProps =
+  withIronSessionSsr(async ({ req }) => {
+    const cookie = req.session.user?.user;
+    if (cookie === undefined) {
+      const cookie = '0';
+      return {
+        props: { cookie },
+      };
+    }
     return {
       props: { cookie },
     };
-  }
-  return {
-    props: { cookie },
-  };
-};
+  }, sessionOptions);
 
 export default function History({
   cookie,
@@ -49,7 +48,8 @@ export default function History({
   cookie: string | undefined;
 }) {
   const router = useRouter();
-  const [order, setOrder] = useState('id.desc');
+  const [order, setOrder] = useState('新しい順');
+  const [query, setQuery] = useState('id.desc');
 
   // useEffect(() => {
   //   if (cookie === '0' || null) {
@@ -61,7 +61,7 @@ export default function History({
   const fetcher = (url: string) =>
     fetch(url).then((res) => res.json());
   const { data, error } = useSWR<Item[], Error>(
-    `/api/getHistory?id=${userId}&order=${order}`,
+    `/api/getHistory?id=${userId}&order=${query}`,
     fetcher
   );
   if (error) return <p>エラー</p>;
@@ -75,7 +75,13 @@ export default function History({
   }
 
   function selectOrder(e: React.ChangeEvent<HTMLSelectElement>) {
-    setOrder(e.target.value);
+    if (e.target.value === '新しい順') {
+      setOrder(e.target.value);
+      setQuery('id.desc');
+    } else if (e.target.value === '古い順') {
+      setOrder(e.target.value);
+      setQuery('id.asc');
+    }
   }
 
   return (
@@ -102,15 +108,22 @@ export default function History({
             <div className={hModule.body}>
               <h1 className={hModule.title}>購入履歴</h1>
               <div className={hModule.historyOrder}>
-                <label htmlFor="historyOrder">並び替える:</label>
-                <select
+                <label htmlFor="historyOrder">並び替える: </label>
+                <SelectBox
+                  arr={["新しい順", "古い順"]}
+                  name="historyOrder"
+                  id="historyOrder"
+                  value={order}
+                  onChange={selectOrder}
+                />
+                {/* <select
                   name="historyOrder"
                   id="historyOrder"
                   onChange={selectOrder}
                 >
                   <option value="id.desc">新しい順</option>
                   <option value="id.asc">古い順</option>
-                </select>
+                </select> */}
               </div>
               <table className={hModule.tableBody}>
                 <thead>

@@ -155,3 +155,27 @@
   border: 1px solid gray;
   border-radius: 5px;
 }
+
+/* stripe決済フォーム */
+.paymentArea {
+  width: 80%;
+  margin: auto;
+}
+
+.paymentButtonArea {
+  margin: 30px auto 10px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.paymentButtonArea button {
+  margin-bottom: 5px;
+}
+
+.paymentButtonArea>div {
+  margin-bottom: 10px;
+  color: red;
+  font-weight: bold;
+}

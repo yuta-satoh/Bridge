@@ -2,9 +2,10 @@ import lstyles from '../../../styles/itemList.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
 import { GetServerSideProps } from 'next';
-import { ChangeEvent, useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import SelectBox from '@/components/utils/SelectBox';
 
 type Item = {
   id: number;
@@ -39,7 +40,6 @@ export const getServerSideProps: GetServerSideProps = async ({
 	const input = query.input;
 	const order = query.order;
 	const page = query.page;
-	console.log(genre, category, input, order, page)
 
   	const genreQuery = typeof genre === "string"
 		? `genre.eq.${genre}`
@@ -124,15 +124,14 @@ export default function Search({
     .fill(0)
     .map((num, index) => index);
 
-  const handleClick = () => {
-    // onClick時にorderの値を変更してリダイレクト
-    // なぜかonChangeではリダイレクトできなかった
-    router.push({
+  const handleChange = async (ev: SyntheticEvent<HTMLSelectElement>) => {
+    setOrder(ev.currentTarget.value)
+    await router.push({
       query: {
         genre: nowOrder.genres,
         category: nowOrder.categories,
         input: nowOrder.input,
-        order: order,
+        order: orderChange(ev.currentTarget.value),
         page: '0',
       },
     });
@@ -144,11 +143,23 @@ export default function Search({
         genre: nowOrder.genres,
         category: nowOrder.categories,
         input: nowOrder.input,
-        order: order,
+        order: orderChange(order),
         page: page,
       },
     });
   };
+
+  const orderChange = (order: string) => {
+    if (order === "新着順") {
+      return "id.desc"
+    } else if (order === "安い順") {
+      return "price.asc"
+    } else if (order === "高い順") {
+      return "price.desc"
+    } else {
+      return "id.desc"
+    }
+  }
 
   if (!filter || filter.length === 0) {
     return (
@@ -197,25 +208,13 @@ export default function Search({
         </div>
         <div className="text-right w-full">
           <label htmlFor="itemOrder">表示順：</label>
-          <select
+          <SelectBox
+            arr={[ "新着順", "安い順", "高い順" ]}
             name="itemOrder"
-            id="itemOrder"
-            data-testid="search-select"
-            className="mx-2 border rounded border-gray-500"
+            id='itemOrder'
             value={order}
-            onChange={(e) => setOrder(e.target.value)}
-          >
-            <option value="id.desc">新着順</option>
-            <option value="price.asc">安い順</option>
-            <option value="price.desc">高い順</option>
-          </select>
-          <button
-            type="button"
-            className="mr-5 px-2 border rounded border-gray-500"
-            onClick={handleClick}
-          >
-            並び替える
-          </button>
+            onChange={(ev) => handleChange(ev)}
+          />
         </div>
 
         <div className={lstyles.list_outer}>

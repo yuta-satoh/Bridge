@@ -65,7 +65,7 @@ exports[`ゲストカートコンポーネント ゲストカートに中身あ�
           >
             <img
               alt="ベルベットアームチェア"
-              class="rounded"
+              class="rounded w-36 h-36"
               data-nimg="1"
               decoding="async"
               height="150"
@@ -104,7 +104,8 @@ exports[`ゲストカートコンポーネント ゲストカートに中身あ�
           class="text-right"
         >
           <button
-            class="text-white bg-neutral-900 border border-neutral-900 rounded px-1"
+            class="jsx-3340056729"
+            type="button"
           >
             削除
           </button>
@@ -179,7 +180,7 @@ exports[`ゲストカートコンポーネント ゲストカートに中身あ�
           >
             <img
               alt="丸椅子スツール"
-              class="rounded"
+              class="rounded w-36 h-36"
               data-nimg="1"
               decoding="async"
               height="150"
@@ -218,7 +219,8 @@ exports[`ゲストカートコンポーネント ゲストカートに中身あ�
           class="text-right"
         >
           <button
-            class="text-white bg-neutral-900 border border-neutral-900 rounded px-1"
+            class="jsx-3340056729"
+            type="button"
           >
             削除
           </button>
@@ -328,13 +330,14 @@ exports[`ゲストカートコンポーネント ゲストカートに中身あ�
                   ベルベットアームチェア
                 </p>
                 <p
-                  class="mt-1"
+                  class="mt-1 mb-5"
                 >
                   ¥ 16,000
                 </p>
               </a>
               <button
-                class="p-1.5 text-center text-white h-10 mt-3 rounded bg-blue-500 hover:bg-blue-700"
+                class="jsx-896052889"
+                type="button"
               >
                 カートに入れる
               </button>
@@ -375,13 +378,14 @@ exports[`ゲストカートコンポーネント ゲストカートに中身あ�
                   丸椅子スツール
                 </p>
                 <p
-                  class="mt-1"
+                  class="mt-1 mb-5"
                 >
                   ¥ 10,000
                 </p>
               </a>
               <button
-                class="p-1.5 text-center text-white h-10 mt-3 rounded bg-blue-500 hover:bg-blue-700"
+                class="jsx-896052889"
+                type="button"
               >
                 カートに入れる
               </button>
@@ -429,28 +433,22 @@ exports[`ゲストカートコンポーネント ゲストカートに中身あ�
           </span>
         </p>
       </div>
-      <a
-        href="/login"
+      <div
+        class="flex flex-col items-center gap-5 mt-5"
       >
-        <div
-          class="container pt-1.5 text-center h-10 border-2 border-neutral-900 bg-white mt-8"
+        <button
+          class="jsx-1912866866"
+          type="button"
         >
-          <span>
-            ログイン
-          </span>
-        </div>
-      </a>
-      <a
-        href="/"
-      >
-        <div
-          class="container pt-1.5 text-center h-10 border-2 border-neutral-900 bg-white mt-4"
+          ログイン
+        </button>
+        <button
+          class="jsx-1912866866"
+          type="button"
         >
-          <span>
-            お買い物を続ける
-          </span>
-        </div>
-      </a>
+          お買い物を続ける
+        </button>
+      </div>
     </div>
   </div>
 </DocumentFragment>
@@ -489,7 +487,7 @@ exports[`ゲストカートコンポーネント ゲストカートの商品の�
           >
             <img
               alt="ベルベットアームチェア"
-              class="rounded"
+              class="rounded w-36 h-36"
               data-nimg="1"
               decoding="async"
               height="150"
@@ -528,7 +526,8 @@ exports[`ゲストカートコンポーネント ゲストカートの商品の�
           class="text-right"
         >
           <button
-            class="text-white bg-neutral-900 border border-neutral-900 rounded px-1"
+            class="jsx-3340056729"
+            type="button"
           >
             削除
           </button>
@@ -638,13 +637,14 @@ exports[`ゲストカートコンポーネント ゲストカートの商品の�
                   ベルベットアームチェア
                 </p>
                 <p
-                  class="mt-1"
+                  class="mt-1 mb-5"
                 >
                   ¥ 16,000
                 </p>
               </a>
               <button
-                class="p-1.5 text-center text-white h-10 mt-3 rounded bg-blue-500 hover:bg-blue-700"
+                class="jsx-896052889"
+                type="button"
               >
                 カートに入れる
               </button>
@@ -692,28 +692,22 @@ exports[`ゲストカートコンポーネント ゲストカートの商品の�
           </span>
         </p>
       </div>
-      <a
-        href="/login"
+      <div
+        class="flex flex-col items-center gap-5 mt-5"
       >
-        <div
-          class="container pt-1.5 text-center h-10 border-2 border-neutral-900 bg-white mt-8"
+        <button
+          class="jsx-1912866866"
+          type="button"
         >
-          <span>
-            ログイン
-          </span>
-        </div>
-      </a>
-      <a
-        href="/"
-      >
-        <div
-          class="container pt-1.5 text-center h-10 border-2 border-neutral-900 bg-white mt-4"
+          ログイン
+        </button>
+        <button
+          class="jsx-1912866866"
+          type="button"
         >
-          <span>
-            お買い物を続ける
-          </span>
-        </div>
-      </a>
+          お買い物を続ける
+        </button>
+      </div>
     </div>
   </div>
 </DocumentFragment>
@@ -752,7 +746,7 @@ exports[`ゲストカートコンポーネント ゲストカートの商品を�
           >
             <img
               alt="ベルベットアームチェア"
-              class="rounded"
+              class="rounded w-36 h-36"
               data-nimg="1"
               decoding="async"
               height="150"
@@ -791,7 +785,8 @@ exports[`ゲストカートコンポーネント ゲストカートの商品を�
           class="text-right"
         >
           <button
-            class="text-white bg-neutral-900 border border-neutral-900 rounded px-1"
+            class="jsx-3340056729"
+            type="button"
           >
             削除
           </button>
@@ -901,13 +896,14 @@ exports[`ゲストカートコンポーネント ゲストカートの商品を�
                   ベルベットアームチェア
                 </p>
                 <p
-                  class="mt-1"
+                  class="mt-1 mb-5"
                 >
                   ¥ 16,000
                 </p>
               </a>
               <button
-                class="p-1.5 text-center text-white h-10 mt-3 rounded bg-blue-500 hover:bg-blue-700"
+                class="jsx-896052889"
+                type="button"
               >
                 カートに入れる
               </button>
@@ -955,28 +951,22 @@ exports[`ゲストカートコンポーネント ゲストカートの商品を�
           </span>
         </p>
       </div>
-      <a
-        href="/login"
+      <div
+        class="flex flex-col items-center gap-5 mt-5"
       >
-        <div
-          class="container pt-1.5 text-center h-10 border-2 border-neutral-900 bg-white mt-8"
+        <button
+          class="jsx-1912866866"
+          type="button"
         >
-          <span>
-            ログイン
-          </span>
-        </div>
-      </a>
-      <a
-        href="/"
-      >
-        <div
-          class="container pt-1.5 text-center h-10 border-2 border-neutral-900 bg-white mt-4"
+          ログイン
+        </button>
+        <button
+          class="jsx-1912866866"
+          type="button"
         >
-          <span>
-            お買い物を続ける
-          </span>
-        </div>
-      </a>
+          お買い物を続ける
+        </button>
+      </div>
     </div>
   </div>
 </DocumentFragment>
@@ -984,8 +974,44 @@ exports[`ゲストカートコンポーネント ゲストカートの商品を�
 
 exports[`ゲストカートコンポーネント ゲストカートをローディング中 1`] = `
 <DocumentFragment>
-  <div>
-    loading...
+  <div
+    class="jsx-1008565373 spinner mx-auto"
+  >
+    <span
+      class="jsx-1008565373"
+    >
+      L
+    </span>
+    <span
+      class="jsx-1008565373"
+    >
+      O
+    </span>
+    <span
+      class="jsx-1008565373"
+    >
+      A
+    </span>
+    <span
+      class="jsx-1008565373"
+    >
+      D
+    </span>
+    <span
+      class="jsx-1008565373"
+    >
+      I
+    </span>
+    <span
+      class="jsx-1008565373"
+    >
+      N
+    </span>
+    <span
+      class="jsx-1008565373"
+    >
+      G
+    </span>
   </div>
 </DocumentFragment>
 `;
