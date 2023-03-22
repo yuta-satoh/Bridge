@@ -45,6 +45,7 @@ export default function Login() {
       setErrorText("");
       const strageData = localStorage.getItem('GuestCart');
       await strageToCart()
+      localStorage.clear();
       rooter.replace('/');
       Cookies.set('status', 'true');
     } else {
