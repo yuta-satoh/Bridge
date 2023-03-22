@@ -7,7 +7,7 @@ import Auth from './auth/auth';
 import cModule from '../styles/coordination.module.css';
 import myStyles from '../styles/mypage.module.css';
 import { GetServerSideProps } from 'next';
-import CurrentCartItems from 'main/src/components/CurrentCartItems';
+import CurrentCartItems from '@/components/CurrentCartItems';
 
 export const getServerSideProps: GetServerSideProps = async (
   context
