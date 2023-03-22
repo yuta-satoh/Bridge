@@ -42,7 +42,7 @@ const InputSuggest = ({ value, onChange, onClick }: Input) => {
                             position: absolute;
                             height: 28px;
                             width: 32px;
-                            left: 168px;
+                            left: 167px;
                             top: 2px;
                             background-color: #ffffff;
                             border-radius: 4px;
