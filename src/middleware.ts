@@ -1,14 +1,27 @@
+import { sessionOptions } from '@/lib/session';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { getIronSession } from 'iron-session/edge';
 
 export const middleware = async (req: NextRequest) => {
-
   const res = NextResponse.next();
+
+  const session = await getIronSession(req, res, {
+    password: process.env.COOKIE_PASSWORD as string,
+    cookieName: process.env.COOKIE_NAME as string,
+    cookieOptions: {
+      secure: process.env.NODE_ENV === 'production',
+    },
+  });
+
+  // const user = session.user?.user;
+  // console.log(user);
+
   if (req.nextUrl.pathname.startsWith('/mypage')) {
     // クッキー取得
-    const cookie = req.cookies.get('id')?.value;
+    const user = session.user?.user
     // クッキーがあればそのまま進む
-    if (cookie) {
+    if (user !== undefined) {
       return res;
     }
     // クッキーがなければログイン画面へ遷移
@@ -17,9 +30,9 @@ export const middleware = async (req: NextRequest) => {
 
   if (req.nextUrl.pathname.startsWith('/account')) {
     // クッキー取得
-    const cookie = req.cookies.get('id')?.value;
+    const user = session.user?.user
     // クッキーがあればそのまま進む
-    if (cookie) {
+    if (user !== undefined) {
       return res;
     }
     // クッキーがなければログイン画面へ遷移
@@ -28,15 +41,15 @@ export const middleware = async (req: NextRequest) => {
 
   if (req.nextUrl.pathname.startsWith('/purchase')) {
     // クッキー取得
-    const cookie = req.cookies.get('id')?.value;
+    const user = session.user?.user
     // クッキーがあればそのまま進む
-    if (cookie) {
+    if (user !== undefined) {
       return res;
     }
     // クッキーがなければログイン画面へ遷移
     return NextResponse.redirect(new URL('/login', req.url))
   }
-  
+
   // アクセスしたURLが/で始まる部分（全て）で認証
   if (req.nextUrl.pathname.startsWith('/')) {
     const authorizationHeader = req.headers.get('authorization');

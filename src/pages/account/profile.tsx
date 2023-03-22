@@ -5,6 +5,8 @@ import urStyles from '../../styles/userRegister.module.css';
 import Link from 'next/link';
 import cModule from '../../styles/coordination.module.css';
 import profModule from '../../styles/account/profile.module.css';
+import { withIronSessionSsr } from 'iron-session/next';
+import { sessionOptions } from '@/lib/session';
 
 // userデータの型を定義
 type User = {
@@ -33,54 +35,38 @@ type ErrorText = {
   address: string;
 };
 
-export const getServerSideProps: GetServerSideProps = async (
-  context
-) => {
-  // クッキーの値の取得
-  const cookie = context.req.headers.cookie;
-  const cookieValue = ((cookie: string | undefined) => {
-    if (typeof cookie !== 'undefined') {
-      const cookies = cookie.split(';');
-      // 配列cookiesを=で分割して代入し、
-      // 0番目の要素が"id"なら1番目の要素(cookieの値)を返す
-      for (let cookie of cookies) {
-        const cookiesArray = cookie.split('=');
-        if (cookiesArray[0].trim() === 'id') {
-          return cookiesArray[1]; // (key[0],value[1])
-        }
+export const getServerSideProps: GetServerSideProps =
+  withIronSessionSsr(async ({ req }) => {
+    // クッキーの値の取得
+    // const cookie = req.headers.cookie;
+    const user = req.session.user?.user;
+    // クッキーの値を元にuserデータを取得
+    const res = await fetch(
+      `${process.env.SUPABASE_URL}/users?id=eq.${user}`,
+      {
+        method: 'GET',
+        headers: {
+          apikey: `${process.env.SUPABASE_API_KEY}`,
+          Authorization: `Bearer ${process.env.SUPABASE_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
       }
-    }
-    // 上記の処理で何もリターンされなければ空文字を返す
-    return '';
-  })(cookie);
+    );
+    const rawData: User[] = await res.json();
+    const data: User = rawData[0];
 
-  // クッキーの値を元にuserデータを取得
-  const res = await fetch(
-    `${process.env.SUPABASE_URL}/users?id=eq.${cookieValue}`,
-    {
-      method: 'GET',
-      headers: {
-        apikey: `${process.env.SUPABASE_API_KEY}`,
-        Authorization: `Bearer ${process.env.SUPABASE_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-    }
-  );
-  const rawData: User[] = await res.json();
-  const data: User = rawData[0];
-
-  // data = usersテーブルデータ, cookieValue = cookie
-  return {
-    props: { data, cookieValue },
-  };
-};
+    // data = usersテーブルデータ, cookieValue = cookie
+    return {
+      props: { data, user },
+    };
+  }, sessionOptions);
 
 export default function Profile({
   data,
-  cookieValue,
+  user,
 }: {
   data: User;
-  cookieValue: string;
+  user: string;
 }) {
   const [profile, setProfile] = useState<User>(data);
   const [tell, setTell] = useState<string[]>(data.tell.split('-'));
@@ -296,7 +282,7 @@ export default function Profile({
       },
       body: JSON.stringify({
         email: profile.email,
-        cookie: cookieValue,
+        cookie: user,
       }),
     });
     const data: { email: string } = await res.json();
@@ -417,7 +403,9 @@ export default function Profile({
                 <label htmlFor="female">性別</label>
                 <br />
                 <div className={profModule.radioField}>
-                  <div className={`${profModule.radioForm} border-neutral-500 rounded pl-2.5`}>
+                  <div
+                    className={`${profModule.radioForm} border-neutral-500 rounded pl-2.5`}
+                  >
                     <input
                       type="radio"
                       name="gender"
@@ -427,11 +415,16 @@ export default function Profile({
                       checked={profile.gender === 'female'}
                       onChange={(e) => handleChange(e)}
                     />
-                    <label htmlFor="female" className={profModule.genderLabel}>
+                    <label
+                      htmlFor="female"
+                      className={profModule.genderLabel}
+                    >
                       女性&emsp;
                     </label>
                   </div>
-                  <div className={`${profModule.radioForm} border-neutral-500 rounded pl-2.5`}>
+                  <div
+                    className={`${profModule.radioForm} border-neutral-500 rounded pl-2.5`}
+                  >
                     <input
                       type="radio"
                       name="gender"
@@ -441,11 +434,16 @@ export default function Profile({
                       checked={profile.gender === 'male'}
                       onChange={(e) => handleChange(e)}
                     />
-                    <label htmlFor="male" className={profModule.genderLabel}>
+                    <label
+                      htmlFor="male"
+                      className={profModule.genderLabel}
+                    >
                       男性&emsp;
                     </label>
                   </div>
-                  <div className={`${profModule.radioForm} border-neutral-500 rounded pl-2.5`}>
+                  <div
+                    className={`${profModule.radioForm} border-neutral-500 rounded pl-2.5`}
+                  >
                     <input
                       type="radio"
                       name="gender"
@@ -455,7 +453,10 @@ export default function Profile({
                       checked={profile.gender === 'other'}
                       onChange={(e) => handleChange(e)}
                     />
-                    <label htmlFor="other" className={profModule.genderLabel}>
+                    <label
+                      htmlFor="other"
+                      className={profModule.genderLabel}
+                    >
                       その他
                     </label>
                   </div>
@@ -557,11 +558,16 @@ export default function Profile({
                 <p className={urStyles.error}>{errorText.address}</p>
               </div>
               <div className={profModule.buttonArea}>
-                <button type="submit" className={profModule.submitButton}>
+                <button
+                  type="submit"
+                  className={profModule.submitButton}
+                >
                   会員情報を変更
                 </button>
                 {completeText && (
-                  <p className={profModule.completeText}>{completeText}</p>
+                  <p className={profModule.completeText}>
+                    {completeText}
+                  </p>
                 )}
               </div>
             </form>

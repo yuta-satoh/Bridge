@@ -3,11 +3,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Cookies from 'js-cookie';
 import Auth from './auth/auth';
-import Logout from '../components/Logout';
+// import Logout from '../components/Logout';
 import cModule from '../styles/coordination.module.css';
 import myStyles from '../styles/mypage.module.css';
 import { GetServerSideProps } from 'next';
-import CurrentCartItems from '../components/CurrentCartItems';
+import CurrentCartItems from 'main/src/components/CurrentCartItems';
 
 export const getServerSideProps: GetServerSideProps = async (
   context
@@ -41,6 +41,12 @@ export default function Mypage({
 }: {
   cookieValue: string;
 }) {
+  async function clickEvent() {
+    document.cookie =
+      'id=;path=/;expires=Thu, 1-Jan-1970 00:00:00 GMT;';
+    Cookies.remove('status');
+    await fetch('/api/logoutIron');
+  }
   return (
     <>
       <Head>
@@ -104,8 +110,13 @@ export default function Mypage({
                 </button>
               </div>
               <div className={myStyles.logout}>
-                &gt;&gt;
-                <Logout />
+                <Link href="/login" className="logout">
+                  <button onClick={() => clickEvent()}>
+                    ログアウト
+                  </button>
+                </Link>
+                {/* &gt;&gt;
+                <Logout /> */}
                 {/* <div>
                     <Link href="#">退会手続き</Link>
                   </div> */}

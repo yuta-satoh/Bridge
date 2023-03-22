@@ -45,7 +45,7 @@ export default function CurrentCartItems({
   const { data: cartItemData, error } = useSWR<
     CartItemsData[],
     Error
-  >(`/api/getCart/items?id=${cookie}`, fetcher);
+  >(`/api/getCart/items`, fetcher);
 
   // エラー文
   if (error) {
