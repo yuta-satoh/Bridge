@@ -1,20 +1,43 @@
-import handler from './index';
-import { NextApiRequest, NextApiResponse } from 'next';
-import { resData } from '@/types/types';
+import handler from './items';
+import {
+  NextApiRequest,
+  NextApiHandler,
+  NextApiResponse,
+} from 'next';
 import { withIronSessionApiRoute } from 'iron-session/next';
 import { sessionOptions } from '@/lib/session';
+import { resData } from '@/types/types';
 jest.clearAllMocks();
 
-// ダミーのカートデータ
-const dummyCart = [
+// ダミーのカート内アイテムデータ
+const dummy_cart_items_data = [
   {
     id: 1,
-    user_id: 1,
+    item_id: 1,
+    cart_id: 1,
+    date: '2022-02-22',
+    quantity: 1,
     delete: false,
+    items: {
+      id: 1,
+      name: 'hoge',
+      description: 'hoge',
+      genre: 'hoge',
+      category: 'hoge',
+      price: 1000,
+      imgurl: 'hoge',
+      stock: 50,
+      delete: false,
+    },
+    carts: {
+      id: 1,
+      user_id: 1,
+      delete: false,
+    },
   },
 ];
 
-// モックリクエストの定義
+// リクエスト/レスポンスのモック
 const mockReq: NextApiRequest = {
   method: 'GET',
   session: {
@@ -23,7 +46,6 @@ const mockReq: NextApiRequest = {
     },
   },
 } as NextApiRequest;
-// モックレスポンスの定義
 const mockRes: NextApiResponse<resData> = {
   status: jest.fn(() => mockRes),
   json: jest.fn(),
@@ -36,32 +58,30 @@ jest.mock('iron-session/next', () => ({
     .mockImplementation((handler, sessionOptions) => handler)
 }));
 
-describe('getCart/index.tsのテスト', () => {
+describe('api/getCart/items.tsのテスト', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
-    afterAll(() => {
+  afterAll(() => {
     jest.clearAllMocks();
   });
 
   test('正常なレスポンス', async () => {
-    global.fetch = jest
-      .fn()
-      .mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(dummyCart),
-      });
+    global.fetch = jest.fn().mockResolvedValueOnce({
+      ok: true,
+      json: () => Promise.resolve(dummy_cart_items_data),
+    });
     await handler(mockReq, mockRes);
 
     expect(mockRes.status).toHaveBeenCalledWith(200);
-    expect(mockRes.json).toHaveBeenCalledWith(dummyCart);
+    expect(mockRes.json).toHaveBeenCalledWith(dummy_cart_items_data);
   });
 
   test('異常なレスポンス', async () => {
     global.fetch = jest.fn().mockResolvedValueOnce({ ok: false });
     await handler(mockReq, mockRes);
 
-    expect(mockRes.status).toHaveBeenCalledWith(400);
+    expect(mockRes.status).toHaveBeenCalledWith(401);
     expect(mockRes.json).toHaveBeenCalledWith({ message: 'Failed' });
   });
 });
