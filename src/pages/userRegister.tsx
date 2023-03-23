@@ -4,6 +4,7 @@ import urStyles from '../styles/userRegister.module.css';
 import { useState, ChangeEvent, SyntheticEvent } from 'react';
 import { useRouter } from 'next/router';
 import { searchAddress } from '@/lib/register';
+import { formValidate } from '@/lib/register';
 
 type User = {
   lastName: string,
@@ -56,85 +57,6 @@ export default function UserRegister() {
   const [borderError, setBorderError] = useState(initBorderError)
   const router = useRouter();
 
-  const nameValidation = (name: string) => {
-    if (!name) return '※名前を入力して下さい';
-    return '';
-  }
-
-  const genderValidation = (gender: string) => {
-    if (!gender) return "※性別を選択して下さい";
-  }
-
-  const emailValidation = (email: string) => {
-    if (!email) return "※メールアドレスを入力して下さい";
-    if (email.indexOf('@') === -1 || email.indexOf('@') === 0 || email.indexOf('@') === email.length-1) {
-      return '※メールアドレスの形式が不正です';
-    }
-    return '';
-  }
-
-  const zipcodeValidation = (key: string, zipcode: string) => {
-    switch (key) {
-      case 'zipcode1':
-        if (zipcode.length !== 3) return '※郵便番号はXXX-XXXXの形式で入力して下さい';
-        return '';
-      case 'zipcode2':
-        if (zipcode.length !== 4) return '※郵便番号はXXX-XXXXの形式で入力して下さい';
-        return '';
-    }
-  }
-
-  const addressValidation = (address: string) => {
-    if (!address) return '※住所を入力して下さい';
-    return '';
-  }
-
-  const telValidation = (tell: string) => {
-    if (!tell) return '※電話番号はXXXX-XXXX-XXXXの形式で入力してください';
-    return '';
-  }
-
-  const passwordValidation = (password: string) => {
-    const regax = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9!"#$%]{0,100}$/;
-    const regaxInput = /^[a-zA-Z0-9!"#$%]{0,100}$/;
-    if (!password) return '※パスワードを入力して下さい';
-    if (!regaxInput.test(password)) return '※半角英数字の大文字と小文字、数字、記号(!"#$%)のみ使用可能です'
-    if (!regax.test(password)) return "※英数字を組み合わせたパスワードにして下さい"
-    if (password.length < 8 || password.length > 20) return "※８文字以上２０文字以内で設定してください"
-    return '';
-  }
-
-  const samePasswordValidation = (confirmationPassword: string) => {
-    if (!confirmationPassword) return "※確認用パスワードを入力して下さい"
-    if (confirmationPassword !== userInfo.password) return '※パスワードと確認用パスワードが不一致です';
-    return '';
-  }
-
-  const formValidate = (key: string, value: string) => {
-    switch (key) {
-      case 'lastName':
-      case 'firstName':
-        return nameValidation(value);
-      case 'gender':
-        return genderValidation(value);
-      case 'email':
-        return emailValidation(value);
-      case 'zipcode1':
-      case 'zipcode2':
-        return zipcodeValidation(key, value);
-      case 'address':
-        return addressValidation(value);
-      case 'tell1':
-      case 'tell2':
-      case 'tell3':
-        return telValidation(value);
-      case 'password':
-        return passwordValidation(value);
-      case 'confirmationPassword':
-        return samePasswordValidation(value);
-    }
-  }
-
   const handleChange = (e: ChangeEvent) => {
     if (!(e.target instanceof HTMLInputElement)) {
         return;
@@ -142,7 +64,7 @@ export default function UserRegister() {
     const key = e.target.name;
     const value = e.target.value;
     setUserInfo({...userInfo, [key]: value});
-    setErrorText({...errorText, [key]: formValidate(key, value)})
+    setErrorText({...errorText, [key]: formValidate(key, value, userInfo.password)})
     setBorderError({...borderError, [key]: false})
   }
 
