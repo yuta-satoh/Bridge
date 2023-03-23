@@ -23,12 +23,13 @@ const mockRes: NextApiResponse<resData> = {
   json: jest.fn(),
 } as unknown as NextApiResponse<resData>;
 
+jest.clearAllMocks();
 describe('profile.tsのテスト', () => {
-  beforeEach(() => {
+  afterAll(() => {
     jest.clearAllMocks();
   });
 
-  test('res.ok = true', async () => {
+  test('正常なレスポンス', async () => {
     global.fetch = jest.fn().mockResolvedValueOnce({ ok: true });
     await handler(mockReq, mockRes);
 
@@ -36,7 +37,7 @@ describe('profile.tsのテスト', () => {
     expect(mockRes.json).toHaveBeenCalledWith({ message: 'OK' });
   });
 
-  test('res.ok = false', async () => {
+  test('異常なレスポンス', async () => {
     global.fetch = jest.fn().mockResolvedValueOnce({ ok: false });
     await handler(mockReq, mockRes);
 
