@@ -8,7 +8,6 @@ const mockReq: NextApiRequest = {
     method: 'GET',
     body: {
         email: 'hoge@example.com',
-        password: 'hoge1234',
     }
 } as NextApiRequest;
 
@@ -17,4 +16,13 @@ const mockRes: NextApiResponse<resData> = {
     json: jest.fn(),
 } as unknown as NextApiResponse<resData>;
 
-describe('api/search')
+describe('api/userRegister/search.tsのテスト', () => {
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
+    afterAll(() => {
+        jest.clearAllMocks();
+    });
+
+    test('メールアドレス')
+});

@@ -5,7 +5,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { email, password } = req.body;
-  const searchResult = await searchUser(email, password);
+  const { email } = req.body;
+  const searchResult = await searchUser(email);
   res.status(200).json(searchResult);
 }
