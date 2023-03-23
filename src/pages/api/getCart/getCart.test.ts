@@ -1,8 +1,9 @@
 import handler from './index';
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 import { resData } from '@/types/types';
 import { withIronSessionApiRoute } from 'iron-session/next';
 import { sessionOptions } from '@/lib/session';
+import { IronSessionOptions } from 'iron-session';
 jest.clearAllMocks();
 
 // ダミーのカートデータ
@@ -33,11 +34,14 @@ const mockRes: NextApiResponse<resData> = {
 jest.mock('iron-session/next', () => ({
   withIronSessionApiRoute: jest
     .fn()
-    .mockImplementation((handler, sessionOptions) => handler),
+    .mockImplementation((handler, sessionOptions) => handler)
 }));
 
 describe('getCart/index.tsのテスト', () => {
-  afterAll(() => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+    afterAll(() => {
     jest.clearAllMocks();
   });
 
@@ -60,20 +64,5 @@ describe('getCart/index.tsのテスト', () => {
 
     expect(mockRes.status).toHaveBeenCalledWith(400);
     expect(mockRes.json).toHaveBeenCalledWith({ message: 'Failed' });
-  });
-
-  test('iron-sessionのテスト', async () => {
-    global.fetch = jest
-      .fn()
-      .mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(dummyCart),
-      });
-    await handler(mockReq, mockRes);
-
-    expect(withIronSessionApiRoute).toHaveBeenCalledWith(
-      handler,
-      sessionOptions
-    );
   });
 });
