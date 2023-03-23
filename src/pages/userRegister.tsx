@@ -3,6 +3,7 @@ import Link from 'next/link';
 import urStyles from '../styles/userRegister.module.css';
 import { useState, ChangeEvent, SyntheticEvent } from 'react';
 import { useRouter } from 'next/router';
+import { searchAddress } from '@/lib/register';
 
 type User = {
   lastName: string,
@@ -55,24 +56,7 @@ export default function UserRegister() {
   const [borderError, setBorderError] = useState(initBorderError)
   const router = useRouter();
 
-  const searchAddress = (e: React.FormEvent) => {
-    const url = 'https://zipcoda.net/api?';
-    if (userInfo.zipcode1 && userInfo.zipcode2) {
-        const params = new URLSearchParams({ zipcode: `${userInfo.zipcode1}${userInfo.zipcode2}` })
-        fetch(url + params)
-            .then(response => response.json())
-            .then(data => {
-                const stateName: string = data.items[0].state_name;
-                const townName: string = data.items[0].address;
-                setUserInfo({...userInfo, address: `${stateName + townName}`})
-            })
-            .catch((err: ErrorEvent) => {
-                console.log(err)
-            });
-    }
-  }
-
-   const nameValidation = (name: string) => {
+  const nameValidation = (name: string) => {
     if (!name) return '※名前を入力して下さい';
     return '';
   }
@@ -485,11 +469,13 @@ export default function UserRegister() {
                 onChange={handleChange}
               />
               <button
-               
                 type='button'
                 className={`${urStyles.zipButton} text-white bg-neutral-900 border border-neutral-900 rounded px-1`}
-              
-                onClick={searchAddress}
+                onClick={async () => {
+                  const result = await searchAddress(`${userInfo.zipcode1}${userInfo.zipcode2}`)
+                  setUserInfo({...userInfo, address: result.address})
+                  setErrorText({...errorText, zipcode1: result.error})
+                }}
               >
                 住所検索
               </button>
