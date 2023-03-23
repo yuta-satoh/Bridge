@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 
 export default function Home() {
   const router = useRouter();
-  Cookies.set('genre', 'ナチュラル');
+  // Cookies.set('genre', 'ナチュラル');
   // カテゴリ用配列
   const category = [
     {

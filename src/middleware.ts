@@ -17,37 +17,56 @@ export const middleware = async (req: NextRequest) => {
   // const user = session.user?.user;
   // console.log(user);
 
+  if (req.nextUrl.pathname.startsWith('/coordinationRes')) {
+    // クッキー取得
+    const genre = req.cookies.get('genre')?.value;
+
+    console.log(genre);
+    // クッキーがあればそのまま進む
+    if (
+      (genre !== undefined && genre === 'ナチュラル') ||
+      genre === '北欧風' ||
+      genre === 'フェミニン' ||
+      genre === '和モダン'
+    ) {
+      return res;
+    }
+    // クッキーが無いもしくは不正だった場合はリダイレクト
+    // res.cookies.set('genre', 'ナチュラル');
+    return NextResponse.redirect(new URL('/coordination', req.url));
+  }
+
   if (req.nextUrl.pathname.startsWith('/mypage')) {
     // クッキー取得
-    const user = session.user?.user
+    const user = session.user?.user;
     // クッキーがあればそのまま進む
     if (user !== undefined) {
       return res;
     }
     // クッキーがなければログイン画面へ遷移
-    return NextResponse.redirect(new URL('/login', req.url))
+    return NextResponse.redirect(new URL('/login', req.url));
   }
 
   if (req.nextUrl.pathname.startsWith('/account')) {
     // クッキー取得
-    const user = session.user?.user
+    const user = session.user?.user;
     // クッキーがあればそのまま進む
     if (user !== undefined) {
       return res;
     }
     // クッキーがなければログイン画面へ遷移
-    return NextResponse.redirect(new URL('/login', req.url))
+    return NextResponse.redirect(new URL('/login', req.url));
   }
 
   if (req.nextUrl.pathname.startsWith('/purchase')) {
     // クッキー取得
-    const user = session.user?.user
+    const user = session.user?.user;
     // クッキーがあればそのまま進む
     if (user !== undefined) {
       return res;
     }
     // クッキーがなければログイン画面へ遷移
-    return NextResponse.redirect(new URL('/login', req.url))
+    return NextResponse.redirect(new URL('/login', req.url));
   }
 
   // アクセスしたURLが/で始まる部分（全て）で認証
