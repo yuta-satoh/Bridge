@@ -190,11 +190,15 @@ export default function Purchase({
   async function test() {
     procedure(data);
     router.replace('/purchaseComp');
-    await fetch('api/mailtrap', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(user[0]),
-    }).then((res) => res.json());
+    try {
+      await fetch('api/mailtrap', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user[0]),
+      }).then((res) => res.json());
+    } catch (error) {
+      console.error(error);
+    }
     // router.replace('/purchaseComp');
     // .then(() => setSubmitted(true));
   }
