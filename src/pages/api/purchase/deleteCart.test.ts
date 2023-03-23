@@ -16,7 +16,7 @@ const mockRes: NextApiResponse<resData> = {
 } as unknown as NextApiResponse<resData>;
 
 jest.clearAllMocks();
-describe('api/purchase/addHistory.tsのテスト', () => {
+describe('api/purchase/deleteCart.tsのテスト', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });

@@ -24,7 +24,7 @@ const mockRes: NextApiResponse<resData> = {
 } as unknown as NextApiResponse<resData>;
 
 jest.clearAllMocks();
-describe('profile.tsのテスト', () => {
+describe('api/account/profile.tsのテスト', () => {
   afterAll(() => {
     jest.clearAllMocks();
   });

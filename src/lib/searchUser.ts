@@ -13,8 +13,10 @@ const searchUser = async (
         if (data.length !== 0) {
             return "このメールアドレスはすでに使用されています"
         } 
-        return ""
-    })
+        return "";
+    }).catch(() => {
+        return "";
+    });
 
     const searchPasswordResult = await fetch(`${process.env.SUPABASE_URL}/users?password=eq.${password}`, {
         method: "GET",
@@ -27,8 +29,11 @@ const searchUser = async (
         if (data.length !== 0) {
             return "このパスワードはすでに使用されています"
         }
-        return ""
-    })
+        return "";
+    }).catch(() => {
+        return "";
+    });
+    
     return {
         email: searchEmailResult,
         password: searchPasswordResult,

@@ -36,7 +36,7 @@ jest.mock('iron-session/next', () => ({
     .mockImplementation((handler, sessionOptions) => handler)
 }));
 
-describe('getCart/index.tsのテスト', () => {
+describe('api/getCart/index.tsのテスト', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });

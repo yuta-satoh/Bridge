@@ -19,7 +19,7 @@ const mockRes: NextApiResponse<resData> = {
 const dummy_usersID = '1';
 
 jest.clearAllMocks();
-describe('api/purchase/addHistory.tsのテスト', () => {
+describe('api/userRegister/createCart.tsのテスト', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
