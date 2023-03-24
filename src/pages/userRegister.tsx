@@ -91,7 +91,8 @@ export default function UserRegister() {
       userInfo.tell1.length + userInfo.tell2.length + userInfo.tell3.length < 10
       || userInfo.tell1.length + userInfo.tell2.length + userInfo.tell3.length >= 12
     ) {
-      setErrorText({...errorText, tell1: "電話番号はXXXX-XXXX-XXXXの形式で入力して下さい"})
+      setErrorText({...errorText, tell1: "電話番号の形式が不正です"})
+      setBorderError({...borderError, tell1: true, tell2: true, tell3: true})
       return
     }
 
