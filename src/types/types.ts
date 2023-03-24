@@ -62,6 +62,7 @@ type Reviews = {
     evaluation: number;
     title: string;
     description: string;
+    date: string;
     delete: boolean;
 }
 
