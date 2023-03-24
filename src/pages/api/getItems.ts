@@ -1,3 +1,4 @@
+import { resData } from '@/types/types';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 type ItemData = {
@@ -14,11 +15,10 @@ type ItemData = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ItemData[]>
+  res: NextApiResponse<ItemData[] | resData>
 ) {
 	const queryId = req.query.id as string;
   const queryGenre = typeof req.query.genre === 'string' ? `genre=eq.${req.query.genre}` : ""
-	// const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw';
   const responseItems = await fetch(
     `${process.env.SUPABASE_URL}/items?${queryGenre}&${queryId}`,
     {
@@ -31,11 +31,12 @@ export default async function handler(
     }
   );
 
-  const guestItems: ItemData[] = await responseItems.json();
-
 	if (responseItems.ok) {
+    const guestItems: ItemData[] = await responseItems.json();
     res.status(200).json(guestItems);
   } else {
-    res.status(400).end();
+    // ローカルストレージからのデータ取得タイミングの問題で、
+    // end()じゃないと機能しなくなってしまう
+    res.status(responseItems.status).end();
   }
 }

@@ -45,12 +45,17 @@ describe('api/userRegister/createCart.tsのテスト', () => {
   test('users_idの取得に失敗', async () => {
     global.fetch = jest
       .fn()
-      .mockResolvedValueOnce({ ok: false });
+      .mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve([]),
+      });
 
     await handler(mockReq, mockRes);
 
     expect(mockRes.status).toHaveBeenCalledWith(401);
-    expect(mockRes.json).toHaveBeenCalledWith({ message: 'User Data was nothing.' });
+    expect(mockRes.json).toHaveBeenCalledWith({
+      message: 'User Data was nothing.',
+    });
   });
 
   test('新しいcartsデータの生成に失敗', async () => {
@@ -65,6 +70,8 @@ describe('api/userRegister/createCart.tsのテスト', () => {
     await handler(mockReq, mockRes);
 
     expect(mockRes.status).toHaveBeenCalledWith(401);
-    expect(mockRes.json).toHaveBeenCalledWith({ message: 'Creating cart data was wrong.' });
+    expect(mockRes.json).toHaveBeenCalledWith({
+      message: 'Creating cart data was wrong.',
+    });
   });
 });

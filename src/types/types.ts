@@ -47,10 +47,10 @@ type Order_histories = {
     genre: string;
     category: string;
     price: number;
-    imgUrl: string;
+    imgurl: string;
     date: string;
     quantity: number;
-    dalete: boolean;
+    delete: boolean;
 }
 
 type Reviews = {
@@ -62,6 +62,7 @@ type Reviews = {
     evaluation: number;
     title: string;
     description: string;
+    date: string;
     delete: boolean;
 }
 

@@ -51,14 +51,21 @@ export default function RenewPass(Data: User) {
     Cpassword: '',
   });
   // エラー文
-  const [errorTextPass, setErrorTextPass] = useState<string>('');
-  const [errorTextCPass, setErrorTextCPass] = useState<string>('');
+  const [errorTextPass, setErrorTextPass] = useState<string>();
+  const [errorTextCPass, setErrorTextCPass] = useState<string>();
 
   // ルーターを定義
   const rooter = useRouter();
 
   // inputの値をstateに格納するチェンジイベント
-  function updateLoginData(e: ChangeEvent<HTMLInputElement>) {
+  function updatePass(e: ChangeEvent<HTMLInputElement>) {
+    setPassword({
+      ...password,
+      [`${e.target.name}`]: e.target.value,
+    });
+    setErrorTextPass(passwordValidation(e.target.value))
+  }
+  function updateCPass(e: ChangeEvent<HTMLInputElement>) {
     setPassword({
       ...password,
       [`${e.target.name}`]: e.target.value,
@@ -79,37 +86,40 @@ export default function RenewPass(Data: User) {
     return '';
   };
 
-  async function handleSubmitLogin(e: SyntheticEvent) {
+  async function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
-    setErrorTextPass(passwordValidation(password.password));
-    if (
-      errorTextPass !== '' &&
+    if (password.password !== password.Cpassword) {
+      setErrorTextCPass('確認用パスワードと一致しません');
+      return;
+    }
+    const error = errorTextPass;
+    if (!password.password) {
+      setErrorTextPass('※パスワードを入力して下さい')
+      return;
+    } else if (
+      error !== '' &&
       password.password !== password.Cpassword
     ) {
       setErrorTextCPass('確認用パスワードと一致しません');
       return;
-    } else if (errorTextPass !== '') {
+    } else if (error !== '') {
       setErrorTextCPass('');
       return;
-    } else if (password.password !== password.Cpassword) {
-      setErrorTextCPass('確認用パスワードと一致しません');
-      return;
-    } else {
-      const res = await fetch('/api/renewPass', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...Data,
-          password: password.password,
-        }),
-      });
-      if (res.ok) {
-        setErrorTextPass('');
-        setErrorTextCPass('');
-        rooter.replace('/renewComplete');
-      }
+    }
+    const res = await fetch('/api/renewPass', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ...Data,
+        password: password.password,
+      }),
+    });
+    if (res.ok) {
+      setErrorTextPass('');
+      setErrorTextCPass('');
+      rooter.replace('/renewComplete');
     }
   }
 
@@ -125,7 +135,7 @@ export default function RenewPass(Data: User) {
           </div>
           <form
             className={urStyles.form}
-            onSubmit={(e) => handleSubmitLogin(e)}
+            onSubmit={(e) =>  handleSubmit(e)}
           >
             <div className={urStyles.inputItems}>
               <label htmlFor="password" className={urStyles.label}>
@@ -138,7 +148,7 @@ export default function RenewPass(Data: User) {
                 id="password"
                 className={`${urStyles.inputParts} border border-neutral-500 rounded pl-2.5`}
                 placeholder="例：abcdef123456"
-                onChange={(e) => updateLoginData(e)}
+                onChange={(e) => updatePass(e)}
               />
               <p className={urStyles.error}>{errorTextPass}</p>
             </div>
@@ -153,7 +163,7 @@ export default function RenewPass(Data: User) {
                 id="Cpassword"
                 className={`${urStyles.inputParts} border border-neutral-500 rounded pl-2.5`}
                 placeholder="例：abcdef123456"
-                onChange={(e) => updateLoginData(e)}
+                onChange={(e) => updateCPass(e)}
               />
               <p className={urStyles.error}>{errorTextCPass}</p>
             </div>

@@ -25,6 +25,6 @@ export default async function handler(
     if (spbaseRes.ok) {
         res.status(200).json({ message: 'OK' });
     } else {
-        res.status(401).json({ message: 'Failed' });
+        res.status(spbaseRes.status).json({ message: 'Failed' });
     }
 };
