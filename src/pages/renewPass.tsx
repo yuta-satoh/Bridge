@@ -58,12 +58,18 @@ export default function RenewPass(Data: User) {
   const rooter = useRouter();
 
   // inputの値をstateに格納するチェンジイベント
-  function updateLoginData(e: ChangeEvent<HTMLInputElement>) {
+  function updatePass(e: ChangeEvent<HTMLInputElement>) {
     setPassword({
       ...password,
       [`${e.target.name}`]: e.target.value,
     });
     setErrorTextPass(passwordValidation(e.target.value))
+  }
+  function updateCPass(e: ChangeEvent<HTMLInputElement>) {
+    setPassword({
+      ...password,
+      [`${e.target.name}`]: e.target.value,
+    });
   }
 
   const passwordValidation = (password: string) => {
@@ -141,7 +147,7 @@ export default function RenewPass(Data: User) {
                 id="password"
                 className={`${urStyles.inputParts} border border-neutral-500 rounded pl-2.5`}
                 placeholder="例：abcdef123456"
-                onChange={(e) => updateLoginData(e)}
+                onChange={(e) => updatePass(e)}
               />
               <p className={urStyles.error}>{errorTextPass}</p>
             </div>
@@ -156,7 +162,7 @@ export default function RenewPass(Data: User) {
                 id="Cpassword"
                 className={`${urStyles.inputParts} border border-neutral-500 rounded pl-2.5`}
                 placeholder="例：abcdef123456"
-                onChange={(e) => updateLoginData(e)}
+                onChange={(e) => updateCPass(e)}
               />
               <p className={urStyles.error}>{errorTextCPass}</p>
             </div>
