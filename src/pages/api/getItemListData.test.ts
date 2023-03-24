@@ -48,13 +48,14 @@ describe('api/getItemListData.tsのテスト', () => {
         expect(mockRes.json).toBeCalledWith(dummy_items);
     });
 
-    test('正常なレスポンス', async () => {
+    test('異常なレスポンス', async () => {
         global.fetch = jest.fn().mockResolvedValueOnce({
             ok: false,
+            status: 400,
         });
         await handler(mockReq, mockRes);
 
-        expect(mockRes.status).toBeCalledWith(401);
+        expect(mockRes.status).toBeCalledWith(400);
         expect(mockRes.json).toBeCalledWith({ message: 'Getting Items was failed.' });
     });
 });

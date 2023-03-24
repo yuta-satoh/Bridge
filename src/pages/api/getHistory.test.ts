@@ -54,10 +54,11 @@ describe('api/getHistory.tsのテスト', () => {
     test('異常なレスポンス', async () => {
         global.fetch = jest.fn().mockResolvedValueOnce({
             ok: false,
+            status: 400,
         });
         await handler(mockReq, mockRes);
 
-        expect(mockRes.status).toBeCalledWith(401);
+        expect(mockRes.status).toBeCalledWith(400);
         expect(mockRes.json).toBeCalledWith({ message: 'Getting order-history was feiled' });
     });
 });

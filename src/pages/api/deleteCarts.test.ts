@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import handler from './deleteCart';
 
 const mockReq: NextApiRequest = {
+  method: 'DELETE',
   body: {
     item_id: 1,
     cart_id: 1,
@@ -34,11 +35,11 @@ describe('api/deleteCart.tsのテスト', () => {
   });
 
   test('異常なレスポンス', async () => {
-    global.fetch = jest.fn().mockResolvedValueOnce({ ok: false });
+    global.fetch = jest.fn().mockResolvedValueOnce({ ok: false, status: 400 });
 
     await handler(mockReq, mockRes);
 
-    expect(mockRes.status).toBeCalledWith(401);
+    expect(mockRes.status).toBeCalledWith(400);
     expect(mockRes.json).toBeCalledWith({
       message: 'Deleteing item in cart was failed.',
     });

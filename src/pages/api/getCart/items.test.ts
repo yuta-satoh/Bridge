@@ -66,7 +66,7 @@ describe('api/getCart/items.tsのテスト', () => {
     jest.clearAllMocks();
   });
 
-  test('正常なレスポンス', async () => {
+  test('レスポンスデータあり', async () => {
     global.fetch = jest.fn().mockResolvedValueOnce({
       ok: true,
       json: () => Promise.resolve(dummy_cart_items_data),
@@ -77,7 +77,7 @@ describe('api/getCart/items.tsのテスト', () => {
     expect(mockRes.json).toHaveBeenCalledWith(dummy_cart_items_data);
   });
 
-  test('異常なレスポンス', async () => {
+  test('レスポンスデータが空', async () => {
     global.fetch = jest.fn().mockResolvedValueOnce({
       ok: true,
       json: () => Promise.resolve([]),
