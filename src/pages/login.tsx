@@ -17,7 +17,7 @@ export default function Login() {
     password: '',
   });
   // エラー文
-  const [errorText, setErrorText] = useState<string>("");
+  const [errorText, setErrorText] = useState<string>('');
 
   // ルーターを定義
   const rooter = useRouter();
@@ -29,7 +29,6 @@ export default function Login() {
       [`${e.target.name}`]: e.target.value,
     });
   }
-  
 
   // email, passwordの値がデータベースに存在するかを確認するSubmitイベント
   async function handleSubmitLogin(e: SyntheticEvent) {
@@ -42,14 +41,14 @@ export default function Login() {
       body: JSON.stringify(loginData),
     });
     if (responce.status === 200) {
-      setErrorText("");
+      setErrorText('');
       const strageData = localStorage.getItem('GuestCart');
-      await strageToCart()
+      await strageToCart();
       localStorage.clear();
       rooter.replace('/');
       Cookies.set('status', 'true');
     } else {
-      setErrorText("メールアドレスかパスワードが間違っています");
+      setErrorText('メールアドレスかパスワードが間違っています');
     }
   }
 
@@ -103,11 +102,14 @@ export default function Login() {
               </p>
             </div>
             <div className={urStyles.buttonArea}>
-            <p className={urStyles.error}>{errorText}</p>
+              <p className={urStyles.error}>{errorText}</p>
               <button type="submit" className={urStyles.loginButton}>
                 ログイン<span className={urStyles.buttonSpan}>→</span>
               </button>
             </div>
+            <p className={urStyles.remember}>
+              <Link href="/rememberPass">パスワードをお忘れの方はこちら →</Link>
+            </p>
           </form>
           <div className={urStyles.title}>
             <h2 className={`${urStyles.subTitle}`}>

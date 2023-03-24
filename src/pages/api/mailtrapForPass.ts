@@ -17,17 +17,17 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const user: User = req.body;
+  const email: string = req.body;
 
 //   console.log(user)
 
   const mailData = {
     from: '”Bridge”<no-reply@bridge-mailTest.com>',
-    to: `${user.email}`,
-    subject: `ご購入ありがとうございます`,
-    text: `${user.lastname} 様 ご購入ありがとうございます!`,
-    html: `<p>${user.lastname} 様 購入ありがとうございます！</p>
-    <a href="${process.env.NEXT_PUBLIC_URL_HEAD}/account/history">注文履歴を確認する</a>`,
+    to: `${email}`,
+    subject: `パスワード再設定のご案内`,
+    text: `${email} 様 お帰りなさい!`,
+    html: `<p>${email} 様 お帰りなさい！</p>
+    <a href="${process.env.NEXT_PUBLIC_URL_HEAD}/renewPass">パスワードを再設定する</a>`,
   };
 
   const transport = nodemailer.createTransport({
