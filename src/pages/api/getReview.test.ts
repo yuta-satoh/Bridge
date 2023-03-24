@@ -30,7 +30,7 @@ const dummy_reviews: Reviews[] =[{
     users: { lastname: 'hoge', firstname: 'hoge', }
 }]
 
-describe('api/getItemListData.tsのテスト', () => {
+describe('api/getReview.tsのテスト', () => {
     beforeEach(() => {
         jest.clearAllMocks();
     });

@@ -1,14 +1,11 @@
-import handler from './items';
-import { NextApiRequest, NextApiResponse } from 'next';
+import handler from './newItems';
 import { Items, resData } from '@/types/types';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 // リクエストとレスポンスをモック
 const mockReq: NextApiRequest = {
   method: 'GET',
-  query: {
-    order: 'desc',
-  },
-} as unknown as NextApiRequest;
+} as NextApiRequest;
 
 const mockRes: NextApiResponse<resData | Items[]> = {
   status: jest.fn(() => mockRes),
@@ -30,7 +27,7 @@ const dummy_items: Items[] = [
   },
 ];
 
-describe('api/items.tsのテスト', () => {
+describe('api/newItems.tsのテスト', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -57,7 +54,7 @@ describe('api/items.tsのテスト', () => {
 
     expect(mockRes.status).toBeCalledWith(401);
     expect(mockRes.json).toBeCalledWith({
-      message: 'Getting ordered items was failed.',
+      message: 'Getting new items was failed.',
     });
   });
 });
