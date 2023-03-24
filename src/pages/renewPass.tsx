@@ -21,13 +21,6 @@ type User = {
   delete: Boolean;
 };
 
-// passwordデータの型を定義
-type Password = {
-  password: string;
-  newPassword: string;
-  confirmationPassword: string;
-};
-
 export const getServerSideProps: GetServerSideProps =
   withIronSessionSsr(async ({ req }) => {
     // クッキーの値の取得
@@ -88,32 +81,35 @@ export default function RenewPass(Data: User) {
 
   async function handleSubmitLogin(e: SyntheticEvent) {
     e.preventDefault();
-    setErrorTextPass(passwordValidation(password.password))
-    if(errorTextPass !== '' && password.password !== password.Cpassword){
-      setErrorTextCPass('確認用パスワードと一致しません')
+    setErrorTextPass(passwordValidation(password.password));
+    if (
+      errorTextPass !== '' &&
+      password.password !== password.Cpassword
+    ) {
+      setErrorTextCPass('確認用パスワードと一致しません');
       return;
-    }else if(errorTextPass !== ''){
-      setErrorTextCPass('')
-      return;
-    }
-    if(password.password !== password.Cpassword){
-      setErrorTextCPass('確認用パスワードと一致しません')
-      return;
-    }
-    const res = await fetch('/api/renewPass', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        ...Data,
-        password: password.password,
-      }),
-    });
-    if (res.ok) {
-      setErrorTextPass('');
+    } else if (errorTextPass !== '') {
       setErrorTextCPass('');
-      rooter.replace('/renewPassComplete');
+      return;
+    } else if (password.password !== password.Cpassword) {
+      setErrorTextCPass('確認用パスワードと一致しません');
+      return;
+    } else {
+      const res = await fetch('/api/renewPass', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...Data,
+          password: password.password,
+        }),
+      });
+      if (res.ok) {
+        setErrorTextPass('');
+        setErrorTextCPass('');
+        rooter.replace('/renewComplete');
+      }
     }
   }
 

@@ -4,14 +4,14 @@ import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import urStyles from '../styles/userRegister.module.css';
 import { useRouter } from 'next/router';
 
-
 export default function RememberPass() {
   // email, passwordの値を格納するState
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState('');
   // エラー文
   const [errorText, setErrorText] = useState<string>('');
 
-  const [buttonText, setButtonText] = useState('再登録用メールを送る')
+  const [buttonText, setButtonText] =
+    useState('再登録用メールを送る');
 
   // ルーターを定義
   const rooter = useRouter();
@@ -24,6 +24,10 @@ export default function RememberPass() {
   // email, passwordの値がデータベースに存在するかを確認するSubmitイベント
   async function handleSubmitLogin(e: SyntheticEvent) {
     e.preventDefault();
+    if (email.length === 0) {
+      setErrorText('メールアドレスを入力してください');
+      return;
+    }
     const responce = await fetch('/api/checkEmail', {
       method: 'POST',
       headers: {
@@ -33,7 +37,7 @@ export default function RememberPass() {
     });
     if (responce.status === 200) {
       setErrorText('');
-      setButtonText('メールを再送信する')
+      setButtonText('メールを再送信する');
       try {
         await fetch('api/mailtrapForPass', {
           method: 'POST',
@@ -43,7 +47,7 @@ export default function RememberPass() {
       } catch (error) {
         console.error(error);
       }
-    //   rooter.replace('/login');
+      //   rooter.replace('/login');
     } else {
       setErrorText('登録されていないメールアドレスです');
     }
@@ -52,12 +56,12 @@ export default function RememberPass() {
   return (
     <>
       <Head>
-        <title>確認用メールを送る</title>
+        <title>再設定用メールを送る</title>
       </Head>
       <main className={urStyles.main}>
         <div className={urStyles.body}>
           <div className={urStyles.title}>
-            <h1 className={urStyles.h1}>確認用メールを送る</h1>
+            <h1 className={urStyles.h1}>再設定用メールを送る</h1>
           </div>
           <form
             className={urStyles.form}
@@ -83,7 +87,8 @@ export default function RememberPass() {
             <div className={urStyles.buttonArea}>
               <p className={urStyles.error}>{errorText}</p>
               <button type="submit" className={urStyles.loginButton}>
-                {buttonText}<span className={urStyles.buttonSpan}>→</span>
+                {buttonText}
+                <span className={urStyles.buttonSpan}>→</span>
               </button>
             </div>
           </form>
