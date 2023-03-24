@@ -40,6 +40,7 @@ async function loginIron(req: NextApiRequest, res: NextApiResponse) {
 
   // レスポンスの定義
   if (responce.ok) {
+    req.session.status = { status: 'true' };
     req.session.user = { user: id };
     await req.session.save();
     res

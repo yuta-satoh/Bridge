@@ -26,10 +26,18 @@ export type Email = {
   email: string;
 };
 
+/**
+ * status
+ */
+export type Status = {
+  status: string;
+};
+
 declare module 'iron-session' {
   interface IronSessionData {
     user?: UserId;
     email?: Email;
+    status?: Status;
   }
 }
 
@@ -44,6 +52,12 @@ export const NullUser: UserId = {
  */
 export const NullEmail: Email = {
   email: '',
+};
+/**
+ * Email object that indicates not logged in
+ */
+export const NullStatus: Status = {
+  status: '',
 };
 
 /**
