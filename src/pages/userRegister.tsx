@@ -101,7 +101,7 @@ export default function UserRegister() {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ email: userInfo.email, password: userInfo.password })
+      body: JSON.stringify({ email: userInfo.email })
     })
       .then((res) => res.json())
       .then((data) => {
