@@ -1,3 +1,4 @@
+import { resData } from '@/types/types';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 type Item = {
@@ -17,7 +18,7 @@ type Item = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Item[]>
+  res: NextApiResponse<Item[] | resData>
 ) {
   const userId = req.query.id as string;
   const order = req.query.order as string;
@@ -33,11 +34,10 @@ export default async function handler(
     }
   );
 
-  const guestItems: Item[] = await responseItems.json();
-
   if (responseItems.ok) {
+    const guestItems: Item[] = await responseItems.json();
     res.status(200).json(guestItems);
   } else {
-    res.status(401).end();
+    res.status(401).json({ message: 'Getting order-history was feiled' });
   }
 }

@@ -16,8 +16,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const test = judge();
 
-  console.log(user);
-  console.log(test);
+  // console.log(user);
+  // console.log(test);
 
   res.json(test);
 }

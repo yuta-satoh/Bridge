@@ -1,3 +1,4 @@
+import { resData } from '@/types/types';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 type ReqBody = {
@@ -7,7 +8,7 @@ type ReqBody = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse<resData>
 ) {
   const body: ReqBody = req.body
   const response = await fetch(`${process.env.SUPABASE_URL}/cart_items?cart_id=eq.${body.cart_id}&item_id=eq.${body.item_id}`, {
@@ -20,8 +21,8 @@ export default async function handler(
 	})
 
 	if (response.ok) {
-		res.status(201).end();
+		res.status(200).json({ message: 'Deleteing item in cart was successed.' });
 	} else {
-		res.status(401).end();
+		res.status(401).json({ message: 'Deleteing item in cart was failed.' });
 	}
 }

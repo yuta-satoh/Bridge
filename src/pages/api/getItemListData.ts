@@ -1,20 +1,21 @@
+import { resData } from '@/types/types';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 type Item = {
-    id: number;
-    name: string;
-    description: string;
-    genre: string;
-    category: string;
-    price: number;
-    imgurl: string;
-    stock: number;
-    delete: boolean;
-  };
+  id: number;
+  name: string;
+  description: string;
+  genre: string;
+  category: string;
+  price: number;
+  imgurl: string;
+  stock: number;
+  delete: boolean;
+};
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Item[]>
+  res: NextApiResponse<Item[] | resData>
 ) {
   const genre = req.query.genre as string;
   const category = req.query.category as string;
@@ -23,18 +24,17 @@ export default async function handler(
     {
       method: 'GET',
       headers: {
-        "apikey": `${process.env.SUPABASE_API_KEY}`,
-        "Authorization": `Bearer ${process.env.SUPABASE_API_KEY}`,
+        apikey: `${process.env.SUPABASE_API_KEY}`,
+        Authorization: `Bearer ${process.env.SUPABASE_API_KEY}`,
         'Content-Type': 'application/json',
       },
     }
   );
 
-  const guestItems: Item[] = await responseItems.json();
-
   if (responseItems.ok) {
+    const guestItems: Item[] = await responseItems.json();
     res.status(200).json(guestItems);
   } else {
-    res.status(401).end();
+    res.status(401).json({ message: 'Getting Items was failed.' });
   }
 }
