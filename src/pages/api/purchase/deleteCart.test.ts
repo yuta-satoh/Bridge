@@ -1,22 +1,14 @@
 import { resData } from '@/types/types';
 import { NextApiRequest, NextApiResponse } from 'next';
-import handler from './profile';
+import handler from './addHistory';
 
 // モックのリクエストとレスポンスを定義
 const mockReq: NextApiRequest = {
-  body: {
-    id: 1,
-    lastname: '田中',
-    firstname: '太郎',
-    gender: 'male',
-    tell: '111-111-1111',
-    email: 'hoge@example.com',
-    zipcode: '111-1111',
-    address: '東京都墨田区押上1-1-2',
-    password: 'hogehoge1111',
-    delete: true,
+  method: 'DELETE',
+  query: {
+    id: '1',
   },
-} as NextApiRequest;
+} as unknown as NextApiRequest;
 
 const mockRes: NextApiResponse<resData> = {
   status: jest.fn(() => mockRes),
@@ -24,7 +16,10 @@ const mockRes: NextApiResponse<resData> = {
 } as unknown as NextApiResponse<resData>;
 
 jest.clearAllMocks();
-describe('api/account/profile.tsのテスト', () => {
+describe('api/purchase/deleteCart.tsのテスト', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
   afterAll(() => {
     jest.clearAllMocks();
   });
