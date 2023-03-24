@@ -16,8 +16,18 @@ const mockReq: NextApiRequest = {
 
 const mockRes: NextApiResponse<resData> = {
   status: jest.fn(() => mockRes),
-  json: jest.fn(),
+  end: jest.fn(),
 } as unknown as NextApiResponse<resData>;
+
+// ダミーデータ
+const dummy_items = [{
+  id: 1,
+  item_id: 1,
+  cart_id: 1,
+  date: '2023-01-01',
+  quantity: 50,
+  delete: false,
+}];
 
 describe('api/addCart.tsのテスト', () => {
   beforeEach(() => {
@@ -31,47 +41,47 @@ describe('api/addCart.tsのテスト', () => {
     global.fetch = jest
       .fn()
       // item_id重複なし
-      .mockResolvedValueOnce({ ok: false })
+      .mockResolvedValueOnce({ ok: false, json: () => Promise.resolve(dummy_items) })
       .mockResolvedValueOnce({ ok: true });
 
     await handler(mockReq, mockRes);
     expect(mockRes.status).toBeCalledWith(200);
-    expect(mockRes.json).toBeCalledWith({ message: 'Adding new item in cart was successed.' });
+    expect(mockRes.end).toBeCalledTimes(1);
   });
 
   test('cart-items重複なし&&異常なレスポンス', async () => {
     global.fetch = jest
       .fn()
       // item_id重複なし
-      .mockResolvedValueOnce({ ok: false })
+      .mockResolvedValueOnce({ ok: false, json: () => Promise.resolve(dummy_items)})
       .mockResolvedValueOnce({ ok: false });
 
     await handler(mockReq, mockRes);
     expect(mockRes.status).toBeCalledWith(401);
-    expect(mockRes.json).toBeCalledWith({ message: 'Adding new item in cart was failed.' });
+    expect(mockRes.end).toBeCalledTimes(1)
   });
 
   test('cart-items重複あり&&正常なレスポンス', async () => {
     global.fetch = jest
       .fn()
       // item_id重複なし
-      .mockResolvedValueOnce({ ok: true })
+      .mockResolvedValueOnce({ ok: true, json: () => Promise.resolve(dummy_items) })
       .mockResolvedValueOnce({ ok: true });
 
     await handler(mockReq, mockRes);
     expect(mockRes.status).toBeCalledWith(200);
-    expect(mockRes.json).toBeCalledWith({ message: 'Increasing quantity of item in cart was succesed.' });
+    expect(mockRes.end).toBeCalledTimes(1)
   });
 
   test('cart-items重複あり&&異常なレスポンス', async () => {
     global.fetch = jest
       .fn()
       // item_id重複なし
-      .mockResolvedValueOnce({ ok: true })
+      .mockResolvedValueOnce({ ok: true, json: () => Promise.resolve(dummy_items) })
       .mockResolvedValueOnce({ ok: false });
 
     await handler(mockReq, mockRes);
     expect(mockRes.status).toBeCalledWith(401);
-    expect(mockRes.json).toBeCalledWith({ message: 'Increasing quantity of item in cart was failed.' });
+    expect(mockRes.end).toBeCalledTimes(1)
   });
 });
