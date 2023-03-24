@@ -96,8 +96,7 @@ export default function UserRegister() {
       return
     }
 
-
-    const searchResult: {email: string, password: string} = await fetch("/api/userResister/search", {
+    const searchResult: {email: string } = await fetch("/api/userResister/search", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -110,13 +109,9 @@ export default function UserRegister() {
         return data;
       })
 
-    if (searchResult.email !== "" && searchResult.password !== "") {
-      setErrorText({...errorText, email: searchResult.email, password: searchResult.password});
-    } else if (searchResult.email !== "") {
-      setErrorText({...errorText, email: searchResult.email})
-      setBorderError({...borderError, email: true})
-    } else if (searchResult.password !== "") {
-      setErrorText({...errorText, password: searchResult.password})
+    if (searchResult.email !== "") {
+      setErrorText({...errorText, email: searchResult.email});
+      return;
     } else {
       const postUser = {
         lastname: userInfo.lastName,

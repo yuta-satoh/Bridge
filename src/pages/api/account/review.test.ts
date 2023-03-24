@@ -22,8 +22,9 @@ const mockRes: NextApiResponse<resData> = {
   json: jest.fn(),
 } as unknown as NextApiResponse<resData>;
 
-describe('review.tsのテスト', () => {
-  beforeEach(() => {
+jest.clearAllMocks();
+describe('api/account/review.tsのテスト', () => {
+  afterAll(() => {
     jest.clearAllMocks();
   });
 
