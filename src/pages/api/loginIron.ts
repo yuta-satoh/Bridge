@@ -38,6 +38,7 @@ async function loginIron(req: NextApiRequest, res: NextApiResponse<resData>) {
     // user_idのみ抽出
     const id: string = userData[0].id.toString();
 
+    req.session.status = { status: 'true' };
     req.session.user = { user: id };
     await req.session.save();
     res.status(200).json({ message: 'Login was successed' });

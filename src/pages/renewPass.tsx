@@ -94,6 +94,7 @@ export default function RenewPass(Data: User) {
     }
     const error = errorTextPass;
     if (!password.password) {
+      setErrorTextPass('※パスワードを入力して下さい')
       return;
     } else if (
       error !== '' &&
