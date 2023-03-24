@@ -41,7 +41,7 @@ export default async function handler(
 		if (response.ok) {
 			res.status(200).end();
 		} else {
-			res.status(401).end();
+			res.status(response.status).end();
 		}
 	} else {
 		// 被っているパターン
@@ -61,7 +61,7 @@ export default async function handler(
 		if (response.ok) {
 			res.status(200).end();
 		} else {
-			res.status(401).end();
+			res.status(response.status).end();
 		}
 	}
 }

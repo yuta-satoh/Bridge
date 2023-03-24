@@ -75,7 +75,7 @@ export default async function handler(
       const filter = await response.json();
       res.status(200).json(filter);
     } else {
-      res.status(401).json({ message: 'search items was failed' });
+      res.status(response.status).json({ message: 'search items was failed' });
     }
   }
 }

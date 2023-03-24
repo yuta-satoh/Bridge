@@ -25,13 +25,13 @@ export async function handler(
       },
     }
   );
+  const cartData: Cart[] = await responceCart.json();
 
   // レスポンスの定義
-  if (responceCart.ok) {
-    const cartData: Cart[] = await responceCart.json();
+  if (cartData.length !== 0) {
     res.status(200).json(cartData);
   } else {
-    res.status(400).json({ message: 'Failed' });
+    res.status(responceCart.status).json({ message: 'Cart is Nothing' });
   }
 }
 

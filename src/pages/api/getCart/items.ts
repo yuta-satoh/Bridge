@@ -51,12 +51,12 @@ async function handler(
       },
     }
   );
+  const data = await responce.json();
 
   // レスポンスの定義
-  if (responce.ok) {
-    const data = await responce.json();
+  if (data.length !== 0) {
     res.status(200).json(data);
   } else {
-    res.status(401).json({ message: 'Failed' });
+    res.status(200).json(data);
   }
 }

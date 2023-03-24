@@ -22,7 +22,7 @@ export default async function handler(
     res.status(200).json(data);
   } else {
     res
-      .status(401)
+      .status(response.status)
       .json({ message: 'Getting new items was failed.' });
   }
 }

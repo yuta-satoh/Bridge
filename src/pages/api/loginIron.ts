@@ -43,6 +43,6 @@ async function loginIron(req: NextApiRequest, res: NextApiResponse<resData>) {
     await req.session.save();
     res.status(200).json({ message: 'Login was successed' });
   } else {
-    res.status(401).json({ message: 'Login was failed' });
+    res.status(responce.status).json({ message: 'Login was failed' });
   }
 }

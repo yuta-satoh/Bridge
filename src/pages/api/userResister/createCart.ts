@@ -15,9 +15,9 @@ export default async function handler(
             "Content-Type": "application/json",
         },
     });
+    const uid: { id: number }[] = await userRes.json();
 
-    if(userRes.ok) {
-        const uid: { id: number }[] = await userRes.json();
+    if(uid.length !== 0) {
         const cartRes = await fetch(`${process.env.SUPABASE_URL}/carts`, {
             method: req.method,
             headers: {
@@ -31,9 +31,9 @@ export default async function handler(
         if (cartRes.ok) {
             res.status(200).json({message: "OK"});
         } else {
-            res.status(401).json({message: "Creating cart data was wrong."});
+            res.status(cartRes.status).json({message: "Creating cart data was wrong."});
         }
     } else {
-        res.status(401).json({message: "User Data was nothing."});
+        res.status(userRes.status).json({message: "User Data was nothing."});
     }
 }

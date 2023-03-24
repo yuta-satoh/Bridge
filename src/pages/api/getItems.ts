@@ -37,6 +37,6 @@ export default async function handler(
   } else {
     // ローカルストレージからのデータ取得タイミングの問題で、
     // end()じゃないと機能しなくなってしまう
-    res.status(401).end();
+    res.status(responseItems.status).end();
   }
 }
