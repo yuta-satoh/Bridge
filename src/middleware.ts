@@ -36,6 +36,17 @@ export const middleware = async (req: NextRequest) => {
     return NextResponse.redirect(new URL('/coordination', req.url));
   }
 
+  if (req.nextUrl.pathname.startsWith('/renewPass')) {
+    // クッキー取得
+    const user = session.email?.email;
+    // クッキーがあればそのまま進む
+    if (user !== undefined) {
+      return res;
+    }
+    // クッキーがなければ再設定メール送信画面へ遷移
+    return NextResponse.redirect(new URL('/rememberPass', req.url));
+  }
+
   if (req.nextUrl.pathname.startsWith('/mypage')) {
     // クッキー取得
     const user = session.user?.user;

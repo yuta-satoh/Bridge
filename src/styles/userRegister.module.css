@@ -162,6 +162,12 @@
   font-size: 13px;
   text-align: center;
 }
+.remember:hover {
+  margin: 10px auto;
+  font-size: 13px;
+  text-align: center;
+  color: red;
+}
 .error {
   font-size: 12px;
   padding-bottom: 5px;
