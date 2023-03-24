@@ -51,8 +51,8 @@ export default function RenewPass(Data: User) {
     Cpassword: '',
   });
   // エラー文
-  const [errorTextPass, setErrorTextPass] = useState<string>('');
-  const [errorTextCPass, setErrorTextCPass] = useState<string>('');
+  const [errorTextPass, setErrorTextPass] = useState<string>();
+  const [errorTextCPass, setErrorTextCPass] = useState<string>();
 
   // ルーターを定義
   const rooter = useRouter();
@@ -63,6 +63,7 @@ export default function RenewPass(Data: User) {
       ...password,
       [`${e.target.name}`]: e.target.value,
     });
+    setErrorTextPass(passwordValidation(e.target.value))
   }
 
   const passwordValidation = (password: string) => {
@@ -79,37 +80,39 @@ export default function RenewPass(Data: User) {
     return '';
   };
 
-  async function handleSubmitLogin(e: SyntheticEvent) {
+  async function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
-    setErrorTextPass(passwordValidation(password.password));
-    if (
-      errorTextPass !== '' &&
+    if (password.password !== password.Cpassword) {
+      setErrorTextCPass('確認用パスワードと一致しません');
+      return;
+    }
+    const error = errorTextPass;
+    if (!password.password) {
+      return;
+    } else if (
+      error !== '' &&
       password.password !== password.Cpassword
     ) {
       setErrorTextCPass('確認用パスワードと一致しません');
       return;
-    } else if (errorTextPass !== '') {
+    } else if (error !== '') {
       setErrorTextCPass('');
       return;
-    } else if (password.password !== password.Cpassword) {
-      setErrorTextCPass('確認用パスワードと一致しません');
-      return;
-    } else {
-      const res = await fetch('/api/renewPass', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...Data,
-          password: password.password,
-        }),
-      });
-      if (res.ok) {
-        setErrorTextPass('');
-        setErrorTextCPass('');
-        rooter.replace('/renewComplete');
-      }
+    }
+    const res = await fetch('/api/renewPass', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ...Data,
+        password: password.password,
+      }),
+    });
+    if (res.ok) {
+      setErrorTextPass('');
+      setErrorTextCPass('');
+      rooter.replace('/renewComplete');
     }
   }
 
@@ -125,7 +128,7 @@ export default function RenewPass(Data: User) {
           </div>
           <form
             className={urStyles.form}
-            onSubmit={(e) => handleSubmitLogin(e)}
+            onSubmit={(e) =>  handleSubmit(e)}
           >
             <div className={urStyles.inputItems}>
               <label htmlFor="password" className={urStyles.label}>
