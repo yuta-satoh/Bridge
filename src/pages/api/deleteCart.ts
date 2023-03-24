@@ -23,6 +23,6 @@ export default async function handler(
 	if (response.ok) {
 		res.status(200).json({ message: 'Deleteing item in cart was successed.' });
 	} else {
-		res.status(401).json({ message: 'Deleteing item in cart was failed.' });
+		res.status(response.status).json({ message: 'Deleteing item in cart was failed.' });
 	}
 }
