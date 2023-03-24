@@ -14,6 +14,7 @@ const mockReq: NextApiRequest = {
 const mockRes: NextApiResponse<resData | Items[]> = {
     status: jest.fn(() => mockRes),
     json: jest.fn(),
+    end: jest.fn(),
 } as unknown as NextApiResponse<resData | Items[]>;
 
 // ダミーの商品データ
@@ -55,6 +56,6 @@ describe('api/getItemListData.tsのテスト', () => {
         await handler(mockReq, mockRes);
 
         expect(mockRes.status).toBeCalledWith(401);
-        expect(mockRes.json).toBeCalledWith({ message: 'Getting Items was failed.' });
+        expect(mockRes.end).toBeCalledTimes(1);
     });
 });
