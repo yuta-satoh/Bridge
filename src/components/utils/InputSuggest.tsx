@@ -1,6 +1,7 @@
 import fetcher from "@/lib/fetcher";
 import { ChangeEvent } from "react";
 import useSWR from 'swr'
+import utilstyle from '../../styles/utils.module.css'
 
 type Input = {
     value: string;
@@ -21,14 +22,16 @@ const InputSuggest = ({ value, onChange, onClick }: Input) => {
                         placeholder='何をお探しですか？'
                         value={value}
                         onChange={onChange}
+                        className={utilstyle.input_util}
                     />
                     <button
                         type="button"
                         onClick={() => onClick('')}
+                        className={utilstyle.btn_util}
                     >
                         x
                     </button>
-                    <style jsx>{`
+                    {/* <style jsx>{`
                         input {
                             height: 32px;
                             width: 200px;
@@ -47,7 +50,7 @@ const InputSuggest = ({ value, onChange, onClick }: Input) => {
                             background-color: #ffffff;
                             border-radius: 4px;
                         }
-                    `}</style>
+                    `}</style> */}
                 </div>
             )
         } else {
@@ -58,8 +61,9 @@ const InputSuggest = ({ value, onChange, onClick }: Input) => {
                         placeholder='何をお探しですか？'
                         value={value}
                         onChange={onChange}
+                        className={utilstyle.input_util}
                     />
-                    <style jsx>{`
+                    {/* <style jsx>{`
                         input {
                             height: 32px;
                             width: 200px;
@@ -69,7 +73,7 @@ const InputSuggest = ({ value, onChange, onClick }: Input) => {
                             border-bottom-left-radius: 4px;
                             padding-left: 10px;
                         }
-                    `}</style>
+                    `}</style> */}
                 </div>
             )
         }
@@ -82,13 +86,14 @@ const InputSuggest = ({ value, onChange, onClick }: Input) => {
                         placeholder='何をお探しですか？'
                         value={value}
                         onChange={onChange}
+                        className={utilstyle.input_util}
                     />
-                    <div className="suggest">
+                    <div className={utilstyle.suggest}>
                         {data.map((item, index) => {
                             return (
                                 <div
                                     key={`suggest_${index}`}
-                                    className='suggest-list'
+                                    className={utilstyle.suggest_list}
                                     onClick={() => onClick(item.name)}
                                 >
                                     {item.name}
@@ -96,7 +101,7 @@ const InputSuggest = ({ value, onChange, onClick }: Input) => {
                             )
                         })}
                     </div>
-                    <style jsx>{`
+                    {/* <style jsx>{`
                             input {
                                 height: 32px;
                                 width: 200px;
@@ -122,7 +127,7 @@ const InputSuggest = ({ value, onChange, onClick }: Input) => {
                             .suggest-list:hover {
                                 background-color: rgb(229 229 229);
                             }
-                    `}</style>
+                    `}</style> */}
                 </div>
             )
         } else {
@@ -133,6 +138,7 @@ const InputSuggest = ({ value, onChange, onClick }: Input) => {
                         placeholder='何をお探しですか？'
                         value={value}
                         onChange={onChange}
+                        className={utilstyle.input_util}
                     />
                     <style jsx>{`
                         input {
