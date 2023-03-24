@@ -1,3 +1,48 @@
+type User = {
+    lastName: string,
+    firstName: string,
+    gender: string,
+    tell1: string,
+    tell2: string,
+    tell3: string,
+    email: string,
+    zipcode1: string,
+    zipcode2: string,
+    address: string,
+    password: string,
+    confirmationPassword: string,
+}
+
+const initUserInfo = {
+    lastName: "",
+    firstName: "",
+    gender: "",
+    tell1: "",
+    tell2: "",
+    tell3: "",
+    email: "",
+    zipcode1: "",
+    zipcode2: "",
+    address: "",
+    password: "",
+    confirmationPassword: "",
+}
+
+const initBorderError = {
+    lastName: false,
+    firstName: false,
+    gender: false,
+    tell1: false,
+    tell2: false,
+    tell3: false,
+    email: false,
+    zipcode1: false,
+    zipcode2: false,
+    address: false,
+    password: false,
+    confirmationPassword: false,
+}
+
 // zipcodeはハイフン無しで引数に渡す
 export const searchAddress = async (zipcode: string) => {
     const url = 'https://zipcoda.net/api?';
@@ -86,3 +131,62 @@ export const formValidate = (key: string, value: string, password?: string) => {
         return ''
     }
 }
+
+// onSubmit時に入力に空欄がないかチェックし、エラーメッセージのオブジェクトを返す関数
+export const checkInput = (userInfo: User) => {
+    const keys = Object.keys(userInfo);
+    const values = Object.values(userInfo);
+    const valueIndex = values.flatMap((value, index) => !value ? index : [])
+    const filterKeys = keys.flatMap((key, index) => valueIndex.includes(index) ? key : [])
+    const newObjText = initUserInfo
+    const newObjIsError = initBorderError
+    filterKeys.forEach((key) => {
+      switch (key) {
+        case 'lastName':
+          newObjText.lastName = '※名前を入力して下さい'
+          newObjIsError.lastName = true;
+        case 'firstName':
+          newObjText.firstName = '※名前を入力して下さい'
+          newObjIsError.firstName = true;
+          break
+        case 'gender':
+          newObjText.gender = '※性別を選択して下さい'
+          newObjIsError.gender = true;
+          break
+        case 'email':
+          newObjText.email = '※メールアドレスを入力して下さい'
+          newObjIsError.email = true;
+          break
+        case 'zipcode1':
+          newObjText.zipcode1 = '※郵便番号を入力して下さい'
+          newObjIsError.zipcode1 = true;
+        case 'zipcode2':
+          newObjText.zipcode2 = '※郵便番号を入力して下さい'
+          newObjIsError.zipcode2 = true;
+          break
+        case 'address':
+          newObjText.address = '※住所を入力して下さい'
+          newObjIsError.address = true;
+          break
+        case 'tell1':
+          newObjText.tell1 = '※電話番号を入力して下さい'
+          newObjIsError.tell1 = true;
+        case 'tell2':
+          newObjText.tell2 = '※電話番号を入力して下さい'
+          newObjIsError.tell2 = true;
+        case 'tell3':
+          newObjText.tell3 = '※電話番号を入力して下さい'
+          newObjIsError.tell3 = true;
+          break
+        case 'password':
+          newObjText.password = '※パスワードを入力して下さい'
+          newObjIsError.password = true;
+          break
+        case 'confirmationPassword':
+          newObjText.confirmationPassword = '※確認用パスワードを入力して下さい'
+          newObjIsError.confirmationPassword = true;
+          break
+      }
+    })
+    return { newObjText, newObjIsError }
+  }

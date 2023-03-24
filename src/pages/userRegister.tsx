@@ -3,8 +3,7 @@ import Link from 'next/link';
 import urStyles from '../styles/userRegister.module.css';
 import { useState, ChangeEvent, SyntheticEvent } from 'react';
 import { useRouter } from 'next/router';
-import { searchAddress } from '@/lib/register';
-import { formValidate } from '@/lib/register';
+import { searchAddress, formValidate, checkInput } from '@/lib/register';
 
 type User = {
   lastName: string,
@@ -78,70 +77,13 @@ export default function UserRegister() {
     return validInfo && validError
   };
 
-  const checkInput = () => {
-    const keys = Object.keys(userInfo);
-    const values = Object.values(userInfo);
-    const valueIndex = values.flatMap((value, index) => !value ? index : [])
-    const filterKeys = keys.flatMap((key, index) => valueIndex.includes(index) ? key : [])
-    const newObjText = initUserInfo
-    const newObjIsError = initBorderError
-    filterKeys.forEach((key) => {
-      switch (key) {
-        case 'lastName':
-          newObjText.lastName = '※名前を入力して下さい'
-          newObjIsError.lastName = true;
-        case 'firstName':
-          newObjText.firstName = '※名前を入力して下さい'
-          newObjIsError.firstName = true;
-          break
-        case 'gender':
-          newObjText.gender = '※性別を選択して下さい'
-          newObjIsError.gender = true;
-          break
-        case 'email':
-          newObjText.email = '※メールアドレスを入力して下さい'
-          newObjIsError.email = true;
-          break
-        case 'zipcode1':
-          newObjText.zipcode1 = '※郵便番号を入力して下さい'
-          newObjIsError.zipcode1 = true;
-        case 'zipcode2':
-          newObjText.zipcode2 = '※郵便番号を入力して下さい'
-          newObjIsError.zipcode2 = true;
-          break
-        case 'address':
-          newObjText.address = '※住所を入力して下さい'
-          newObjIsError.address = true;
-          break
-        case 'tell1':
-          newObjText.tell1 = '※電話番号を入力して下さい'
-          newObjIsError.tell1 = true;
-        case 'tell2':
-          newObjText.tell2 = '※電話番号を入力して下さい'
-          newObjIsError.tell2 = true;
-        case 'tell3':
-          newObjText.tell3 = '※電話番号を入力して下さい'
-          newObjIsError.tell3 = true;
-          break
-        case 'password':
-          newObjText.password = '※パスワードを入力して下さい'
-          newObjIsError.password = true;
-          break
-        case 'confirmationPassword':
-          newObjText.confirmationPassword = '※確認用パスワードを入力して下さい'
-          newObjIsError.confirmationPassword = true;
-          break
-      }
-    })
-    setErrorText(newObjText);
-    setBorderError(newObjIsError);
-  }
-
   const submitHandler = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    checkInput();
-
+    
     if (!canSubmit()) {
+      const check = checkInput(userInfo);
+      setErrorText(check.newObjText)
+      setBorderError(check.newObjIsError)
       return
     }
 
@@ -152,6 +94,7 @@ export default function UserRegister() {
       setErrorText({...errorText, tell1: "電話番号はXXXX-XXXX-XXXXの形式で入力して下さい"})
       return
     }
+
 
     const searchResult: {email: string, password: string} = await fetch("/api/userResister/search", {
       method: "POST",
@@ -464,7 +407,7 @@ export default function UserRegister() {
               <br />
             </div>
             <div className={urStyles.buttonArea}>
-              <button type="submit" disabled={!canSubmit()} className={urStyles.submitButton}>
+              <button type="submit" className={urStyles.submitButton}>
                 会員登録をする
                 <span className={urStyles.buttonSpan}>→</span>
               </button>

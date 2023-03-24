@@ -1,19 +1,37 @@
-import { searchAddress, formValidate } from "./register";
+import { searchAddress, formValidate, checkInput } from "./register";
 
-const userInput = {
-    lastName: "",
-    firstName: "",
-    gender: "",
-    tell1: "",
-    tell2: "",
-    tell3: "",
-    email: "",
-    zipcode1: "",
-    zipcode2: "",
-    address: "",
-    password: "",
-    confirmationPassword: "",
-  }
+type User = {
+    lastName: string,
+    firstName: string,
+    gender: string,
+    tell1: string,
+    tell2: string,
+    tell3: string,
+    email: string,
+    zipcode1: string,
+    zipcode2: string,
+    address: string,
+    password: string,
+    confirmationPassword: string,
+}
+
+type Result = {
+    newObjText: User;
+    newObjIsError: {
+        lastName: boolean,
+        firstName: boolean,
+        gender: boolean,
+        tell1: boolean,
+        tell2: boolean,
+        tell3: boolean,
+        email: boolean,
+        zipcode1: boolean,
+        zipcode2: boolean,
+        address: boolean,
+        password: boolean,
+        confirmationPassword: boolean,
+    }
+}
 
 describe('searchAddressの単体テスト', () => {
     const fetchMockOk = () => {
@@ -244,4 +262,79 @@ describe('formValidateの単体テスト', () => {
         const expected = formValidate('confirmationPassword', 'rakus456', 'rakus123')
         expect(expected).toBe('※パスワードと確認用パスワードが不一致です')
     })
+})
+
+describe('checkInputの単体テスト', () => {
+    // 変数を初期化する
+    let userInfo: User
+    let result: Result
+
+    // 各テストごとに再割り当てする
+    beforeEach(() => {
+        userInfo = {
+            lastName: '田中',
+            firstName: '太郎',
+            gender: 'men',
+            tell1: '111',
+            tell2: '2222',
+            tell3: '3333',
+            email: 'rakus@example.com',
+            zipcode1: '105',
+            zipcode2: '0011',
+            address: '東京都港区芝公園1-1-1',
+            password: 'rakus123',
+            confirmationPassword: 'rakus123',
+        }
+        result = {
+            newObjText: {
+                lastName: '',
+                firstName: '',
+                gender: '',
+                tell1: '',
+                tell2: '',
+                tell3: '',
+                email: '',
+                zipcode1: '',
+                zipcode2: '',
+                address: '',
+                password: '',
+                confirmationPassword: '',
+            },
+            newObjIsError: {
+                lastName: false,
+                firstName: false,
+                gender: false,
+                tell1: false,
+                tell2: false,
+                tell3: false,
+                email: false,
+                zipcode1: false,
+                zipcode2: false,
+                address: false,
+                password: false,
+                confirmationPassword: false,
+            }
+        }
+    })
+    test('１ヶ所のみ空欄がある(名前)', () => {
+        userInfo.firstName = ''
+        const expected = checkInput(userInfo)
+        result.newObjText.firstName = '※名前を入力して下さい'
+        result.newObjIsError.firstName = true
+        expect(expected).toEqual(result)
+    })
+    test('複数の空欄がある(名前, メールアドレス, 住所)', () => {
+        userInfo.firstName = ''
+        userInfo.email = ''
+        userInfo.address = ''
+        const expected = checkInput(userInfo)
+        result.newObjText.firstName = '※名前を入力して下さい'
+        result.newObjIsError.firstName = true
+        result.newObjText.email = '※メールアドレスを入力して下さい'
+        result.newObjIsError.email = true
+        result.newObjText.address = '※住所を入力して下さい'
+        result.newObjIsError.address = true
+        expect(expected).toEqual(result)
+    })
+
 })
