@@ -65,6 +65,6 @@ describe('api/getCart/index.tsのテスト', () => {
     await handler(mockReq, mockRes);
 
     expect(mockRes.status).toHaveBeenCalledWith(400);
-    expect(mockRes.json).toHaveBeenCalledWith({ message: 'Failed' });
+    expect(mockRes.json).toHaveBeenCalledWith({ message: 'Cart is Nothing' });
   });
 });

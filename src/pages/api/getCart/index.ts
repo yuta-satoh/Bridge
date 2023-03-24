@@ -31,7 +31,7 @@ export async function handler(
   if (cartData.length !== 0) {
     res.status(200).json(cartData);
   } else {
-    res.status(400).json({ message: 'Failed' });
+    res.status(400).json({ message: 'Cart is Nothing' });
   }
 }
 
