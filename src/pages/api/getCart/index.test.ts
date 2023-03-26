@@ -61,6 +61,7 @@ describe('api/getCart/index.tsのテスト', () => {
       .mockResolvedValueOnce({
         ok: true,
         json: () => Promise.resolve([]),
+        status: 400,
       });
     await handler(mockReq, mockRes);
 

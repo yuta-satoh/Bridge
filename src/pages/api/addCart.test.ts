@@ -41,7 +41,7 @@ describe('api/addCart.tsのテスト', () => {
     global.fetch = jest
       .fn()
       // item_id重複なし
-      .mockResolvedValueOnce({ ok: false, json: () => Promise.resolve(dummy_items) })
+      .mockResolvedValueOnce({ ok: true, json: () => Promise.resolve([]) })
       .mockResolvedValueOnce({ ok: true });
 
     await handler(mockReq, mockRes);
@@ -53,11 +53,11 @@ describe('api/addCart.tsのテスト', () => {
     global.fetch = jest
       .fn()
       // item_id重複なし
-      .mockResolvedValueOnce({ ok: false, json: () => Promise.resolve(dummy_items)})
-      .mockResolvedValueOnce({ ok: false });
+      .mockResolvedValueOnce({ ok: true, json: () => Promise.resolve([])})
+      .mockResolvedValueOnce({ ok: false, status: 400 });
 
     await handler(mockReq, mockRes);
-    expect(mockRes.status).toBeCalledWith(401);
+    expect(mockRes.status).toBeCalledWith(400);
     expect(mockRes.end).toBeCalledTimes(1)
   });
 
@@ -78,10 +78,10 @@ describe('api/addCart.tsのテスト', () => {
       .fn()
       // item_id重複なし
       .mockResolvedValueOnce({ ok: true, json: () => Promise.resolve(dummy_items) })
-      .mockResolvedValueOnce({ ok: false });
+      .mockResolvedValueOnce({ ok: false, status: 400 });
 
     await handler(mockReq, mockRes);
-    expect(mockRes.status).toBeCalledWith(401);
+    expect(mockRes.status).toBeCalledWith(400);
     expect(mockRes.end).toBeCalledTimes(1)
   });
 });

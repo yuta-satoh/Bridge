@@ -64,10 +64,10 @@ describe('api/loginIron.tsのテスト', () => {
   });
 
   test('異常なレスポンス', async () => {
-    global.fetch = jest.fn().mockResolvedValueOnce({ ok: false });
+    global.fetch = jest.fn().mockResolvedValueOnce({ ok: false, status: 400 });
     await loginIron(mockReq, mockRes);
 
-    expect(mockRes.status).toBeCalledWith(401);
+    expect(mockRes.status).toBeCalledWith(400);
     expect(mockRes.json).toBeCalledWith({ message: 'Login was failed' });
   });
 });
