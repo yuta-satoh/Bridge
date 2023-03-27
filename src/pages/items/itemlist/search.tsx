@@ -226,14 +226,13 @@ export default function Search({
                     <Image
                       src={fil.imgurl}
                       alt={fil.name}
-                      width={280}
-                      height={250}
+                      fill
                     />
                   </div>
                   <div className={lstyles.detail}>
                     <p className={lstyles.itemname}>{fil.name}</p>
                     <p>¥ {(fil.price * 1.1).toLocaleString()}</p>
-                    <p>{fil.description}</p>
+                    <p className={lstyles.itemdescription}>{fil.description}</p>
                   </div>
                 </Link>
               </div>
