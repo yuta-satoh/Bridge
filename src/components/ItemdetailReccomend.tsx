@@ -48,8 +48,7 @@ export default function ItemdetailReccomend(props:{
                     <Image
                       src={item.imgurl}
                       alt={item.name}
-                      width={130}
-                      height={110}
+                      fill
                     />
                   </div>
                   <div className={istyles.detail}>

@@ -109,7 +109,7 @@ export default function ReviewList({ itemId }: { itemId: string }) {
         <div className={rlStyles.title}>
           <h2>みんなのレビュー</h2>
         </div>
-        <div>
+        <div className={rlStyles.evaluation_area}>
           <p className={rlStyles.evaluation}>
             平均評価:&nbsp;
             <span className={rlStyles.stars_gray}>
