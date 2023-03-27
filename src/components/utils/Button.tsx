@@ -53,6 +53,7 @@ const Button = ({ children, type, color, shadow, onClick }: Button) => {
                         border: 1px solid #000000;
                         width: 90%;
                         max-width: 400px;
+                        min-width: max-content;
                     }
                     button:hover {
                         background-color: #F2F2F2;

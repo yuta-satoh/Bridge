@@ -12,7 +12,7 @@ module.exports = {
     extend: {},
     screens: {
       sp: "600px",
-      pc: "1200px",
+      pc: "1080px",
     },
   },
   plugins: [],
