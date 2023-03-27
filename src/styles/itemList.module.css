@@ -213,7 +213,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
+    position: relative;
+    width: 280px;
     height: 250px;
   }
 
@@ -221,8 +222,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 280px;
-    height: 250px;
+
   }
 
   .itemname {
@@ -343,351 +343,465 @@
   .result_none a:hover {
     color: #ff7c8a;
   }
+
+  /* selectbox */
+  .selectbox {
+    position: relative;
+}
+
+.selectbox::before,
+.selectbox::after {
+    position: absolute;
+    content: '';
+    pointer-events: none;
+}
+
+.selectbox::before {
+    right: 0;
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    border-radius: 0 3px 3px 0;
+    background-color: #574142;
+    content: '';
+}
+
+.selectbox::after {
+    position: absolute;
+    top: 50%;
+    right: 17px;
+    transform: translate(50%, -50%) rotate(45deg);
+    width: 6px;
+    height: 6px;
+    border-bottom: 2px solid #fff;
+    border-right: 2px solid #fff;
+    content: '';
+}
+
+.selectbox select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    min-width: 100px;
+    height: 35px;
+    border: 1px solid #574142;
+    border-radius: 2px;
+    color: #333333;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    padding-right: 2.1em;
+}
+
+.selectbox select:focus {
+    outline: 1px solid #574142;
+}
 }
 
 @media (width < 600px) {
-    .container {
-      display: flex;
-      flex-direction: column;
-      box-sizing: border-box;
-      min-height: 100vh;
-    }
-  
-    .main {
-      box-sizing: border-box;
-      width: 100%;
-      min-width: 599px;
-      padding: 5px 10px;
-    }
-  
-    .serch_boxes {
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      justify-content: center;
-  
-      margin: 10px 0 25px;
-    }
-  
-    .serchbox {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  
-    .serch {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-  
-      width: 600px;
-      height: 40px;
-      padding: 0 20px;
-  
-      border: 1.5px solid #574142;
-      border-radius: 0.25rem;
-    }
-  
-    .serch_button {
-      width: 100px;
-      height: 40px;
-      padding: 0 20px;
-  
-      color: #f5f5f5;
-      border-radius: 0.25rem;
-      background-color: #574142;
-    }
-  
-    .serch_itemsmenu {
-      padding: 5px 10px;
-    }
-  
-    .serch_checkbox {
-      display: none;
-    }
-  
-    .serch_menu {
-      font-size: small;
-  
-      display: flex;
-      align-items: center;
-      justify-content: center;
-  
-      width: 700px;
-      height: 30px;
-      padding: 5px;
-  
-      color: #f5f5f5;
-      border: 2px solid #574142;
-      background-color: #574142;
-    }
-  
-    .serch_menu:hover,
-    .serch_button:hover {
-      background-color: #442e30;
-    }
-  
-    .serchmenu_itembox {
-      display: flex;
-      visibility: hidden;
-      flex-direction: center;
-      justify-content: center;
-  
-      height: 0;
-      width: 700px;
-      padding: 0px 45px;
-  
-      /* transition:all 0.5s ease-in; */
-  
-      opacity: 0;
-      background-color: #f5f5f5;
-    }
-  
-    .serch_checkbox:checked + .serch_menu + .serchmenu_itembox {
-      visibility: visible;
-  
-      height: 100%;
-      padding: 30px 45px;
-      flex-direction: column;
-  
-      transition: all 1s ease-in-out;
-  
-      opacity: 1;
-    }
-  
-    .itemboxes {
-      padding: 0 15px 15px;
-  
-      border-bottom: 1.5px solid #574142;
-    }
-  
-    /* 絞り込み条件 */
-    .itembox {
-      font-weight: bold;
-  
-      display: flex;
-      align-items: center;
-      justify-content: center;
-  
-      margin: 0 15px 15px;
-    }
-  
-    .itembox_clear {
-      font-size: small;
-      font-weight: lighter;
-      border-radius: 0.25rem;
-  
-      align-items: center;
-      justify-content: flex-start;
-  
-      margin: 0 15px;
-      padding: 5px 10px;
-  
-      background-color: #f8c6bd;
-    }
-  
-    .itembox_clear:hover {
-      background-color: #f6b0a4;
-    }
-  
-    .itembox_item {
-      display: flex;
-      flex-direction: column;
-  
-      padding: 0 15px;
-    }
-  
-    .itembox_categories,
-    .itembox_genres {
-      display: flex;
-    }
-  
-    .itembox_lists {
-      margin: 0 15px;
-    }
-  
-    .itembox_list {
-      padding: 0 10px;
-    }
-  
-    .menu_contents_title {
-      font-weight: bold;
-  
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-  
-      margin: 0 15px 15px;
-    }
-  
-    .categorybox {
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-    }
-  
-    .category_lists {
-      display: flex;
-      align-items: flex-start;
-      justify-content: flex-start;
-  
-      padding: 0 15px;
-    }
-  
-    .category_list {
-      /* flex-basis: 30%; */
-  
-      padding: 0 15px;
-  
-      text-indent: 0%;
-    }
-  
-    /* 商品一覧 */
-    .list_outer {
-      display: grid;
-      overflow: hidden;
-  
-      box-sizing: border-box;
-      padding: 30px 30px 10px;
-  
-      grid-gap: 30px 30px;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      /* grid-template-rows: repeat(auto-fill,minmax(250px, 1fr)); */
-    }
-  
-    .image {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-  
-      height: 250px;
-    }
-  
-    .images {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 280px;
-      height: 250px;
-    }
-  
-    .itemname {
-      font-size: medium;
-    }
-  
-    .detail {
-      display: flex;
-      align-items: flex-start;
-      flex-direction: column;
-      justify-content: space-around;
-      font-size: small;
-  
-      padding: 20px 30px;
-    }
-  
-    .detail:hover,
-    .breadlist:hover {
-      color: #ff7c8a;
-    }
-  
-    .images:hover {
-      box-shadow: 5px 5px 5px #f8c6bd;
-    }
-  
-    /* パンくずリスト */
-    .Breadcrumb {
-      font-size: 12px;
-  
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-  
-      box-sizing: border-box;
-      margin: 2px 0;
-      padding: 10px 20px;
-  
-      color: #574142;
-  
-      -webkit-font-smoothing: antialiased;
-    }
-  
-    .breadlist {
-      font-size: 100%;
-  
-      display: inline-block;
-  
-      margin-right: 1px;
-  
-      color: #574142;
-  
-      -webkit-font-smoothing: antialiased;
-    }
-  
-    .breadlist:not(:last-of-type)::after {
-      margin: 0 0.6em;
-      content: '>';
-      color: #574142;
-    }
-  
-    .paging {
-      display: flex;
-      justify-content: flex-end;
-    }
-  
-    .pages {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      margin: 0 30px 0 0;
-    }
-  
-    .page {
-      margin: 15px;
-      text-align: center;
-      transition: 1s all;
-    }
-  
-    .page:hover {
-      color: #ff7c8a;
-      font-weight: bold;
-  
-      transform: translateY(-5px);
-  
-      transition: 0.25s ease-out;
-    }
-  
-    .currentPage {
-      margin: 15px;
-      border-bottom: 1px solid #574142;
-      border-bottom-width: thin;
-    }
-  
-    .button {
-      width: 25px;
-    }
-  
-    /* 検索結果がない場合 */
-    .result_none {
-      width: 80%;
-      height: 300px;
-      margin: auto;
-      text-align: center;
-    }
-  
-    .result_none p {
-      font-size: 30px;
-      padding-top: 80px;
-    }
-  
-    .result_none a {
-      font-size: 20px;
-      display: inline-block;
-      padding-top: 10px;
-      text-decoration: underline;
-    }
-  
-    .result_none a:hover {
-      color: #ff7c8a;
-    }
+  .container {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    min-height: 100vh;
   }
-  
+
+  .main {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 599px;
+    padding: 5px 10px;
+  }
+
+  .serch_boxes {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    margin: 10px 0 25px;
+  }
+
+  .serchbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .serch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 600px;
+    height: 40px;
+    padding: 0 20px;
+
+    border: 1.5px solid #574142;
+    border-radius: 0.25rem;
+  }
+
+  .serch_button {
+    width: 100px;
+    height: 40px;
+    padding: 0 20px;
+
+    color: #f5f5f5;
+    border-radius: 0.25rem;
+    background-color: #574142;
+  }
+
+  .serch_itemsmenu {
+    padding: 5px 10px;
+  }
+
+  .serch_checkbox {
+    display: none;
+  }
+
+  .serch_menu {
+    font-size: small;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 700px;
+    height: 30px;
+    padding: 5px;
+
+    color: #f5f5f5;
+    border: 2px solid #574142;
+    background-color: #574142;
+  }
+
+  .serch_menu:hover,
+  .serch_button:hover {
+    background-color: #442e30;
+  }
+
+  .serchmenu_itembox {
+    display: flex;
+    visibility: hidden;
+    flex-direction: center;
+    justify-content: center;
+
+    height: 0;
+    width: 700px;
+    padding: 0px 45px;
+
+    /* transition:all 0.5s ease-in; */
+
+    opacity: 0;
+    background-color: #f5f5f5;
+  }
+
+  .serch_checkbox:checked + .serch_menu + .serchmenu_itembox {
+    visibility: visible;
+
+    height: 100%;
+    padding: 30px 45px;
+    flex-direction: column;
+
+    transition: all 1s ease-in-out;
+
+    opacity: 1;
+  }
+
+  .itemboxes {
+    padding: 0 15px 15px;
+
+    border-bottom: 1.5px solid #574142;
+  }
+
+  /* 絞り込み条件 */
+  .itembox {
+    font-weight: bold;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 15px 15px;
+  }
+
+  .itembox_clear {
+    font-size: small;
+    font-weight: lighter;
+    border-radius: 0.25rem;
+
+    align-items: center;
+    justify-content: flex-start;
+
+    margin: 0 15px;
+    padding: 5px 10px;
+
+    background-color: #f8c6bd;
+  }
+
+  .itembox_clear:hover {
+    background-color: #f6b0a4;
+  }
+
+  .itembox_item {
+    display: flex;
+    flex-direction: column;
+
+    padding: 0 15px;
+  }
+
+  .itembox_categories,
+  .itembox_genres {
+    display: flex;
+  }
+
+  .itembox_lists {
+    margin: 0 15px;
+  }
+
+  .itembox_list {
+    padding: 0 10px;
+  }
+
+  .menu_contents_title {
+    font-weight: bold;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    margin: 0 15px 15px;
+  }
+
+  .categorybox {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .category_lists {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    padding: 0 15px;
+  }
+
+  .category_list {
+    /* flex-basis: 30%; */
+
+    padding: 0 15px;
+
+    text-indent: 0%;
+  }
+
+  /* 商品一覧 */
+  .list_outer {
+    display: grid;
+    box-sizing: border-box;
+    padding: 15px 15px 5px;
+    grid-gap: 15px 5px;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    /* grid-template-rows: repeat(auto-fill,minmax(250px, 1fr)); */
+  }
+
+  .item {
+    margin: 0 auto;
+  }
+
+  .image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 150px;
+    height: 140px;
+  }
+
+  .images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .itemname {
+    font-size: 15px;
+  }
+
+  .itemdescription {
+    display: none;
+  }
+
+  .detail {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size: small;
+
+    padding: 5px 8px;
+  }
+
+  .detail:hover,
+  .breadlist:hover {
+    color: #ff7c8a;
+  }
+
+  .images:hover {
+    box-shadow: 5px 5px 5px #f8c6bd;
+  }
+
+  /* パンくずリスト */
+  .Breadcrumb {
+    font-size: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    box-sizing: border-box;
+    margin: 2px 0;
+    padding: 10px 20px;
+
+    color: #574142;
+
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .breadlist {
+    font-size: 100%;
+
+    display: inline-block;
+
+    margin-right: 1px;
+
+    color: #574142;
+
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .breadlist:not(:last-of-type)::after {
+    margin: 0 0.6em;
+    content: '>';
+    color: #574142;
+  }
+
+  .paging {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .pages {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 20px 10px 0 0;
+  }
+
+  .page {
+    margin: 5px;
+    text-align: center;
+    transition: 1s all;
+  }
+
+  .page:hover {
+    color: #ff7c8a;
+    font-weight: bold;
+
+    transform: translateY(-5px);
+
+    transition: 0.25s ease-out;
+  }
+
+  .currentPage {
+    margin: 5px;
+    border-bottom: 1px solid #574142;
+    border-bottom-width: thin;
+  }
+
+  .button {
+    width: 25px;
+  }
+
+  /* 検索結果がない場合 */
+  .result_none {
+    width: 80%;
+    height: 300px;
+    margin: auto;
+    text-align: center;
+  }
+
+  .result_none p {
+    font-size: 30px;
+    padding-top: 80px;
+  }
+
+  .result_none a {
+    font-size: 20px;
+    display: inline-block;
+    padding-top: 10px;
+    text-decoration: underline;
+  }
+
+  .result_none a:hover {
+    color: #ff7c8a;
+  }
+
+  .itemOrder {
+    font-size: 12px;
+  }
+
+  /* selectbox */
+  .selectbox {
+    position: relative;
+}
+
+.selectbox::before,
+.selectbox::after {
+    position: absolute;
+    content: '';
+    pointer-events: none;
+}
+
+.selectbox::before {
+    right: 0;
+    display: inline-block;
+    width: 25px;
+    height: 27px;
+    border-radius: 0 3px 3px 0;
+    background-color: #574142;
+    content: '';
+}
+
+.selectbox::after {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translate(50%, -50%) rotate(45deg);
+    width: 6px;
+    height: 6px;
+    border-bottom: 2px solid #fff;
+    border-right: 2px solid #fff;
+    content: '';
+}
+
+.selectbox select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    min-width: 50px;
+    height: 25px;
+    border: 1px solid #574142;
+    border-radius: 2px;
+    color: #333333;
+    font-size: 13px;
+    cursor: pointer;
+    text-align: center;
+    padding-right: 2.1em;
+    padding-left: 2px;
+}
+
+.selectbox select:focus {
+    outline: 1px solid #574142;
+}
+}
