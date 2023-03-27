@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 import NewItems from '@/components/NewItems';
 import Button from '@/components/utils/Button';
 import { useRouter } from 'next/router';
+import { useWindowSize } from '@/lib/getWindowSize';
 
 export default function Home() {
   const router = useRouter();
@@ -58,6 +59,8 @@ export default function Home() {
       alt: 'accessory',
     },
   ];
+
+  const windowSize = useWindowSize()
 
   return (
     <>
@@ -113,7 +116,7 @@ export default function Home() {
           </div>
         </div>
         <div className={`${topStyle.content} mt-20`}>
-          <h2 className={`${topStyle.font} text-center text-xl font-bold`}>新着商品</h2>
+          <h2 className='text-center text-xl font-bold mb-2'>新着商品</h2>
           <NewItems />
           <div className={topStyle.buttonContent}>
             <Button
@@ -126,67 +129,97 @@ export default function Home() {
           </div>
         </div>
         <div
-          className={`${topStyle.content} mx-auto mt-20 justify-center`}
+          className={`mx-auto mt-20 justify-center w-5/6`}
         >
           {/* カテゴリの表示は２段で別々にmap()を使っています */}
-          <h2 className={`${topStyle.font} text-center text-xl font-bold`}>
+          <h2 className='text-center text-xl font-bold mb-2'>
             商品カテゴリから探す
           </h2>
-          <ul
-            className={`${topStyle.cateLists} grid grid-cols-5 gap-8 w-4/5 mx-auto mt-5`}
-          >
-            {category.slice(0, 5).map((item) => (
-              <li key={item.alt} >
-                <Link
-                  href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=${item.name}&input=&order=id.desc&page=0`}
-                >
-                  <div className={`${topStyle.cateList} relative block h-16 border rounded hover:shadow-md border-neutral-400`}>
-                    <div className={`${topStyle.cateLis} absolute flex ml-2 top-1/2 -translate-y-1/2`}>
-                      <Image
-                        className={topStyle.cateimg}
-                        src={item.src}
-                        alt={item.alt}
-                        width={50}
-                        height={50}
-                      />
-                      <span className={`${topStyle.catename} my-auto mx-2`}>
-                        {item.name}
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <ul
-            className={`${topStyle.cateLists2} grid grid-cols-4 gap-7 w-3/5 mx-auto mt-5`}
-          >
-            {category.slice(5, 9).map((item) => (
-              <li key={item.alt}>
-                <Link
-                  href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=${item.name}&input=&order=id.desc&page=0`}
-                >
-                  <div className={`${topStyle.cateList} relative block h-16 border rounded hover:shadow border-neutral-400`}>
-                    <div className={`${topStyle.cateLis} absolute ml-2 flex top-1/2 -translate-y-1/2`}>
-                      <Image
-                        className={topStyle.cateimg}
-                        src={item.src}
-                        alt={item.alt}
-                        width={50}
-                        height={50}
-                      />
-                      <span className={`${topStyle.catename} my-auto mx-2`}>
-                        {item.name}
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              </li>
-            ))}
-          </ul>
+          {windowSize.width >= 600 ?
+            <>
+              <ul
+                className={`${topStyle.cateLists} grid grid-cols-5 gap-8 mx-auto mt-5`}
+              >
+                {category.slice(0, 5).map((item) => (
+                  <li key={item.alt} >
+                    <Link
+                      href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=${item.name}&input=&order=id.desc&page=0`}
+                    >
+                      <div className={`${topStyle.cateList} relative block h-16 border rounded hover:shadow-md border-neutral-400`}>
+                        <div className={`${topStyle.cateLis} absolute flex ml-2 top-1/2 -translate-y-1/2`}>
+                          <Image
+                            className={topStyle.cateimg}
+                            src={item.src}
+                            alt={item.alt}
+                            width={50}
+                            height={50}
+                          />
+                          <span className={`${topStyle.catename} my-auto mx-2`}>
+                            {item.name}
+                          </span>
+                        </div>
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <ul
+                className={`${topStyle.cateLists2} grid grid-cols-4 gap-7 w-3/5 mx-auto mt-5`}
+              >
+                {category.slice(5, 9).map((item) => (
+                  <li key={item.alt}>
+                    <Link
+                      href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=${item.name}&input=&order=id.desc&page=0`}
+                    >
+                      <div className={`${topStyle.cateList} relative block h-16 border rounded hover:shadow border-neutral-400`}>
+                        <div className={`${topStyle.cateLis} absolute ml-2 flex top-1/2 -translate-y-1/2`}>
+                          <Image
+                            className={topStyle.cateimg}
+                            src={item.src}
+                            alt={item.alt}
+                            width={50}
+                            height={50}
+                          />
+                          <span className={`${topStyle.catename} my-auto mx-2`}>
+                            {item.name}
+                          </span>
+                        </div>
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </>
+          :
+            <ul
+              className='grid grid-cols-3 gap-4 mx-auto mt-5'
+              >
+                {category.map((item) => (
+                    <li key={item.alt}>
+                      <Link
+                        href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=${item.name}&input=&order=id.desc&page=0`}
+                      >
+                        <div className='relative block border rounded hover:shadow border-neutral-400 h-16'>
+                          <div className='absolute ml-2 flex top-1/2 -translate-y-1/2'>
+                            <Image
+                              src={item.src}
+                              alt={item.alt}
+                              width={50}
+                              height={50}
+                            />
+                            <span className='my-auto mx-1 text-sm'>
+                              {item.name}
+                            </span>
+                          </div>
+                        </div>
+                      </Link>
+                    </li>
+                  ))}
+            </ul>
+          }
         </div>
         <div className={topStyle.scrollArea} id="remind">
-          <h2 className={`${topStyle.font} text-center text-xl font-bold`}>お知らせ</h2>
+          <h2 className='text-center text-xl font-bold'>お知らせ</h2>
           <div className={topStyle.scroll}>
             <div className={topStyle.announce}>
               <p className={topStyle.date}>2023-1-4</p>
