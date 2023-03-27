@@ -1,3 +1,4 @@
+@media (600px <= width) {
 .title {
   font-size: 20px;
   text-align: center;
@@ -5,7 +6,7 @@
 }
 .itemTable {
   width: 90%;
-  margin: 30px 0;
+  margin: 30px auto;
 }
 .tableCell {
   padding: 10px 0;
@@ -21,6 +22,7 @@
 .body {
   width: 80%;
   margin: 30px auto 90px;
+  min-width: 1280px;
 }
 .listItems {
   width: 80%;
@@ -178,4 +180,192 @@
   margin-bottom: 10px;
   color: red;
   font-weight: bold;
+}
+}
+
+@media (width < 600px) {
+  .title {
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+  }
+  .itemTable {
+    width: 90%;
+    margin: 30px auto;
+  }
+  .tableCell {
+    padding: 10px 0;
+  }
+  .tableLine {
+    padding: 10px 0;
+    border-bottom: 1px black solid;
+  }
+  .tableTLine {
+    padding: 10px 0;
+    border-bottom: 1px black solid;
+  }
+  .body {
+    width: 80%;
+    margin: 30px auto 90px;
+    min-width: 599px;
+  }
+  .listItems {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin: auto;
+  }
+  .item {
+    text-align: end;
+    padding: 3px 0;
+    font-size: 12px;
+  }
+  .itemTag {
+    text-align: end;
+    padding-right: 20px;
+    padding: 3px 0;
+  }
+  .itemName {
+    text-align: center;
+    padding: 3px 0;
+    font-size: 13px;
+  }
+  .text {
+    text-align: end;
+    padding: 3px 0 3px;
+  }
+  .topText {
+    text-align: end;
+    padding: 20px 0 3px;
+  }
+  .content {
+    margin: 3px 0 3px;
+  }
+  .topContent {
+    padding: 20px 0 3px;
+  }
+  .subTotal {
+    text-align: end;
+    padding: 3px 0 3px;
+  }
+  .subTTotal {
+    text-align: end;
+    padding: 20px 0 3px;
+  }
+  .total {
+    padding-left: 20px;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: end;
+  }
+  .totalContent {
+    padding: 3px 0;
+    margin-top: 2px;
+  }
+  .buttonStyle {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    padding: 10px 80px;
+    font-size: 17px;
+  }
+  .addressTitle {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  .addressArea {
+    width: 80%;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .buttonArea {
+    text-align: center;
+    margin: 30px 0 60px;
+  }
+  .address {
+    width: 400px;
+    height: 30px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  .zipcode {
+    width: 110px;
+    height: 30px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  .radio {
+    display: flex;
+    margin-top: 10px;
+  }
+  .inputItems {
+    padding-bottom: 10px;
+    padding-left: 15px;
+    margin-top: 5px;
+  }
+  
+  .nonItems {
+    padding-bottom: 10px;
+    padding-left: 15px;
+    display: none;
+  }
+  .nAddress {
+    margin: 5px 0;
+    padding-left: 15px;
+    font-size: 18px;
+  }
+  .dateArea {
+    width: 80%;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .label {
+    margin-left: 5px;
+  }
+  .date {
+    margin-left: 15px;
+    border: 1px solid gray;
+    border-radius: 5px;
+  }
+  .timeArea {
+    width: 80%;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .time_zone {
+    margin-left: 15px;
+    margin-top: 8px;
+    border: 1px solid gray;
+    border-radius: 5px;
+  }
+  
+  /* stripe決済フォーム */
+  .paymentArea {
+    width: 80%;
+    margin: auto;
+  }
+  
+  .paymentButtonArea {
+    margin: 30px auto 10px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .paymentButtonArea button {
+    margin-bottom: 5px;
+  }
+  
+  .paymentButtonArea>div {
+    margin-bottom: 10px;
+    color: red;
+    font-weight: bold;
+  }
 }
