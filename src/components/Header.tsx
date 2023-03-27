@@ -143,7 +143,7 @@ export default function Header({
               href={`/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=椅子&category=テーブル&category=カーテン&category=照明&category=カーペット%2Fラグ&category=ソファ&category=収納棚&category=ベッド%2F寝具&category=小物%2F雑貨&input=${input}&order=id.desc&page=0`}
             >
               <button
-                className={`${headModule.searchs}h-8 text-white bg-neutral-900 border border-neutral-900 rounded-r px-1`}
+                className={`${headModule.searchs} h-6 sp:h-8 text-white bg-neutral-900 border border-neutral-900 rounded-r px-1`}
                 type="submit"
               >
                 <span className={headModule.search}>検索</span>
@@ -161,7 +161,7 @@ export default function Header({
               />
               <div>
                 <span
-                  className={`${headModule.menuLabel} inline-block mt-1`}
+                  className={`${headModule.menuLabel} inline-block`}
                 >
                   マイページ
                 </span>
@@ -178,7 +178,7 @@ export default function Header({
               />
               <div>
                 <span
-                  className={`${headModule.menuLabel} inline-block mt-1 whitespace-nowrap`}
+                  className={`${headModule.menuLabel} inline-block whitespace-nowrap`}
                 >
                   ログイン
                 </span>

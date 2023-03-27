@@ -1,7 +1,7 @@
 import fetcher from "@/lib/fetcher";
 import { ChangeEvent } from "react";
 import useSWR from 'swr'
-import utilstyle from '../../styles/utils.module.css'
+import { useWindowSize } from "@/lib/getWindowSize";
 
 type Input = {
     value: string;
@@ -12,6 +12,7 @@ type Input = {
 
 const InputSuggest = ({ value, onChange, onClick }: Input) => {
     const input = value.split(/\s+/)[0]
+    const windowSize = useWindowSize()
     const { data, error } = useSWR(`/api/suggest?input=${input}`, fetcher)
     if (!data || data.length === 0 || error || data[0].name === value) {
         if (value) {
@@ -22,35 +23,17 @@ const InputSuggest = ({ value, onChange, onClick }: Input) => {
                         placeholder='何をお探しですか？'
                         value={value}
                         onChange={onChange}
-                        className={utilstyle.input_util}
+                        className='h-6 sp:h-8 w-32 sp:w-48 border border-neutral-500 rounded-l pl-2'
                     />
-                    <button
+                    {windowSize.width >= 600 ? 
+                        <button
                         type="button"
                         onClick={() => onClick('')}
-                        className={utilstyle.btn_util}
-                    >
-                        x
-                    </button>
-                    {/* <style jsx>{`
-                        input {
-                            height: 32px;
-                            width: 200px;
-                            border-width: 1px;
-                            border-color: rgb(115 115 115);
-                            border-top-left-radius: 4px;
-                            border-bottom-left-radius: 4px;
-                            padding-left: 10px;
-                        }
-                        button {
-                            position: absolute;
-                            height: 28px;
-                            width: 32px;
-                            left: 167px;
-                            top: 2px;
-                            background-color: #ffffff;
-                            border-radius: 4px;
-                        }
-                    `}</style> */}
+                        className='absolute h-5 sp:h-7 w-3 sp:w-7 left-28 sp:left-40 top-px sp:top-0.5 bg-white rounded'
+                        >
+                            x
+                        </button>
+                    : <></> }
                 </div>
             )
         } else {
@@ -61,19 +44,8 @@ const InputSuggest = ({ value, onChange, onClick }: Input) => {
                         placeholder='何をお探しですか？'
                         value={value}
                         onChange={onChange}
-                        className={utilstyle.input_util}
+                        className='h-6 sp:h-8 w-32 sp:w-48 border border-neutral-500 rounded-l pl-2'
                     />
-                    {/* <style jsx>{`
-                        input {
-                            height: 32px;
-                            width: 200px;
-                            border-width: 1px;
-                            border-color: rgb(115 115 115);
-                            border-top-left-radius: 4px;
-                            border-bottom-left-radius: 4px;
-                            padding-left: 10px;
-                        }
-                    `}</style> */}
                 </div>
             )
         }
@@ -86,14 +58,14 @@ const InputSuggest = ({ value, onChange, onClick }: Input) => {
                         placeholder='何をお探しですか？'
                         value={value}
                         onChange={onChange}
-                        className={utilstyle.input_util}
+                        className='h-6 sp:h-8 w-32 sp:w-48 border border-neutral-500 rounded-l pl-2'
                     />
-                    <div className={utilstyle.suggest}>
+                    <div className='absolute z-50'>
                         {data.map((item, index) => {
                             return (
                                 <div
                                     key={`suggest_${index}`}
-                                    className={utilstyle.suggest_list}
+                                    className='w-32 sp:w-48 border bg-white border-neutral-500 text-sm p-1 cursor-pointer hover:bg-neutral-200'
                                     onClick={() => onClick(item.name)}
                                 >
                                     {item.name}
@@ -101,33 +73,6 @@ const InputSuggest = ({ value, onChange, onClick }: Input) => {
                             )
                         })}
                     </div>
-                    {/* <style jsx>{`
-                            input {
-                                height: 32px;
-                                width: 200px;
-                                border-width: 1px;
-                                border-color: rgb(115 115 115);
-                                border-top-left-radius: 4px;
-                                padding-left: 10px;
-                            }
-                            .suggest {
-                                position: absolute;
-                                z-index: 50;
-                            }
-                            .suggest-list {
-                                width: 200px;
-                                border-width: 1px;
-                                background-color: rgb(255 255 255);
-                                border-color: rgb(115 115 115);
-                                font-size: 14px;
-                                line-height: 20px;
-                                padding: 4px;
-                                cursor: pointer;
-                            }
-                            .suggest-list:hover {
-                                background-color: rgb(229 229 229);
-                            }
-                    `}</style> */}
                 </div>
             )
         } else {
@@ -138,19 +83,8 @@ const InputSuggest = ({ value, onChange, onClick }: Input) => {
                         placeholder='何をお探しですか？'
                         value={value}
                         onChange={onChange}
-                        className={utilstyle.input_util}
+                        className='h-6 sp:h-8 w-32 sp:w-48 border border-neutral-500 rounded-l pl-2'
                     />
-                    <style jsx>{`
-                        input {
-                            height: 32px;
-                            width: 200px;
-                            border-width: 1px;
-                            border-color: rgb(115 115 115);
-                            border-top-left-radius: 4px;
-                            border-bottom-left-radius: 4px;
-                            padding-left: 10px;
-                        }
-                    `}</style>
                 </div>
             )
         }
