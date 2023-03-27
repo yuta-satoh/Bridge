@@ -1,356 +1,736 @@
-.body {
-  max-width: 85%;
-  margin: auto;
-}
-.selectbody {
-  max-width: 85%;
-  margin: auto;
-  height: auto
-}
-.links {
-  display: flex;
-  margin-top: 20px;
-  margin-bottom: 30px;
-}
-.pageLink {
-  font-size: 15px;
-  margin-right: 5px;
-}
-.pageLink a:hover {
-  color: #ff7c8a;
-}
-.greaterThan {
-  margin-left: 5px;
-}
-.title {
-  font-size: 30px;
-}
-.selectTheme {
-  display: flex;
-  margin-top: 20px;
-  margin-left: 20px;
-  margin-bottom: 20px;
-}
-.selectResTheme {
-  display: flex;
-  font-size: 20px;
-  margin-top: 20px;
-  margin-left: 20px;
-  margin-bottom: 20px;
-}
-.theme {
-  font-size: 20px;
-}
-.select {
-  font-size: 19px;
-}
-.titleItems {
-  border-bottom: 2px black solid;
-}
-.buttonSpan {
-  padding-left: 15px;
-}
-.linkButton {
-  border: 2.3px black solid;
-  padding: 8px 60px;
-  background-color: white;
-  font-size: 13px;
-  font-weight: bold;
-  margin: 40px 0;
-}
-.linkItems {
-  text-align: center;
-  margin: 40px auto 80px;
-}
-.subTitle {
-  margin-top: 40px;
-  margin-bottom: 40px;
-  font-weight: bold;
-  font-size: 20px;
-}
-.categoriesList {
-  display: flex;
-  justify-content: center;
-  margin: 10px;
-}
-.categories {
-  display: flex;
-  margin-top: 20px;
-  background-color: rgb(245, 245, 245);
-  margin: 10px 20px;
+@media (600px <= width) {
+  .main {
+    min-width: 1180px;
+    width: 100%;
+  }
+  .body {
+    width: 85%;
+    margin: auto;
+  }
+  .selectbody {
+    width: 85%;
+    margin: auto;
+    height: auto;
+  }
+  .links {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+  .pageLink {
+    font-size: 15px;
+    margin-right: 5px;
+  }
+  .pageLink a:hover {
+    color: #ff7c8a;
+  }
+  .greaterThan {
+    margin-left: 5px;
+  }
+  .title {
+    font-size: 30px;
+  }
+  .selectTheme {
+    display: flex;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+  .selectResTheme {
+    display: flex;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+  .theme {
+    font-size: 20px;
+  }
+  .select {
+    font-size: 19px;
+  }
+  .titleItems {
+    border-bottom: 2px black solid;
+  }
+  .buttonSpan {
+    padding-left: 15px;
+  }
+  .linkButton {
+    border: 2.3px black solid;
+    padding: 8px 60px;
+    background-color: white;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 40px 0;
+  }
+  .linkItems {
+    text-align: center;
+    margin: 40px auto 80px;
+  }
+  .subTitle {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  .categoriesList {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+  }
+  .categories {
+    display: flex;
+    margin-top: 20px;
+    background-color: rgb(245, 245, 245);
+    margin: 10px 20px;
+    align-items: center;
+  }
+
+  .coordinateArea {
+    background-image: url(/images/background/coordinate.jpeg);
+    background-size: cover;
+    height: 750px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+  }
+  .empty {
+    width: 25%;
+    height: 240px;
+  }
+  .images {
+    width: 25%;
+    height: 240px;
+  }
+  .images_b {
+    width: 25%;
+    height: 240px;
+    text-align: -webkit-center;
+    animation: fade 0.4s ease-in-out 0.2s 1 normal forwards;
+  }
+  .images_c {
+    width: 25%;
+    height: 240px;
+    text-align: -webkit-right;
+  }
+
+  .price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(245, 245, 245);
+    max-width: 20%;
+    margin: 0 auto;
+    padding: 5px 0;
+  }
+  .total {
+    font-weight: bold;
+    margin-right: 15px;
+  }
+  .totalPrice {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 15px;
+  }
+  .cardList {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 80%;
+    margin: 0 auto;
+    justify-content: space-between;
+  }
+  .card {
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+  }
+  .cardDetail {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 16px;
+  }
+  .cardContents {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  .cardStyle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 5px;
+  }
+  .cardStyle:hover {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 5px 5px 5px #f8c6bd;
+    padding-bottom: 5px;
+  }
+
+  .priceFree {
+    font-size: 13px;
+    color: white;
+    background-color: black;
+    padding: 3px;
+    margin-left: 15px;
+  }
+  .button {
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+  .buttonStyle {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    padding: 10px 0px;
+    font-size: 17px;
+    width: 230px;
+  }
+  .image {
+    width: 200px;
+    height: 200px;
+  }
+  .display {
+    width: 240px;
+    height: 240px;
+  }
+  .resForm {
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+  .backButtonStyle {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    padding: 10px 80px;
+    font-size: 17px;
+    border: 2.3px black solid;
+  }
+
+  .fadein {
+    animation: fadeIn 1s cubic-bezier(0.33, 1, 0.68, 1) 1 forwards;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .articleImageA {
+    animation: fadeInA 3s ease 0s 1 normal backwards;
+  }
+  .articleImageB {
+    animation: fadeInB 3s ease 0.5s 1 normal backwards;
+  }
+  .articleImageC {
+    margin: auto;
+    animation: fadeInC 3s ease 1s 1 normal backwards;
+  }
+  .articleImageD {
+    animation: fadeInD 3s ease 1.5s 1 normal backwards;
+  }
+  .imageBox {
+    width: 600px;
+    height: 600px;
+  }
+
+  .imageBoxUpper {
+    display: flex;
+    justify-content: space-between;
+  }
+  .imageBoxBottom {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .article {
+    display: flex;
+    justify-content: space-between;
+    margin: 100px 0;
+  }
+  .articleTitle {
+    font-size: 30px;
+    font-weight: bold;
+    animation: fadeInE 3s ease 0s 1 normal backwards;
+  }
+
+  .articleContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  .articleSentence {
+    font-size: 25px;
+    animation: fadeInF 3s ease 1s 1 normal backwards;
+  }
+  .buttonArea {
+    text-align: center;
+    animation: fadeInF 3s ease 1s 1 normal backwards;
+  }
+  .tryButton {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    border: 2.3px black solid;
+    padding: 10px 0px;
+    font-size: 14px;
+    width: 200px;
+    transition: background-color 0.5s;
+  }
+  .tryButton:hover {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    border: 2.3px white solid;
+    padding: 10px 0px;
+    font-size: 14px;
+    width: 200px;
+  }
+  @keyframes fadeInA {
+    from {
+      opacity: 0;
+      transform: translateY(-100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fadeInB {
+    from {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes fadeInC {
+    from {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes fadeInD {
+    from {
+      opacity: 0;
+      transform: translateY(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fadeInE {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes fadeInF {
+    from {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
 }
 
-.coordinateArea {
-  background-image: url(/images/background/coordinate.jpeg);
-  background-size: cover;
-  height: 750px;
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: space-between;
-}
-.empty {
-  width: 25%;
-  height: 240px;
-}
-.images {
-  width: 25%;
-  height: 240px;
-}
-.images_b {
-  width: 25%;
-  height: 240px;
-  text-align: -webkit-center;
-  animation: fade 0.4s ease-in-out 0.2s 1 normal forwards;
-}
-.images_c {
-  width: 25%;
-  height: 240px;
-  text-align: -webkit-right;
-}
+@media (width < 600px) {
+  .main {
+    min-width: 500px;
+    width: 100%;
+  }
+  .body {
+    width: 85%;
+    margin: auto;
+  }
+  .selectbody {
+    width: 85%;
+    margin: auto;
+    height: auto;
+  }
+  .links {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+  .pageLink {
+    font-size: 15px;
+    margin-right: 5px;
+  }
+  .pageLink a:hover {
+    color: #ff7c8a;
+  }
+  .greaterThan {
+    margin-left: 5px;
+  }
+  .title {
+    font-size: 23px;
+  }
+  .selectTheme {
+    display: flex;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+  .selectResTheme {
+    display: flex;
+    font-size: 15px;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+  .theme {
+    font-size: 18px;
+  }
+  .select {
+    font-size: 18px;
+  }
+  .titleItems {
+    border-bottom: 2px black solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .buttonSpan {
+    padding-left: 15px;
+  }
+  .linkButton {
+    border: 2.3px black solid;
+    padding: 8px 60px;
+    background-color: white;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 40px 0;
+  }
+  .linkItems {
+    text-align: center;
+    margin: 40px auto 80px;
+  }
+  .subTitle {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  .categoriesList {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 10px;
+  }
+  .categories {
+    display: flex;
+    margin-top: 20px;
+    background-color: rgb(245, 245, 245);
+    margin: 10px 5px;
+    font-size: 13px;
+    height: 20px;
+    align-items: center;
+  }
+  .categoriesImage{
+    width: 15px;
+    height: 15px;
+  }
 
-.price {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgb(245, 245, 245);
-  max-width: 20%;
-  margin: 0 auto;
-  padding: 5px 0;
-}
-.total {
-  font-weight: bold;
-  margin-right: 15px;
-}
-.totalPrice {
-  font-size: 20px;
-  font-weight: bold;
-  margin-left: 15px;
-}
-.cardList {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 80%;
-  margin: 0 auto;
-  justify-content: space-between;
-}
-.card {
-  width: 33%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 40px;
-}
-.cardDetail {
-  margin-top: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 16px;
-}
-.cardContents {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 10px;
-}
-.cardStyle {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 5px;
-}
-.cardStyle:hover {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow:5px 5px 5px #F8C6BD;
-  padding-bottom: 5px;
-}
+  .coordinateArea {
+    background-image: url(/images/background/coordinate.jpeg);
+    background-size: cover;
+    height: 750px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+  }
+  .empty {
+    width: 25%;
+    height: 240px;
+  }
+  .images {
+    width: 25%;
+    height: 240px;
+  }
+  .images_b {
+    width: 25%;
+    height: 240px;
+    text-align: -webkit-center;
+    animation: fade 0.4s ease-in-out 0.2s 1 normal forwards;
+  }
+  .images_c {
+    width: 25%;
+    height: 240px;
+    text-align: -webkit-right;
+  }
 
-.priceFree {
-  font-size: 13px;
-  color: white;
-  background-color: black;
-  padding: 3px;
-  margin-left: 15px;
-}
-.button {
-  margin-left: 20px;
-  margin-bottom: 20px;
-}
-.buttonStyle {
-  background-color: black;
-  color: white;
-  font-weight: bold;
-  padding: 10px 0px;
-  font-size: 17px;
-  width: 230px;
-}
-.image {
-  width: 200px;
-  height: 200px;
-}
-.display {
-  width: 240px;
-  height: 240px;
-}
-.resForm {
-  margin-top: 20px;
-  margin-bottom: 30px;
-}
-.backButtonStyle {
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-  font-weight: bold;
-  padding: 10px 80px;
-  font-size: 17px;
-  border: 2.3px black solid;
-}
+  .price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(245, 245, 245);
+    max-width: 40%;
+    margin: 0 auto;
+    padding: 5px 0;
+  }
+  .total {
+    font-weight: bold;
+    margin-right: 15px;
+  }
+  .totalPrice {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 15px;
+  }
+  .cardList {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+    margin: 0 auto;
+    justify-content: space-between;
+  }
+  .card {
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+  }
+  .cardDetail {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 10px;
+  }
+  .cardContents {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  .cardStyle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 5px;
+  }
+  .cardStyle:hover {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 5px 5px 5px #f8c6bd;
+    padding-bottom: 5px;
+  }
 
-.fadein {
-  animation: fadeIn 1s cubic-bezier(0.33, 1, 0.68, 1) 1 forwards;
-}
+  .priceFree {
+    font-size: 10px;
+    color: white;
+    background-color: black;
+    padding: 3px;
+    margin-left: 15px;
+  }
+  .button {
+    margin-left: 20px;
+    margin-bottom: 20px;
+    margin-top: 40px;
+  }
+  .buttonStyle {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    padding: 10px 0px;
+    font-size: 17px;
+    width: 230px;
+  }
+  .image {
+    width: 100px;
+    height: 100px;
+  }
+  .display {
+    width: 240px;
+    height: 240px;
+  }
+  .resForm {
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+  .backButtonStyle {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    padding: 10px 80px;
+    font-size: 17px;
+    border: 2.3px black solid;
+  }
 
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
+  .fadein {
+    animation: fadeIn 1s cubic-bezier(0.33, 1, 0.68, 1) 1 forwards;
   }
-  100% {
-    opacity: 1;
-  }
-}
 
-.articleImageA {
-  animation: fadeInA 3s ease 0s 1 normal backwards;
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 
-}
-.articleImageB {
-  animation: fadeInB 3s ease 0.5s 1 normal backwards;
+  .articleImageA {
+    animation: fadeInA 3s ease 0s 1 normal backwards;
+  }
+  .articleImageB {
+    animation: fadeInB 3s ease 0.5s 1 normal backwards;
+  }
+  .articleImageC {
+    /* margin: auto; */
+    animation: fadeInC 3s ease 1s 1 normal backwards;
+  }
+  .articleImageD {
+    animation: fadeInD 3s ease 1.5s 1 normal backwards;
+  }
+  .imageBox {
+    width: 600px;
+    height: 600px;
+    display: none;
+  }
+  /*
+  .imageBoxUpper {
+    display: flex;
+    justify-content: space-between;
+  }
+  .imageBoxBottom {
+    display: flex;
+    justify-content: flex-end;
+  }*/
+  .article {
+    display: flex;
+    justify-content: space-around;
+    margin: 100px auto;
+    width: 100%;
+  }
+  .articleTitle {
+    font-size: 25px;
+    font-weight: bold;
+    animation: fadeInE 3s ease 0s 1 normal backwards;
+  }
 
-}
-.articleImageC {
-  margin: auto;
-  animation: fadeInC 3s ease 1s 1 normal backwards;
-}
-.articleImageD {
-  animation: fadeInD 3s ease 1.5s 1 normal backwards;
+  .articleContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+  }
 
-}
-.imageBox {
-  width: 600px;
-  height: 600px;
-}
-
-.imageBoxUpper {
-  display: flex;
-  justify-content: space-between;
-}
-.imageBoxBottom {
-  display: flex;
-  justify-content: flex-end;
-}
-.article{
-  display: flex;
-  justify-content: space-between;
-  margin: 100px 0;
-}
-.articleTitle{
-  font-size: 30px;
-  font-weight: bold;
-  animation: fadeInE 3s ease 0s 1 normal backwards;
-}
-
-.articleContent{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-}
-
-.articleSentence{
-  font-size: 25px;
-  animation: fadeInF 3s ease 1s 1 normal backwards;
-}
-.buttonArea{
-  text-align: center;
-  animation: fadeInF 3s ease 1s 1 normal backwards;
-}
-.tryButton {
-  background-color: white;
-  color: black;
-  font-weight: bold;
-  border: 2.3px black solid;
-  padding: 10px 0px;
-  font-size: 14px;
-  width: 200px;
-  transition: background-color 0.5s;
-}
-.tryButton:hover {
-  background-color: black;
-  color: white;
-  font-weight: bold;
-  border: 2.3px white solid;
-  padding: 10px 0px;
-  font-size: 14px;
-  width: 200px;
-}
-@keyframes fadeInA {
-  from {
-    opacity: 0;
-    transform: translateY(-100px);
+  .articleSentence {
+    font-size: 20px;
+    margin-top: 20px;
+    animation: fadeInF 3s ease 1s 1 normal backwards;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  .buttonArea {
+    text-align: center;
+    margin-top: 20px;
+    animation: fadeInF 3s ease 1s 1 normal backwards;
   }
-}
-@keyframes fadeInB {
-  from {
-    opacity: 0;
-    transform: translateX(100px);
+  .tryButton {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    border: 2.3px black solid;
+    padding: 10px 0px;
+    font-size: 14px;
+    width: 200px;
+    transition: background-color 0.5s;
   }
-  to {
-    opacity: 1;
-    transform: translateX(0);
+  .tryButton:hover {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    border: 2.3px white solid;
+    padding: 10px 0px;
+    font-size: 14px;
+    width: 200px;
   }
-}
-@keyframes fadeInC {
-  from {
-    opacity: 0;
-    transform: translateX(-100px);
+  @keyframes fadeInA {
+    from {
+      opacity: 0;
+      transform: translateY(-100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
-  to {
-    opacity: 1;
-    transform: translateX(0);
+  @keyframes fadeInB {
+    from {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
-}
-@keyframes fadeInD {
-  from {
-    opacity: 0;
-    transform: translateY(100px);
+  @keyframes fadeInC {
+    from {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  @keyframes fadeInD {
+    from {
+      opacity: 0;
+      transform: translateY(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
-}
-@keyframes fadeInE {
-  from {
-    opacity: 0;
-    transform: translateX(50px);
+  @keyframes fadeInE {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-@keyframes fadeInF {
-  from {
-    opacity: 0;
-    transform: translateX(100px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
+  @keyframes fadeInF {
+    from {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 }

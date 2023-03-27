@@ -27,7 +27,7 @@ export default function coordination() {
         <title>コーディネートジェネレーター</title>
       </Head>
       <div className={cModule.selectbody}>
-        <main>
+        <main className={cModule.main}>
           <ol className={cModule.links} id="top">
             <li className={cModule.pageLink}>
               <Link href="/">Bridge</Link>
