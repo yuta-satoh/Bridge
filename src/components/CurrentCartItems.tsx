@@ -63,8 +63,8 @@ export default function CurrentCartItems({
   if (!cartItemData) {
     return (
       <>
-        <div className="container">
-          <div className="background">
+        <div className={cciStyles.container}>
+          <div className={cciStyles.background}>
             <p>ロード中...</p>
           </div>
         </div>
@@ -75,8 +75,8 @@ export default function CurrentCartItems({
   if (cartItemData.length === 0) {
     return (
       <>
-        <div className="container">
-          <div className="background">
+        <div className={cciStyles.container}>
+          <div className={cciStyles.background}>
             <p>カートに商品がありません</p>
           </div>
         </div>
