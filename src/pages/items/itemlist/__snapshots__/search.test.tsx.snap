@@ -97,28 +97,24 @@ exports[`検索ページ 正常に描画される 1`] = `
         表示順：
       </label>
       <label
-        class="jsx-2217467650 selectbox"
+        class="selectbox"
       >
         <select
-          class="jsx-2217467650"
           data-testid="select-option"
           id="itemOrder"
           name="itemOrder"
         >
           <option
-            class="jsx-2217467650"
             value="新着順"
           >
             新着順
           </option>
           <option
-            class="jsx-2217467650"
             value="安い順"
           >
             安い順
           </option>
           <option
-            class="jsx-2217467650"
             value="高い順"
           >
             高い順
@@ -138,14 +134,13 @@ exports[`検索ページ 正常に描画される 1`] = `
           >
             <img
               alt="ベルベットアームチェア"
-              data-nimg="1"
+              data-nimg="fill"
               decoding="async"
-              height="250"
               loading="lazy"
-              src="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=640&q=75"
-              srcset="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=384&q=75 1x, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=640&q=75 2x"
-              style="color: transparent;"
-              width="280"
+              sizes="100vw"
+              src="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=3840&q=75"
+              srcset="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=640&q=75 640w, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=750&q=75 750w, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=828&q=75 828w, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=1080&q=75 1080w, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=1200&q=75 1200w, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=1920&q=75 1920w, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=2048&q=75 2048w, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=3840&q=75 3840w"
+              style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; color: transparent;"
             />
           </div>
           <div
@@ -159,7 +154,9 @@ exports[`検索ページ 正常に描画される 1`] = `
             <p>
               ¥ 17,600
             </p>
-            <p>
+            <p
+              class="itemdescription"
+            >
               ベルベットのお洒落なデザインチェア。
             </p>
           </div>
@@ -174,14 +171,13 @@ exports[`検索ページ 正常に描画される 1`] = `
           >
             <img
               alt="丸椅子スツール"
-              data-nimg="1"
+              data-nimg="fill"
               decoding="async"
-              height="250"
               loading="lazy"
-              src="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_2.jpg&w=640&q=75"
-              srcset="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_2.jpg&w=384&q=75 1x, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_2.jpg&w=640&q=75 2x"
-              style="color: transparent;"
-              width="280"
+              sizes="100vw"
+              src="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_2.jpg&w=3840&q=75"
+              srcset="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_2.jpg&w=640&q=75 640w, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_2.jpg&w=750&q=75 750w, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_2.jpg&w=828&q=75 828w, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_2.jpg&w=1080&q=75 1080w, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_2.jpg&w=1200&q=75 1200w, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_2.jpg&w=1920&q=75 1920w, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_2.jpg&w=2048&q=75 2048w, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_2.jpg&w=3840&q=75 3840w"
+              style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; color: transparent;"
             />
           </div>
           <div
@@ -195,7 +191,9 @@ exports[`検索ページ 正常に描画される 1`] = `
             <p>
               ¥ 11,000
             </p>
-            <p>
+            <p
+              class="itemdescription"
+            >
               落ち着いた可愛らしいベロア風スツール。
             </p>
           </div>

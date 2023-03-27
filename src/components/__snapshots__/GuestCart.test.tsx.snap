@@ -22,7 +22,7 @@ exports[`ゲストカートコンポーネント ゲストカートが空の状�
         href="/"
       >
         <div
-          class="container mx-auto pt-1.5 text-center h-10 w-1/3 border-2 border-neutral-900 bg-white mt-4"
+          class="container mx-auto pt-1.5 text-center h-10 w-1/2 sp:w-1/3 sp:min-w-max border-2 border-neutral-900 bg-white mt-4"
         >
           お買い物はこちらから
         </div>
@@ -35,10 +35,80 @@ exports[`ゲストカートコンポーネント ゲストカートが空の状�
 exports[`ゲストカートコンポーネント ゲストカートに中身あり 1`] = `
 <DocumentFragment>
   <div
-    class="flex mx-auto w-4/5 gap-32"
+    class="pc:flex pc:flex-row-reverse mx-auto w-screen sp:w-3/5 pc:w-4/5 gap-32"
   >
     <div
-      class="w-3/5 mt-10"
+      class="flex w-4/5 mx-auto mt-10"
+    >
+      <h2
+        class="text-3xl font-bold"
+      >
+        合計
+      </h2>
+      <span
+        class="mt-2"
+      >
+        (2点の商品)
+      </span>
+    </div>
+    <div
+      class="mx-auto w-4/5 pc:w-1/4 h-80 mt-4 pc:mt-20 p-10 border-2 border-neutral-900 rounded bg-gray-100 pc:sticky top-10 min-w-max"
+    >
+      <p>
+        <span>
+          商品合計
+        </span>
+        <span
+          class="float-right"
+        >
+          ¥ 26,000
+        </span>
+      </p>
+      <p>
+        <span>
+          消費税
+        </span>
+        <span
+          class="float-right"
+        >
+          ¥ 2,600
+        </span>
+      </p>
+      <div
+        class="border-b border-black"
+      >
+        <p
+          class="mt-10 text-lg font-bold"
+        >
+          <span>
+            合計
+          </span>
+          <span
+            class="float-right"
+          >
+            ¥ 28,600
+          </span>
+        </p>
+      </div>
+      <div
+        class="flex flex-col items-center gap-5 mt-5"
+      >
+        <button
+          class="jsx-644447430"
+          type="button"
+        >
+          ログイン
+        </button>
+        <button
+          class="jsx-644447430"
+          type="button"
+        >
+          お買い物を続ける
+        </button>
+      </div>
+    </div>
+    <div
+      class="mx-auto w-4/5 sp:w-full pc:w-3/5 mt-10"
     >
       <div
         class="flex"
@@ -55,17 +125,17 @@ exports[`ゲストカートコンポーネント ゲストカートに中身あ�
         </span>
       </div>
       <div
-        class="border border-neutral-900 my-2 py-3 px-8 h-52"
+        class="border border-neutral-900 my-2 py-3 px-8 w-full min-h-max"
       >
         <div
-          class="flex gap-5"
+          class="sp:flex sp:gap-5"
         >
           <a
             href="/items/itemlist/1"
           >
             <img
               alt="ベルベットアームチェア"
-              class="rounded w-36 h-36"
+              class="rounded w-36 h-36 mx-auto"
               data-nimg="1"
               decoding="async"
               height="150"
@@ -170,17 +240,17 @@ exports[`ゲストカートコンポーネント ゲストカートに中身あ�
         </div>
       </div>
       <div
-        class="border border-neutral-900 my-2 py-3 px-8 h-52"
+        class="border border-neutral-900 my-2 py-3 px-8 w-full min-h-max"
       >
         <div
-          class="flex gap-5"
+          class="sp:flex sp:gap-5"
         >
           <a
             href="/items/itemlist/2"
           >
             <img
               alt="丸椅子スツール"
-              class="rounded w-36 h-36"
+              class="rounded w-36 h-36 mx-auto"
               data-nimg="1"
               decoding="async"
               height="150"
@@ -294,10 +364,10 @@ exports[`ゲストカートコンポーネント ゲストカートに中身あ�
         </h2>
       </div>
       <div
-        class="flex gap-3 mb-10"
+        class="pc:flex pc:gap-3 mb-10"
       >
         <div
-          class="border border-neutral-900 w-1/2 rounded p-3 mx-auto"
+          class="border border-neutral-900 w-full rounded p-3 mx-auto my-4"
         >
           <div
             class="flex gap-5"
@@ -307,7 +377,7 @@ exports[`ゲストカートコンポーネント ゲストカートに中身あ�
             >
               <img
                 alt="ベルベットアームチェア"
-                class="rounded"
+                class="rounded w-40 pc:w-28 h-32 pc:h-20"
                 data-nimg="1"
                 decoding="async"
                 height="100"
@@ -325,7 +395,7 @@ exports[`ゲストカートコンポーネント ゲストカートに中身あ�
                 href="/items/itemlist/1"
               >
                 <p
-                  class="underline mb-1 text-sm"
+                  class="underline mb-1 text-lg pc:text-sm"
                 >
                   ベルベットアームチェア
                 </p>
@@ -345,7 +415,7 @@ exports[`ゲストカートコンポーネント ゲストカートに中身あ�
           </div>
         </div>
         <div
-          class="border border-neutral-900 w-1/2 rounded p-3 mx-auto"
+          class="border border-neutral-900 w-full rounded p-3 mx-auto my-4"
         >
           <div
             class="flex gap-5"
@@ -355,7 +425,7 @@ exports[`ゲストカートコンポーネント ゲストカートに中身あ�
             >
               <img
                 alt="丸椅子スツール"
-                class="rounded"
+                class="rounded w-40 pc:w-28 h-32 pc:h-20"
                 data-nimg="1"
                 decoding="async"
                 height="100"
@@ -373,7 +443,7 @@ exports[`ゲストカートコンポーネント ゲストカートに中身あ�
                 href="/items/itemlist/2"
               >
                 <p
-                  class="underline mb-1 text-sm"
+                  class="underline mb-1 text-lg pc:text-sm"
                 >
                   丸椅子スツール
                 </p>
@@ -394,62 +464,6 @@ exports[`ゲストカートコンポーネント ゲストカートに中身あ�
         </div>
       </div>
     </div>
-    <div
-      class="w-1/4 h-80 mt-10 p-10 border-2 border-neutral-900 rounded bg-gray-100"
-    >
-      <p>
-        <span>
-          商品合計
-        </span>
-        <span
-          class="float-right"
-        >
-          ¥ 26,000
-        </span>
-      </p>
-      <p>
-        <span>
-          消費税
-        </span>
-        <span
-          class="float-right"
-        >
-          ¥ 2,600
-        </span>
-      </p>
-      <div
-        class="border-b border-black"
-      >
-        <p
-          class="mt-10 text-lg font-bold"
-        >
-          <span>
-            合計
-          </span>
-          <span
-            class="float-right"
-          >
-            ¥ 28,600
-          </span>
-        </p>
-      </div>
-      <div
-        class="flex flex-col items-center gap-5 mt-5"
-      >
-        <button
-          class="jsx-1912866866"
-          type="button"
-        >
-          ログイン
-        </button>
-        <button
-          class="jsx-1912866866"
-          type="button"
-        >
-          お買い物を続ける
-        </button>
-      </div>
-    </div>
   </div>
 </DocumentFragment>
 `;
@@ -457,204 +471,24 @@ exports[`ゲストカートコンポーネント ゲストカートに中身あ�
 exports[`ゲストカートコンポーネント ゲストカートの商品の個数を変更する 1`] = `
 <DocumentFragment>
   <div
-    class="flex mx-auto w-4/5 gap-32"
+    class="pc:flex pc:flex-row-reverse mx-auto w-screen sp:w-3/5 pc:w-4/5 gap-32"
   >
     <div
-      class="w-3/5 mt-10"
+      class="flex w-4/5 mx-auto mt-10"
     >
-      <div
-        class="flex"
+      <h2
+        class="text-3xl font-bold"
       >
-        <h2
-          class="text-3xl font-bold"
-        >
-          カート
-        </h2>
-        <span
-          class="mt-2"
-        >
-          (1点の商品)
-        </span>
-      </div>
-      <div
-        class="border border-neutral-900 my-2 py-3 px-8 h-52"
+        合計
+      </h2>
+      <span
+        class="mt-2"
       >
-        <div
-          class="flex gap-5"
-        >
-          <a
-            href="/items/itemlist/1"
-          >
-            <img
-              alt="ベルベットアームチェア"
-              class="rounded w-36 h-36"
-              data-nimg="1"
-              decoding="async"
-              height="150"
-              loading="lazy"
-              src="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=384&q=75"
-              srcset="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=384&q=75 2x"
-              style="color: transparent;"
-              width="150"
-            />
-          </a>
-          <div
-            class="px-3 py-4"
-          >
-            <a
-              href="/items/itemlist/1"
-            >
-              <p
-                class="underline mb-1 text-xl"
-              >
-                ベルベットアームチェア
-              </p>
-            </a>
-            <p
-              class="text-sm mt-1"
-            >
-              ベルベットのお洒落なデザインチェア。
-            </p>
-            <p
-              class="mt-1 text-lg"
-            >
-              ¥ 16,000
-            </p>
-          </div>
-        </div>
-        <div
-          class="text-right"
-        >
-          <button
-            class="jsx-3340056729"
-            type="button"
-          >
-            削除
-          </button>
-          <select
-            class="ml-5 border border-neutral-900 rounded p-1"
-            data-testid="select-option"
-            id="cart_quantity"
-            name="quantity"
-          >
-            <option
-              selected=""
-              value="1"
-            >
-              1
-            </option>
-            <option
-              value="2"
-            >
-              2
-            </option>
-            <option
-              value="3"
-            >
-              3
-            </option>
-            <option
-              value="4"
-            >
-              4
-            </option>
-            <option
-              value="5"
-            >
-              5
-            </option>
-            <option
-              value="6"
-            >
-              6
-            </option>
-            <option
-              value="7"
-            >
-              7
-            </option>
-            <option
-              value="8"
-            >
-              8
-            </option>
-            <option
-              value="9"
-            >
-              9
-            </option>
-            <option
-              value="10"
-            >
-              10
-            </option>
-          </select>
-        </div>
-      </div>
-      <div
-        class="mt-16 mb-5"
-      >
-        <h2
-          class="text-3xl font-bold"
-        >
-          こちらもいかがですか？
-        </h2>
-      </div>
-      <div
-        class="flex gap-3 mb-10"
-      >
-        <div
-          class="border border-neutral-900 w-1/2 rounded p-3 mx-auto"
-        >
-          <div
-            class="flex gap-5"
-          >
-            <a
-              href="/items/itemlist/1"
-            >
-              <img
-                alt="ベルベットアームチェア"
-                class="rounded"
-                data-nimg="1"
-                decoding="async"
-                height="100"
-                loading="lazy"
-                src="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=256&q=75"
-                srcset="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=128&q=75 1x, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=256&q=75 2x"
-                style="color: transparent;"
-                width="100"
-              />
-            </a>
-            <div
-              class="px-2 py-2"
-            >
-              <a
-                href="/items/itemlist/1"
-              >
-                <p
-                  class="underline mb-1 text-sm"
-                >
-                  ベルベットアームチェア
-                </p>
-                <p
-                  class="mt-1 mb-5"
-                >
-                  ¥ 16,000
-                </p>
-              </a>
-              <button
-                class="jsx-896052889"
-                type="button"
-              >
-                カートに入れる
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+        (1点の商品)
+      </span>
     </div>
     <div
-      class="w-1/4 h-80 mt-10 p-10 border-2 border-neutral-900 rounded bg-gray-100"
+      class="mx-auto w-4/5 pc:w-1/4 h-80 mt-4 pc:mt-20 p-10 border-2 border-neutral-900 rounded bg-gray-100 pc:sticky top-10 min-w-max"
     >
       <p>
         <span>
@@ -696,30 +530,21 @@ exports[`ゲストカートコンポーネント ゲストカートの商品の�
         class="flex flex-col items-center gap-5 mt-5"
       >
         <button
-          class="jsx-1912866866"
+          class="jsx-644447430"
           type="button"
         >
           ログイン
         </button>
         <button
-          class="jsx-1912866866"
+          class="jsx-644447430"
           type="button"
         >
           お買い物を続ける
         </button>
       </div>
     </div>
-  </div>
-</DocumentFragment>
-`;
-
-exports[`ゲストカートコンポーネント ゲストカートの商品を削除 1`] = `
-<DocumentFragment>
-  <div
-    class="flex mx-auto w-4/5 gap-32"
-  >
     <div
-      class="w-3/5 mt-10"
+      class="mx-auto w-4/5 sp:w-full pc:w-3/5 mt-10"
     >
       <div
         class="flex"
@@ -736,17 +561,17 @@ exports[`ゲストカートコンポーネント ゲストカートの商品を�
         </span>
       </div>
       <div
-        class="border border-neutral-900 my-2 py-3 px-8 h-52"
+        class="border border-neutral-900 my-2 py-3 px-8 w-full min-h-max"
       >
         <div
-          class="flex gap-5"
+          class="sp:flex sp:gap-5"
         >
           <a
             href="/items/itemlist/1"
           >
             <img
               alt="ベルベットアームチェア"
-              class="rounded w-36 h-36"
+              class="rounded w-36 h-36 mx-auto"
               data-nimg="1"
               decoding="async"
               height="150"
@@ -860,10 +685,10 @@ exports[`ゲストカートコンポーネント ゲストカートの商品を�
         </h2>
       </div>
       <div
-        class="flex gap-3 mb-10"
+        class="pc:flex pc:gap-3 mb-10"
       >
         <div
-          class="border border-neutral-900 w-1/2 rounded p-3 mx-auto"
+          class="border border-neutral-900 w-full rounded p-3 mx-auto my-4"
         >
           <div
             class="flex gap-5"
@@ -873,7 +698,7 @@ exports[`ゲストカートコンポーネント ゲストカートの商品を�
             >
               <img
                 alt="ベルベットアームチェア"
-                class="rounded"
+                class="rounded w-40 pc:w-28 h-32 pc:h-20"
                 data-nimg="1"
                 decoding="async"
                 height="100"
@@ -891,7 +716,7 @@ exports[`ゲストカートコンポーネント ゲストカートの商品を�
                 href="/items/itemlist/1"
               >
                 <p
-                  class="underline mb-1 text-sm"
+                  class="underline mb-1 text-lg pc:text-sm"
                 >
                   ベルベットアームチェア
                 </p>
@@ -912,8 +737,31 @@ exports[`ゲストカートコンポーネント ゲストカートの商品を�
         </div>
       </div>
     </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`ゲストカートコンポーネント ゲストカートの商品を削除 1`] = `
+<DocumentFragment>
+  <div
+    class="pc:flex pc:flex-row-reverse mx-auto w-screen sp:w-3/5 pc:w-4/5 gap-32"
+  >
     <div
-      class="w-1/4 h-80 mt-10 p-10 border-2 border-neutral-900 rounded bg-gray-100"
+      class="flex w-4/5 mx-auto mt-10"
+    >
+      <h2
+        class="text-3xl font-bold"
+      >
+        合計
+      </h2>
+      <span
+        class="mt-2"
+      >
+        (1点の商品)
+      </span>
+    </div>
+    <div
+      class="mx-auto w-4/5 pc:w-1/4 h-80 mt-4 pc:mt-20 p-10 border-2 border-neutral-900 rounded bg-gray-100 pc:sticky top-10 min-w-max"
     >
       <p>
         <span>
@@ -955,17 +803,211 @@ exports[`ゲストカートコンポーネント ゲストカートの商品を�
         class="flex flex-col items-center gap-5 mt-5"
       >
         <button
-          class="jsx-1912866866"
+          class="jsx-644447430"
           type="button"
         >
           ログイン
         </button>
         <button
-          class="jsx-1912866866"
+          class="jsx-644447430"
           type="button"
         >
           お買い物を続ける
         </button>
+      </div>
+    </div>
+    <div
+      class="mx-auto w-4/5 sp:w-full pc:w-3/5 mt-10"
+    >
+      <div
+        class="flex"
+      >
+        <h2
+          class="text-3xl font-bold"
+        >
+          カート
+        </h2>
+        <span
+          class="mt-2"
+        >
+          (1点の商品)
+        </span>
+      </div>
+      <div
+        class="border border-neutral-900 my-2 py-3 px-8 w-full min-h-max"
+      >
+        <div
+          class="sp:flex sp:gap-5"
+        >
+          <a
+            href="/items/itemlist/1"
+          >
+            <img
+              alt="ベルベットアームチェア"
+              class="rounded w-36 h-36 mx-auto"
+              data-nimg="1"
+              decoding="async"
+              height="150"
+              loading="lazy"
+              src="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=384&q=75"
+              srcset="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=384&q=75 2x"
+              style="color: transparent;"
+              width="150"
+            />
+          </a>
+          <div
+            class="px-3 py-4"
+          >
+            <a
+              href="/items/itemlist/1"
+            >
+              <p
+                class="underline mb-1 text-xl"
+              >
+                ベルベットアームチェア
+              </p>
+            </a>
+            <p
+              class="text-sm mt-1"
+            >
+              ベルベットのお洒落なデザインチェア。
+            </p>
+            <p
+              class="mt-1 text-lg"
+            >
+              ¥ 16,000
+            </p>
+          </div>
+        </div>
+        <div
+          class="text-right"
+        >
+          <button
+            class="jsx-3340056729"
+            type="button"
+          >
+            削除
+          </button>
+          <select
+            class="ml-5 border border-neutral-900 rounded p-1"
+            data-testid="select-option"
+            id="cart_quantity"
+            name="quantity"
+          >
+            <option
+              selected=""
+              value="1"
+            >
+              1
+            </option>
+            <option
+              value="2"
+            >
+              2
+            </option>
+            <option
+              value="3"
+            >
+              3
+            </option>
+            <option
+              value="4"
+            >
+              4
+            </option>
+            <option
+              value="5"
+            >
+              5
+            </option>
+            <option
+              value="6"
+            >
+              6
+            </option>
+            <option
+              value="7"
+            >
+              7
+            </option>
+            <option
+              value="8"
+            >
+              8
+            </option>
+            <option
+              value="9"
+            >
+              9
+            </option>
+            <option
+              value="10"
+            >
+              10
+            </option>
+          </select>
+        </div>
+      </div>
+      <div
+        class="mt-16 mb-5"
+      >
+        <h2
+          class="text-3xl font-bold"
+        >
+          こちらもいかがですか？
+        </h2>
+      </div>
+      <div
+        class="pc:flex pc:gap-3 mb-10"
+      >
+        <div
+          class="border border-neutral-900 w-full rounded p-3 mx-auto my-4"
+        >
+          <div
+            class="flex gap-5"
+          >
+            <a
+              href="/items/itemlist/1"
+            >
+              <img
+                alt="ベルベットアームチェア"
+                class="rounded w-40 pc:w-28 h-32 pc:h-20"
+                data-nimg="1"
+                decoding="async"
+                height="100"
+                loading="lazy"
+                src="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=256&q=75"
+                srcset="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=128&q=75 1x, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=256&q=75 2x"
+                style="color: transparent;"
+                width="100"
+              />
+            </a>
+            <div
+              class="px-2 py-2"
+            >
+              <a
+                href="/items/itemlist/1"
+              >
+                <p
+                  class="underline mb-1 text-lg pc:text-sm"
+                >
+                  ベルベットアームチェア
+                </p>
+                <p
+                  class="mt-1 mb-5"
+                >
+                  ¥ 16,000
+                </p>
+              </a>
+              <button
+                class="jsx-896052889"
+                type="button"
+              >
+                カートに入れる
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

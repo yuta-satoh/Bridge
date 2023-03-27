@@ -126,19 +126,11 @@ exports[`mypage.tsxのスナップショットテスト ロード中 1`] = `
         <div
           className="logout"
         >
-          <a
-            className="logout"
-            href="/login"
+          <button
             onClick={[Function]}
-            onMouseEnter={[Function]}
-            onTouchStart={[Function]}
           >
-            <button
-              onClick={[Function]}
-            >
-              ログアウト
-            </button>
-          </a>
+            ログアウト
+          </button>
         </div>
       </div>
     </div>

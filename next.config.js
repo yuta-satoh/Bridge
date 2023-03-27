@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    optimizeFonts: true,
-  },
+  // experimental: {
+  //   optimizeFonts: true,
+  // },
   reactStrictMode: true,
   // rewrites: async () => {
   //   return [

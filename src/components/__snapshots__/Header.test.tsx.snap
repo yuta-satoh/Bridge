@@ -37,7 +37,9 @@ exports[`ログイン時 1`] = `
     <ul
       className="left flex gap-10 mr-60 ml-30 whitespace-nowrap"
     >
-      <li>
+      <li
+        className="text-base"
+      >
         <a
           href="/items/itemlist"
           onClick={[Function]}
@@ -69,11 +71,9 @@ exports[`ログイン時 1`] = `
         className="form"
         onSubmit={[Function]}
       >
-        <div
-          className="jsx-8bc86e838c725549"
-        >
+        <div>
           <input
-            className="jsx-8bc86e838c725549"
+            className="h-6 sp:h-8 w-32 sp:w-48 text-xs border border-neutral-500 rounded-l pl-2"
             onChange={[Function]}
             placeholder="何をお探しですか？"
             type="text"
@@ -87,7 +87,7 @@ exports[`ログイン時 1`] = `
           onTouchStart={[Function]}
         >
           <button
-            className="searchsh-8 text-white bg-neutral-900 border border-neutral-900 rounded-r px-1"
+            className="searchs h-6 sp:h-8 text-white bg-neutral-900 border border-neutral-900 rounded-r px-1"
             type="submit"
           >
             <span
@@ -125,7 +125,7 @@ exports[`ログイン時 1`] = `
         />
         <div>
           <span
-            className="menuLabel inline-block mt-1"
+            className="menuLabel inline-block pt-1"
           >
             マイページ
           </span>
@@ -176,7 +176,9 @@ exports[`未ログイン 1`] = `
     <ul
       className="left flex gap-10 mr-60 ml-30 whitespace-nowrap"
     >
-      <li>
+      <li
+        className="text-base"
+      >
         <a
           href="/items/itemlist"
           onClick={[Function]}
@@ -197,9 +199,6 @@ exports[`未ログイン 1`] = `
           お知らせ
         </a>
       </li>
-      <li>
-        ヘルプ
-      </li>
     </ul>
     <div
       className="right flex gap-10"
@@ -208,11 +207,9 @@ exports[`未ログイン 1`] = `
         className="form"
         onSubmit={[Function]}
       >
-        <div
-          className="jsx-8bc86e838c725549"
-        >
+        <div>
           <input
-            className="jsx-8bc86e838c725549"
+            className="h-6 sp:h-8 w-32 sp:w-48 text-xs border border-neutral-500 rounded-l pl-2"
             onChange={[Function]}
             placeholder="何をお探しですか？"
             type="text"
@@ -226,7 +223,7 @@ exports[`未ログイン 1`] = `
           onTouchStart={[Function]}
         >
           <button
-            className="searchsh-8 text-white bg-neutral-900 border border-neutral-900 rounded-r px-1"
+            className="searchs h-6 sp:h-8 text-white bg-neutral-900 border border-neutral-900 rounded-r px-1"
             type="submit"
           >
             <span
@@ -264,7 +261,7 @@ exports[`未ログイン 1`] = `
         />
         <div>
           <span
-            className="menuLabel inline-block mt-1 whitespace-nowrap"
+            className="menuLabel inline-block whitespace-nowrap"
           >
             ログイン
           </span>
@@ -296,7 +293,7 @@ exports[`未ログイン 1`] = `
           width={25}
         />
         <span
-          className="menuLabel inline-block mt-1 whitespace-nowrap"
+          className="menuLabel inline-block whitespace-nowrap"
         >
           カート
         </span>

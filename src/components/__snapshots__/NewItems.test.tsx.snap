@@ -55,7 +55,7 @@ exports[`新着商品 フェッチエラーの場合 1`] = `
 exports[`新着商品 正常に描画されました 1`] = `
 <DocumentFragment>
   <div
-    class="categoryList container mx-auto p-2 flex gap-5 justify-center"
+    class="container mx-auto p-2 flex gap-5 justify-center"
   >
     <a
       href="/items/itemlist/1"

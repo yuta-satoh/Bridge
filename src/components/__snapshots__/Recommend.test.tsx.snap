@@ -18,10 +18,10 @@ exports[`Recommendコンポーネント カートにおすすめ商品を追加�
     </h2>
   </div>
   <div
-    class="flex gap-3 mb-10"
+    class="pc:flex pc:gap-3 mb-10"
   >
     <div
-      class="border border-neutral-900 w-1/2 rounded p-3 mx-auto"
+      class="border border-neutral-900 w-full rounded p-3 mx-auto my-4"
     >
       <div
         class="flex gap-5"
@@ -31,7 +31,7 @@ exports[`Recommendコンポーネント カートにおすすめ商品を追加�
         >
           <img
             alt="ベルベットアームチェア"
-            class="rounded"
+            class="rounded w-40 pc:w-28 h-32 pc:h-20"
             data-nimg="1"
             decoding="async"
             height="100"
@@ -49,7 +49,7 @@ exports[`Recommendコンポーネント カートにおすすめ商品を追加�
             href="/items/itemlist/1"
           >
             <p
-              class="underline mb-1 text-sm"
+              class="underline mb-1 text-lg pc:text-sm"
             >
               ベルベットアームチェア
             </p>
@@ -84,10 +84,10 @@ exports[`Recommendコンポーネント ユーザーカートのおすすめ商�
     </h2>
   </div>
   <div
-    class="flex gap-3 mb-10"
+    class="pc:flex pc:gap-3 mb-10"
   >
     <div
-      class="border border-neutral-900 w-1/2 rounded p-3 mx-auto"
+      class="border border-neutral-900 w-full rounded p-3 mx-auto my-4"
     >
       <div
         class="flex gap-5"
@@ -97,7 +97,7 @@ exports[`Recommendコンポーネント ユーザーカートのおすすめ商�
         >
           <img
             alt="ベルベットアームチェア"
-            class="rounded"
+            class="rounded w-40 pc:w-28 h-32 pc:h-20"
             data-nimg="1"
             decoding="async"
             height="100"
@@ -115,7 +115,7 @@ exports[`Recommendコンポーネント ユーザーカートのおすすめ商�
             href="/items/itemlist/1"
           >
             <p
-              class="underline mb-1 text-sm"
+              class="underline mb-1 text-lg pc:text-sm"
             >
               ベルベットアームチェア
             </p>
@@ -135,7 +135,7 @@ exports[`Recommendコンポーネント ユーザーカートのおすすめ商�
       </div>
     </div>
     <div
-      class="border border-neutral-900 w-1/2 rounded p-3 mx-auto"
+      class="border border-neutral-900 w-full rounded p-3 mx-auto my-4"
     >
       <div
         class="flex gap-5"
@@ -145,7 +145,7 @@ exports[`Recommendコンポーネント ユーザーカートのおすすめ商�
         >
           <img
             alt="丸椅子スツール"
-            class="rounded"
+            class="rounded w-40 pc:w-28 h-32 pc:h-20"
             data-nimg="1"
             decoding="async"
             height="100"
@@ -163,7 +163,7 @@ exports[`Recommendコンポーネント ユーザーカートのおすすめ商�
             href="/items/itemlist/2"
           >
             <p
-              class="underline mb-1 text-sm"
+              class="underline mb-1 text-lg pc:text-sm"
             >
               丸椅子スツール
             </p>

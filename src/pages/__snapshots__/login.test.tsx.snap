@@ -89,6 +89,15 @@ exports[`ログインページ ログインページが正常に描画されま�
             </span>
           </button>
         </div>
+        <p
+          class="remember"
+        >
+          <a
+            href="/rememberPass"
+          >
+            パスワードをお忘れの方はこちら →
+          </a>
+        </p>
       </form>
       <div
         class="title"
@@ -212,6 +221,15 @@ exports[`ログインページ 正常なメールアドレスとパスワード�
             </span>
           </button>
         </div>
+        <p
+          class="remember"
+        >
+          <a
+            href="/rememberPass"
+          >
+            パスワードをお忘れの方はこちら →
+          </a>
+        </p>
       </form>
       <div
         class="title"
@@ -337,6 +355,15 @@ exports[`ログインページ 異常なメールアドレスとパスワード�
             </span>
           </button>
         </div>
+        <p
+          class="remember"
+        >
+          <a
+            href="/rememberPass"
+          >
+            パスワードをお忘れの方はこちら →
+          </a>
+        </p>
       </form>
       <div
         class="title"
