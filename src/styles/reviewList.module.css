@@ -1,85 +1,190 @@
-/* タイトルのスタイル */
-.title h2 {
+@media (600px <= width) {
+  /* タイトルのスタイル */
+  .title h2 {
     font-size: 20px;
     font-weight: bold;
     padding: 10px;
-}
+  }
 
-/* エラー、ロード中、レビュー未投稿時のスタイル */
-.background {
+  /* エラー、ロード中、レビュー未投稿時のスタイル */
+  .background {
     width: 80%;
     height: 50px;
-    margin: auto;
+    margin: 10px auto;
     background-color: #f5f5f5;
     text-align: center;
     display: table;
-    margin: 10px;
-}
-.background p {
+  }
+  .background p {
     vertical-align: middle;
     display: table-cell;
-}
+  }
 
-/* リストのスタイル */
-.scroll {
+  /* リストのスタイル */
+  .evaluation_area {
+    width: 95%;
+    margin: auto;
+  }
+
+  .scroll {
     width: 95%;
     height: 250px;
     border: 1px solid #f5f5f5;
     overflow-y: scroll;
-    margin: 10px;
+    margin: 10px auto;
     padding: 10px;
-}
+  }
 
-.review {
+  .review {
     width: 90%;
     margin: 10px auto 30px auto;
-}
+  }
 
-.black_hr {
+  .black_hr {
     border-color: black;
-}
+  }
 
-.review h3 {
+  .review h3 {
     font-size: 15px;
-}
+  }
 
-.review_head {
+  .review_head {
     display: flex;
     align-items: baseline;
-}
+  }
 
-.review_head p {
+  .review_head p {
     margin-left: 20px;
     font-size: 13px;
-}
+  }
 
-.review_container h4 {
+  .review_container h4 {
     margin: 10px auto;
     font-weight: bold;
     font-size: 20px;
-}
+  }
 
-.review_container p {
+  .review_container p {
     margin: 10px auto;
     font-size: 15px;
-}
+  }
 
-
-/* 評価の星のスタイル */
-.stars_gray {
+  /* 評価の星のスタイル */
+  .stars_gray {
     position: relative;
     z-index: 0;
     display: inline-block;
     white-space: nowrap;
     color: #d2d2d2;
-}
+  }
 
-.stars_yellow {
+  .stars_yellow {
     position: absolute;
     z-index: 1;
     top: 0;
     left: 0;
     overflow: hidden;
     white-space: nowrap;
-    color: #F8C601;
+    color: #f8c601;
+  }
+}
+
+@media (width < 600px) {
+  /* タイトルのスタイル */
+  .title {
+    margin-top: 25px;
+    text-align: center;
+  }
+
+  .title h2 {
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px;
+  }
+
+  /* エラー、ロード中、レビュー未投稿時のスタイル */
+  .background {
+    width: 80%;
+    height: 50px;
+    margin: 10px auto;
+    background-color: #f5f5f5;
+    text-align: center;
+    display: table;
+  }
+  .background p {
+    vertical-align: middle;
+    display: table-cell;
+  }
+
+  /* リストのスタイル */
+  .evaluation_area {
+    width: 85%;
+    margin: 8px auto;
+  }
+
+  .evaluation_area p {
+    font-size: 15px;
+  }
+
+  .scroll {
+    width: 85%;
+    height: 250px;
+    border: 1px solid #f5f5f5;
+    overflow-y: scroll;
+    margin: 10px auto;
+    padding: 10px;
+  }
+
+  .review {
+    width: 90%;
+    margin: 10px auto 30px auto;
+  }
+
+  .black_hr {
+    border-color: black;
+  }
+
+  .review h3 {
+    font-size: 15px;
+  }
+
+  .review_head {
+    display: flex;
+    align-items: baseline;
+  }
+
+  .review_head p {
+    margin-left: 20px;
+    font-size: 13px;
+  }
+
+  .review_container h4 {
+    margin: 10px auto;
+    font-weight: bold;
+    font-size: 15px;
+  }
+
+  .review_container p {
+    margin: 10px auto;
+    font-size: 12px;
+  }
+
+  /* 評価の星のスタイル */
+  .stars_gray {
+    position: relative;
+    z-index: 0;
+    display: inline-block;
+    white-space: nowrap;
+    color: #d2d2d2;
+  }
+
+  .stars_yellow {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #f8c601;
+  }
 }
