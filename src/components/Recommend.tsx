@@ -60,7 +60,7 @@ export default function Recommend({ recommend, reloadStrage }: { recommend: Reco
           <div key={index} className="border border-neutral-900 w-full rounded p-3 mx-auto my-4">
             <div className="flex gap-5">
               <Link href={`/items/itemlist/${item.id}`}>
-                <Image src={item.imgurl} alt={item.name} width={100} height={100} className="rounded"/>
+                <Image src={item.imgurl} alt={item.name} width={100} height={100} className="rounded w-40 pc:w-28 h-32 pc:h-20"/>
               </Link>
               <div className="px-2 py-2">
                 <Link href={`/items/itemlist/${item.id}`}>

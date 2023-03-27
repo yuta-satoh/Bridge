@@ -94,14 +94,10 @@
         min-width: 599px;
         background-color: #574142;
     }
-    .titleiconimg{
-        width: 110px;
-        height: 50px;
-    }
     .menuLabel{
         /* font-size: 13px; */
         white-space: nowrap;
-        font-size: 10px;
+        /* font-size: 10px; */
         transform: scale(0.8);
     }
     .iconModule{
@@ -109,12 +105,12 @@
         flex-direction: column;
         align-items: center;
     }
-    .iconimg{
+    /* .iconimg{
         width: 16px;
         height: 16px;
-    }
+    } */
     .left{
-        font-size: 10px;
+        /* font-size: 10px; */
         margin-right: 10px;
         grid-gap: 20px;
         /* transform: scale(0.8); */
