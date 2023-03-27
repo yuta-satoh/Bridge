@@ -116,7 +116,7 @@ export default function Home() {
           </div>
         </div>
         <div className={`${topStyle.content} mt-20`}>
-          <h2 className={`${topStyle.font} text-center text-xl font-bold`}>新着商品</h2>
+          <h2 className='text-center text-xl font-bold mb-2'>新着商品</h2>
           <NewItems />
           <div className={topStyle.buttonContent}>
             <Button
@@ -132,7 +132,7 @@ export default function Home() {
           className={`mx-auto mt-20 justify-center w-5/6`}
         >
           {/* カテゴリの表示は２段で別々にmap()を使っています */}
-          <h2 className={`${topStyle.font} text-center text-xl font-bold`}>
+          <h2 className='text-center text-xl font-bold mb-2'>
             商品カテゴリから探す
           </h2>
           {windowSize.width >= 600 ?
@@ -219,7 +219,7 @@ export default function Home() {
           }
         </div>
         <div className={topStyle.scrollArea} id="remind">
-          <h2 className={`${topStyle.font} text-center text-xl font-bold`}>お知らせ</h2>
+          <h2 className='text-center text-xl font-bold'>お知らせ</h2>
           <div className={topStyle.scroll}>
             <div className={topStyle.announce}>
               <p className={topStyle.date}>2023-1-4</p>
