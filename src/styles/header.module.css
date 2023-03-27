@@ -77,7 +77,7 @@
     }
 }
 
-@media (width <= 599px) {
+@media (width < 600px) {
     .menu{
         display: flex;
         justify-content:space-between;
