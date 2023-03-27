@@ -23,13 +23,13 @@ const InputSuggest = ({ value, onChange, onClick }: Input) => {
                         placeholder='何をお探しですか？'
                         value={value}
                         onChange={onChange}
-                        className='h-6 sp:h-8 w-32 sp:w-48 border border-neutral-500 rounded-l pl-2'
+                        className='h-6 sp:h-8 w-32 sp:w-48 text-xs border border-neutral-500 rounded-l pl-2'
                     />
                     {windowSize.width >= 600 ? 
                         <button
                         type="button"
                         onClick={() => onClick('')}
-                        className='absolute h-5 sp:h-7 w-3 sp:w-7 left-28 sp:left-40 top-px sp:top-0.5 bg-white rounded'
+                        className='absolute h-7 w-7 left-40 top-0.5 bg-white rounded'
                         >
                             x
                         </button>
@@ -44,7 +44,7 @@ const InputSuggest = ({ value, onChange, onClick }: Input) => {
                         placeholder='何をお探しですか？'
                         value={value}
                         onChange={onChange}
-                        className='h-6 sp:h-8 w-32 sp:w-48 border border-neutral-500 rounded-l pl-2'
+                        className='h-6 sp:h-8 w-32 sp:w-48 text-xs border border-neutral-500 rounded-l pl-2'
                     />
                 </div>
             )
@@ -58,14 +58,14 @@ const InputSuggest = ({ value, onChange, onClick }: Input) => {
                         placeholder='何をお探しですか？'
                         value={value}
                         onChange={onChange}
-                        className='h-6 sp:h-8 w-32 sp:w-48 border border-neutral-500 rounded-l pl-2'
+                        className='h-6 sp:h-8 w-32 sp:w-48 text-xs border border-neutral-500 rounded-l pl-2'
                     />
                     <div className='absolute z-50'>
                         {data.map((item, index) => {
                             return (
                                 <div
                                     key={`suggest_${index}`}
-                                    className='w-32 sp:w-48 border bg-white border-neutral-500 text-sm p-1 cursor-pointer hover:bg-neutral-200'
+                                    className='w-32 sp:w-48 border bg-white border-neutral-500 text-xs sp:text-sm p-1 cursor-pointer hover:bg-neutral-200'
                                     onClick={() => onClick(item.name)}
                                 >
                                     {item.name}
@@ -83,7 +83,7 @@ const InputSuggest = ({ value, onChange, onClick }: Input) => {
                         placeholder='何をお探しですか？'
                         value={value}
                         onChange={onChange}
-                        className='h-6 sp:h-8 w-32 sp:w-48 border border-neutral-500 rounded-l pl-2'
+                        className='h-6 sp:h-8 w-32 sp:w-48 text-xs border border-neutral-500 rounded-l pl-2'
                     />
                 </div>
             )
