@@ -3,7 +3,7 @@
 exports[`ユーザーカートコンポーネント ユーザーカートが空の状態 1`] = `
 <DocumentFragment>
   <div
-    class="w-4/5 mx-auto"
+    class="w-3/4 min-w-full"
   >
     <h2
       class="text-3xl font-bold mt-10"
@@ -35,10 +35,80 @@ exports[`ユーザーカートコンポーネント ユーザーカートが空�
 exports[`ユーザーカートコンポーネント ユーザーカートに中身あり 1`] = `
 <DocumentFragment>
   <div
-    class="flex mx-auto w-4/5 gap-32"
+    class="pc:flex pc:flex-row-reverse mx-auto w-screen sp:w-3/5 pc:w-4/5 gap-32"
   >
     <div
-      class="w-3/5 mt-10"
+      class="flex w-4/5 mx-auto mt-10"
+    >
+      <h2
+        class="text-3xl font-bold"
+      >
+        合計
+      </h2>
+      <span
+        class="mt-2"
+      >
+        (2点の商品)
+      </span>
+    </div>
+    <div
+      class="mx-auto w-4/5 pc:w-1/4 h-80 mt-4 pc:mt-20 p-10 border-2 border-neutral-900 rounded bg-gray-100 pc:sticky top-10 min-w-max"
+    >
+      <p>
+        <span>
+          商品合計
+        </span>
+        <span
+          class="float-right"
+        >
+          ¥ 26,000
+        </span>
+      </p>
+      <p>
+        <span>
+          消費税
+        </span>
+        <span
+          class="float-right"
+        >
+          ¥ 2,600
+        </span>
+      </p>
+      <div
+        class="border-b border-black"
+      >
+        <p
+          class="mt-10 text-lg font-bold"
+        >
+          <span>
+            合計
+          </span>
+          <span
+            class="float-right"
+          >
+            ¥ 28,600
+          </span>
+        </p>
+      </div>
+      <div
+        class="flex flex-col items-center gap-5 mt-5"
+      >
+        <button
+          class="jsx-644447430"
+          type="button"
+        >
+          ご注文手続き
+        </button>
+        <button
+          class="jsx-644447430"
+          type="button"
+        >
+          お買い物を続ける
+        </button>
+      </div>
+    </div>
+    <div
+      class="mx-auto w-4/5 sp:w-full pc:w-3/5 mt-10"
     >
       <div
         class="flex"
@@ -55,17 +125,17 @@ exports[`ユーザーカートコンポーネント ユーザーカートに中�
         </span>
       </div>
       <div
-        class="border border-neutral-900 my-2 py-3 px-8 h-52"
+        class="border border-neutral-900 my-2 py-3 px-8 w-full min-h-max"
       >
         <div
-          class="flex gap-5"
+          class="sp:flex sp:gap-5"
         >
           <a
             href="/items/itemlist/1"
           >
             <img
               alt="ベルベットアームチェア"
-              class="rounded w-36 h-36"
+              class="rounded w-36 h-36 mx-auto"
               data-nimg="1"
               decoding="async"
               height="150"
@@ -110,71 +180,60 @@ exports[`ユーザーカートコンポーネント ユーザーカートに中�
             削除
           </button>
           <label
-            class="jsx-209487258 selectbox"
+            class="selectbox"
           >
             <select
-              class="jsx-209487258"
               data-testid="select-option"
               id="cart_quantity"
               name="quantity"
             >
               <option
-                class="jsx-209487258"
                 selected=""
                 value="1"
               >
                 1
               </option>
               <option
-                class="jsx-209487258"
                 value="2"
               >
                 2
               </option>
               <option
-                class="jsx-209487258"
                 value="3"
               >
                 3
               </option>
               <option
-                class="jsx-209487258"
                 value="4"
               >
                 4
               </option>
               <option
-                class="jsx-209487258"
                 value="5"
               >
                 5
               </option>
               <option
-                class="jsx-209487258"
                 value="6"
               >
                 6
               </option>
               <option
-                class="jsx-209487258"
                 value="7"
               >
                 7
               </option>
               <option
-                class="jsx-209487258"
                 value="8"
               >
                 8
               </option>
               <option
-                class="jsx-209487258"
                 value="9"
               >
                 9
               </option>
               <option
-                class="jsx-209487258"
                 value="10"
               >
                 10
@@ -184,17 +243,17 @@ exports[`ユーザーカートコンポーネント ユーザーカートに中�
         </div>
       </div>
       <div
-        class="border border-neutral-900 my-2 py-3 px-8 h-52"
+        class="border border-neutral-900 my-2 py-3 px-8 w-full min-h-max"
       >
         <div
-          class="flex gap-5"
+          class="sp:flex sp:gap-5"
         >
           <a
             href="/items/itemlist/2"
           >
             <img
               alt="丸椅子スツール"
-              class="rounded w-36 h-36"
+              class="rounded w-36 h-36 mx-auto"
               data-nimg="1"
               decoding="async"
               height="150"
@@ -239,71 +298,60 @@ exports[`ユーザーカートコンポーネント ユーザーカートに中�
             削除
           </button>
           <label
-            class="jsx-209487258 selectbox"
+            class="selectbox"
           >
             <select
-              class="jsx-209487258"
               data-testid="select-option"
               id="cart_quantity"
               name="quantity"
             >
               <option
-                class="jsx-209487258"
                 selected=""
                 value="1"
               >
                 1
               </option>
               <option
-                class="jsx-209487258"
                 value="2"
               >
                 2
               </option>
               <option
-                class="jsx-209487258"
                 value="3"
               >
                 3
               </option>
               <option
-                class="jsx-209487258"
                 value="4"
               >
                 4
               </option>
               <option
-                class="jsx-209487258"
                 value="5"
               >
                 5
               </option>
               <option
-                class="jsx-209487258"
                 value="6"
               >
                 6
               </option>
               <option
-                class="jsx-209487258"
                 value="7"
               >
                 7
               </option>
               <option
-                class="jsx-209487258"
                 value="8"
               >
                 8
               </option>
               <option
-                class="jsx-209487258"
                 value="9"
               >
                 9
               </option>
               <option
-                class="jsx-209487258"
                 value="10"
               >
                 10
@@ -316,62 +364,6 @@ exports[`ユーザーカートコンポーネント ユーザーカートに中�
         recommend="[object Object],[object Object]"
       />
     </div>
-    <div
-      class="w-1/4 h-80 mt-20 p-10 border-2 border-neutral-900 rounded bg-gray-100 sticky top-10"
-    >
-      <p>
-        <span>
-          商品合計
-        </span>
-        <span
-          class="float-right"
-        >
-          ¥ 26,000
-        </span>
-      </p>
-      <p>
-        <span>
-          消費税
-        </span>
-        <span
-          class="float-right"
-        >
-          ¥ 2,600
-        </span>
-      </p>
-      <div
-        class="border-b border-black"
-      >
-        <p
-          class="mt-10 text-lg font-bold"
-        >
-          <span>
-            合計
-          </span>
-          <span
-            class="float-right"
-          >
-            ¥ 28,600
-          </span>
-        </p>
-      </div>
-      <div
-        class="flex flex-col items-center gap-5 mt-5"
-      >
-        <button
-          class="jsx-1912866866"
-          type="button"
-        >
-          ご注文手続き
-        </button>
-        <button
-          class="jsx-1912866866"
-          type="button"
-        >
-          お買い物を続ける
-        </button>
-      </div>
-    </div>
   </div>
 </DocumentFragment>
 `;
@@ -379,160 +371,24 @@ exports[`ユーザーカートコンポーネント ユーザーカートに中�
 exports[`ユーザーカートコンポーネント ユーザーカートの商品の個数を変更する 1`] = `
 <DocumentFragment>
   <div
-    class="flex mx-auto w-4/5 gap-32"
+    class="pc:flex pc:flex-row-reverse mx-auto w-screen sp:w-3/5 pc:w-4/5 gap-32"
   >
     <div
-      class="w-3/5 mt-10"
+      class="flex w-4/5 mx-auto mt-10"
     >
-      <div
-        class="flex"
+      <h2
+        class="text-3xl font-bold"
       >
-        <h2
-          class="text-3xl font-bold"
-        >
-          カート
-        </h2>
-        <span
-          class="mt-2"
-        >
-          (1点の商品)
-        </span>
-      </div>
-      <div
-        class="border border-neutral-900 my-2 py-3 px-8 h-52"
+        合計
+      </h2>
+      <span
+        class="mt-2"
       >
-        <div
-          class="flex gap-5"
-        >
-          <a
-            href="/items/itemlist/1"
-          >
-            <img
-              alt="ベルベットアームチェア"
-              class="rounded w-36 h-36"
-              data-nimg="1"
-              decoding="async"
-              height="150"
-              loading="lazy"
-              src="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=384&q=75"
-              srcset="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=384&q=75 2x"
-              style="color: transparent;"
-              width="150"
-            />
-          </a>
-          <div
-            class="px-3 py-4"
-          >
-            <a
-              href="/items/itemlist/1"
-            >
-              <p
-                class="underline mb-1 text-xl"
-              >
-                ベルベットアームチェア
-              </p>
-            </a>
-            <p
-              class="text-sm mt-1"
-            >
-              ベルベットのお洒落なデザインチェア。
-            </p>
-            <p
-              class="mt-1 text-lg"
-            >
-              ¥ 16,000
-            </p>
-          </div>
-        </div>
-        <div
-          class="flex justify-end gap-4"
-        >
-          <button
-            class="jsx-3340056729"
-            type="button"
-          >
-            削除
-          </button>
-          <label
-            class="jsx-209487258 selectbox"
-          >
-            <select
-              class="jsx-209487258"
-              data-testid="select-option"
-              id="cart_quantity"
-              name="quantity"
-            >
-              <option
-                class="jsx-209487258"
-                selected=""
-                value="1"
-              >
-                1
-              </option>
-              <option
-                class="jsx-209487258"
-                value="2"
-              >
-                2
-              </option>
-              <option
-                class="jsx-209487258"
-                value="3"
-              >
-                3
-              </option>
-              <option
-                class="jsx-209487258"
-                value="4"
-              >
-                4
-              </option>
-              <option
-                class="jsx-209487258"
-                value="5"
-              >
-                5
-              </option>
-              <option
-                class="jsx-209487258"
-                value="6"
-              >
-                6
-              </option>
-              <option
-                class="jsx-209487258"
-                value="7"
-              >
-                7
-              </option>
-              <option
-                class="jsx-209487258"
-                value="8"
-              >
-                8
-              </option>
-              <option
-                class="jsx-209487258"
-                value="9"
-              >
-                9
-              </option>
-              <option
-                class="jsx-209487258"
-                value="10"
-              >
-                10
-              </option>
-            </select>
-          </label>
-        </div>
-      </div>
-      <div
-        recommend="[object Object]"
-      />
+        (1点の商品)
+      </span>
     </div>
     <div
-      class="w-1/4 h-80 mt-20 p-10 border-2 border-neutral-900 rounded bg-gray-100 sticky top-10"
+      class="mx-auto w-4/5 pc:w-1/4 h-80 mt-4 pc:mt-20 p-10 border-2 border-neutral-900 rounded bg-gray-100 pc:sticky top-10 min-w-max"
     >
       <p>
         <span>
@@ -574,30 +430,21 @@ exports[`ユーザーカートコンポーネント ユーザーカートの商�
         class="flex flex-col items-center gap-5 mt-5"
       >
         <button
-          class="jsx-1912866866"
+          class="jsx-644447430"
           type="button"
         >
           ご注文手続き
         </button>
         <button
-          class="jsx-1912866866"
+          class="jsx-644447430"
           type="button"
         >
           お買い物を続ける
         </button>
       </div>
     </div>
-  </div>
-</DocumentFragment>
-`;
-
-exports[`ユーザーカートコンポーネント ユーザーカートの商品を削除 1`] = `
-<DocumentFragment>
-  <div
-    class="flex mx-auto w-4/5 gap-32"
-  >
     <div
-      class="w-3/5 mt-10"
+      class="mx-auto w-4/5 sp:w-full pc:w-3/5 mt-10"
     >
       <div
         class="flex"
@@ -614,17 +461,17 @@ exports[`ユーザーカートコンポーネント ユーザーカートの商�
         </span>
       </div>
       <div
-        class="border border-neutral-900 my-2 py-3 px-8 h-52"
+        class="border border-neutral-900 my-2 py-3 px-8 w-full min-h-max"
       >
         <div
-          class="flex gap-5"
+          class="sp:flex sp:gap-5"
         >
           <a
             href="/items/itemlist/1"
           >
             <img
               alt="ベルベットアームチェア"
-              class="rounded w-36 h-36"
+              class="rounded w-36 h-36 mx-auto"
               data-nimg="1"
               decoding="async"
               height="150"
@@ -669,71 +516,60 @@ exports[`ユーザーカートコンポーネント ユーザーカートの商�
             削除
           </button>
           <label
-            class="jsx-209487258 selectbox"
+            class="selectbox"
           >
             <select
-              class="jsx-209487258"
               data-testid="select-option"
               id="cart_quantity"
               name="quantity"
             >
               <option
-                class="jsx-209487258"
                 selected=""
                 value="1"
               >
                 1
               </option>
               <option
-                class="jsx-209487258"
                 value="2"
               >
                 2
               </option>
               <option
-                class="jsx-209487258"
                 value="3"
               >
                 3
               </option>
               <option
-                class="jsx-209487258"
                 value="4"
               >
                 4
               </option>
               <option
-                class="jsx-209487258"
                 value="5"
               >
                 5
               </option>
               <option
-                class="jsx-209487258"
                 value="6"
               >
                 6
               </option>
               <option
-                class="jsx-209487258"
                 value="7"
               >
                 7
               </option>
               <option
-                class="jsx-209487258"
                 value="8"
               >
                 8
               </option>
               <option
-                class="jsx-209487258"
                 value="9"
               >
                 9
               </option>
               <option
-                class="jsx-209487258"
                 value="10"
               >
                 10
@@ -746,8 +582,31 @@ exports[`ユーザーカートコンポーネント ユーザーカートの商�
         recommend="[object Object]"
       />
     </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`ユーザーカートコンポーネント ユーザーカートの商品を削除 1`] = `
+<DocumentFragment>
+  <div
+    class="pc:flex pc:flex-row-reverse mx-auto w-screen sp:w-3/5 pc:w-4/5 gap-32"
+  >
     <div
-      class="w-1/4 h-80 mt-20 p-10 border-2 border-neutral-900 rounded bg-gray-100 sticky top-10"
+      class="flex w-4/5 mx-auto mt-10"
+    >
+      <h2
+        class="text-3xl font-bold"
+      >
+        合計
+      </h2>
+      <span
+        class="mt-2"
+      >
+        (1点の商品)
+      </span>
+    </div>
+    <div
+      class="mx-auto w-4/5 pc:w-1/4 h-80 mt-4 pc:mt-20 p-10 border-2 border-neutral-900 rounded bg-gray-100 pc:sticky top-10 min-w-max"
     >
       <p>
         <span>
@@ -789,18 +648,157 @@ exports[`ユーザーカートコンポーネント ユーザーカートの商�
         class="flex flex-col items-center gap-5 mt-5"
       >
         <button
-          class="jsx-1912866866"
+          class="jsx-644447430"
           type="button"
         >
           ご注文手続き
         </button>
         <button
-          class="jsx-1912866866"
+          class="jsx-644447430"
           type="button"
         >
           お買い物を続ける
         </button>
       </div>
+    </div>
+    <div
+      class="mx-auto w-4/5 sp:w-full pc:w-3/5 mt-10"
+    >
+      <div
+        class="flex"
+      >
+        <h2
+          class="text-3xl font-bold"
+        >
+          カート
+        </h2>
+        <span
+          class="mt-2"
+        >
+          (1点の商品)
+        </span>
+      </div>
+      <div
+        class="border border-neutral-900 my-2 py-3 px-8 w-full min-h-max"
+      >
+        <div
+          class="sp:flex sp:gap-5"
+        >
+          <a
+            href="/items/itemlist/1"
+          >
+            <img
+              alt="ベルベットアームチェア"
+              class="rounded w-36 h-36 mx-auto"
+              data-nimg="1"
+              decoding="async"
+              height="150"
+              loading="lazy"
+              src="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=384&q=75"
+              srcset="/_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Fchair%2Fchair_feminine_1.jpg&w=384&q=75 2x"
+              style="color: transparent;"
+              width="150"
+            />
+          </a>
+          <div
+            class="px-3 py-4"
+          >
+            <a
+              href="/items/itemlist/1"
+            >
+              <p
+                class="underline mb-1 text-xl"
+              >
+                ベルベットアームチェア
+              </p>
+            </a>
+            <p
+              class="text-sm mt-1"
+            >
+              ベルベットのお洒落なデザインチェア。
+            </p>
+            <p
+              class="mt-1 text-lg"
+            >
+              ¥ 16,000
+            </p>
+          </div>
+        </div>
+        <div
+          class="flex justify-end gap-4"
+        >
+          <button
+            class="jsx-3340056729"
+            type="button"
+          >
+            削除
+          </button>
+          <label
+            class="selectbox"
+          >
+            <select
+              data-testid="select-option"
+              id="cart_quantity"
+              name="quantity"
+            >
+              <option
+                selected=""
+                value="1"
+              >
+                1
+              </option>
+              <option
+                value="2"
+              >
+                2
+              </option>
+              <option
+                value="3"
+              >
+                3
+              </option>
+              <option
+                value="4"
+              >
+                4
+              </option>
+              <option
+                value="5"
+              >
+                5
+              </option>
+              <option
+                value="6"
+              >
+                6
+              </option>
+              <option
+                value="7"
+              >
+                7
+              </option>
+              <option
+                value="8"
+              >
+                8
+              </option>
+              <option
+                value="9"
+              >
+                9
+              </option>
+              <option
+                value="10"
+              >
+                10
+              </option>
+            </select>
+          </label>
+        </div>
+      </div>
+      <div
+        recommend="[object Object]"
+      />
     </div>
   </div>
 </DocumentFragment>
