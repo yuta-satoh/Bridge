@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import useSWR, { Fetcher } from 'swr';
 import myStyles from '../styles/mypage.module.css';
-import cciStyles from '../styles/currentCartItems.module.css'
+import cciStyles from '../styles/currentCartItems.module.css';
 
 // 型定義
 type Items = {
@@ -63,8 +63,8 @@ export default function CurrentCartItems({
   if (!cartItemData) {
     return (
       <>
-        <div className="container">
-          <div className="background">
+        <div className={cciStyles.container}>
+          <div className={cciStyles.background}>
             <p>ロード中...</p>
           </div>
         </div>
@@ -75,8 +75,8 @@ export default function CurrentCartItems({
   if (cartItemData.length === 0) {
     return (
       <>
-        <div className="container">
-          <div className="background">
+        <div className={cciStyles.container}>
+          <div className={cciStyles.background}>
             <p>カートに商品がありません</p>
           </div>
         </div>
@@ -101,13 +101,14 @@ export default function CurrentCartItems({
         {currentCartItems.map((cartItem) => {
           return (
             <div className={cciStyles.cartItems} key={cartItem.id}>
-              <Image
-                src={cartItem.items.imgurl}
-                alt={'kagu'}
-                width={150}
-                height={150}
-                className={myStyles.picture}
-              />
+              <div className={cciStyles.pic_area}>
+                <Image
+                  src={cartItem.items.imgurl}
+                  alt={'kagu'}
+                  fill
+                  className={myStyles.picture}
+                />
+              </div>
               <p className={myStyles.cartName}>
                 {cartItem.items.name}
               </p>

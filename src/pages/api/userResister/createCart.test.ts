@@ -48,11 +48,12 @@ describe('api/userRegister/createCart.tsのテスト', () => {
       .mockResolvedValueOnce({
         ok: true,
         json: () => Promise.resolve([]),
+        status: 400,
       });
 
     await handler(mockReq, mockRes);
 
-    expect(mockRes.status).toHaveBeenCalledWith(401);
+    expect(mockRes.status).toHaveBeenCalledWith(400);
     expect(mockRes.json).toHaveBeenCalledWith({
       message: 'User Data was nothing.',
     });
@@ -64,12 +65,13 @@ describe('api/userRegister/createCart.tsのテスト', () => {
       .mockResolvedValueOnce({
         ok: true,
         json: () => Promise.resolve(dummy_usersID),
+        status: 400,
       })
-      .mockResolvedValueOnce({ ok: false });
+      .mockResolvedValueOnce({ ok: false, status: 400 });
 
     await handler(mockReq, mockRes);
 
-    expect(mockRes.status).toHaveBeenCalledWith(401);
+    expect(mockRes.status).toHaveBeenCalledWith(400);
     expect(mockRes.json).toHaveBeenCalledWith({
       message: 'Creating cart data was wrong.',
     });

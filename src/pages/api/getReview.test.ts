@@ -55,7 +55,7 @@ describe('api/getReview.tsのテスト', () => {
         });
         await handler(mockReq, mockRes);
 
-        expect(mockRes.status).toBeCalledWith(401);
+        expect(mockRes.status).toBeCalledWith(400);
         expect(mockRes.json).toBeCalledWith({ message: 'Getting Reviews was failed.' });
     });
 });

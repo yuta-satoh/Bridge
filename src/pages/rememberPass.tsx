@@ -2,10 +2,9 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import urStyles from '../styles/userRegister.module.css';
-import { useRouter } from 'next/router';
 
 export default function RememberPass() {
-  // email, passwordの値を格納するState
+  // emailの値を格納するState
   const [email, setEmail] = useState('');
   // エラー文
   const [errorText, setErrorText] = useState<string>('');
@@ -13,15 +12,12 @@ export default function RememberPass() {
   const [buttonText, setButtonText] =
     useState('再登録用メールを送る');
 
-  // ルーターを定義
-  const rooter = useRouter();
-
   // inputの値をstateに格納するチェンジイベント
   function updateLoginData(e: ChangeEvent<HTMLInputElement>) {
     setEmail(e.target.value);
   }
 
-  // email, passwordの値がデータベースに存在するかを確認するSubmitイベント
+  // emailの値がデータベースに存在するかを確認するSubmitイベント
   async function handleSubmitLogin(e: SyntheticEvent) {
     e.preventDefault();
     if (email.length === 0) {
@@ -80,9 +76,6 @@ export default function RememberPass() {
                 placeholder="例：bridge@example.com"
                 onChange={(e) => updateLoginData(e)}
               />
-              <p className={urStyles.nope}>
-                ※メールアドレスを入力して下さい
-              </p>
             </div>
             <div className={urStyles.buttonArea}>
               <p className={urStyles.error}>{errorText}</p>

@@ -36,6 +36,6 @@ export default async function handler(
   const guestItems: Reviews[] = await responseItems.json();
     res.status(200).json(guestItems);
   } else {
-    res.status(responseItems.status).json({ message: 'Getting Reviews was failed.' });
+    res.status(400).json({ message: 'Getting Reviews was failed.' });
   }
 }
