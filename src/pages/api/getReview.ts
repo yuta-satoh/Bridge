@@ -1,3 +1,4 @@
+import { resData } from '@/types/types';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 type Reviews = {
@@ -9,14 +10,14 @@ type Reviews = {
   evaluation: number;
   title: string;
   description: string;
-  date: Date;
+  date: string;
   delete: boolean;
   users: { lastname: string; firstname: string };
 };
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Reviews[]>
+  res: NextApiResponse<Reviews[] | resData>
 ) {
   const itemId = req.query.itemId as string;
   const responseItems = await fetch(
@@ -31,11 +32,10 @@ export default async function handler(
     }
   );
 
-  const guestItems: Reviews[] = await responseItems.json();
-
   if (responseItems.ok) {
+  const guestItems: Reviews[] = await responseItems.json();
     res.status(200).json(guestItems);
   } else {
-    res.status(400).end();
+    res.status(400).json({ message: 'Getting Reviews was failed.' });
   }
 }

@@ -28,6 +28,6 @@ export default async function handler(
   if (responce.ok) {
     res.status(200).json({ message: 'OK' });
   } else {
-    res.status(401).json({ message: 'Failed' });
+    res.status(responce.status).json({ message: 'Failed' });
   }
 }

@@ -1,3 +1,4 @@
+// 使わなくなったのでテストしません
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { useEffect, useState } from 'react';
 

@@ -125,7 +125,7 @@
 
 }
 
-@media (width <= 599px) {
+@media (width < 600px) {
     .menu {
         display: block;
     

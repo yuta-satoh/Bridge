@@ -124,7 +124,7 @@ export default function coordination(
         <title>{listItem.genre}</title>
       </Head>
       <div className={cModule.body}>
-        <main>
+      <main className={cModule.main}>
           <ol className={cModule.links} id="top">
             <li className={cModule.pageLink}>
               <Link href="/">Bridge</Link>
@@ -196,6 +196,7 @@ export default function coordination(
                       width={23}
                       height={10}
                       alt=""
+                      className={cModule.categoriesImage}
                     />
                     <p>&emsp;テーブル&emsp;</p>
                   </div>
@@ -211,6 +212,7 @@ export default function coordination(
                       width={23}
                       height={10}
                       alt=""
+                      className={cModule.categoriesImage}
                     />
                     <p>&emsp;椅子&emsp;</p>
                   </div>
@@ -226,6 +228,7 @@ export default function coordination(
                       width={23}
                       height={10}
                       alt=""
+                      className={cModule.categoriesImage}
                     />
                     <p>&emsp;ソファ&emsp;</p>
                   </div>
@@ -241,6 +244,7 @@ export default function coordination(
                       width={23}
                       height={10}
                       alt=""
+                      className={cModule.categoriesImage}
                     />
                     <p>&emsp;ベッド/寝具&emsp;</p>
                   </div>
@@ -256,6 +260,7 @@ export default function coordination(
                       width={23}
                       height={10}
                       alt=""
+                      className={cModule.categoriesImage}
                     />
                     <p>&emsp;収納棚&emsp;</p>
                   </div>
@@ -273,6 +278,7 @@ export default function coordination(
                       width={23}
                       height={10}
                       alt=""
+                      className={cModule.categoriesImage}
                     />
                     <p>&emsp;ラグ&emsp;</p>
                   </div>
@@ -288,6 +294,7 @@ export default function coordination(
                       width={23}
                       height={10}
                       alt=""
+                      className={cModule.categoriesImage}
                     />
                     <p>&emsp;照明&emsp;</p>
                   </div>
@@ -303,6 +310,7 @@ export default function coordination(
                       width={23}
                       height={10}
                       alt=""
+                      className={cModule.categoriesImage}
                     />
                     <p>&emsp;カーテン&emsp;</p>
                   </div>
@@ -318,6 +326,7 @@ export default function coordination(
                       width={23}
                       height={10}
                       alt=""
+                      className={cModule.categoriesImage}
                     />
                     <p>&emsp;小物/雑貨&emsp;</p>
                   </div>

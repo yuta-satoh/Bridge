@@ -69,13 +69,17 @@ exports[`ログイン時 1`] = `
         className="form"
         onSubmit={[Function]}
       >
-        <input
-          className="formtitle h-8 border border-neutral-500 rounded-l pl-2.5"
-          onChange={[Function]}
-          placeholder="何をお探しですか？"
-          type="text"
-          value=""
-        />
+        <div
+          className="jsx-8bc86e838c725549"
+        >
+          <input
+            className="jsx-8bc86e838c725549"
+            onChange={[Function]}
+            placeholder="何をお探しですか？"
+            type="text"
+            value=""
+          />
+        </div>
         <a
           href="/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=椅子&category=テーブル&category=カーテン&category=照明&category=カーペット%2Fラグ&category=ソファ&category=収納棚&category=ベッド%2F寝具&category=小物%2F雑貨&input=&order=id.desc&page=0"
           onClick={[Function]}
@@ -127,40 +131,9 @@ exports[`ログイン時 1`] = `
           </span>
         </div>
       </a>
-      <a
-        className="iconModule"
-        href="/cart"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        onTouchStart={[Function]}
-      >
-        <div
-          className="loader"
-        />
-        <img
-          alt=""
-          className="iconimg"
-          data-nimg="1"
-          decoding="async"
-          height={25}
-          loading="lazy"
-          onError={[Function]}
-          onLoad={[Function]}
-          src="/_next/image?url=%2Fimages%2Ficon%2Fcart.png&w=64&q=75"
-          srcSet="/_next/image?url=%2Fimages%2Ficon%2Fcart.png&w=32&q=75 1x, /_next/image?url=%2Fimages%2Ficon%2Fcart.png&w=64&q=75 2x"
-          style={
-            {
-              "color": "transparent",
-            }
-          }
-          width={25}
-        />
-        <span
-          className="menuLabel inline-block mt-1 whitespace-nowrap"
-        >
-          カート
-        </span>
-      </a>
+      <p>
+        エラー
+      </p>
     </div>
   </div>
 </header>
@@ -235,13 +208,17 @@ exports[`未ログイン 1`] = `
         className="form"
         onSubmit={[Function]}
       >
-        <input
-          className="formtitle h-8 border border-neutral-500 rounded-l pl-2.5"
-          onChange={[Function]}
-          placeholder="何をお探しですか？"
-          type="text"
-          value=""
-        />
+        <div
+          className="jsx-8bc86e838c725549"
+        >
+          <input
+            className="jsx-8bc86e838c725549"
+            onChange={[Function]}
+            placeholder="何をお探しですか？"
+            type="text"
+            value=""
+          />
+        </div>
         <a
           href="/items/itemlist/search?genre=北欧風&genre=ナチュラル&genre=和モダン&genre=フェミニン&category=椅子&category=テーブル&category=カーテン&category=照明&category=カーペット%2Fラグ&category=ソファ&category=収納棚&category=ベッド%2F寝具&category=小物%2F雑貨&input=&order=id.desc&page=0"
           onClick={[Function]}

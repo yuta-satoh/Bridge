@@ -129,8 +129,8 @@ export default function History({
                 <thead>
                   <tr>
                     <th></th>
-                    <th>商品名</th>
-                    <th className={hModule.tableCell}>購入数</th>
+                    <th className={hModule.tabletitle}>商品名</th>
+                    <th className={hModule.tableCell}>数量</th>
                     <th className={hModule.tableCell}>単価</th>
                     <th className={hModule.tableCell}>小計</th>
                   </tr>

@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { withIronSessionApiRoute } from 'iron-session/next';
 import { sessionOptions } from '@/lib/session';
+import { resData } from '@/types/types';
 
 type Cart = {
   id: number,
@@ -10,9 +11,8 @@ type Cart = {
 
 export async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Cart[]>
+  res: NextApiResponse<Cart[] | resData >
 ) {
-	const userId = req.query.id as string
   const user = req.session.user?.user
   const responceCart = await fetch(
     `${process.env.SUPABASE_URL}/carts?user_id=eq.${user}`,
@@ -28,10 +28,10 @@ export async function handler(
   const cartData: Cart[] = await responceCart.json();
 
   // レスポンスの定義
-  if (responceCart.ok) {
+  if (cartData.length !== 0) {
     res.status(200).json(cartData);
   } else {
-    res.status(400).end();
+    res.status(responceCart.status).json({ message: 'Cart is Nothing' });
   }
 }
 

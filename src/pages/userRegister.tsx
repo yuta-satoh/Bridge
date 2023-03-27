@@ -3,6 +3,7 @@ import Link from 'next/link';
 import urStyles from '../styles/userRegister.module.css';
 import { useState, ChangeEvent, SyntheticEvent } from 'react';
 import { useRouter } from 'next/router';
+import { searchAddress, formValidate, checkInput } from '@/lib/register';
 
 type User = {
   lastName: string,
@@ -55,102 +56,6 @@ export default function UserRegister() {
   const [borderError, setBorderError] = useState(initBorderError)
   const router = useRouter();
 
-  const searchAddress = (e: React.FormEvent) => {
-    const url = 'https://zipcoda.net/api?';
-    if (userInfo.zipcode1 && userInfo.zipcode2) {
-        const params = new URLSearchParams({ zipcode: `${userInfo.zipcode1}${userInfo.zipcode2}` })
-        fetch(url + params)
-            .then(response => response.json())
-            .then(data => {
-                const stateName: string = data.items[0].state_name;
-                const townName: string = data.items[0].address;
-                setUserInfo({...userInfo, address: `${stateName + townName}`})
-            })
-            .catch((err: ErrorEvent) => {
-                console.log(err)
-            });
-    }
-  }
-
-   const nameValidation = (name: string) => {
-    if (!name) return '※名前を入力して下さい';
-    return '';
-  }
-
-  const genderValidation = (gender: string) => {
-    if (!gender) return "※性別を選択して下さい";
-  }
-
-  const emailValidation = (email: string) => {
-    if (!email) return "※メールアドレスを入力して下さい";
-    if (email.indexOf('@') === -1 || email.indexOf('@') === 0 || email.indexOf('@') === email.length-1) {
-      return '※メールアドレスの形式が不正です';
-    }
-    return '';
-  }
-
-  const zipcodeValidation = (key: string, zipcode: string) => {
-    switch (key) {
-      case 'zipcode1':
-        if (zipcode.length !== 3) return '※郵便番号はXXX-XXXXの形式で入力して下さい';
-        return '';
-      case 'zipcode2':
-        if (zipcode.length !== 4) return '※郵便番号はXXX-XXXXの形式で入力して下さい';
-        return '';
-    }
-  }
-
-  const addressValidation = (address: string) => {
-    if (!address) return '※住所を入力して下さい';
-    return '';
-  }
-
-  const telValidation = (tell: string) => {
-    if (!tell) return '※電話番号はXXXX-XXXX-XXXXの形式で入力してください';
-    return '';
-  }
-
-  const passwordValidation = (password: string) => {
-    const regax = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9!"#$%]{0,100}$/;
-    const regaxInput = /^[a-zA-Z0-9!"#$%]{0,100}$/;
-    if (!password) return '※パスワードを入力して下さい';
-    if (!regaxInput.test(password)) return '※半角英数字の大文字と小文字、数字、記号(!"#$%)のみ使用可能です'
-    if (!regax.test(password)) return "※英数字を組み合わせたパスワードにして下さい"
-    if (password.length < 8 || password.length > 20) return "※８文字以上２０文字以内で設定してください"
-    return '';
-  }
-
-  const samePasswordValidation = (confirmationPassword: string) => {
-    if (!confirmationPassword) return "※確認用パスワードを入力して下さい"
-    if (confirmationPassword !== userInfo.password) return '※パスワードと確認用パスワードが不一致です';
-    return '';
-  }
-
-  const formValidate = (key: string, value: string) => {
-    switch (key) {
-      case 'lastName':
-      case 'firstName':
-        return nameValidation(value);
-      case 'gender':
-        return genderValidation(value);
-      case 'email':
-        return emailValidation(value);
-      case 'zipcode1':
-      case 'zipcode2':
-        return zipcodeValidation(key, value);
-      case 'address':
-        return addressValidation(value);
-      case 'tell1':
-      case 'tell2':
-      case 'tell3':
-        return telValidation(value);
-      case 'password':
-        return passwordValidation(value);
-      case 'confirmationPassword':
-        return samePasswordValidation(value);
-    }
-  }
-
   const handleChange = (e: ChangeEvent) => {
     if (!(e.target instanceof HTMLInputElement)) {
         return;
@@ -158,7 +63,7 @@ export default function UserRegister() {
     const key = e.target.name;
     const value = e.target.value;
     setUserInfo({...userInfo, [key]: value});
-    setErrorText({...errorText, [key]: formValidate(key, value)})
+    setErrorText({...errorText, [key]: formValidate(key, value, userInfo.password)})
     setBorderError({...borderError, [key]: false})
   }
 
@@ -172,70 +77,13 @@ export default function UserRegister() {
     return validInfo && validError
   };
 
-  const checkInput = () => {
-    const keys = Object.keys(userInfo);
-    const values = Object.values(userInfo);
-    const valueIndex = values.flatMap((value, index) => !value ? index : [])
-    const filterKeys = keys.flatMap((key, index) => valueIndex.includes(index) ? key : [])
-    const newObjText = initUserInfo
-    const newObjIsError = initBorderError
-    filterKeys.forEach((key) => {
-      switch (key) {
-        case 'lastName':
-          newObjText.lastName = '※名前を入力して下さい'
-          newObjIsError.lastName = true;
-        case 'firstName':
-          newObjText.firstName = '※名前を入力して下さい'
-          newObjIsError.firstName = true;
-          break
-        case 'gender':
-          newObjText.gender = '※性別を選択して下さい'
-          newObjIsError.gender = true;
-          break
-        case 'email':
-          newObjText.email = '※メールアドレスを入力して下さい'
-          newObjIsError.email = true;
-          break
-        case 'zipcode1':
-          newObjText.zipcode1 = '※郵便番号を入力して下さい'
-          newObjIsError.zipcode1 = true;
-        case 'zipcode2':
-          newObjText.zipcode2 = '※郵便番号を入力して下さい'
-          newObjIsError.zipcode2 = true;
-          break
-        case 'address':
-          newObjText.address = '※住所を入力して下さい'
-          newObjIsError.address = true;
-          break
-        case 'tell1':
-          newObjText.tell1 = '※電話番号を入力して下さい'
-          newObjIsError.tell1 = true;
-        case 'tell2':
-          newObjText.tell2 = '※電話番号を入力して下さい'
-          newObjIsError.tell2 = true;
-        case 'tell3':
-          newObjText.tell3 = '※電話番号を入力して下さい'
-          newObjIsError.tell3 = true;
-          break
-        case 'password':
-          newObjText.password = '※パスワードを入力して下さい'
-          newObjIsError.password = true;
-          break
-        case 'confirmationPassword':
-          newObjText.confirmationPassword = '※確認用パスワードを入力して下さい'
-          newObjIsError.confirmationPassword = true;
-          break
-      }
-    })
-    setErrorText(newObjText);
-    setBorderError(newObjIsError);
-  }
-
   const submitHandler = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    checkInput();
-
+    
     if (!canSubmit()) {
+      const check = checkInput(userInfo);
+      setErrorText(check.newObjText)
+      setBorderError(check.newObjIsError)
       return
     }
 
@@ -243,16 +91,17 @@ export default function UserRegister() {
       userInfo.tell1.length + userInfo.tell2.length + userInfo.tell3.length < 10
       || userInfo.tell1.length + userInfo.tell2.length + userInfo.tell3.length >= 12
     ) {
-      setErrorText({...errorText, tell1: "電話番号はXXXX-XXXX-XXXXの形式で入力して下さい"})
+      setErrorText({...errorText, tell1: "電話番号の形式が不正です"})
+      setBorderError({...borderError, tell1: true, tell2: true, tell3: true})
       return
     }
 
-    const searchResult: {email: string, password: string} = await fetch("/api/userResister/search", {
+    const searchResult: {email: string } = await fetch("/api/userResister/search", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ email: userInfo.email, password: userInfo.password })
+      body: JSON.stringify({ email: userInfo.email })
     })
       .then((res) => res.json())
       .then((data) => {
@@ -260,13 +109,9 @@ export default function UserRegister() {
         return data;
       })
 
-    if (searchResult.email !== "" && searchResult.password !== "") {
-      setErrorText({...errorText, email: searchResult.email, password: searchResult.password});
-    } else if (searchResult.email !== "") {
-      setErrorText({...errorText, email: searchResult.email})
-      setBorderError({...borderError, email: true})
-    } else if (searchResult.password !== "") {
-      setErrorText({...errorText, password: searchResult.password})
+    if (searchResult.email !== "") {
+      setErrorText({...errorText, email: searchResult.email});
+      return;
     } else {
       const postUser = {
         lastname: userInfo.lastName,
@@ -485,11 +330,13 @@ export default function UserRegister() {
                 onChange={handleChange}
               />
               <button
-               
                 type='button'
                 className={`${urStyles.zipButton} text-white bg-neutral-900 border border-neutral-900 rounded px-1`}
-              
-                onClick={searchAddress}
+                onClick={async () => {
+                  const result = await searchAddress(`${userInfo.zipcode1}${userInfo.zipcode2}`)
+                  setUserInfo({...userInfo, address: result.address})
+                  setErrorText({...errorText, zipcode1: result.error})
+                }}
               >
                 住所検索
               </button>
@@ -556,7 +403,7 @@ export default function UserRegister() {
               <br />
             </div>
             <div className={urStyles.buttonArea}>
-              <button type="submit" disabled={!canSubmit()} className={urStyles.submitButton}>
+              <button type="submit" className={urStyles.submitButton}>
                 会員登録をする
                 <span className={urStyles.buttonSpan}>→</span>
               </button>

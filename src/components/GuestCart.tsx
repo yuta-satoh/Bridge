@@ -7,6 +7,7 @@ import { ChangeEvent } from "react";
 import { useRouter } from "next/router";
 import Button from "./utils/Button";
 import Loading from "./utils/Loading";
+import { useWindowSize } from "@/lib/getWindowSize";
 
 type Item = {
   id: number,
@@ -28,12 +29,11 @@ type GuestCartType = {
 const fetcher: Fetcher<Item[], string> = (...args) => fetch(...args).then((res) => res.json());
 
 export default function GuestCart({ guestCart, reloadStrage }: { guestCart: GuestCartType[], reloadStrage: () => void }) {
+  const windowSize = useWindowSize()
   const router = useRouter();
   // 受け取ったゲストカートからクエリパラメータを作成
   const itemQuery = guestCart.reduce((query, cartItem) => query + `,id.eq.${cartItem.itemId}`, "").replace(",", "");
   const queryParams = `or=(${itemQuery})`
-
-  console.log(guestCart)
 
 	// SWRでアイテムを取得
   const { data: cartItemData, error } = useSWR(`/api/getItems?id=${queryParams}`, fetcher)
@@ -45,7 +45,7 @@ export default function GuestCart({ guestCart, reloadStrage }: { guestCart: Gues
       <div className="block py-40 mx-auto my-10 bg-neutral-100 rounded">
         <h2 className="text-center text-3xl font-bold mb-10">カートに商品がありません</h2>
         <Link href="/">
-          <div className="container mx-auto pt-1.5 text-center h-10 w-1/3 border-2 border-neutral-900 bg-white mt-4">
+          <div className="container mx-auto pt-1.5 text-center h-10 w-1/2 sp:w-1/3 sp:min-w-max border-2 border-neutral-900 bg-white mt-4">
             お買い物はこちらから
           </div>
         </Link>
@@ -90,17 +90,55 @@ export default function GuestCart({ guestCart, reloadStrage }: { guestCart: Gues
   }
 
 	return (
-    <div className="flex mx-auto w-4/5 gap-32">
-      <div className="w-3/5 mt-10">
+    <div className="pc:flex pc:flex-row-reverse mx-auto w-screen sp:w-3/5 pc:w-4/5 gap-32">
+      {windowSize.width < 1080 ? 
+        <div className="flex w-4/5 mx-auto mt-10">
+            <h2 className="text-3xl font-bold">合計</h2>
+            <span className="mt-2">{`(${filteredItemData.length}点の商品)`}</span>
+        </div>
+      : <></> }
+      <div className="mx-auto w-4/5 pc:w-1/4 h-80 mt-4 pc:mt-20 p-10 border-2 border-neutral-900 rounded bg-gray-100 pc:sticky top-10 min-w-max">
+        <p>
+          <span>商品合計</span>
+          <span className="float-right">¥ {sumPrice.toLocaleString()}</span>
+        </p>
+        <p>
+          <span>消費税</span>
+          <span className="float-right">¥ {(sumPrice * 0.1).toLocaleString()}</span>
+        </p>
+        <div className="border-b border-black">
+          <p className="mt-10 text-lg font-bold">
+            <span>合計</span>
+            <span className="float-right">¥ {(sumPrice + (sumPrice * 0.1)).toLocaleString()}</span>
+          </p>
+        </div>
+        <div className="flex flex-col items-center gap-5 mt-5">
+          <Button
+            type="button"
+            color="white"
+            onClick={() => router.push("/login")}
+          >
+            ログイン
+          </Button>
+          <Button
+            type="button"
+            color="white"
+            onClick={() => router.push("/")}
+          >
+            お買い物を続ける
+          </Button>
+        </div>
+      </div>
+      <div className="mx-auto w-4/5 sp:w-full pc:w-3/5 mt-10">
         <div className="flex">
           <h2 className="text-3xl font-bold">カート</h2>
           <span className="mt-2">{`(${filteredItemData.length}点の商品)`}</span>
         </div>
         {filteredItemData.map((item, index) => (
-          <div key={index} className="border border-neutral-900 my-2 py-3 px-8 h-52">
-            <div className="flex gap-5">
+          <div key={index} className="border border-neutral-900 my-2 py-3 px-8 w-full min-h-max">
+            <div className="sp:flex sp:gap-5">
               <Link href={`/items/itemlist/${item.id}`}>
-                <Image src={item.imgurl} alt={item.name} width={150} height={150} className="rounded w-36 h-36"/>
+                <Image src={item.imgurl} alt={item.name} width={150} height={150} className="rounded w-36 h-36 mx-auto"/>
               </Link>
               <div className="px-3 py-4">
                 <Link href={`/items/itemlist/${item.id}`}>
@@ -142,38 +180,6 @@ export default function GuestCart({ guestCart, reloadStrage }: { guestCart: Gues
           </div>  
         ))}
         <Recommend recommend={recommend} reloadStrage={reloadStrage} />
-      </div>
-      <div className="w-1/4 h-80 mt-10 p-10 border-2 border-neutral-900 rounded bg-gray-100">
-        <p>
-          <span>商品合計</span>
-          <span className="float-right">¥ {sumPrice.toLocaleString()}</span>
-        </p>
-        <p>
-          <span>消費税</span>
-          <span className="float-right">¥ {(sumPrice * 0.1).toLocaleString()}</span>
-        </p>
-        <div className="border-b border-black">
-          <p className="mt-10 text-lg font-bold">
-            <span>合計</span>
-            <span className="float-right">¥ {(sumPrice + (sumPrice * 0.1)).toLocaleString()}</span>
-          </p>
-        </div>
-        <div className="flex flex-col items-center gap-5 mt-5">
-          <Button
-            type="button"
-            color="white"
-            onClick={() => router.push("/login")}
-          >
-            ログイン
-          </Button>
-          <Button
-            type="button"
-            color="white"
-            onClick={() => router.push("/")}
-          >
-            お買い物を続ける
-          </Button>
-        </div>
       </div>
     </div>
   )

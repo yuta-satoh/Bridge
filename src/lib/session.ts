@@ -12,25 +12,52 @@ export const sessionOptions: IronSessionOptions = {
     secure: process.env.NODE_ENV === 'production',
   },
 };
-
-declare module 'iron-session' {
-  interface IronSessionData {
-    user?: UserId ;
-  }
-}
-
 /**
  * User
  */
 export type UserId = {
-user: string;
+  user: string;
 };
+
+/**
+ * email
+ */
+export type Email = {
+  email: string;
+};
+
+/**
+ * status
+ */
+export type Status = {
+  status: string;
+};
+
+declare module 'iron-session' {
+  interface IronSessionData {
+    user?: UserId;
+    email?: Email;
+    status?: Status;
+  }
+}
 
 /**
  * User object that indicates not logged in
  */
 export const NullUser: UserId = {
   user: '',
+};
+/**
+ * Email object that indicates not logged in
+ */
+export const NullEmail: Email = {
+  email: '',
+};
+/**
+ * Email object that indicates not logged in
+ */
+export const NullStatus: Status = {
+  status: '',
 };
 
 /**

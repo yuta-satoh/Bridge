@@ -47,10 +47,10 @@ type Order_histories = {
     genre: string;
     category: string;
     price: number;
-    imgUrl: string;
+    imgurl: string;
     date: string;
     quantity: number;
-    dalete: boolean;
+    delete: boolean;
 }
 
 type Reviews = {
@@ -62,7 +62,13 @@ type Reviews = {
     evaluation: number;
     title: string;
     description: string;
+    date: string;
     delete: boolean;
 }
 
-export type { Items, Users, Carts, Cart_items, Order_histories, Reviews }
+// ハンドラ関数レスポンス用型エイリアス
+type resData = {
+    message: string;
+  };
+
+export type { Items, Users, Carts, Cart_items, Order_histories, Reviews, resData }

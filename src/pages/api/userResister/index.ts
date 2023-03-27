@@ -4,8 +4,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-	// const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXBpX3VzZXIifQ.OOP7yE5O_2aYFQG4bgMBQ9r0f9sikNqXbhJqoS9doTw";
-  
   const response = await fetch(`${process.env.SUPABASE_URL}/users`, {
 		method: req.method,
 		headers: {
@@ -16,9 +14,9 @@ export default async function handler(
 		body: JSON.stringify(req.body)
 	})
 
-  if (response.ok) {
-		res.status(201).end()
-  } else {
-    res.status(400).json({message: "エラー"})
-  }
+	if (response.ok) {
+		res.status(200).json({ message: 'OK' });
+	} else {
+		res.status(response.status).json({ message: 'Registration failed.' });
+	}
 }

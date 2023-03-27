@@ -352,7 +352,6 @@ exports[`会員登録ページ 正常に描画 1`] = `
         >
           <button
             class="submitButton"
-            disabled=""
             type="submit"
           >
             会員登録をする
