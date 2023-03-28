@@ -10,10 +10,10 @@ export default function List() {
     <>
       <Head>
         <title>商品一覧画面</title>
-        <meta
+        {/* <meta
           name="viewport"
           content="width=device-width,initial-scale=1.0"
-        />
+        /> */}
       </Head>
 
       <div className={lstyles.container}>
