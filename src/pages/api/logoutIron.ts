@@ -4,8 +4,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 export default withIronSessionApiRoute(handler, sessionOptions);
 function handler(req: NextApiRequest, res: NextApiResponse) {
-  req.session.destroy()
+  req.session.destroy();
   // await req.session.save();
-  res.setHeader("cache-control", "no-store, max-age=0");
+  res.setHeader('bridge', '');
   res.send({ ok: true });
 }
