@@ -2,6 +2,7 @@ import Head from 'next/head';
 import UserCart from '@/components/UserCart';
 import GuestCart from '@/components/GuestCart';
 import { useEffect, useState } from 'react';
+import cartstyle from '../styles/cart.module.css';
 
 export default function Cart() {
   const [userId, setUserId] = useState('');
@@ -63,7 +64,9 @@ export default function Cart() {
         <Head>
           <title>カート</title>
         </Head>
-        <UserCart userId={userId} />
+        <main className={cartstyle.main}>
+          <UserCart userId={userId} />
+        </main>
       </>
     );
   } else {
@@ -72,10 +75,12 @@ export default function Cart() {
         <Head>
           <title>カート</title>
         </Head>
-        <GuestCart
-          guestCart={guestCart}
-          reloadStrage={reloadStrage}
-        />
+        <main className={cartstyle.main}>
+          <GuestCart
+            guestCart={guestCart}
+            reloadStrage={reloadStrage}
+          />
+        </main>
       </>
     );
   }
