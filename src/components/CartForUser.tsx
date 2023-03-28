@@ -39,7 +39,7 @@ export default function UserCart() {
           height={25}
         />
         <span
-          className={`${headModule.menuLabel} inline-block mt-1 whitespace-nowrap`}
+          className={`${headModule.menuLabel} inline-block whitespace-nowrap`}
         >
           カート
         </span>

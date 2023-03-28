@@ -1,0 +1,127 @@
+@media (600px <= width) {
+  /* dataなし */
+  .nDat {
+    position: relative;
+  }
+
+  .nDat > input {
+    height: 40px;
+    width: 600px;
+    border: 1.5px solid #574142;
+    border-radius: 0.25rem;
+    padding-left: 10px;
+  }
+  .nDat > button {
+    display: inline-block;
+    position: absolute;
+    height: 36px;
+    width: 40px;
+    left: 557px;
+    top: 2px;
+    background-color: #ffffff;
+    border-radius: 0.25rem;
+  }
+
+  /* dataあり */
+  .yDat {
+    position: relative;
+  }
+  .yDat input {
+    height: 40px;
+    width: 600px;
+    border: 1.5px solid #574142;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    padding-left: 10px;
+  }
+  .suggest {
+    position: absolute;
+    z-index: 50;
+  }
+  .suggest_list {
+    width: 600px;
+    border-width: 1px;
+    background-color: rgb(255 255 255);
+    border-color: #574142;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 10px;
+    cursor: pointer;
+  }
+  .suggest-list:hover {
+    background-color: rgb(229 229 229);
+  }
+
+  /* valueなし */
+  .nVal input {
+    height: 40px;
+    width: 600px;
+    border: 1.5px solid #574142;
+    border-radius: 0.25rem;
+    padding-left: 10px;
+  }
+}
+
+@media (width < 600px) {
+  /* dataなし */
+  .nDat {
+    position: relative;
+  }
+
+  .nDat > input {
+    height: 40px;
+    width: 400px;
+    border: 1.5px solid #574142;
+    border-radius: 0.25rem;
+    padding-left: 10px;
+  }
+  .nDat > button {
+    display: inline-block;
+    position: absolute;
+    height: 36px;
+    width: 40px;
+    left: 357px;
+    top: 2px;
+    background-color: #ffffff;
+    border-radius: 0.25rem;
+  }
+
+  /* dataあり */
+  .yDat {
+    position: relative;
+  }
+  .yDat input {
+    height: 40px;
+    width: 400px;
+    border: 1.5px solid #574142;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    padding-left: 10px;
+  }
+  .suggest {
+    position: absolute;
+    z-index: 50;
+  }
+  .suggest_list {
+    width: 400px;
+    border-width: 1px;
+    background-color: rgb(255 255 255);
+    border-color: #574142;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 10px;
+    cursor: pointer;
+  }
+  .suggest-list:hover {
+    background-color: rgb(229 229 229);
+  }
+
+  /* valueなし */
+  .nVal input {
+    height: 40px;
+    width: 400px;
+    border: 1.5px solid #574142;
+    border-radius: 0.25rem;
+    padding-left: 10px;
+  }
+}

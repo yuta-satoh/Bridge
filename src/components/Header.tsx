@@ -9,6 +9,7 @@ import useSWR from 'swr';
 import UserCart from './CartForUser';
 import GuestCart from './CartForGuest';
 import InputSuggest from './utils/InputSuggest';
+import { useWindowSize } from '@/lib/getWindowSize';
 
 type items = {
   id: number;
@@ -37,6 +38,7 @@ export default function Header({
 }: {
   auth: boolean | undefined;
 }) {
+  const windowSize = useWindowSize()
   const router = useRouter();
   const [input, setInput] = useState('');
 
@@ -115,7 +117,7 @@ export default function Header({
           </div>
         </Link>
         <ul className={`${headModule.left} flex gap-10 mr-60 ml-30 whitespace-nowrap`}>
-          <li>
+          <li className='text-base'>
             <Link href="/items/itemlist">商品</Link>
           </li>
           <li>
@@ -123,7 +125,7 @@ export default function Header({
               お知らせ
             </Link>
           </li>
-          <li>ヘルプ</li>
+          { windowSize.width >= 600 ? <li>ヘルプ</li> : <></> }
         </ul>
         <div className={`${headModule.right} flex gap-10`}>
           <form className={headModule.form} onSubmit={handleSubmit}>
@@ -161,7 +163,7 @@ export default function Header({
               />
               <div>
                 <span
-                  className={`${headModule.menuLabel} inline-block`}
+                  className={`${headModule.menuLabel} inline-block pt-1`}
                 >
                   マイページ
                 </span>

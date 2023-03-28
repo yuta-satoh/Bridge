@@ -86,7 +86,7 @@ exports[`トップページ トップページが正常に描画されました 
       class="content mt-20"
     >
       <h2
-        class="font text-center text-xl font-bold"
+        class="text-center text-xl font-bold mb-2"
       >
         新着商品
       </h2>
@@ -133,7 +133,7 @@ exports[`トップページ トップページが正常に描画されました 
         class="buttonContent"
       >
         <button
-          class="jsx-1912866866"
+          class="jsx-644447430"
           type="button"
         >
           商品一覧へ　→
@@ -141,15 +141,15 @@ exports[`トップページ トップページが正常に描画されました 
       </div>
     </div>
     <div
-      class="content mx-auto mt-20 justify-center"
+      class="mx-auto mt-20 justify-center w-5/6"
     >
       <h2
-        class="font text-center text-xl font-bold"
+        class="text-center text-xl font-bold mb-2"
       >
         商品カテゴリから探す
       </h2>
       <ul
-        class="cateLists grid grid-cols-5 gap-8 w-4/5 mx-auto mt-5"
+        class="cateLists grid grid-cols-5 gap-8 mx-auto mt-5"
       >
         <li>
           <a
@@ -441,7 +441,7 @@ exports[`トップページ トップページが正常に描画されました 
       id="remind"
     >
       <h2
-        class="font text-center text-xl font-bold"
+        class="text-center text-xl font-bold"
       >
         お知らせ
       </h2>

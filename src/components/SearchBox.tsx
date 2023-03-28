@@ -155,7 +155,7 @@ export default function SearchBox() {
 
             {/* チェックボックス */}
             <div className={lstyles.categorybox}>
-              <div className={fstyles.category}>
+              <div className={lstyles.category}>
                 <p className={lstyles.menu_contents_title}>
                   インテリアジャンルから探す
                 </p>
@@ -182,7 +182,7 @@ export default function SearchBox() {
                 </div>
               </div>
 
-              <div className={fstyles.category}>
+              <div className={lstyles.category}>
                 <p className={lstyles.menu_contents_title}>
                   商品カテゴリから探す
                 </p>

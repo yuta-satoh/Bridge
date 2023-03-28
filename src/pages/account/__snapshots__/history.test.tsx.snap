@@ -151,10 +151,9 @@ exports[`描画される 1`] = `
         並び替える: 
       </label>
       <label
-        className="jsx-2982400643 selectbox"
+        className="selectbox"
       >
         <select
-          className="jsx-2982400643"
           data-testid="select-option"
           id="historyOrder"
           name="historyOrder"
@@ -162,13 +161,11 @@ exports[`描画される 1`] = `
           value="新しい順"
         >
           <option
-            className="jsx-2982400643"
             value="新しい順"
           >
             新しい順
           </option>
           <option
-            className="jsx-2982400643"
             value="古い順"
           >
             古い順
@@ -182,13 +179,15 @@ exports[`描画される 1`] = `
       <thead>
         <tr>
           <th />
-          <th>
+          <th
+            className="tabletitle"
+          >
             商品名
           </th>
           <th
             className="tableCell"
           >
-            購入数
+            数量
           </th>
           <th
             className="tableCell"
@@ -203,94 +202,92 @@ exports[`描画される 1`] = `
         </tr>
       </thead>
       <tbody>
-        <div>
-          <tr
-            className="tableLine"
+        <tr
+          className="tableLine"
+        >
+          <td
+            className="tableCellCenter"
           >
-            <td
-              className="tableCellCenter"
+            <a
+              href="../items/itemlist/4"
+              onClick={[Function]}
+              onMouseEnter={[Function]}
+              onTouchStart={[Function]}
             >
-              <a
-                href="../items/itemlist/4"
-                onClick={[Function]}
-                onMouseEnter={[Function]}
-                onTouchStart={[Function]}
-              >
-                <img
-                  alt="ガラスローテーブル"
-                  className="cardImage"
-                  data-nimg="1"
-                  decoding="async"
-                  height={100}
-                  loading="lazy"
-                  onError={[Function]}
-                  onLoad={[Function]}
-                  src="/_next/image?url=%2Fimages%2Ftable%2Ftable_feminine_1.jpg&w=256&q=75"
-                  srcSet="/_next/image?url=%2Fimages%2Ftable%2Ftable_feminine_1.jpg&w=128&q=75 1x, /_next/image?url=%2Fimages%2Ftable%2Ftable_feminine_1.jpg&w=256&q=75 2x"
-                  style={
-                    {
-                      "color": "transparent",
-                    }
+              <img
+                alt="ガラスローテーブル"
+                className="cardImage"
+                data-nimg="1"
+                decoding="async"
+                height={100}
+                loading="lazy"
+                onError={[Function]}
+                onLoad={[Function]}
+                src="/_next/image?url=%2Fimages%2Ftable%2Ftable_feminine_1.jpg&w=256&q=75"
+                srcSet="/_next/image?url=%2Fimages%2Ftable%2Ftable_feminine_1.jpg&w=128&q=75 1x, /_next/image?url=%2Fimages%2Ftable%2Ftable_feminine_1.jpg&w=256&q=75 2x"
+                style={
+                  {
+                    "color": "transparent",
                   }
-                  width={100}
-                />
-              </a>
-            </td>
-            <td
-              className="tableCellCenter"
+                }
+                width={100}
+              />
+            </a>
+          </td>
+          <td
+            className="tableCellCenter"
+          >
+            <a
+              href="../items/itemlist/4"
+              onClick={[Function]}
+              onMouseEnter={[Function]}
+              onTouchStart={[Function]}
             >
-              <a
-                href="../items/itemlist/4"
-                onClick={[Function]}
-                onMouseEnter={[Function]}
-                onTouchStart={[Function]}
-              >
-                ガラスローテーブル
-              </a>
-            </td>
-            <td
-              className="tableCell"
+              ガラスローテーブル
+            </a>
+          </td>
+          <td
+            className="tableCell"
+          >
+            1
+            個
+          </td>
+          <td
+            className="tableCell"
+          >
+            ¥ 
+            31,900
+          </td>
+          <td
+            className="tableCell"
+          >
+            ¥
+             
+            31,900
+          </td>
+          <td
+            className="tableCellCenter"
+          >
+            <button
+              className="buttonStyle"
+              onClick={[Function]}
+              type="button"
             >
-              1
-              個
-            </td>
-            <td
-              className="tableCell"
-            >
-              ¥ 
-              31,900
-            </td>
-            <td
-              className="tableCell"
-            >
-              ¥
-               
-              31,900
-            </td>
-            <td
-              className="tableCellCenter"
-            >
-              <button
-                className="buttonStyle"
-                onClick={[Function]}
-                type="button"
-              >
-                レビューする
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td
-              colSpan={5}
-            />
-            <td
-              className="tableCellCenterSub"
-            >
-              購入日：
-              2023-03-01
-            </td>
-          </tr>
-        </div>
+              レビューする
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td
+            colSpan={5}
+          />
+          <td
+            className="tableCellCenterSub"
+          >
+            購入日：
+            2023-03-01
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>,

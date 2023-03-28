@@ -32,7 +32,7 @@ exports[`ストレージあり 1`] = `
     width={25}
   />
   <span
-    className="menuLabel inline-block mt-1 whitespace-nowrap"
+    className="menuLabel inline-block whitespace-nowrap"
   >
     カート
   </span>
@@ -66,7 +66,7 @@ exports[`ストレージなし 1`] = `
     width={25}
   />
   <span
-    className="menuLabel inline-block mt-1 whitespace-nowrap"
+    className="menuLabel inline-block whitespace-nowrap"
   >
     カート
   </span>

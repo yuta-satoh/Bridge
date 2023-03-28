@@ -30,19 +30,16 @@ export default function ItemPage({
   const genre = items.genre;
   const category = items.category;
 
-  const [multiItemPrice, setMultiItemPrice] = useState(items.price)
+  const [multiItemPrice, setMultiItemPrice] = useState(items.price);
 
   const handleChangeQuantityItem = (quantity: string) => {
     const multi = items.price * Number(quantity);
     setMultiItemPrice(multi);
-  }
+  };
 
   const showMultiPrice = () => {
     if (multiItemPrice === items.price) {
-      return (
-        <div className={istyles.content_itemprice}>
-        </div>
-      )
+      return <div className={istyles.content_itemprice}></div>;
     } else {
       return (
         <div className={istyles.content_itemprice}>
@@ -50,9 +47,9 @@ export default function ItemPage({
           <span>¥ {(multiItemPrice * 1.1).toLocaleString()}</span>
           <span className={istyles.inTax}>(税込)</span>
         </div>
-      )
+      );
     }
-  }
+  };
 
   return (
     <>
@@ -95,19 +92,8 @@ export default function ItemPage({
         <div className={istyles.itembox}>
           <div key={items.id} className={istyles.content_left}>
             <div className={istyles.image}>
-              <Image
-                src={items.imgurl}
-                alt={items.name}
-                width={580}
-                height={500}
-              />
+              <Image src={items.imgurl} alt={items.name} fill />
             </div>
-
-            {/* レビュー機能 */}
-            <ReviewList itemId={items.id.toString()} />
-
-            {/* 以下はこんなのもどうですか、ジャンル・カテゴリに合致したものを持ってくる */}
-            <ItemdetailReccomend genre={genre} category={category} />
           </div>
 
           <div className={istyles.content_right}>
@@ -130,13 +116,17 @@ export default function ItemPage({
               <span>{items.name}</span>
             </div>
             <div className={istyles.content_itemprice}>
-              <span>¥ {(items.price * 1.1).toLocaleString()}</span><span className={istyles.inTax}>(税込)</span>
+              <span>¥ {(items.price * 1.1).toLocaleString()}</span>
+              <span className={istyles.inTax}>(税込)</span>
             </div>
-              {/* 合計金額 */}
-              {showMultiPrice()}
+            {/* 合計金額 */}
+            {showMultiPrice()}
 
             {/* カートボタン機能 */}
-            <CartCounter itemId={items.id} handleChangeQuantityItem={handleChangeQuantityItem} />
+            <CartCounter
+              itemId={items.id}
+              handleChangeQuantityItem={handleChangeQuantityItem}
+            />
 
             {/* 商品詳細説明 */}
             <div className={istyles.content_description}>
@@ -175,6 +165,12 @@ export default function ItemPage({
             </div>
           </div>
         </div>
+        <div className={istyles.content_bottom}>
+          {/* レビュー機能 */}
+          <ReviewList itemId={items.id.toString()} />
+          {/* 以下はこんなのもどうですか、ジャンル・カテゴリに合致したものを持ってくる */}
+          <ItemdetailReccomend genre={genre} category={category} />
+        </div>
       </main>
     </>
   );
@@ -183,10 +179,10 @@ export default function ItemPage({
 // パス・データ取得
 
 export async function getStaticPaths() {
-  const res = await fetch(`${process.env.SUPABASE_URL}/items`,{
+  const res = await fetch(`${process.env.SUPABASE_URL}/items`, {
     headers: {
-      "apikey": `${process.env.SUPABASE_API_KEY}`,
-      "Authorization": `Bearer ${process.env.SUPABASE_API_KEY}`,
+      apikey: `${process.env.SUPABASE_API_KEY}`,
+      Authorization: `Bearer ${process.env.SUPABASE_API_KEY}`,
       'Content-Type': 'application/json',
     },
   });
@@ -212,10 +208,11 @@ type Params = {
 
 export async function getStaticProps({ params }: Params) {
   const res = await fetch(
-    `${process.env.SUPABASE_URL}/items?id=eq.${params.id}`,{
+    `${process.env.SUPABASE_URL}/items?id=eq.${params.id}`,
+    {
       headers: {
-				"apikey": `${process.env.SUPABASE_API_KEY}`,
-				"Authorization": `Bearer ${process.env.SUPABASE_API_KEY}`,
+        apikey: `${process.env.SUPABASE_API_KEY}`,
+        Authorization: `Bearer ${process.env.SUPABASE_API_KEY}`,
         'Content-Type': 'application/json',
       },
     }

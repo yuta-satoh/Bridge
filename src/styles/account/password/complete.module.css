@@ -1,23 +1,55 @@
-.main {
+@media (600px <= width) {
+  .main {
     background-size: cover;
     width: 100%;
+    min-width: 1280px;
     max-height: 100%;
     display: flex;
-}
-.container {
+  }
+  .container {
     background-color: rgba(255, 255, 255, 0.9);
     margin: 50px auto;
     width: 70%;
-}
-.section {
+  }
+  .section {
     text-align: center;
     margin: 70px auto;
-}
-.complete {
+  }
+  .complete {
     font-size: 30px;
     padding-bottom: 10px;
-}
-.section span {
+  }
+  .section span {
     color: rgb(29, 198, 245);
     text-decoration: underline;
+  }
 }
+
+@media (width < 600px) {
+    .main {
+      background-size: cover;
+      width: 100%;
+      min-width: 599px;
+      height: 300px;
+      display: flex;
+    }
+    .container {
+      background-color: rgba(255, 255, 255, 0.9);
+      margin: 50px auto;
+      width: 70%;
+    }
+    .section {
+      text-align: center;
+      margin: 70px auto;
+    }
+    .complete {
+      font-size: 20px;
+      padding-bottom: 10px;
+    }
+    .section span {
+      color: rgb(29, 198, 245);
+      text-decoration: underline;
+      font-size: 13px;
+    }
+  }
+  
