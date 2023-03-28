@@ -13,6 +13,7 @@ import { sessionOptions } from '@/lib/session';
 import { useEffect } from 'react';
 import SelectBox from '@/components/utils/SelectBox';
 import Loading from '@/components/utils/Loading';
+import lstyles from '../../styles/itemList.module.css';
 
 type Item = {
   id: number;
@@ -51,6 +52,7 @@ export default function History({
   const router = useRouter();
   const [order, setOrder] = useState('新しい順');
   const [query, setQuery] = useState('id.desc');
+  const [page, setPage] = useState(0);
 
   // useEffect(() => {
   //   if (cookie === '0' || null) {
@@ -67,6 +69,25 @@ export default function History({
   );
   if (error) return <p>エラー</p>;
   if (!data) return <Loading height={400} />;
+
+  // ここからページング機能
+  // ページ数
+  const pageAmount =
+    data.length % 10 === 0
+      ? data.length / 10
+      : Math.floor(data.length / 10) + 1;
+  // console.log('ページ数', pageAmount);
+
+  // ページ数の配列
+  const pageArr = Array(pageAmount)
+    .fill(0)
+    .map((num, index) => index);
+  // console.log('ページ配列', pageArr);
+
+  // データの成形
+  const pagingData = data.slice(page * 10, page * 10 + 10);
+  // console.log('成形済みデータ', pagingData);
+  // ここまで
 
   function handlePathTransition(item: Item) {
     router.push({
@@ -91,27 +112,28 @@ export default function History({
         <title>購入履歴</title>
       </Head>
       {/* <Auth> */}
-        <>
-          <div className={hModule.breadList}>
-            <ol className={cModule.links} id="top">
-              <li className={cModule.pageLink}>
-                <Link href="/">Bridge</Link>
-                <span className={cModule.greaterThan}>&gt;</span>
-              </li>
-              <li className={cModule.pageLink}>
-                <Link href="/mypage">マイページ</Link>
-                <span className={cModule.greaterThan}>&gt;</span>
-              </li>
-              <li className={cModule.pageLink}>購入履歴</li>
-            </ol>
-          </div>
-          {data.length !== 0 ? (
+      <>
+        <div className={hModule.breadList}>
+          <ol className={cModule.links} id="top">
+            <li className={cModule.pageLink}>
+              <Link href="/">Bridge</Link>
+              <span className={cModule.greaterThan}>&gt;</span>
+            </li>
+            <li className={cModule.pageLink}>
+              <Link href="/mypage">マイページ</Link>
+              <span className={cModule.greaterThan}>&gt;</span>
+            </li>
+            <li className={cModule.pageLink}>購入履歴</li>
+          </ol>
+        </div>
+        {data.length !== 0 ? (
+          <>
             <div className={hModule.body}>
               <h1 className={hModule.title}>購入履歴</h1>
               <div className={hModule.historyOrder}>
                 <label htmlFor="historyOrder">並び替える: </label>
                 <SelectBox
-                  arr={["新しい順", "古い順"]}
+                  arr={['新しい順', '古い順']}
                   name="historyOrder"
                   id="historyOrder"
                   value={order}
@@ -137,7 +159,7 @@ export default function History({
                   </tr>
                 </thead>
                 <tbody>
-                  {data.map((item) => (
+                  {pagingData.map((item) => (
                     <>
                       <tr key={item.id} className={hModule.tableLine}>
                         <td className={hModule.tableCellCenter}>
@@ -193,24 +215,50 @@ export default function History({
                   ))}
                 </tbody>
               </table>
-            </div>
-          ) : (
-            <div className={hModule.body}>
-              <h1 className={hModule.noData}>履歴はありません</h1>
-              <div className={urStyles.loginLink}>
-                <Link href="/mypage">
-                  <button
-                    type="button"
-                    className={urStyles.linkButton}
-                  >
-                    マイページ
-                    <span className={urStyles.buttonSpan}>→</span>
-                  </button>
-                </Link>
+              {/* ページング用 */}
+              <div className={hModule.hisPage}>
+                <div className={lstyles.paging}>
+                  <ul className={lstyles.pages}>
+                    {pageArr.map((num) => (
+                      <li
+                        key={`page_${num}`}
+                        className={
+                          num === page
+                            ? lstyles.currentPage
+                            : lstyles.page
+                        }
+                      >
+                        <button
+                          className={lstyles.button}
+                          type="button"
+                          onClick={() => {
+                            setPage(num);
+                            window.scroll({ top: 0 });
+                          }}
+                        >
+                          {num + 1}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
-          )}
-        </>
+          </>
+        ) : (
+          <div className={hModule.body}>
+            <h1 className={hModule.noData}>履歴はありません</h1>
+            <div className={urStyles.loginLink}>
+              <Link href="/mypage">
+                <button type="button" className={urStyles.linkButton}>
+                  マイページ
+                  <span className={urStyles.buttonSpan}>→</span>
+                </button>
+              </Link>
+            </div>
+          </div>
+        )}
+      </>
       {/* </Auth> */}
     </>
   );
