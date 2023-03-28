@@ -490,7 +490,7 @@
 
     height: 0;
     width: 500px;
-    padding: 0px 45px;
+    padding: 0px 20px;
 
     /* transition:all 0.5s ease-in; */
 
@@ -502,7 +502,7 @@
     visibility: visible;
 
     height: 100%;
-    padding: 30px 45px;
+    padding: 15px 20px;
     flex-direction: column;
 
     transition: all 1s ease-in-out;
@@ -563,15 +563,15 @@
 
   .itembox_list {
     padding: 0 10px;
+    font-size: 13px;
   }
 
   .menu_contents_title {
     font-weight: bold;
-
+    font-size: 13px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-
     margin: 0 15px 15px;
   }
 
@@ -797,7 +797,7 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     min-width: 50px;
-    height: 25px;
+    height: 27px;
     border: 1px solid #574142;
     border-radius: 2px;
     color: #333333;
