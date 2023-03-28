@@ -66,11 +66,14 @@
     margin: 15px 0;
     font-size: 15px;
   }
+  .hisPage {
+    width: 90%;
+  }
 }
 @media (width < 600px) {
   .breadList {
     width: 100%;
-    margin: 30px 
+    margin: 30px;
   }
 
   .body {
@@ -100,7 +103,7 @@
     width: 50px;
     font-size: 11px;
   }
-  .tabletitle{
+  .tabletitle {
     font-size: 11px;
   }
   .tableCellCenter {
@@ -140,5 +143,8 @@
     width: 90%;
     margin: 15px 0;
     font-size: 15px;
+  }
+  .hisPage {
+    width: 90%;
   }
 }
