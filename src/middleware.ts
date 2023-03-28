@@ -47,16 +47,16 @@ export const middleware = async (req: NextRequest) => {
     return NextResponse.redirect(new URL('/rememberPass', req.url));
   }
 
-  if (req.nextUrl.pathname.startsWith('/login')) {
-    // クッキー取得
-    const user = session.user?.user;
-    // クッキーがあればマイページへ
-    if (user !== undefined) {
-      return NextResponse.redirect(new URL('/mypage', req.url));
-    }
-    // クッキーがなければログイン画面へ遷移
-    return res;
-  }
+  // if (req.nextUrl.pathname.startsWith('/login')) {
+  //   // クッキー取得
+  //   const user = session.user?.user;
+  //   // クッキーがあればマイページへ
+  //   if (user !== undefined) {
+  //     return NextResponse.redirect(new URL('/mypage', req.url));
+  //   }
+  //   // クッキーがなければログイン画面へ遷移
+  //   return res;
+  // }
 
   if (req.nextUrl.pathname.startsWith('/mypage')) {
     // クッキー取得
