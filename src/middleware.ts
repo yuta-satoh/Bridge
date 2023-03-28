@@ -51,7 +51,7 @@ export const middleware = async (req: NextRequest) => {
     // クッキー取得
     const user = session.user?.user;
     // クッキーがあればマイページへ
-    if (user !== undefined) {
+    if (user) {
       return NextResponse.redirect(new URL('/mypage', req.url));
     }
     // クッキーがなければログイン画面へ遷移

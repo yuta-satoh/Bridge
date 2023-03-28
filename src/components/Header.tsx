@@ -9,7 +9,7 @@ import useSWR from 'swr';
 import UserCart from './CartForUser';
 import GuestCart from './CartForGuest';
 import InputSuggest from './utils/InputSuggest';
-import { useWindowSize } from '@/lib/getWindowSize';
+import { useWindowSize } from '@/lib/useWindowSize';
 
 type items = {
   id: number;

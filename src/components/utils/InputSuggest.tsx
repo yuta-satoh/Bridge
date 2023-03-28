@@ -1,7 +1,7 @@
 import fetcher from "@/lib/fetcher";
 import { ChangeEvent } from "react";
 import useSWR from 'swr'
-import { useWindowSize } from "@/lib/getWindowSize";
+import { useWindowSize } from "@/lib/useWindowSize";
 
 type Input = {
     value: string;

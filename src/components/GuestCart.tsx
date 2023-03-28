@@ -7,7 +7,7 @@ import { ChangeEvent } from "react";
 import { useRouter } from "next/router";
 import Button from "./utils/Button";
 import Loading from "./utils/Loading";
-import { useWindowSize } from "@/lib/getWindowSize";
+import { useWindowSize } from "@/lib/useWindowSize";
 
 type Item = {
   id: number,

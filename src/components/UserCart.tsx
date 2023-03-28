@@ -8,7 +8,7 @@ import Button from "./utils/Button";
 import SelectBox from "./utils/SelectBox";
 import { useRouter } from "next/router";
 import Loading from "./utils/Loading";
-import { useWindowSize } from "@/lib/getWindowSize";
+import { useWindowSize } from "@/lib/useWindowSize";
 
 type Item = {
   id: number,
