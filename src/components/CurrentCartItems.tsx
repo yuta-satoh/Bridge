@@ -2,6 +2,7 @@ import Image from 'next/image';
 import useSWR, { Fetcher } from 'swr';
 import myStyles from '../styles/mypage.module.css';
 import cciStyles from '../styles/currentCartItems.module.css';
+import Loading from './utils/Loading';
 
 // 型定義
 type Items = {
@@ -63,11 +64,7 @@ export default function CurrentCartItems({
   if (!cartItemData) {
     return (
       <>
-        <div className={cciStyles.container}>
-          <div className={cciStyles.background}>
-            <p>ロード中...</p>
-          </div>
-        </div>
+        <Loading height={200}/>
       </>
     );
   }
