@@ -45,7 +45,7 @@ export default function Mypage({
     document.cookie =
       'id=;path=/;expires=Thu, 1-Jan-1970 00:00:00 GMT;';
     Cookies.remove('status');
-    await fetch('/api/logoutIron');
+    await fetch('/api/logoutIron'), { method: 'POST' };
     location.href = '/login';
   }
   return (
@@ -112,9 +112,9 @@ export default function Mypage({
               </div>
               <div className={myStyles.logout}>
                 {/* <Link href="/login" className="logout"> */}
-                  <button onClick={() => clickEvent()}>
-                    ログアウト
-                  </button>
+                <button onClick={() => clickEvent()}>
+                  ログアウト
+                </button>
                 {/* </Link> */}
                 {/* &gt;&gt;
                 <Logout /> */}
