@@ -58,7 +58,6 @@ export const middleware = async (req: NextRequest) => {
     return res;
   }
 
-
   if (req.nextUrl.pathname.startsWith('/mypage')) {
     // クッキー取得
     const user = session.user?.user;
