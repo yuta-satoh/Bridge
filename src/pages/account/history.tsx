@@ -12,6 +12,7 @@ import { withIronSessionSsr } from 'iron-session/next';
 import { sessionOptions } from '@/lib/session';
 import { useEffect } from 'react';
 import SelectBox from '@/components/utils/SelectBox';
+import Loading from '@/components/utils/Loading';
 
 type Item = {
   id: number;
@@ -65,7 +66,7 @@ export default function History({
     fetcher
   );
   if (error) return <p>エラー</p>;
-  if (!data) return <p>ロード中...</p>;
+  if (!data) return <Loading height={400} />;
 
   function handlePathTransition(item: Item) {
     router.push({
