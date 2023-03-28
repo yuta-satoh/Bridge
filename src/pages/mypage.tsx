@@ -112,9 +112,9 @@ export default function Mypage({
               </div>
               <div className={myStyles.logout}>
                 {/* <Link href="/login" className="logout"> */}
-                  <button onClick={() => clickEvent()}>
-                    ログアウト
-                  </button>
+                <button onClick={() => clickEvent()}>
+                  ログアウト
+                </button>
                 {/* </Link> */}
                 {/* &gt;&gt;
                 <Logout /> */}
