@@ -92,7 +92,7 @@ export default function UserCart({ userId }: { userId: string }) {
 	return (
     <>
       {filtercartItems.length !== 0 ? (
-        <div className="pc:flex pc:flex-row-reverse mx-auto w-screen sp:w-3/5 pc:w-4/5 gap-32">
+        <div className="pc:flex pc:flex-row-reverse mx-auto w-fit sp:w-4/5 pc:w-4/5 gap-32">
           {windowSize.width < 1080 ? 
           <div className="flex w-4/5 mx-auto mt-10">
               <h2 className="text-3xl font-bold">合計</h2>
