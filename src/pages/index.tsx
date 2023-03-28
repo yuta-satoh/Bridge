@@ -6,7 +6,7 @@ import Cookies from 'js-cookie';
 import NewItems from '@/components/NewItems';
 import Button from '@/components/utils/Button';
 import { useRouter } from 'next/router';
-import { useWindowSize } from '@/lib/getWindowSize';
+import { useWindowSize } from '@/lib/useWindowSize';
 
 export default function Home() {
   const router = useRouter();

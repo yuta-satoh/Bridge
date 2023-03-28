@@ -4,7 +4,7 @@ import Image from 'next/image';
 import fetcher from '@/lib/fetcher';
 import useSWR from 'swr';
 import Loading from './utils/Loading';
-import { useWindowSize } from '@/lib/getWindowSize';
+import { useWindowSize } from '@/lib/useWindowSize';
 
 type Item = {
   id: number;
