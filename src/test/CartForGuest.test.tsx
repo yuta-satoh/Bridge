@@ -1,5 +1,5 @@
 import renderer from 'react-test-renderer';
-import GuestCart from './CartForGuest';
+import GuestCart from '../components/CartForGuest';
 import { expect, jest, test } from '@jest/globals';
 
 type GuestCartType = {

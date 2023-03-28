@@ -46,7 +46,7 @@ export const middleware = async (req: NextRequest) => {
     // クッキーがなければ再設定メール送信画面へ遷移
     return NextResponse.redirect(new URL('/rememberPass', req.url));
   }
-
+  
   if (req.nextUrl.pathname.startsWith('/login')) {
     // クッキー取得
     const user = session.user?.user;
@@ -57,6 +57,7 @@ export const middleware = async (req: NextRequest) => {
     // クッキーがなければログイン画面へ遷移
     return res;
   }
+
 
   if (req.nextUrl.pathname.startsWith('/mypage')) {
     // クッキー取得
