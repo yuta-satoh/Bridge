@@ -46,7 +46,7 @@ export default function Mypage({
       'id=;path=/;expires=Thu, 1-Jan-1970 00:00:00 GMT;';
     Cookies.remove('status');
     await fetch('/api/logoutIron');
-    location.href = '/login';
+    // location.href = '/login';
   }
   return (
     <>
